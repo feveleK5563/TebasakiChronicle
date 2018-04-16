@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\src">
+      <UniqueIdentifier>{15e3f8de-d850-4b74-8242-3ed20674a3ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\BaseClass">
+      <UniqueIdentifier>{8fa6db0d-df57-4136-b315-44186656dbb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Object">
+      <UniqueIdentifier>{d9d130d8-2f50-40af-a9bd-6d69996d03da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Object\Player">
+      <UniqueIdentifier>{66c5bfae-6aef-4296-bed5-6ad1fa37c14a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Scene">
+      <UniqueIdentifier>{29b547e9-36d0-44ad-98cd-db8fefb2e0c6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BaseClass\Move.cpp">
+      <Filter>ソース ファイル\src\BaseClass</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BaseClass\Position.cpp">
+      <Filter>ソース ファイル\src\BaseClass</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\GameObject.cpp">
+      <Filter>ソース ファイル\src\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Player\Player.cpp">
+      <Filter>ソース ファイル\src\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Scene.cpp">
+      <Filter>ソース ファイル\src\Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\BaseClass\Move.h">
+      <Filter>ソース ファイル\src\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BaseClass\Position.h">
+      <Filter>ソース ファイル\src\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\GameObject.h">
+      <Filter>ソース ファイル\src\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Player\Player.h">
+      <Filter>ソース ファイル\src\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Scene.h">
+      <Filter>ソース ファイル\src\Scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

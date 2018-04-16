@@ -1,0 +1,51 @@
+#version 400
+
+//input
+in vec4 outLightDepth;
+
+
+//output
+out vec4 resultColor;
+
+//uniform
+uniform sampler2D depthMap;
+uniform float addVisible;
+
+
+//FragmentShader
+void main(void)
+{
+	vec3 suv = (outLightDepth.xyz / outLightDepth.w);
+	suv = (suv + 1.0) * 0.5;
+	if(suv.x > 1.0 || suv.y > 1.0 || suv.x < 0.0 || suv.y < 0.0){
+		resultColor = vec4(1.0, 1.0, 1.0, 1.0);
+		return;
+	}
+
+	float samp = 0.1;
+	float fix = 700.0;
+	float texDepth1 = texture(depthMap, suv.xy + vec2(samp, 0.0) / fix).x;
+	float texDepth2 = texture(depthMap, suv.xy + vec2(-samp, 0.0) / fix).x;
+	float texDepth3 = texture(depthMap, suv.xy + vec2(0.0, samp) / fix).x;
+	float texDepth4 = texture(depthMap, suv.xy + vec2(0.0, -samp) / fix).x;
+
+	float depth = outLightDepth.z / outLightDepth.w;
+	float visible = 1.0 + addVisible;
+
+	float bias = 0.0015;
+	if(texDepth1 < depth - bias){
+		visible -= 0.1;
+	}
+	if(texDepth2 < depth - bias){
+		visible -= 0.1;
+	}
+	if(texDepth3 < depth - bias){
+		visible -= 0.1;
+	}
+	if(texDepth4 < depth - bias){
+		visible -= 0.1;
+	}
+	visible = clamp(visible, 0.0, 1.0);
+
+	resultColor = vec4(visible, visible, visible, 1.0);
+}
