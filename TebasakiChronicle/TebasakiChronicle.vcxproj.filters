@@ -20,6 +20,9 @@
     <Filter Include="ソース ファイル\src\Scene">
       <UniqueIdentifier>{29b547e9-36d0-44ad-98cd-db8fefb2e0c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\BaseClass\ImageManager">
+      <UniqueIdentifier>{96c6f9e9-b373-4fa5-abcc-465d103a4ac0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -40,6 +43,12 @@
     <ClCompile Include="src\Scene\Scene.cpp">
       <Filter>ソース ファイル\src\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\BaseClass\ImageManager\AnimationCharaChip.cpp">
+      <Filter>ソース ファイル\src\BaseClass\ImageManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BaseClass\ImageManager\ImageManager.cpp">
+      <Filter>ソース ファイル\src\BaseClass\ImageManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BaseClass\Move.h">
@@ -56,6 +65,12 @@
     </ClInclude>
     <ClInclude Include="src\Scene\Scene.h">
       <Filter>ソース ファイル\src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BaseClass\ImageManager\AnimationCharaChip.h">
+      <Filter>ソース ファイル\src\BaseClass\ImageManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BaseClass\ImageManager\ImageManager.h">
+      <Filter>ソース ファイル\src\BaseClass\ImageManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

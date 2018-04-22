@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\BaseClass\ImageManager\AnimationCharaChip.cpp" />
+    <ClCompile Include="src\BaseClass\ImageManager\ImageManager.cpp" />
     <ClCompile Include="src\BaseClass\Move.cpp" />
     <ClCompile Include="src\BaseClass\Position.cpp" />
     <ClCompile Include="src\Main.cpp" />
@@ -27,6 +29,8 @@
     <ClCompile Include="src\Scene\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\BaseClass\ImageManager\AnimationCharaChip.h" />
+    <ClInclude Include="src\BaseClass\ImageManager\ImageManager.h" />
     <ClInclude Include="src\BaseClass\Move.h" />
     <ClInclude Include="src\BaseClass\Position.h" />
     <ClInclude Include="src\Object\GameObject.h" />
