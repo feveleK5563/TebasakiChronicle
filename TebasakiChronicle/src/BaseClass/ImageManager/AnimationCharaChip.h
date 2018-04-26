@@ -2,6 +2,8 @@
 #include <iostream>
 #include <vector>
 #include "SystemClass.h"
+#include "MeshModel.h"
+#include "..\..\CSTList.h"
 
 //画像の分割情報(キャラチップ)を保持するやつ
 class AnimationCharaChip
@@ -13,7 +15,7 @@ public:
 	bool			isAnimRoop;		//ループするか否か(trueでループする)
 
 	//コンストラクタ
-	AnimationCharaChip(const K_Math::Box2D& src, const int sheet, const float spd, const bool ir);
+	AnimationCharaChip(const K_Math::Box2D& src, int sheet, float spd, bool ir);
 
 	//デストラクタ
 	~AnimationCharaChip();

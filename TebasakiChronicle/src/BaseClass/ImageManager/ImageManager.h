@@ -1,8 +1,5 @@
 #pragma once
-#include "MeshModel.h"
-#include "K_Graphics\CameraList.h"
-#include "K_Graphics\ShaderList.h"
-#include "K_Graphics\TextureList.h"
+#include <math.h>
 #include "AnimationCharaChip.h"
 
 class ImageManager
@@ -10,36 +7,31 @@ class ImageManager
 private:
 	const bool	isDelete;
 public:
-	K_Graphics::CameraClass*			camera;
-	K_Graphics::ShaderClass*			shader;
-
+	CSTList*							cst;
 	K_Graphics::SpriteObject*			spobj;
 	std::vector<AnimationCharaChip*>	charaChip;
 	int									nowAnimNum;
 	float								animCnt;
 
-	//コンストラクタ(キャラチップを作成する)
-	ImageManager(	K_Graphics::CameraClass*	cc,
-					K_Graphics::ShaderClass*	sc, 
-					K_Graphics::Texture*		tex);
-
-	//コンストラクタ(外部のキャラチップを参照する)
-	//※キャラチップを新たに設定することはできない
-	ImageManager(	K_Graphics::CameraClass*			cc,
-					K_Graphics::ShaderClass*			sc,
-					K_Graphics::Texture*				tex,
-					std::vector<AnimationCharaChip*>	acc);
+	//コンストラクタ(キャラチップは後で作成する)
+	//キャラチップをImageManager内で作成しない場合は第二引数にfalseを指定
+	ImageManager(K_Graphics::Texture* tex, bool isde = true);
 
 	//デストラクタ
 	~ImageManager();
 
 	//----------------------------------------------
 	//キャラチップの作成
-	void CreateCharaChip(const K_Math::Box2D& src, int sheet, float spd, bool isroop);
+	bool CreateCharaChip(const K_Math::Box2D& src, int sheet, float spd, bool isroop);
+
+	//----------------------------------------------
+	//キャラチップを変更
+	//※コンストラクタでisdeをfalseにしていないと失敗する
+	bool ChangeCharaChip(const std::vector<AnimationCharaChip*>& acc);
 
 	//----------------------------------------------
 	//アニメーションパターンの変更
-	void ChangeAnimationPattern(int motionNum);
+	void ChangeAnimationPattern(int motionNum, bool timeReset = true);
 
 	//----------------------------------------------
 	//アニメーション
