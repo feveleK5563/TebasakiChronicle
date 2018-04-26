@@ -8,6 +8,7 @@ private:
 	const bool	isDelete;
 public:
 	CSTList*							cst;
+	std::string							textureName;
 	K_Graphics::SpriteObject*			spobj;
 	std::vector<AnimationCharaChip*>	charaChip;
 	int									nowAnimNum;

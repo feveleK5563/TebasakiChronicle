@@ -38,6 +38,7 @@
     <ClCompile Include="src\Scene\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\BaseClass\easing.h" />
     <ClInclude Include="src\BaseClass\ImageManager\AnimationCharaChip.h" />
     <ClInclude Include="src\BaseClass\ImageManager\ImageManager.h" />
     <ClInclude Include="src\BaseClass\Move.h" />
