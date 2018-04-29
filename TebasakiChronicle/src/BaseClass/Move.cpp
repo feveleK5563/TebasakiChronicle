@@ -1,0 +1,109 @@
+#include "Move.h"
+
+//------------------------------------------------------
+//概要:Moveクラスの処理内容
+//製作者:日比野
+//------------------------------------------------------
+
+
+//------------------------------------------------------
+//コンストラクタ
+//------------------------------------------------------
+Move::Move() : moveVec(K_Math::Vector3(0,0,0)),jumpPower(0.0f), 
+	fallSpeed(1.0f), gravity(-9.8f)
+{
+
+}
+Move::Move(const K_Math::Vector3& vec,float jumpPow, float fallSpeed, float gravity)
+	: moveVec(vec),jumpPower(jumpPow),fallSpeed(fallSpeed),gravity(gravity)
+{
+
+}
+
+//------------------------------------------------------
+//デストラクタ
+//------------------------------------------------------
+Move::~Move()
+{
+
+}
+
+
+//------------------------------------------------------
+//設定処理
+//------------------------------------------------------
+//ジャンプ力の設定
+void	Move::SetJumpPow(float jumpPow)
+{
+	this->jumpPower = jumpPow;
+}
+
+//落下速度の設定
+void	Move::SetFallSpeed(float fallSpeed)
+{
+	this->fallSpeed = fallSpeed;
+}
+
+//重力加速度の設定
+void	Move::SetGravity(float gravity)
+{
+	this->gravity = gravity;
+}
+
+//データの設定
+void	Move::SetMoveDate(const K_Math::Vector3& moveVec, const float& jumpPow,
+	const float& fallSpeed, const float& gravity)
+{
+	this->moveVec = moveVec;
+	this->jumpPower = jumpPow;
+	this->fallSpeed = fallSpeed;
+	this->gravity = gravity;
+}
+
+
+//------------------------------------------------------
+//取得処理
+//------------------------------------------------------
+//ジャンプ力の取得
+float	Move::GetJumpPow()
+{
+	return jumpPower;
+}
+
+//落下速度の取得
+float	Move::GetFallSpeed()
+{
+	return fallSpeed;
+}
+
+//重力加速度の設定
+float	Move::GetGravity()
+{
+	return gravity;
+}
+
+
+//------------------------------------------------------
+//動作
+//------------------------------------------------------
+//重力動作
+void	Move::GravityOperation()
+{
+	moveVec.y() += fallSpeed;
+	fallSpeed += gravity;
+}
+
+//移動動作
+void	Move::MovingOperation()
+{
+	K_Math::Vector3	vectorArg;	//引数で受けっとった変数
+
+	//1フレームで動く量をプラスしていく
+	moveVec += vectorArg;
+}
+
+//ジャンプ動作
+void	Move::JumpOperation()
+{
+	fallSpeed = jumpPower;
+}

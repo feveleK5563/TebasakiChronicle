@@ -23,6 +23,7 @@
     <ClCompile Include="src\BaseClass\ImageManager\ImageManager.cpp" />
     <ClCompile Include="src\BaseClass\Move.cpp" />
     <ClCompile Include="src\BaseClass\Position.cpp" />
+    <ClCompile Include="src\BaseClass\Status\Status.cpp" />
     <ClCompile Include="src\CSTList.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Object\Enemy\Enemy.cpp" />
@@ -34,6 +35,8 @@
     <ClCompile Include="src\Object\Enemy\EnemyType.cpp" />
     <ClCompile Include="src\Object\Enemy\EnemyTypeManager.cpp" />
     <ClCompile Include="src\Object\GameObject.cpp" />
+    <ClCompile Include="src\Object\Player\CameraGun\CameraGun.cpp" />
+    <ClCompile Include="src\Object\Player\CharaController\CharaController.cpp" />
     <ClCompile Include="src\Object\Player\Player.cpp" />
     <ClCompile Include="src\Scene\Scene.cpp" />
   </ItemGroup>
@@ -43,6 +46,7 @@
     <ClInclude Include="src\BaseClass\ImageManager\ImageManager.h" />
     <ClInclude Include="src\BaseClass\Move.h" />
     <ClInclude Include="src\BaseClass\Position.h" />
+    <ClInclude Include="src\BaseClass\Status\Status.h" />
     <ClInclude Include="src\CSTList.h" />
     <ClInclude Include="src\Object\Enemy\Enemy.h" />
     <ClInclude Include="src\Object\Enemy\EnemyController.h" />
@@ -53,6 +57,8 @@
     <ClInclude Include="src\Object\Enemy\EnemyType.h" />
     <ClInclude Include="src\Object\Enemy\EnemyTypeManager.h" />
     <ClInclude Include="src\Object\GameObject.h" />
+    <ClInclude Include="src\Object\Player\CameraGun\CameraGun.h" />
+    <ClInclude Include="src\Object\Player\CharaController\CharaController.h" />
     <ClInclude Include="src\Object\Player\Player.h" />
     <ClInclude Include="src\Scene\Scene.h" />
   </ItemGroup>

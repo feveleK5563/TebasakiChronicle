@@ -26,6 +26,15 @@
     <Filter Include="ソース ファイル\src\Object\Enemy">
       <UniqueIdentifier>{c79e45e1-1f1b-4a3b-8459-da9ca87b8b6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\Object\Player\CharaController">
+      <UniqueIdentifier>{40e3f806-d416-4348-923e-0cf76f785a8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\BaseClass\Status">
+      <UniqueIdentifier>{4a9a8cad-bd29-42d2-acdf-9ab23bfc69f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Object\Player\CameraGun">
+      <UniqueIdentifier>{739da917-d419-4a43-9cd5-755a11ba48b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -79,6 +88,15 @@
     <ClCompile Include="src\Object\Enemy\EnemyMove.cpp">
       <Filter>ソース ファイル\src\Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="src\Object\Player\CharaController\CharaController.cpp">
+      <Filter>ソース ファイル\src\Object\Player\CharaController</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BaseClass\Status\Status.cpp">
+      <Filter>ソース ファイル\src\BaseClass\Status</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Player\CameraGun\CameraGun.cpp">
+      <Filter>ソース ファイル\src\Object\Player\CameraGun</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BaseClass\Move.h">
@@ -131,6 +149,15 @@
     </ClInclude>
     <ClInclude Include="src\Object\Enemy\EnemyMove.h">
       <Filter>ソース ファイル\src\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Player\CharaController\CharaController.h">
+      <Filter>ソース ファイル\src\Object\Player\CharaController</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BaseClass\Status\Status.h">
+      <Filter>ソース ファイル\src\BaseClass\Status</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Player\CameraGun\CameraGun.h">
+      <Filter>ソース ファイル\src\Object\Player\CameraGun</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
