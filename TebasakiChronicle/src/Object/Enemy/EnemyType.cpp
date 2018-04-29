@@ -1,22 +1,18 @@
 #include "EnemyType.h"
 
-EnemyType::EnemyType(std::string imgName, int ml, int hd) :
+EnemyType::EnemyType(std::string imgName, K_Physics::CollisionShape* cs, int ml, int hd) :
 	imageName(imgName),
 	maxLife(ml),
 	hitDamage(hd),
 	emSet(new EnemyMoveSet())
 {
 	//テクスチャを読み込む
-	CSTList* cst = CSTList::GetInstance();
-	cst->GetTextureList()->LoadTexture(imageName, "data/image/" + imgName + ".tga");
-	texture = cst->GetTextureList()->GetTexture(imageName);
+	texture = CST::LoadAndGetTexture(imageName, "data/image/" + imgName + ".tga");
+	//コリジョンの形状を設定
+	cShape = cs;
 }
 
 EnemyType::~EnemyType()
 {
-	//不要な画像(テクスチャ)を開放する
-	CSTList* cst = CSTList::GetInstance();
-	cst->GetTextureList()->DeleteTexture(imageName);
-
 	delete emSet;
 }

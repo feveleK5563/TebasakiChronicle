@@ -52,9 +52,6 @@
     <ClCompile Include="src\BaseClass\ImageManager\ImageManager.cpp">
       <Filter>ソース ファイル\src\BaseClass\ImageManager</Filter>
     </ClCompile>
-    <ClCompile Include="src\CSTList.cpp">
-      <Filter>ソース ファイル\src</Filter>
-    </ClCompile>
     <ClCompile Include="src\Object\Enemy\Enemy.cpp">
       <Filter>ソース ファイル\src\Object\Enemy</Filter>
     </ClCompile>
@@ -79,6 +76,12 @@
     <ClCompile Include="src\Object\Enemy\EnemyMove.cpp">
       <Filter>ソース ファイル\src\Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="src\CSTList.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CollisionManager.cpp">
+      <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BaseClass\Move.h">
@@ -101,9 +104,6 @@
     </ClInclude>
     <ClInclude Include="src\BaseClass\ImageManager\ImageManager.h">
       <Filter>ソース ファイル\src\BaseClass\ImageManager</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CSTList.h">
-      <Filter>ソース ファイル\src</Filter>
     </ClInclude>
     <ClInclude Include="src\Object\Enemy\Enemy.h">
       <Filter>ソース ファイル\src\Object\Enemy</Filter>
@@ -131,6 +131,12 @@
     </ClInclude>
     <ClInclude Include="src\Object\Enemy\EnemyMove.h">
       <Filter>ソース ファイル\src\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CSTList.h">
+      <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CollisionManager.h">
+      <Filter>ソース ファイル\src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

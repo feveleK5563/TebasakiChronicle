@@ -16,12 +16,13 @@ public:
 	int					beforePatternOrder;	//前の動作パターン番号
 
 	//以下のメンバ変数はGameObjectやMoveクラスとかが持ってるものだと思う
-	int					life;
-	K_Math::Vector3		pos;
-	K_Math::Vector3		angle;
-	K_Math::Vector3		scale;
-	K_Math::Vector3		moveVec;
-	ImageManager*		imgManager;
+	int							life;
+	K_Math::Vector3				pos;
+	K_Math::Vector3				angle;
+	K_Math::Vector3				scale;
+	K_Math::Vector3				moveVec;
+	ImageManager*				imgManager;
+	K_Physics::CollisionData*	cData;
 
 	//コンストラクタ
 	Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos);
@@ -35,5 +36,5 @@ public:
 	void Update();
 
 	//描画
-	void Render();
+	void Draw();
 };

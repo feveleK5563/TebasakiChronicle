@@ -7,7 +7,6 @@ class ImageManager
 private:
 	const bool	isDelete;
 public:
-	CSTList*							cst;
 	std::string							textureName;
 	K_Graphics::SpriteObject*			spobj;
 	std::vector<AnimationCharaChip*>	charaChip;
@@ -40,7 +39,7 @@ public:
 
 	//----------------------------------------------
 	//•`‰æ
-	void ImageDraw(	const K_Math::Vector3& posc, 
-					const K_Math::Vector3& angle,
-					const K_Math::Vector3& scale);
+	void ImageDraw3D(	const K_Math::Vector3& posc, 
+						const K_Math::Vector3& angle,
+						const K_Math::Vector3& scale);
 };

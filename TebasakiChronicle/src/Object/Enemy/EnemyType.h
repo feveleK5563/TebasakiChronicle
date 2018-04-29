@@ -1,5 +1,6 @@
 #pragma once
 #include "EnemyMoveSet.h"
+#include "../../CollisionManager.h"
 
 //EnemyMoveSetとその他敵の生成に必要となる敵情報
 class EnemyType
@@ -11,13 +12,14 @@ public:
 	const int					maxLife;	//体力上限
 	const int					hitDamage;	//接触時、プレイヤーに与えるダメージ
 	K_Graphics::Texture*		texture;	//テクスチャ
+	K_Physics::CollisionShape*	cShape;		//コリジョンの形状
 	//接触用コリジョンのサイズ
 	//視界用コリジョンのサイズ
 	//攻撃動作遷移用コリジョンのサイズ
 
 
 	//コンストラクタ
-	EnemyType(std::string imgName, int ml, int atk);
+	EnemyType(std::string imgName, K_Physics::CollisionShape* cs, int ml, int atk);
 	//デストラクタ
 	~EnemyType();
 };

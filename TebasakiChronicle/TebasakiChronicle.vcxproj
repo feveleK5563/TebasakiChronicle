@@ -36,6 +36,7 @@
     <ClCompile Include="src\Object\GameObject.cpp" />
     <ClCompile Include="src\Object\Player\Player.cpp" />
     <ClCompile Include="src\Scene\Scene.cpp" />
+    <ClCompile Include="src\CollisionManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BaseClass\easing.h" />
@@ -55,6 +56,7 @@
     <ClInclude Include="src\Object\GameObject.h" />
     <ClInclude Include="src\Object\Player\Player.h" />
     <ClInclude Include="src\Scene\Scene.h" />
+    <ClInclude Include="src\CollisionManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

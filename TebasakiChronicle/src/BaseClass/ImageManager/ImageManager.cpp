@@ -2,7 +2,6 @@
 
 //コンストラクタ(キャラチップを作成する)
 ImageManager::ImageManager(K_Graphics::Texture* tex, bool isde) :
-	cst(CSTList::GetInstance()),
 	spobj(new K_Graphics::SpriteObject(tex)),
 	animCnt(0.f),
 	nowAnimNum(0),
@@ -73,7 +72,7 @@ void ImageManager::Animation()
 
 //-----------------------------------------------------------------------------
 //描画
-void ImageManager::ImageDraw(	const K_Math::Vector3& posc,
+void ImageManager::ImageDraw3D(	const K_Math::Vector3& posc,
 								const K_Math::Vector3& angle,
 								const K_Math::Vector3& scale)
 {
@@ -93,8 +92,8 @@ void ImageManager::ImageDraw(	const K_Math::Vector3& posc,
 	pos.y() += (float)src.h / 2.f;
 
 	spobj->Draw3D(
-		cst->GetPerspectoveCamera(),
-		cst->GetShaderClass(),
+		CST::GetPerspectiveCamera(),
+		CST::GetShaderClass(),
 		src,
 		pos,
 		angle,

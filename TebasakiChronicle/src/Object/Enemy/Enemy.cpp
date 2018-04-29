@@ -27,6 +27,7 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos)
 	angle = { 0, 0, 0 };
 	scale = { 1, 1, 1 };
 	moveVec = { 0, 0, 0 };
+	cData = CM::CreateCollisionObject(cpyet->cShape, true, 1, pos, angle);
 	imgManager = new ImageManager(cpyet->texture, false);
 	imgManager->ChangeAnimationPattern(nowMoveOrder);
 	imgManager->ChangeCharaChip(eController->GetNowCharaChip(nowPatternOrder));
@@ -60,7 +61,7 @@ void Enemy::Update()
 
 //-----------------------------------------------------------------------------
 //•`‰æ
-void Enemy::Render()
+void Enemy::Draw()
 {
-	imgManager->ImageDraw(pos, angle, scale);
+	imgManager->ImageDraw3D(pos, angle, scale);
 }
