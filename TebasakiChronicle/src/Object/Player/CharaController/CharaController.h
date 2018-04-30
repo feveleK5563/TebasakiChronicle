@@ -1,6 +1,6 @@
 #pragma once
 #include "../src/BaseClass/Move.h"
-#include "InputGLFW.h"
+#include "K_Input/InputClass.h"
 
 //--------------------------------------------------------------
 //キャラクターコントローラー
@@ -11,9 +11,10 @@ class CharaController
 {
 public:
 	CharaController();
-	CharaController(K_Input::InputGLFW* input);
+	CharaController(K_Input::InputClass* input);
 	~CharaController();
 
+	void	SetInput();		//InputClassの設定
 	void	UpDate();		//更新
 
 private:
@@ -22,7 +23,7 @@ private:
 
 	//変数-------------------
 	Move*	move;					//移動
-	K_Input::InputGLFW*	input;		//入力ボタン
+	K_Input::InputClass*	input;	//入力ボタン
 	K_Math::Vector3 moveVec;		//移動量
 };
 
