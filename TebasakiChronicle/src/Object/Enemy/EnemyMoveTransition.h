@@ -5,6 +5,7 @@ class EnemyMoveTransition
 {
 public:
 	EnemyMoveTransition(){}
+	virtual ~EnemyMoveTransition(){}
 	virtual bool Transition() = 0;
 };
 

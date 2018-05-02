@@ -1,5 +1,5 @@
 #include "CSTList.h"
-#include "CollisionManager.h"
+#include "BaseClass\Collision\CollisionCreator.h"
 #include "MeshModel.h"
 #include "SystemClass.h"
 
@@ -13,7 +13,7 @@ int main()
 	K_System::SystemClass* sc = new K_System::SystemClass(720, 540, false);
 
 	//CollisionManager‚ð‰Šú‰»
-	CM::Initialize();
+	CC::Initialize();
 
 	//ƒJƒƒ‰ƒŠƒXƒg
 	K_Math::Vector3 position = K_Math::Vector3(0, 0, -150);
@@ -47,7 +47,7 @@ int main()
 		CST::GetOrthoCamera()->Draw();
 
 		e1.Draw();
-		CM::DebugDraw(CST::GetShaderClass(), CST::GetPerspectiveCamera());
+		CC::DebugDraw(CST::GetShaderClass(), CST::GetPerspectiveCamera());
 
 		sc->SwapBuffer();
 	}
@@ -55,6 +55,5 @@ int main()
 	delete sc;
 	delete etm;
 
-	CST::Delete();
-	CM::Delete();
+	CC::Delete();
 }

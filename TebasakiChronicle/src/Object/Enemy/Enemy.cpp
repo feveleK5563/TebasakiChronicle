@@ -27,17 +27,23 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos)
 	angle = { 0, 0, 0 };
 	scale = { 1, 1, 1 };
 	moveVec = { 0, 0, 0 };
-	cData = CM::CreateCollisionObject(cpyet->cShape, true, 1, pos, angle);
-	imgManager = new ImageManager(cpyet->texture, false);
+
+	imgManager = new ImageManager(cpyet->textureName, cpyet->texture, false);
 	imgManager->ChangeAnimationPattern(nowMoveOrder);
 	imgManager->ChangeCharaChip(eController->GetNowCharaChip(nowPatternOrder));
+
+	cData = CC::CreateCollisionObject(cpyet->cShape, true, 1, pos, angle);
+
+	skillAndChip.skillId = eController->GetSkillId();
+	skillAndChip.textureName = &imgManager->textureName;
+	skillAndChip.nowCharaChip = imgManager->charaChip[nowPatternOrder];
 }
 
 //-----------------------------------------------------------------------------
 //更新
 void Enemy::Update()
 {
-	moveVec = { 0, 0, 0 };	//この処理はコリジョンで行う
+	moveVec = { 0, 0, 0 };	//※この処理はコリジョンで行う
 
 	eController->Move(nowMoveOrder, nowPatternOrder, moveVec);
 	imgManager->Animation();
@@ -56,8 +62,19 @@ void Enemy::Update()
 	}
 	beforePatternOrder = nowPatternOrder;
 
-	pos += moveVec; //この処理はコリジョンで行う
+	pos += moveVec; //※この処理はコリジョンで行う
+
+	SetSkillData();
 }
+
+//-----------------------------------------------------------------------------
+//スキル情報を格納
+void Enemy::SetSkillData()
+{
+	skillAndChip.skillId = eController->GetSkillId();
+	skillAndChip.nowCharaChip = imgManager->charaChip[nowPatternOrder];
+}
+
 
 //-----------------------------------------------------------------------------
 //描画

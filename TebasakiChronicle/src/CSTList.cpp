@@ -1,20 +1,11 @@
 #include "CSTList.h"
 
-CSTList* CSTList::cstList = nullptr;
 //-------------------------------------------------------------------
 //インスタンスを得る
 CSTList* CSTList::GetInstance()
 {
-	if (cstList == nullptr)
-		cstList = new CSTList();
-
-	return cstList;
-}
-//-------------------------------------------------------------------
-//解放する
-void CSTList::Destroy()
-{
-	delete cstList;
+	static CSTList cstList;
+	return &cstList;
 }
 
 CSTList* cstl = CSTList::GetInstance();
@@ -22,17 +13,6 @@ CSTList* cstl = CSTList::GetInstance();
 //外部で呼ぶ関数
 namespace CST
 {
-	//-------------------------------------------------------------------
-	//終了するときに呼ぶ
-	void Delete()
-	{
-		if (cstl == nullptr)
-			return;
-
-		cstl->Destroy();
-		cstl = nullptr;
-	}
-
 	/*☆カメラ関連☆*/
 
 	//-------------------------------------------------------------------

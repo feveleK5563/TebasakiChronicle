@@ -6,6 +6,8 @@
 class EnemyMove
 {
 public:
+	EnemyMove(){}
+	virtual ~EnemyMove() {}
 	virtual void Move(K_Math::Vector3& moveVec) = 0;
 };
 

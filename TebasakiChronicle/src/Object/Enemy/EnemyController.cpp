@@ -10,6 +10,13 @@ EnemyController::EnemyController(EnemyMoveSet* cpyems) :
 EnemyController::~EnemyController(){}
 
 //-----------------------------------------------------------------------------
+//スキル番号を取得
+int EnemyController::GetSkillId()
+{
+	return skillId;
+}
+
+//-----------------------------------------------------------------------------
 //動作の実行
 void EnemyController::Move(int& nowMoveOrder, int& nowPatternOrder, K_Math::Vector3& moveVec)
 {
@@ -20,5 +27,5 @@ void EnemyController::Move(int& nowMoveOrder, int& nowPatternOrder, K_Math::Vect
 //EnemyMoveSetからキャラチップを取得
 const std::vector<AnimationCharaChip*> EnemyController::GetNowCharaChip(int nowPatternOrder)
 {
-	return ems->empattern[nowPatternOrder]->animChip;
+	return ems->GetNowAnimChip(nowPatternOrder);
 }

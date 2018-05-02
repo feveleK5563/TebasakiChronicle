@@ -39,9 +39,8 @@ public:
 	//デストラクタ
 	~EnemyMovePattern();
 
-	//動作を行う
-	//現在の動作順、時間計測、座標
-	void Move(int& nowMoveOrder, int& timeCnt, K_Math::Vector3& moveVec);
+	//動作を行い、現在取得可能なスキルの番号を返す
+	int Move(int& nowMoveOrder, int& timeCnt, K_Math::Vector3& moveVec);
 
 	//動作順をリセットする
 	void MoveReset(int& nowMoveOrder);

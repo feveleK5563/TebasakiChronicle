@@ -26,6 +26,9 @@
     <Filter Include="ソース ファイル\src\Object\Enemy">
       <UniqueIdentifier>{c79e45e1-1f1b-4a3b-8459-da9ca87b8b6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\BaseClass\Collision">
+      <UniqueIdentifier>{ebb1be35-0c29-4188-8808-cb03736c9ade}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -79,8 +82,11 @@
     <ClCompile Include="src\CSTList.cpp">
       <Filter>ソース ファイル\src</Filter>
     </ClCompile>
-    <ClCompile Include="src\CollisionManager.cpp">
-      <Filter>ソース ファイル\src</Filter>
+    <ClCompile Include="src\BaseClass\Collision\CollisionCreator.cpp">
+      <Filter>ソース ファイル\src\BaseClass\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BaseClass\Collision\CollisionManager.cpp">
+      <Filter>ソース ファイル\src\BaseClass\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -135,8 +141,11 @@
     <ClInclude Include="src\CSTList.h">
       <Filter>ソース ファイル\src</Filter>
     </ClInclude>
-    <ClInclude Include="src\CollisionManager.h">
-      <Filter>ソース ファイル\src</Filter>
+    <ClInclude Include="src\BaseClass\Collision\CollisionCreator.h">
+      <Filter>ソース ファイル\src\BaseClass\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BaseClass\Collision\CollisionManager.h">
+      <Filter>ソース ファイル\src\BaseClass\Collision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

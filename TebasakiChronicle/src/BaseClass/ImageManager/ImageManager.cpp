@@ -1,7 +1,8 @@
 #include "ImageManager.h"
 
 //コンストラクタ(キャラチップを作成する)
-ImageManager::ImageManager(K_Graphics::Texture* tex, bool isde) :
+ImageManager::ImageManager(const std::string& texName, K_Graphics::Texture* tex, bool isde) :
+	textureName(texName),
 	spobj(new K_Graphics::SpriteObject(tex)),
 	animCnt(0.f),
 	nowAnimNum(0),
@@ -17,7 +18,6 @@ ImageManager::~ImageManager()
 		for (auto it : charaChip)
 			delete it;
 	}
-
 }
 
 //-----------------------------------------------------------------------------
@@ -71,7 +71,7 @@ void ImageManager::Animation()
 }
 
 //-----------------------------------------------------------------------------
-//描画
+//描画(3D)
 void ImageManager::ImageDraw3D(	const K_Math::Vector3& posc,
 								const K_Math::Vector3& angle,
 								const K_Math::Vector3& scale)

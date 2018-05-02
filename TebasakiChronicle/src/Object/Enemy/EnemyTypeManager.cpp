@@ -25,15 +25,15 @@ void EnemyTypeManager::LoadEnemyData(const std::string& filePath)
 	switch (shapeType)
 	{
 	case 0:
-		cs = CM::CreateSphereShape(shapeSize[0]);
+		cs = CC::CreateSphereShape(shapeSize[0]);
 		break;
 
 	case 1:
-		cs = CM::CreateCapsuleShape(shapeSize[0], shapeSize[1]);
+		cs = CC::CreateCapsuleShape(shapeSize[0], shapeSize[1]);
 		break;
 
 	case 2:
-		cs = CM::CreateBoxShape(shapeSize[0], shapeSize[1], shapeSize[2]);
+		cs = CC::CreateBoxShape(shapeSize[0], shapeSize[1], shapeSize[2]);
 		break;
 	}
 	eType.emplace_back(new EnemyType("resource2", cs, 1, 1));

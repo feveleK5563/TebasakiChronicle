@@ -37,12 +37,9 @@ EnemyMovePattern::~EnemyMovePattern()
 }
 
 //-----------------------------------------------------------------------------
-//動作を行う
-void EnemyMovePattern::Move(int& nowMoveOrder, int& timeCnt, K_Math::Vector3& moveVec)
+//動作を行い、現在取得可能なスキルの番号を返す
+int EnemyMovePattern::Move(int& nowMoveOrder, int& timeCnt, K_Math::Vector3& moveVec)
 {
-	mp[nowMoveOrder]->em->Move(moveVec);
-
-	++timeCnt;
 	//timeCntがmoveTimeMaxを超えたら、次の動作に移行する
 	if (timeCnt >= mp[nowMoveOrder]->moveTimeMax)
 	{
@@ -52,6 +49,10 @@ void EnemyMovePattern::Move(int& nowMoveOrder, int& timeCnt, K_Math::Vector3& mo
 		if (nowMoveOrder >= (int)mp.size())
 			nowMoveOrder = 0;
 	}
+	++timeCnt;
+
+	mp[nowMoveOrder]->em->Move(moveVec);
+	return mp[nowMoveOrder]->skillId;
 }
 
 //-----------------------------------------------------------------------------

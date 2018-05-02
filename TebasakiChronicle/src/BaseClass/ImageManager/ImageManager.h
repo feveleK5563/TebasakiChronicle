@@ -15,7 +15,7 @@ public:
 
 	//コンストラクタ(キャラチップは後で作成する)
 	//キャラチップをImageManager内で作成しない場合は第二引数にfalseを指定
-	ImageManager(K_Graphics::Texture* tex, bool isde = true);
+	ImageManager(const std::string& texName, K_Graphics::Texture* tex, bool isde = true);
 
 	//デストラクタ
 	~ImageManager();
@@ -38,7 +38,7 @@ public:
 	void Animation();
 
 	//----------------------------------------------
-	//描画
+	//描画(3D)
 	void ImageDraw3D(	const K_Math::Vector3& posc, 
 						const K_Math::Vector3& angle,
 						const K_Math::Vector3& scale);

@@ -7,7 +7,6 @@
 class CSTList
 {
 private:
-	static CSTList* cstList;
 	CSTList():
 		fList(nullptr)
 	{
@@ -42,16 +41,11 @@ public:
 
 	//インスタンスを得る
 	static CSTList* GetInstance();
-	//解放する
-	void Destroy();
 };
 
 //関数群
 namespace CST
 {
-	//終了する際に呼ぶ
-	void Delete();
-
 	//射影投影カメラを作成
 	void CreatePerspectiveCamera(const K_Math::Vector3& position, const K_Math::Vector3& target, int screenWidth, int screenHeight, float cameraNeer, float cameraFar, float fieldOfFar);
 	//平行投影カメラを作成

@@ -3,14 +3,14 @@
 #include "K_Graphics\CameraClass.h"
 #include "K_Graphics\ShaderClass.h"
 
-class CollisionManager
+class CollisionCreator
 {
 private:
-	static CollisionManager* cManager;
-	CollisionManager() : 
+	static CollisionCreator* cCreator;
+	CollisionCreator() : 
 		bPhysics(nullptr){}
 
-	~CollisionManager()
+	~CollisionCreator()
 	{
 		if (bPhysics != nullptr)
 			delete bPhysics;
@@ -20,13 +20,13 @@ public:
 	K_Physics::BulletPhysics* bPhysics;
 
 	//インスタンスを得る
-	static CollisionManager* GetInstance();
+	static CollisionCreator* GetInstance();
 	//解放する
 	void Destroy();
 };
 
 //関数群
-namespace CM
+namespace CC
 {
 	//終了処理
 	void Delete();

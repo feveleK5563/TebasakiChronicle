@@ -26,11 +26,16 @@ void EnemyMoveSet::CreateMotionPattern(	int* moveNum,		//“®ì”Ô†‚ğ“ü‚ê‚½”z—ñ‚Ìƒ
 }
 
 //-----------------------------------------------------------------------------
-//Œ»İ‚Ì“®ìƒpƒ^[ƒ“‚ğÀs‚·‚é
-void EnemyMoveSet::Move(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, K_Math::Vector3& moveVec)
+//w’èƒpƒ^[ƒ“”Ô†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“‚ğ•Ô‚·
+const std::vector<AnimationCharaChip*> EnemyMoveSet::GetNowAnimChip(int nowPatternOrder)
 {
-	empattern[nowPatternOrder]->Move(nowMoveOrder, timeCnt, moveVec);
+	return empattern[nowPatternOrder]->animChip;
+}
 
+//-----------------------------------------------------------------------------
+//Œ»İ‚Ì“®ìƒpƒ^[ƒ“‚ğÀs‚µAŒ»İæ“¾‰Â”\‚ÈƒXƒLƒ‹”Ô†‚ğ•Ô‚·
+int EnemyMoveSet::Move(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, K_Math::Vector3& moveVec)
+{
 	//ƒpƒ^[ƒ“‚Ì‘JˆÚğŒ‚ğ–‚½‚µ‚½‚ç‘¦ƒpƒ^[ƒ“•ÏX
 	for (int i = 0; i < (int)empattern.size(); ++i)
 	{
@@ -38,9 +43,10 @@ void EnemyMoveSet::Move(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, K
 			empattern[i]->emt->Transition())
 		{
 			PatternTransition(nowMoveOrder, nowPatternOrder, timeCnt, i);
-			return;
+			break;
 		}
 	}
+	return empattern[nowPatternOrder]->Move(nowMoveOrder, timeCnt, moveVec);
 }
 
 //-----------------------------------------------------------------------------
