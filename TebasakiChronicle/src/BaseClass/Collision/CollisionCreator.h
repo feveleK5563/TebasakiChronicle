@@ -42,7 +42,7 @@ namespace CC
 	K_Physics::CollisionShape* CreateBoxShape(float halfWidth, float halfHeight, float halfDepth);
 
 	//コリジョンオブジェクトを作成し、アドレス値を得る
-	K_Physics::CollisionData* CreateCollisionObject(btCollisionShape* shape, bool ghost, int mask, const K_Math::Vector3 &pos = K_Math::Vector3(0, 0, 0), const K_Math::Vector3 &rot = K_Math::Vector3(0, 0, 0));
+	K_Physics::CollisionData* CreateCollisionObject(btCollisionShape* shape, bool ghost, int myselfMask, int giveMask, const K_Math::Vector3 &pos = K_Math::Vector3(0, 0, 0), const K_Math::Vector3 &rot = K_Math::Vector3(0, 0, 0));
 
 	//物理世界を更新し、座標を変更する(フレームの最初に呼ぶ)
 	void Run();

@@ -10,7 +10,7 @@
 int main()
 {
 	//ウィンドウ
-	K_System::SystemClass* sc = new K_System::SystemClass(720, 540, false);
+	K_System::SystemClass* sc = new K_System::SystemClass("TebasakiChronicle", 720, 540, false);
 
 	//CollisionManagerを初期化
 	CC::Initialize();

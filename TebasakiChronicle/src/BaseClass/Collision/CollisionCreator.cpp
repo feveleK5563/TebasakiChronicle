@@ -59,9 +59,9 @@ namespace CC
 	}
 
 	//コリジョンオブジェクトを作成し、アドレス値を得る
-	K_Physics::CollisionData* CreateCollisionObject(btCollisionShape* shape, bool ghost, int mask, const K_Math::Vector3 &pos, const K_Math::Vector3 &rot)
+	K_Physics::CollisionData* CreateCollisionObject(btCollisionShape* shape, bool ghost, int myselfMask, int giveMask, const K_Math::Vector3 &pos, const K_Math::Vector3 &rot)
 	{
-		return cc->bPhysics->CreateCollisionObject(shape, ghost, mask, pos, rot);
+		return cc->bPhysics->CreateCollisionObject(shape, ghost, myselfMask, giveMask, pos, rot);
 	}
 
 	//物理世界を更新し、座標を変更する(フレームの最初に呼ぶ)

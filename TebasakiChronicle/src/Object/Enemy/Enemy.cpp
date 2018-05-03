@@ -32,7 +32,7 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos)
 	imgManager->ChangeAnimationPattern(nowMoveOrder);
 	imgManager->ChangeCharaChip(eController->GetNowCharaChip(nowPatternOrder));
 
-	cData = CC::CreateCollisionObject(cpyet->cShape, true, 1, pos, angle);
+	cData = CC::CreateCollisionObject(cpyet->cShape, true, 1, 0, pos, angle);
 
 	skillAndChip.skillId = eController->GetSkillId();
 	skillAndChip.textureName = &imgManager->textureName;

@@ -24,23 +24,23 @@ void CollisionManager::CreateBaseCollisionData(K_Physics::CollisionShape* cs, co
 	if (isJudge == true)
 	{
 		//地形とのめり込み処理を行う
-		baseCollision = CC::CreateCollisionObject(cs, false, 1, pos, rot);
+		baseCollision = CC::CreateCollisionObject(cs, false, 1, 0, pos, rot);
 	}
 	else
 	{
 		//処理を行わない
-		baseCollision = CC::CreateCollisionObject(cs, false, 1, pos, rot);
+		baseCollision = CC::CreateCollisionObject(cs, false, 1, 0, pos, rot);
 	}
 }
 
 //-----------------------------------------------------------------------------
 //サブコリジョンを設定する
-void CollisionManager::CreateSubCollisionData(K_Physics::CollisionShape* cs, int mask, const K_Math::Vector3& pos, const K_Math::Vector3& rot)
+void CollisionManager::CreateSubCollisionData(K_Physics::CollisionShape* cs, int myselfMask, int giveMask, const K_Math::Vector3& pos, const K_Math::Vector3& rot)
 {
 	if (baseCollision == nullptr)
 		return;
 
-	subCollision.emplace_back(	new Sub(CC::CreateCollisionObject(cs, true, mask, pos + baseCollision->GetCollisionPosition(), rot),
+	subCollision.emplace_back(	new Sub(CC::CreateCollisionObject(cs, true, myselfMask, giveMask, pos + baseCollision->GetCollisionPosition(), rot),
 								new K_Math::Vector3(pos)));
 }
 

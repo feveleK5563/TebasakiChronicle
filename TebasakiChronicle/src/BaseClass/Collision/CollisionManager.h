@@ -31,7 +31,7 @@ public:
 
 	//サブコリジョンを設定する(指定座標は、オブジェクトが右向き時のベースコリジョンとの相対座標)
 	//常にghostはtrue
-	void CreateSubCollisionData(K_Physics::CollisionShape* cs, int mask, const K_Math::Vector3& pos, const K_Math::Vector3& rot);
+	void CreateSubCollisionData(K_Physics::CollisionShape* cs, int myselfMask, int giveMask, const K_Math::Vector3& pos, const K_Math::Vector3& rot);
 
 	//指定したサブコリジョンにタグ(userData)を設定する
 	void SetSubCollisionTug(int subNum, void* tug);

@@ -1,6 +1,7 @@
 #pragma once
 #include "EnemyType.h"
 #include "EnemyController.h"
+#include "../../BaseClass/Collision/CollisionManager.h"
 
 //ˆÈ‰º‚Ìinclude‚ÍGameObject‚Å‘ã‘Ö‚·‚é
 #include "../../BaseClass/ImageManager/ImageManager.h"

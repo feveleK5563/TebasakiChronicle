@@ -126,7 +126,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>include\K_Physics;include\K_Math;include\K_Input;include\K_Graphics;include\K_Audio;include\GLFW;include\GLEW;include\FreeType;include\fbxsdk;include\Eigen;include\Effekseer;include\bullet;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include\libpng;include\K_Physics;include\K_Math;include\K_Input;include\K_Graphics;include\K_Audio;include\GLFW;include\GLEW;include\FreeType;include\fbxsdk;include\Eigen;include\Effekseer;include\bullet;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -155,7 +155,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>include\K_Physics;include\K_Math;include\K_Input;include\K_Graphics;include\K_Audio;include\GLFW;include\GLEW;include\FreeType;include\fbxsdk;include\Eigen;include\Effekseer;include\bullet;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include\libpng;include\K_Physics;include\K_Math;include\K_Input;include\K_Graphics;include\K_Audio;include\GLFW;include\GLEW;include\FreeType;include\fbxsdk;include\Eigen;include\Effekseer;include\bullet;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
