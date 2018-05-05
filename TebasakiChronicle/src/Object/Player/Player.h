@@ -1,5 +1,5 @@
 #pragma once
-#include "../src/Object/GameObject.h"
+//#include "../src/Object/GameObject.h"
 #include "../src/Object//Player/CameraGun/CameraGun.h"
 #include "../src/Object/Player/CharaController/CharaController.h"
 
@@ -19,8 +19,27 @@ public:
 	void	UpDate();		//更新
 	void	Render();		//描画
 
+	//カメラガンのスキルを取得する
+	void	SetSkillData();
+
+	//InputClassの取得処理
+	void	GetInputClass(K_Input::InputClass* input);
+
+	//カメラガンを生成する
+	void	CreateCameraGun();
+
 private:
 	GameObject		object;		//ゲームオブジェクト
 	CharaController	controller;	//コントローラー
+public:
 	CameraGun		cameraGun;	//カメラガン
+	
+	K_Input::InputClass*		input;		//InputClass
+
+
+public:
+	K_Physics::BulletPhysics*	physics;	//物理BulletPhysics
+	K_Physics::CollisionShape*	shape;		//形の作成
+	K_Physics::CollisionData*	collision;	//コリジョン
+	K_Physics::CollisionTag*	targetTag;	//ターゲットのコリジョンタグ
 };

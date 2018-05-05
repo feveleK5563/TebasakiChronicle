@@ -35,6 +35,9 @@
     <Filter Include="ソース ファイル\src\Object\Player\CameraGun">
       <UniqueIdentifier>{739da917-d419-4a43-9cd5-755a11ba48b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\BaseClass\Collision">
+      <UniqueIdentifier>{6b0e4c4a-ac66-4c10-948e-fa05c6952cca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -97,6 +100,9 @@
     <ClCompile Include="src\Object\Player\CameraGun\CameraGun.cpp">
       <Filter>ソース ファイル\src\Object\Player\CameraGun</Filter>
     </ClCompile>
+    <ClCompile Include="src\BaseClass\Collision\CollisionManager.cpp">
+      <Filter>ソース ファイル\src\BaseClass\Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BaseClass\Move.h">
@@ -158,6 +164,9 @@
     </ClInclude>
     <ClInclude Include="src\Object\Player\CameraGun\CameraGun.h">
       <Filter>ソース ファイル\src\Object\Player\CameraGun</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BaseClass\Collision\CollisionManager.h">
+      <Filter>ソース ファイル\src\BaseClass\Collision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

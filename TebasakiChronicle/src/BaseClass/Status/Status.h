@@ -33,7 +33,7 @@ public:
 	void	SetStatusData(
 		const State& state,const K_Math::Vector3& pos,
 		const K_Math::Vector3& angle,const K_Math::Vector3& scale,
-		const Direction& dir,const float& attackPoint
+		const Direction& dir,const float& attackPoint,const int& life
 	);
 
 
@@ -42,14 +42,18 @@ public:
 	K_Math::Vector3&	GetPos();
 	K_Math::Vector3&	GetAngle();
 	K_Math::Vector3&	GetScale();
+	K_Math::Vector3&	GetMoveVec();
 	Direction&			GetDirection();
 	float&				GetAttackPoint();
+	int&				GetLife();
 
 private:
 	State				state;		//ó‘Ô
 	K_Math::Vector3		pos;		//À•W
 	K_Math::Vector3		angle;		//ŒX‚«
 	K_Math::Vector3		scale;		//Šg‘åk¬
+	K_Math::Vector3		moveVec;	//ˆÚ“®—Ê
 	Direction			direction;	//Œü‚«
 	float				attackPoint;//UŒ‚—Í
+	int					life;		//‘Ì—Í
 };

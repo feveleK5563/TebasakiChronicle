@@ -13,36 +13,71 @@ CameraGun::CameraGun()
 
 }
 
+CameraGun::CameraGun(const K_Math::Vector3& vec)
+	: moveVec(vec)
+{
+	//ステータスの設定
+	object.GetStatus()->SetStatusData(
+		Status::State::Walk,
+		K_Math::Vector3(0, 0, 0),
+		K_Math::Vector3(0, 0, 0),
+		K_Math::Vector3(1, 1, 1),
+		Status::Direction::Left,
+		1.0f,
+		1);
+
+	//物理を扱うBulletPhysics
+	physics = new K_Physics::BulletPhysics();
+
+	//ボックスの形の生成
+	shape = physics->CreateSphereShape(10);
+
+	//生成した[形]でコリジョンや剛体を作成
+	//K_Physics::RigidBodyData*	rigid = physics->CreateRigidBody(shape, 1.0f, false, 1);
+	collision = physics->CreateCollisionObject(shape, false, 1);
+
+	//コリジョンに情報を持たせる
+	collision->tag.tagIndex = 1;
+	collision->tag.tagName = "CameraGun";
+}
+
 //-------------------------------------------------
 //デストラクタ
 //-------------------------------------------------
 CameraGun::~CameraGun()
 {
+	if (shape != nullptr) { delete shape; shape = nullptr; }
+	if (collision != nullptr) { delete collision; collision = nullptr; }
+	if (physics != nullptr) { delete physics; physics = nullptr; }
 
 }
 
 
 //更新処理
 void	CameraGun::UpDate()
-{
+{	
 	//カメラが有効かどうか
-	if (!active) { return; }
+	//if (!active) { return; }
 
-	//敵と衝突した場合
-	if (HitEnemy())
+	
+	if (HitCheck("Enemy"))
 	{
-		K_Math::Vector3 tarPos;	//衝突した敵の位置
-		Chase(tarPos);			//追尾
+		//追跡処理
+		K_Math::Vector3* targetPos = (K_Math::Vector3*)targetTag->userData;
+		Chase(*targetPos);
 	}
-	else //衝突しない場合
+	else
 	{
-		K_Math::Vector3 moveVec;	//移動量
-		K_Math::Vector3	dir;		//向き
-		K_Math::Vector3 myPos;		//自分の位置
+		//移動量をセットする
+		object.SetMoveVec(moveVec);
+	}
 
-		//---Vector3などは、*演算子で計算ができない---
-		//myPos += moveVec * dir;		//その向きに移動量分、位置を更新
-	}
+	//カメラガンの移動
+	physics->MoveCharacter(collision, object.GetMoveVec());
+	object.GetPos() += object.GetMoveVec();
+
+	physics->Run();	//物理動作を走らせる
+
 }
 
 
@@ -50,11 +85,8 @@ void	CameraGun::UpDate()
 //追尾処理
 void	CameraGun::Chase(const K_Math::Vector3& targetPos)
 {
-	//自身の位置
-	K_Math::Vector3 pos = { 0,0,0 };
-
 	//敵とカメラガンとの距離
-	K_Math::Vector3 targetVec = targetPos - pos;
+	K_Math::Vector3 targetVec = targetPos - object.GetStatus()->GetPos();
 
 	//チェック判定
 	if (targetVec.x() == 0 && targetVec.y() == 0)
@@ -66,8 +98,8 @@ void	CameraGun::Chase(const K_Math::Vector3& targetPos)
 	//追尾
 	float angle = atan2f(targetVec.y(), targetVec.x());	//角度
 	float speed = 3.0f;		//スピード
-	pos.x() += cos(K_Math::DegToRad(angle)) * speed;
-	pos.y() += sin(K_Math::DegToRad(angle)) * speed;
+
+	object.GetMoveVec().x() = cosf(K_Math::DegToRad(angle)) * speed;
 }
 
 
@@ -85,7 +117,8 @@ void	CameraGun::Initailize()
 		K_Math::Vector3(0, 0, 0),
 		K_Math::Vector3(1, 1, 1),
 		Status::Direction::Left,
-		1.0f);
+		1.0f,
+		1);
 	
 	//動きの初期化
 	//動きはデフォルトで生成させる
@@ -94,15 +127,48 @@ void	CameraGun::Initailize()
 	//使い方は今は不明
 	//object.GetImage()->
 
-	//Easingは初期化の必要はない
+	//物理を扱うBulletPhysics
+	physics = new K_Physics::BulletPhysics();
+
+	//ボックスの形の生成
+	shape = physics->CreateSphereShape(10);
+
+	//生成した[形]でコリジョンや剛体を作成
+	//K_Physics::RigidBodyData*	rigid = physics->CreateRigidBody(shape, 1.0f, false, 1);
+	collision = physics->CreateCollisionObject(shape, false, 1);
+
+	//コリジョンに情報を持たせる
+	collision->tag.tagIndex = 1;
+	collision->tag.tagName = "CameraGun";
+
+	active = false;
 }
 
 void	CameraGun::Render()
 {
-
+	if (!active) { return; }
 }
 
-bool	CameraGun::HitEnemy()
+//向いている方向に移動
+void	CameraGun::MoveDir(const K_Math::Vector3& vec)
 {
-	return true;
+	moveVec = vec;	//ここでは移動量を渡す
+}
+
+
+//カメラガンとの衝突判定
+//指定した「タグの名前」と衝突した場合、true
+bool	CameraGun::HitCheck(const std::string& name)
+{
+	std::vector<K_Physics::CollisionTag*>	tags = physics->FindConfrictionObjects(collision);
+	for (auto it = tags.begin(); it != tags.end(); ++it)
+	{
+		if ((*it)->tagName == name)
+		{
+			//targetTag->userData = (K_Math::Vector3*)(*it)->userData;
+			std::cout << "カメラガンと衝突しました" << std::endl;
+			return true;
+		}
+	}
+	return false;
 }

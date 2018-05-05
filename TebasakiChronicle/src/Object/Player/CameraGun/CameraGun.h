@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../src/Object/GameObject.h"
+#include "K_Physics\BulletPhysics.h"
 
 //----------------------------------------------------------------
 //カメラガン
@@ -11,6 +12,7 @@ class CameraGun
 {
 public:
 	CameraGun();
+	CameraGun(const K_Math::Vector3& moveVec);
 	~CameraGun();
 
 	//****************************
@@ -19,16 +21,24 @@ public:
 	//3:追尾処理は問題ない
 	//****************************
 	void	MoveDir(const K_Math::Vector3& moveVec);	//向いている方向に移動
-	bool	HitEnemy();									//敵と衝突したかの判定
 	void	Chase(const K_Math::Vector3& targetPos);	//追尾処理
-
+	bool	HitCheck(const std::string& name);
 	
 	//仮処理
 	void	Initailize();	//初期化処理
 	void	UpDate();		//更新処理
 	void	Render();		//描画
 
-private:
+public:
 	GameObject	object;	//ゲームオブジェクト
 	bool		active;
+private:
+
+public:
+	K_Math::Vector3	moveVec;
+	K_Physics::BulletPhysics*	physics;	//物理BulletPhysics
+	K_Physics::CollisionShape*	shape;		//形の作成
+	K_Physics::CollisionData*	collision;	//コリジョン
+	K_Physics::CollisionTag*	targetTag;	//ターゲットのコリジョンタグ
+
 };

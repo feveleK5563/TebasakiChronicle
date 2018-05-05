@@ -27,7 +27,7 @@ Status::~Status()
 //---------------------------------------------------
 void	Status::SetStatusData(const State& state, const K_Math::Vector3& pos,
 	const K_Math::Vector3& angle, const K_Math::Vector3& scale,
-	const Direction& dir, const float& attackPoint)
+	const Direction& dir, const float& attackPoint,const int& life)
 {
 	this->state = state;
 	this->pos = pos;
@@ -35,6 +35,7 @@ void	Status::SetStatusData(const State& state, const K_Math::Vector3& pos,
 	this->scale = scale;
 	this->direction = dir;
 	this->attackPoint = attackPoint;
+	this->life = life;
 }
 
 //---------------------------------------------------
@@ -64,6 +65,12 @@ K_Math::Vector3&	Status::GetScale()
 	return scale;
 }
 
+//ˆÚ“®—Ê‚ÌŽæ“¾
+K_Math::Vector3&	Status::GetMoveVec()
+{
+	return moveVec;
+}
+
 //Œü‚«‚ÌŽæ“¾
 Status::Direction&	Status::GetDirection()
 {
@@ -76,3 +83,8 @@ float&				Status::GetAttackPoint()
 	return attackPoint;
 }
 
+//‘Ì—Í‚ÌŽæ“¾
+int&				Status::GetLife()
+{
+	return life;
+}
