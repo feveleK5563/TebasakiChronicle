@@ -21,6 +21,19 @@ ImageManager::~ImageManager()
 }
 
 //-----------------------------------------------------------------------------
+//テクスチャ名の取得
+std::string& ImageManager::GetTextureName()
+{
+	return textureName;
+}
+//-----------------------------------------------------------------------------
+//指定した番号のキャラチップを取得
+AnimationCharaChip* ImageManager::GetNowAnimationCharaChip()
+{
+	return charaChip[nowAnimNum];
+}
+
+//-----------------------------------------------------------------------------
 //キャラチップを作成
 bool ImageManager::CreateCharaChip(const K_Math::Box2D& src, int sheet, float spd, bool isroop)
 {

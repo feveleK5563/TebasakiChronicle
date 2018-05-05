@@ -1,7 +1,7 @@
 #pragma once
 #include "EnemyMove.h"
 #include "EnemyMoveTransition.h"
-#include "..\..\BaseClass\ImageManager\AnimationCharaChip.h"
+#include "../../../BaseClass/ImageManager/AnimationCharaChip.h"
 
 //敵動作のパターンを作成するよ！
 class EnemyMovePattern

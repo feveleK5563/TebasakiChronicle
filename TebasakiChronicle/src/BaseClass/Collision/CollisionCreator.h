@@ -54,6 +54,11 @@ namespace CC
 	//衝突のチェック
 	std::vector<K_Physics::CollisionTag*>& FindConfrictionObjects(K_Physics::CollisionData *myself);
 
+	//コリジョンデータを解放する
+	void RemoveCollision(K_Physics::CollisionData** data);
+	//コリジョンの形状情報を解放する
+	void RemoveCollisionShape(K_Physics::CollisionShape** shape);
+
 	//コリジョンの描画
 	void DebugDraw(K_Graphics::ShaderClass* sc, K_Graphics::CameraClass* cc);
 }

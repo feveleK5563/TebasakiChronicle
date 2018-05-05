@@ -1,5 +1,5 @@
 #pragma once
-#include "EnemyMoveSet.h"
+#include "EnemyType/EnemyMoveSet.h"
 
 //敵の種類別に設定された動作アドレスを所有し、
 //動作処理を呼び出すクラス
@@ -19,7 +19,7 @@ public:
 	~EnemyController();
 
 	//スキル番号を取得
-	int GetSkillId();
+	int& GetSkillId();
 
 	//動作の実行
 	void Move(int& nowMoveOrder, int& nowPatternOrder, K_Math::Vector3& moveVec);

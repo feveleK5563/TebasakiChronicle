@@ -86,6 +86,17 @@ namespace CC
 		return cc->bPhysics->FindConfrictionObjects(myself);
 	}
 
+	//コリジョンデータを解放する
+	void RemoveCollision(K_Physics::CollisionData** data)
+	{
+		cc->bPhysics->RemoveCollision(data);
+	}
+	//コリジョンの形状情報を解放する
+	void RemoveCollisionShape(K_Physics::CollisionShape** shape)
+	{
+		cc->bPhysics->RemoveCollisionShape(shape);
+	}
+
 	//コリジョンの描画
 	void DebugDraw(K_Graphics::ShaderClass* shaderc, K_Graphics::CameraClass* camerac)
 	{

@@ -14,71 +14,97 @@ Enemy::Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos) :
 Enemy::~Enemy()
 {
 	delete eController;
-	delete imgManager;
 }
 
 //-----------------------------------------------------------------------------
 //敵情報を設定
 void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos)
 {
-	eController = new EnemyController(cpyet->emSet);
-	life = cpyet->maxLife;
-	pos = setPos;
-	angle = { 0, 0, 0 };
-	scale = { 1, 1, 1 };
-	moveVec = { 0, 0, 0 };
+	eController = new EnemyController(cpyet->GetEnemyMoveSet());
+	//gameObject.GetStatus()->GetLife() = cpyet->GetMaxLife();
+	gameObject.GetStatus()->SetStatusData(	Status::State::Walk,
+											setPos,
+											K_Math::Vector3(0, 0, 0),
+											K_Math::Vector3(1, 1, 1),
+											Status::Direction::Right,
+											cpyet->GetHitDamage());
 
-	imgManager = new ImageManager(cpyet->textureName, cpyet->texture, false);
-	imgManager->ChangeAnimationPattern(nowMoveOrder);
-	imgManager->ChangeCharaChip(eController->GetNowCharaChip(nowPatternOrder));
+	//アニメーションと表示画像の設定
+	ImageManager* im = gameObject.GetImage();
+	im = new ImageManager(cpyet->GetTextureName(), cpyet->GetTexture(), false);
+	im->ChangeAnimationPattern(nowMoveOrder);
+	im->ChangeCharaChip(eController->GetNowCharaChip(nowPatternOrder));
 
-	cData = CC::CreateCollisionObject(cpyet->cShape, true, 1, 0, pos, angle);
+	//コリジョンの設定
+	collisionManager.SetBaseCollisionData(cpyet->GetBaseCollisionData());			//ベースコリジョン
+	collisionManager.SetSubCollisionData(cpyet->GetRecieveDamageCollisionData());	//被ダメージ用コリジョン
+	collisionManager.SetSubCollisionData(cpyet->GetFieldofviewCollisionData());		//視界用コリジョン
+	collisionManager.SetSubCollisionData(cpyet->GetAttackAreaCollisionData());		//攻撃動作遷移用コリジョン
+	collisionManager.SetSubCollisionData(cpyet->GetCheckFootCollisionData());		//足元判定用コリジョン
+	collisionManager.SetSubCollisionData(cpyet->GetCheckHeadCollisionData());		//頭上判定用コリジョン
+	collisionManager.SetSubCollisionData(cpyet->GetRecieveCameraCollisionData());	//被カメラガン用コリジョン
 
-	skillAndChip.skillId = eController->GetSkillId();
-	skillAndChip.textureName = &imgManager->textureName;
-	skillAndChip.nowCharaChip = imgManager->charaChip[nowPatternOrder];
+	//タグの設定
+	skillAndChip.pos = &gameObject.GetStatus()->GetPos();
+	skillAndChip.textureName = &gameObject.GetImage()->GetTextureName();
+	skillAndChip.skillId = &eController->GetSkillId();
+	SetTugData();
 }
 
 //-----------------------------------------------------------------------------
 //更新
 void Enemy::Update()
 {
-	moveVec = { 0, 0, 0 };	//※この処理はコリジョンで行う
+	K_Math::Vector3 moveVec = { 0, 0, 0 };	//※moveVecはStatusクラスのメンバ変数
 
-	eController->Move(nowMoveOrder, nowPatternOrder, moveVec);
-	imgManager->Animation();
+	//eController->Move(nowMoveOrder, nowPatternOrder, moveVec);
+
+	AnimationUpdate();
+
+	collisionManager.MoveBaseCollision(moveVec, gameObject.GetStatus()->GetDirection(), true);
+
+	SetTugData();
+}
+
+//-----------------------------------------------------------------------------
+//タグ情報を格納
+void Enemy::SetTugData()
+{
+	skillAndChip.nowCharaChip = gameObject.GetImage()->GetNowAnimationCharaChip();
+
+	for (int i = 0; i < 5; ++i)
+	{
+		collisionManager.SetSubCollisionTug(i, gameObject.GetStatus());
+	}
+	collisionManager.SetSubCollisionTug(5, &skillAndChip);
+}
+
+//-----------------------------------------------------------------------------
+//描画、アニメーションの更新
+void Enemy::AnimationUpdate()
+{
+	gameObject.GetImage()->Animation();
 
 	//現在の動作と前の動作が異なる場合アニメーションパターンを変更する
 	if (beforeMoveOrder != nowMoveOrder)
 	{
-		imgManager->ChangeAnimationPattern(nowMoveOrder);
+		gameObject.GetImage()->ChangeAnimationPattern(nowMoveOrder);
 	}
 	beforeMoveOrder = nowMoveOrder;
 
 	//現在の動作パターンと前のパターンが異なる場合キャラチップを変更する
 	if (beforePatternOrder != nowPatternOrder)
 	{
-		imgManager->ChangeCharaChip(eController->GetNowCharaChip(nowPatternOrder));
+		gameObject.GetImage()->ChangeCharaChip(eController->GetNowCharaChip(nowPatternOrder));
 	}
 	beforePatternOrder = nowPatternOrder;
-
-	pos += moveVec; //※この処理はコリジョンで行う
-
-	SetSkillData();
 }
-
-//-----------------------------------------------------------------------------
-//スキル情報を格納
-void Enemy::SetSkillData()
-{
-	skillAndChip.skillId = eController->GetSkillId();
-	skillAndChip.nowCharaChip = imgManager->charaChip[nowPatternOrder];
-}
-
 
 //-----------------------------------------------------------------------------
 //描画
 void Enemy::Draw()
 {
-	imgManager->ImageDraw3D(pos, angle, scale);
+	gameObject.GetImage()->ImageDraw3D(	gameObject.GetStatus()->GetPos(),
+										gameObject.GetStatus()->GetAngle(),
+										gameObject.GetStatus()->GetScale());
 }

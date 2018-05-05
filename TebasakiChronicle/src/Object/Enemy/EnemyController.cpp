@@ -11,7 +11,7 @@ EnemyController::~EnemyController(){}
 
 //-----------------------------------------------------------------------------
 //ƒXƒLƒ‹”Ô†‚ğæ“¾
-int EnemyController::GetSkillId()
+int& EnemyController::GetSkillId()
 {
 	return skillId;
 }

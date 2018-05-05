@@ -29,15 +29,24 @@
     <Filter Include="ソース ファイル\src\BaseClass\Collision">
       <UniqueIdentifier>{ebb1be35-0c29-4188-8808-cb03736c9ade}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\BaseClass\Status">
+      <UniqueIdentifier>{bbd08e6c-8280-4c37-9a41-37e4a8e37574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Object\Player\CameraGan">
+      <UniqueIdentifier>{1c25f940-1341-4380-aaac-f7baffe3c49d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Object\Player\CharaController">
+      <UniqueIdentifier>{37caa740-3560-4346-993f-76a3c3b3d694}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Object\Enemy\EnemyType">
+      <UniqueIdentifier>{e504076d-489f-44d2-bc52-995512a4a2f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
       <Filter>ソース ファイル\src</Filter>
     </ClCompile>
     <ClCompile Include="src\BaseClass\Move.cpp">
-      <Filter>ソース ファイル\src\BaseClass</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BaseClass\Position.cpp">
       <Filter>ソース ファイル\src\BaseClass</Filter>
     </ClCompile>
     <ClCompile Include="src\Object\GameObject.cpp">
@@ -55,30 +64,6 @@
     <ClCompile Include="src\BaseClass\ImageManager\ImageManager.cpp">
       <Filter>ソース ファイル\src\BaseClass\ImageManager</Filter>
     </ClCompile>
-    <ClCompile Include="src\Object\Enemy\Enemy.cpp">
-      <Filter>ソース ファイル\src\Object\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\Enemy\EnemyController.cpp">
-      <Filter>ソース ファイル\src\Object\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\Enemy\EnemyMovePattern.cpp">
-      <Filter>ソース ファイル\src\Object\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\Enemy\EnemyMoveSet.cpp">
-      <Filter>ソース ファイル\src\Object\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\Enemy\EnemyMoveTransition.cpp">
-      <Filter>ソース ファイル\src\Object\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\Enemy\EnemyType.cpp">
-      <Filter>ソース ファイル\src\Object\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\Enemy\EnemyTypeManager.cpp">
-      <Filter>ソース ファイル\src\Object\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Object\Enemy\EnemyMove.cpp">
-      <Filter>ソース ファイル\src\Object\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="src\CSTList.cpp">
       <Filter>ソース ファイル\src</Filter>
     </ClCompile>
@@ -88,12 +73,45 @@
     <ClCompile Include="src\BaseClass\Collision\CollisionManager.cpp">
       <Filter>ソース ファイル\src\BaseClass\Collision</Filter>
     </ClCompile>
+    <ClCompile Include="src\BaseClass\Status\Status.cpp">
+      <Filter>ソース ファイル\src\BaseClass\Status</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Player\CameraGun\CameraGun.cpp">
+      <Filter>ソース ファイル\src\Object\Player\CameraGan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Player\CharaController\CharaController.cpp">
+      <Filter>ソース ファイル\src\Object\Player\CharaController</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Enemy\EnemyType\EnemyMove.cpp">
+      <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Enemy\EnemyType\EnemyMovePattern.cpp">
+      <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Enemy\EnemyType\EnemyMoveSet.cpp">
+      <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Enemy\EnemyType\EnemyMoveTransition.cpp">
+      <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Enemy\EnemyType\EnemyType.cpp">
+      <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Enemy\EnemyType\EnemyTypeManager.cpp">
+      <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Enemy\Enemy.cpp">
+      <Filter>ソース ファイル\src\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Enemy\EnemyController.cpp">
+      <Filter>ソース ファイル\src\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Enemy\EnemyManager.cpp">
+      <Filter>ソース ファイル\src\Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BaseClass\Move.h">
-      <Filter>ソース ファイル\src\BaseClass</Filter>
-    </ClInclude>
-    <ClInclude Include="src\BaseClass\Position.h">
       <Filter>ソース ファイル\src\BaseClass</Filter>
     </ClInclude>
     <ClInclude Include="src\Object\GameObject.h">
@@ -111,32 +129,8 @@
     <ClInclude Include="src\BaseClass\ImageManager\ImageManager.h">
       <Filter>ソース ファイル\src\BaseClass\ImageManager</Filter>
     </ClInclude>
-    <ClInclude Include="src\Object\Enemy\Enemy.h">
-      <Filter>ソース ファイル\src\Object\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Object\Enemy\EnemyController.h">
-      <Filter>ソース ファイル\src\Object\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Object\Enemy\EnemyMovePattern.h">
-      <Filter>ソース ファイル\src\Object\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Object\Enemy\EnemyMoveSet.h">
-      <Filter>ソース ファイル\src\Object\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Object\Enemy\EnemyMoveTransition.h">
-      <Filter>ソース ファイル\src\Object\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Object\Enemy\EnemyType.h">
-      <Filter>ソース ファイル\src\Object\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Object\Enemy\EnemyTypeManager.h">
-      <Filter>ソース ファイル\src\Object\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="src\BaseClass\easing.h">
       <Filter>ソース ファイル\src\BaseClass</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Object\Enemy\EnemyMove.h">
-      <Filter>ソース ファイル\src\Object\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="src\CSTList.h">
       <Filter>ソース ファイル\src</Filter>
@@ -146,6 +140,42 @@
     </ClInclude>
     <ClInclude Include="src\BaseClass\Collision\CollisionManager.h">
       <Filter>ソース ファイル\src\BaseClass\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BaseClass\Status\Status.h">
+      <Filter>ソース ファイル\src\BaseClass\Status</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Player\CameraGun\CameraGun.h">
+      <Filter>ソース ファイル\src\Object\Player\CameraGan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Player\CharaController\CharaController.h">
+      <Filter>ソース ファイル\src\Object\Player\CharaController</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Enemy\EnemyType\EnemyMove.h">
+      <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Enemy\EnemyType\EnemyMovePattern.h">
+      <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Enemy\EnemyType\EnemyMoveSet.h">
+      <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Enemy\EnemyType\EnemyMoveTransition.h">
+      <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Enemy\EnemyType\EnemyType.h">
+      <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Enemy\EnemyType\EnemyTypeManager.h">
+      <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Enemy\Enemy.h">
+      <Filter>ソース ファイル\src\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Enemy\EnemyController.h">
+      <Filter>ソース ファイル\src\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Enemy\EnemyManager.h">
+      <Filter>ソース ファイル\src\Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

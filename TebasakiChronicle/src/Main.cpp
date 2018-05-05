@@ -1,11 +1,11 @@
 #include "CSTList.h"
-#include "BaseClass\Collision\CollisionCreator.h"
+#include "BaseClass/Collision/CollisionCreator.h"
 #include "MeshModel.h"
 #include "SystemClass.h"
 
-#include "BaseClass\ImageManager\ImageManager.h"
-#include "Object\Enemy\EnemyTypeManager.h"
-#include "Object\Enemy\Enemy.h"
+#include "BaseClass/ImageManager/ImageManager.h"
+#include "Object/Enemy/EnemyType/EnemyTypeManager.h"
+#include "Object/Enemy/EnemyManager.h"
 
 int main()
 {
@@ -33,20 +33,21 @@ int main()
 	EnemyTypeManager* etm = new EnemyTypeManager();
 	etm->LoadEnemyData("");
 	//“G1‘Ì‚Éã‹L‚Åì¬‚µ‚½Ží—Þ‚ðŠ„‚è“–‚Ä‚é
-	Enemy e1(etm->GetEnemyTypeData(0), K_Math::Vector3(0, 0, 0));
+	EnemyManager emanager;
+	emanager.CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(0, 0, 0));
 
 
 	while (sc->IsSystemEnd() == false)
 	{
 		sc->ProcessSystem();
 
-		e1.Update();
+		emanager.UpdateAllEnemy();
 
 		CST::FrameBufferBeginDraw(720, 540, 0.f, 0.f, 1.f);
 		CST::GetPerspectiveCamera()->Draw();
 		CST::GetOrthoCamera()->Draw();
 
-		e1.Draw();
+		emanager.DrawAllEnemy();
 		CC::DebugDraw(CST::GetShaderClass(), CST::GetPerspectiveCamera());
 
 		sc->SwapBuffer();

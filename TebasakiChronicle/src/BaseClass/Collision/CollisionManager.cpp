@@ -9,13 +9,13 @@ CollisionManager::~CollisionManager()
 {
 	for (auto it : subCollision)
 	{
-		delete it->relativePos;
+		CC::RemoveCollision(&it->collision);
 		delete it;
 	}
 }
 
 //-----------------------------------------------------------------------------
-//ベースコリジョンを設定する
+//ベースコリジョンを作成する
 void CollisionManager::CreateBaseCollisionData(K_Physics::CollisionShape* cs, const K_Math::Vector3& pos, const K_Math::Vector3& rot, bool isJudge)
 {
 	if (baseCollision != nullptr)
@@ -32,16 +32,35 @@ void CollisionManager::CreateBaseCollisionData(K_Physics::CollisionShape* cs, co
 		baseCollision = CC::CreateCollisionObject(cs, false, 1, 0, pos, rot);
 	}
 }
+//-----------------------------------------------------------------------------
+//ベースコリジョンを設定する
+void CollisionManager::SetBaseCollisionData(K_Physics::CollisionData* cd)
+{
+	if (baseCollision != nullptr)
+		return;
+
+	baseCollision = cd;
+}
 
 //-----------------------------------------------------------------------------
-//サブコリジョンを設定する
-void CollisionManager::CreateSubCollisionData(K_Physics::CollisionShape* cs, int myselfMask, int giveMask, const K_Math::Vector3& pos, const K_Math::Vector3& rot)
+//サブコリジョンを作成する
+void CollisionManager::CreateSubCollisionData(K_Physics::CollisionShape* cs, int myselfMask, int giveMask, K_Math::Vector3& pos)
 {
 	if (baseCollision == nullptr)
 		return;
 
-	subCollision.emplace_back(	new Sub(CC::CreateCollisionObject(cs, true, myselfMask, giveMask, pos + baseCollision->GetCollisionPosition(), rot),
-								new K_Math::Vector3(pos)));
+	subCollision.emplace_back(new Sub(CC::CreateCollisionObject(cs, true, myselfMask, giveMask, pos + baseCollision->GetCollisionPosition()), pos));
+}
+//-----------------------------------------------------------------------------
+//サブコリジョンを設定する
+void CollisionManager::SetSubCollisionData(K_Physics::CollisionData* cd)
+{
+	if (baseCollision == nullptr)
+		return;
+
+	K_Math::Vector3* ccd = &cd->GetCollisionPosition();
+	subCollision.emplace_back(new Sub(cd, *ccd));
+	subCollision.back()->collision->SetCollisionPosition(*ccd + baseCollision->GetCollisionPosition());
 }
 
 //-----------------------------------------------------------------------------
@@ -53,7 +72,7 @@ void CollisionManager::SetSubCollisionTug(int subNum, void* tug)
 
 //-----------------------------------------------------------------------------
 //ベースコリジョンを動かし、付随してサブの座標を設定する
-void CollisionManager::MoveBaseCollision(K_Math::Vector3 moveVec, int angle, bool isLightness)
+void CollisionManager::MoveBaseCollision(K_Math::Vector3 moveVec, int direction, bool isLightness)
 {
 	if (isLightness == true)
 	{
@@ -67,7 +86,7 @@ void CollisionManager::MoveBaseCollision(K_Math::Vector3 moveVec, int angle, boo
 	}
 
 	//ベースコリジョンを基に各サブコリジョンの位置を設定
-	SetSubCollisionPos(angle);
+	SetSubCollisionPos(direction);
 }
 
 //-----------------------------------------------------------------------------
@@ -76,9 +95,9 @@ void CollisionManager::SetSubCollisionPos(int angle)
 {
 	for (auto it : subCollision)
 	{
-		K_Math::Vector3 setPos = *it->relativePos;
+		K_Math::Vector3 setPos = it->relativePos;
 
-		if (angle == 180)	//向きが左だった場合位置を反転
+		if (angle == 90)	//向きが左だった場合位置を反転
 			setPos.x() *= -1.f;
 
 		it->collision->SetCollisionPosition(setPos + baseCollision->GetCollisionPosition());
