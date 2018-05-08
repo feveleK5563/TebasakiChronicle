@@ -2,6 +2,7 @@
 
 #include "../src/Object/GameObject.h"
 #include "K_Physics\BulletPhysics.h"
+#include "../../../BaseClass/Collision/CollisionManager.h"
 
 //----------------------------------------------------------------
 //カメラガン
@@ -12,7 +13,6 @@ class CameraGun
 {
 public:
 	CameraGun();
-	CameraGun(const K_Math::Vector3& moveVec);
 	~CameraGun();
 
 	//****************************
@@ -20,25 +20,29 @@ public:
 	//2:衝突判定は、Collisionクラスが行う
 	//3:追尾処理は問題ない
 	//****************************
-	void	MoveDir(const K_Math::Vector3& moveVec);	//向いている方向に移動
-	void	Chase(const K_Math::Vector3& targetPos);	//追尾処理
-	bool	HitCheck(const std::string& name);
+	void	Chase(const K_Math::Vector3& targetPos);	//敵の座標をゆっくり追尾する
+	void	RecieveData();
+	bool	CheckUserData();
+
+	void	Initailize();								//初期化処理
+	void	UpDate(const K_Math::Vector3& pPos);		//更新処理
+	void	Render();									//描画
+
+	void	SetPlayerPos(const K_Math::Vector3& pos);	//プレイヤーの座標と同期する
+	void	SetMoveVec(bool isInjection);				//カメラの速度の設定
+	void	SetDirection(const Status::Direction& dir);	//向きの設定
+	float 	GetDir();
 	
-	//仮処理
-	void	Initailize();	//初期化処理
-	void	UpDate();		//更新処理
-	void	Render();		//描画
 
-public:
-	GameObject	object;	//ゲームオブジェクト
-	bool		active;
 private:
+	bool	CheckNowState(const Status::State& state);	//現在の状態を調べる
+	bool	CheckAddSpeed();
 
 public:
-	K_Math::Vector3	moveVec;
-	K_Physics::BulletPhysics*	physics;	//物理BulletPhysics
-	K_Physics::CollisionShape*	shape;		//形の作成
-	K_Physics::CollisionData*	collision;	//コリジョン
-	K_Physics::CollisionTag*	targetTag;	//ターゲットのコリジョンタグ
 
+	GameObject					object;			//ゲームオブジェクト
+private:
+	K_Physics::CollisionShape*	shape;			//形の作成
+	CollisionManager			cManager;		//コリジョンの管理
+	void*						targetUserData;	//ターゲットのスキルデータを格納する
 };

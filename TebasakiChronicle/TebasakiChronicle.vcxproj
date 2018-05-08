@@ -20,21 +20,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BaseClass\Collision\CollisionManager.cpp" />
+    <ClCompile Include="src\BaseClass\Collision\CollisionCreator.cpp" />
     <ClCompile Include="src\BaseClass\ImageManager\AnimationCharaChip.cpp" />
     <ClCompile Include="src\BaseClass\ImageManager\ImageManager.cpp" />
+    <ClCompile Include="src\BaseClass\Input\Input.cpp" />
     <ClCompile Include="src\BaseClass\Move.cpp" />
-    <ClCompile Include="src\BaseClass\Position.cpp" />
     <ClCompile Include="src\BaseClass\Status\Status.cpp" />
     <ClCompile Include="src\CSTList.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Object\Enemy\Enemy.cpp" />
     <ClCompile Include="src\Object\Enemy\EnemyController.cpp" />
-    <ClCompile Include="src\Object\Enemy\EnemyMove.cpp" />
-    <ClCompile Include="src\Object\Enemy\EnemyMovePattern.cpp" />
-    <ClCompile Include="src\Object\Enemy\EnemyMoveSet.cpp" />
-    <ClCompile Include="src\Object\Enemy\EnemyMoveTransition.cpp" />
-    <ClCompile Include="src\Object\Enemy\EnemyType.cpp" />
-    <ClCompile Include="src\Object\Enemy\EnemyTypeManager.cpp" />
+    <ClCompile Include="src\Object\Enemy\EnemyManager.cpp" />
+    <ClCompile Include="src\Object\Enemy\EnemyType\EnemyMove.cpp" />
+    <ClCompile Include="src\Object\Enemy\EnemyType\EnemyMovePattern.cpp" />
+    <ClCompile Include="src\Object\Enemy\EnemyType\EnemyMoveSet.cpp" />
+    <ClCompile Include="src\Object\Enemy\EnemyType\EnemyMoveTransition.cpp" />
+    <ClCompile Include="src\Object\Enemy\EnemyType\EnemyType.cpp" />
+    <ClCompile Include="src\Object\Enemy\EnemyType\EnemyTypeManager.cpp" />
     <ClCompile Include="src\Object\GameObject.cpp" />
     <ClCompile Include="src\Object\Player\CameraGun\CameraGun.cpp" />
     <ClCompile Include="src\Object\Player\CharaController\CharaController.cpp" />
@@ -43,21 +45,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BaseClass\Collision\CollisionManager.h" />
+    <ClInclude Include="src\BaseClass\Collision\CollisionCreator.h" />
     <ClInclude Include="src\BaseClass\easing.h" />
     <ClInclude Include="src\BaseClass\ImageManager\AnimationCharaChip.h" />
     <ClInclude Include="src\BaseClass\ImageManager\ImageManager.h" />
+    <ClInclude Include="src\BaseClass\Input\Input.h" />
     <ClInclude Include="src\BaseClass\Move.h" />
-    <ClInclude Include="src\BaseClass\Position.h" />
     <ClInclude Include="src\BaseClass\Status\Status.h" />
     <ClInclude Include="src\CSTList.h" />
     <ClInclude Include="src\Object\Enemy\Enemy.h" />
     <ClInclude Include="src\Object\Enemy\EnemyController.h" />
-    <ClInclude Include="src\Object\Enemy\EnemyMove.h" />
-    <ClInclude Include="src\Object\Enemy\EnemyMovePattern.h" />
-    <ClInclude Include="src\Object\Enemy\EnemyMoveSet.h" />
-    <ClInclude Include="src\Object\Enemy\EnemyMoveTransition.h" />
-    <ClInclude Include="src\Object\Enemy\EnemyType.h" />
-    <ClInclude Include="src\Object\Enemy\EnemyTypeManager.h" />
+    <ClInclude Include="src\Object\Enemy\EnemyManager.h" />
+    <ClInclude Include="src\Object\Enemy\EnemyType\EnemyMove.h" />
+    <ClInclude Include="src\Object\Enemy\EnemyType\EnemyMovePattern.h" />
+    <ClInclude Include="src\Object\Enemy\EnemyType\EnemyMoveSet.h" />
+    <ClInclude Include="src\Object\Enemy\EnemyType\EnemyMoveTransition.h" />
+    <ClInclude Include="src\Object\Enemy\EnemyType\EnemyType.h" />
+    <ClInclude Include="src\Object\Enemy\EnemyType\EnemyTypeManager.h" />
     <ClInclude Include="src\Object\GameObject.h" />
     <ClInclude Include="src\Object\Player\CameraGun\CameraGun.h" />
     <ClInclude Include="src\Object\Player\CharaController\CharaController.h" />
@@ -130,7 +134,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>include\K_Physics;include\K_Math;include\K_Input;include\K_Graphics;include\K_Audio;include\GLFW;include\GLEW;include\FreeType;include\fbxsdk;include\Eigen;include\Effekseer;include\bullet;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include\libpng;include\K_Physics;include\K_Math;include\K_Input;include\K_Graphics;include\K_Audio;include\GLFW;include\GLEW;include\FreeType;include\fbxsdk;include\Eigen;include\Effekseer;include\bullet;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -159,7 +163,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>include\K_Physics;include\K_Math;include\K_Input;include\K_Graphics;include\K_Audio;include\GLFW;include\GLEW;include\FreeType;include\fbxsdk;include\Eigen;include\Effekseer;include\bullet;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include\libpng;include\K_Physics;include\K_Math;include\K_Input;include\K_Graphics;include\K_Audio;include\GLFW;include\GLEW;include\FreeType;include\fbxsdk;include\Eigen;include\Effekseer;include\bullet;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

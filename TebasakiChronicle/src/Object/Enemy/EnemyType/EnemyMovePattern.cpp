@@ -37,12 +37,10 @@ EnemyMovePattern::~EnemyMovePattern()
 }
 
 //-----------------------------------------------------------------------------
-//動作を行う
-void EnemyMovePattern::Move(int& nowMoveOrder, int& timeCnt, K_Math::Vector3& moveVec)
+//動作を行い、現在取得可能なスキルの番号を返す
+int EnemyMovePattern::EMove(int& nowMoveOrder, int& timeCnt, Status& status, Move& move, bool& endMovePattern)
 {
-	mp[nowMoveOrder]->em->Move(moveVec);
-
-	++timeCnt;
+	endMovePattern = false;
 	//timeCntがmoveTimeMaxを超えたら、次の動作に移行する
 	if (timeCnt >= mp[nowMoveOrder]->moveTimeMax)
 	{
@@ -50,8 +48,15 @@ void EnemyMovePattern::Move(int& nowMoveOrder, int& timeCnt, K_Math::Vector3& mo
 
 		++nowMoveOrder;
 		if (nowMoveOrder >= (int)mp.size())
+		{
 			nowMoveOrder = 0;
+			endMovePattern = true;
+		}
 	}
+	++timeCnt;
+
+	mp[nowMoveOrder]->em->EMove(status, move);
+	return mp[nowMoveOrder]->skillId;
 }
 
 //-----------------------------------------------------------------------------
@@ -72,16 +77,12 @@ void EnemyMovePattern::SetMoveAndTime(int moveNum, int skillId, int durationTime
 		mp.back()->em = new EMove_NoMotion();
 		break;
 
-	case 1:		//右方向に歩く
-		mp.back()->em = new EMove_WalkRight();
+	case 1:		//向いている方向に移動する
+		mp.back()->em = new EMove_Movement();
 		break;
 
-	case 2:		//上に移動する
-		mp.back()->em = new EMove_Up();
-		break;
-
-	case 3:		//下に移動する
-		mp.back()->em = new EMove_Down();
+	case 2:		//ジャンプする
+		mp.back()->em = new EMove_Jump();
 		break;
 	}
 }
@@ -94,6 +95,14 @@ void EnemyMovePattern::SetTransition(int transitionNum)
 	{
 	case 0:	//遷移なし
 		emt = new ETransition_Default();
+		break;
+
+	case 1: //視界内にプレイヤーが入っているとき
+		emt = new ETransition_PIntoView();
+		break;
+
+	case 2: //視界内に入っているプレイヤーが自身の反対方向に移動したとき
+		emt = new ETransition_PMoveOtherSide();
 		break;
 	}
 }

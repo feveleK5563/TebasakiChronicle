@@ -19,11 +19,7 @@ GameObject::GameObject()
 //---------------------------------------------
 GameObject::~GameObject()
 {
-	if (image != nullptr)
-	{
-		delete image;
-		image = nullptr;
-	}
+	DeleteImage();
 }
 
 
@@ -42,10 +38,13 @@ void	GameObject::SetMove(const Move* move)
 	this->move = *move;
 }
 
-//画像の設定
-void	GameObject::SetImage()
+//画像管理者の生成
+void	GameObject::SetImage(const std::string& texName, K_Graphics::Texture* tex, bool isde)
 {
+	if (image != nullptr)
+		return;
 
+	image = new ImageManager(texName, tex, isde);
 }
 
 //サウンドの設定
@@ -65,27 +64,27 @@ void	GameObject::SetEasing()
 //取得処理
 //---------------------------------------------
 //ステータスの取得
-Status*	GameObject::GetStatus()
+Status&	GameObject::GetStatus()
 {
-	return &status;
+	return status;
 }
 
 //移動の取得
-Move*	GameObject::GetMove()
+Move&	GameObject::GetMove()
 {
-	return &move;
+	return move;
 }
 
 //画像の取得
-ImageManager*	GameObject::GetImage()
+ImageManager&	GameObject::GetImage()
 {
-	return image;
+	return *image;
 }
 
 //イージングの取得
-Easing*	GameObject::GetEasing()
+Easing&	GameObject::GetEasing()
 {
-	return &easing;
+	return easing;
 }
 
 
@@ -97,49 +96,49 @@ Easing*	GameObject::GetEasing()
 //[objectの位置]の設定
 void	GameObject::SetPos(const K_Math::Vector3& vec)
 {
-	this->GetStatus()->GetPos() = vec;
+	this->GetStatus().GetPos() = vec;
 }
 
 //[objectの傾き]の設定
 void	GameObject::SetAngle(const K_Math::Vector3& vec)
 {
-	this->GetStatus()->GetAngle() = vec;
+	this->GetStatus().GetAngle() = vec;
 }
 
 //[objectの拡大縮小]の設定
 void	GameObject::SetScale(const K_Math::Vector3& vec)
 {
-	this->GetStatus()->GetScale() = vec;
+	this->GetStatus().GetScale() = vec;
 }
 
 //[objectの移動量]の設定
 void	GameObject::SetMoveVec(const K_Math::Vector3& vec)
 {
-	this->GetStatus()->GetMoveVec() = vec;
+	this->GetMove().GetMoveVec() = vec;
 }
 
 //[objectの状態]の設定
 void	GameObject::SetState(const Status::State& state)
 {
-	this->GetStatus()->GetState() = state;
+	this->GetStatus().GetState() = state;
 }
 
 //[objectの向き]の設定
 void	GameObject::SetDirection(const Status::Direction& dir)
 {
-	this->GetStatus()->GetDirection() = dir;
+	this->GetStatus().GetDirection() = dir;
 }
 
 //[objectの攻撃力]の設定
-void	GameObject::SetAttackPoint(const float& atPoint)
+void	GameObject::SetAttackPoint(const int& atPoint)
 {
-	this->GetStatus()->GetAttackPoint() = atPoint;
+	this->GetStatus().GetAttackPoint() = atPoint;
 }
 
 //[objectの体力]の設定
 void	GameObject::SetLife(const int& life)
 {
-	this->GetStatus()->GetLife() = life;
+	this->GetStatus().GetLife() = life;
 }
 
 
@@ -151,47 +150,87 @@ void	GameObject::SetLife(const int& life)
 //ステータスの取得
 Status::State&		GameObject::GetState()
 {
-	return GetStatus()->GetState();
+	return GetStatus().GetState();
 }
 
 //位置の取得
 K_Math::Vector3&	GameObject::GetPos() 
 {
-	return GetStatus()->GetPos();
+	return GetStatus().GetPos();
 }
 
 //傾きの取得
 K_Math::Vector3&	GameObject::GetAngle()
 {
-	return GetStatus()->GetAngle();
+	return GetStatus().GetAngle();
 }
 
 //拡大縮小の取得
 K_Math::Vector3&	GameObject::GetScale() 
 {
-	return GetStatus()->GetScale();
+	return GetStatus().GetScale();
 }
 
 //移動量の取得
 K_Math::Vector3&	GameObject::GetMoveVec()
 {
-	return GetStatus()->GetMoveVec();
+	return GetMove().GetMoveVec();
 }
 
 //向きの取得
 Status::Direction&	GameObject::GetDirection()
 {
-	return GetStatus()->GetDirection();
+	return GetStatus().GetDirection();
 }
 
 //攻撃力の取得
-float&				GameObject::GetAttackPoint() 
+int&				GameObject::GetAttackPoint() 
 {
-	return GetStatus()->GetAttackPoint();
+	return GetStatus().GetAttackPoint();
 }
 
 //体力の取得
 int&				GameObject::GetLife()
 {
-	return GetStatus()->GetLife();
+	return GetStatus().GetLife();
+}
+
+
+//---------------------------------------
+//画像の生成
+//画像を作るには、画像がある場合は、1回deleteする必要がある
+bool	GameObject::CreateImage(K_Graphics::Texture* tex, bool isde)
+{
+	if (image != nullptr) { return false; }
+	image = new ImageManager("Player", tex, isde);	//画像の生成
+	return true;
+}
+
+bool	GameObject::CreateImg(const std::string& texName, const std::string& filePath)
+{
+	if (texture != nullptr) { return false; }
+	if (image != nullptr) { return false; }
+
+	texture = new K_Graphics::Texture();
+	texture->LoadImage(filePath);
+	image = new ImageManager(texName,texture,true);
+	return true;
+	
+}
+//画像の破棄
+//画像がある場合、画像をdeleteする
+//画像がない場合、画像はdeleteしない
+bool	GameObject::DeleteImage()
+{
+	if (texture != nullptr)
+	{
+		delete texture;
+		texture = nullptr;
+	}
+	if (image != nullptr)
+	{
+		delete image;
+		image = nullptr;
+	}
+	return true;
 }

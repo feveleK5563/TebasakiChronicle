@@ -26,21 +26,35 @@ void EnemyMoveSet::CreateMotionPattern(	int* moveNum,		//“®ì”Ô†‚ğ“ü‚ê‚½”z—ñ‚Ìƒ
 }
 
 //-----------------------------------------------------------------------------
-//Œ»İ‚Ì“®ìƒpƒ^[ƒ“‚ğÀs‚·‚é
-void EnemyMoveSet::Move(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, K_Math::Vector3& moveVec)
+//w’èƒpƒ^[ƒ“”Ô†‚ÌƒAƒjƒ[ƒVƒ‡ƒ“‚ğ•Ô‚·
+const std::vector<AnimationCharaChip*> EnemyMoveSet::GetNowAnimChip(int nowPatternOrder)
 {
-	empattern[nowPatternOrder]->Move(nowMoveOrder, timeCnt, moveVec);
+	return empattern[nowPatternOrder]->animChip;
+}
 
-	//ƒpƒ^[ƒ“‚Ì‘JˆÚğŒ‚ğ–‚½‚µ‚½‚ç‘¦ƒpƒ^[ƒ“•ÏX
-	for (int i = 0; i < (int)empattern.size(); ++i)
+//-----------------------------------------------------------------------------
+//Œ»İ‚Ì“®ìƒpƒ^[ƒ“‚ğÀs‚µAŒ»İƒvƒŒƒCƒ„[‚ªæ“¾‰Â”\‚ÈƒXƒLƒ‹”Ô†‚ğ•Ô‚·
+int EnemyMoveSet::EMove(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, CollisionManager& colmanager, Status& status, Move& move)
+{
+	bool endMovePattern = false;	//“®ìƒpƒ^[ƒ“‚ªˆê„‚µ‚½‚©(ÅŒã‚Ü‚Å‚¢‚Á‚½‚©)‚Ç‚¤‚©‚ğŠi”[
+	int idNum = empattern[nowPatternOrder]->EMove(nowMoveOrder, timeCnt, status, move, endMovePattern);
+
+	//“®ìƒpƒ^[ƒ“‚ªˆê„‚µ‚½‚çAƒpƒ^[ƒ“•ÏX‚Ì‚½‚ß‚Ìˆ—‚ğs‚¤
+	if (endMovePattern == true)
 	{
-		if (nowPatternOrder != i && 
-			empattern[i]->emt->Transition())
+		//ƒpƒ^[ƒ“‚Ì‘JˆÚğŒ‚ğ–‚½‚µ‚Ä‚¢‚½‚çƒpƒ^[ƒ“•ÏX
+		for (int i = 0; i < (int)empattern.size(); ++i)
 		{
-			PatternTransition(nowMoveOrder, nowPatternOrder, timeCnt, i);
-			return;
+			if (nowPatternOrder != i &&
+				empattern[i]->emt->Transition(colmanager, status))
+			{
+				PatternTransition(nowMoveOrder, nowPatternOrder, timeCnt, i);
+				break;
+			}
 		}
 	}
+
+	return idNum;
 }
 
 //-----------------------------------------------------------------------------

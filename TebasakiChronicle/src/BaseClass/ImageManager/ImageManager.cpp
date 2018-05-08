@@ -1,8 +1,8 @@
 #include "ImageManager.h"
 
 //コンストラクタ(キャラチップを作成する)
-ImageManager::ImageManager(K_Graphics::Texture* tex, bool isde) :
-	cst(CSTList::GetInstance()),
+ImageManager::ImageManager(const std::string& texName, K_Graphics::Texture* tex, bool isde) :
+	textureName(texName),
 	spobj(new K_Graphics::SpriteObject(tex)),
 	animCnt(0.f),
 	nowAnimNum(0),
@@ -18,7 +18,19 @@ ImageManager::~ImageManager()
 		for (auto it : charaChip)
 			delete it;
 	}
+}
 
+//-----------------------------------------------------------------------------
+//テクスチャ名の取得
+std::string& ImageManager::GetTextureName()
+{
+	return textureName;
+}
+//-----------------------------------------------------------------------------
+//指定した番号のキャラチップを取得
+AnimationCharaChip* ImageManager::GetNowAnimationCharaChip()
+{
+	return charaChip[nowAnimNum];
 }
 
 //-----------------------------------------------------------------------------
@@ -72,11 +84,13 @@ void ImageManager::Animation()
 }
 
 //-----------------------------------------------------------------------------
-//描画
-void ImageManager::ImageDraw(	const K_Math::Vector3& posc,
-								const K_Math::Vector3& angle,
-								const K_Math::Vector3& scale)
+//描画(3D)
+void ImageManager::ImageDraw3D(	const K_Math::Vector3&	posc,
+								const K_Math::Vector3&	anglec,
+								const K_Math::Vector3&	scalec,
+								int						direction)
 {
+	//テクスチャの読み込み位置の調整
 	K_Math::Box2D src = charaChip[nowAnimNum]->chip;
 	if (charaChip[nowAnimNum]->chipSheetNum >= 0)
 	{
@@ -86,17 +100,22 @@ void ImageManager::ImageDraw(	const K_Math::Vector3& posc,
 	{
 		src.x -= src.w * (int(animCnt) % charaChip[nowAnimNum]->chipSheetNum);
 	}
-	spobj->controlPoint = K_Math::Vector2(src.w / 2.f, src.h / 2.f);
+	spobj->controlPoint = K_Math::Vector2(src.w / 2.f, src.h / 2.f);	//回転の基準位置をテクスチャの中心に設定
 
+	//座標をテクスチャの中心に設定
 	K_Math::Vector3 pos = posc;
 	pos.x() -= (float)src.w / 2.f;
 	pos.y() += (float)src.h / 2.f;
 
+	//画像の向きを調整
+	K_Math::Vector3 angle = anglec;
+	angle.y() += K_Math::DegToRad((float)direction);
+
 	spobj->Draw3D(
-		cst->GetPerspectoveCamera(),
-		cst->GetShaderClass(),
+		CST::GetPerspectiveCamera(),
+		CST::GetShaderClass(),
 		src,
 		pos,
 		angle,
-		scale);
+		scalec);
 }

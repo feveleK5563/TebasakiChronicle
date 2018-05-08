@@ -19,15 +19,15 @@ public:
 	//設定処理
 	void	SetStatus();
 	void	SetMove(const Move* move);
-	void	SetImage();
+	void	SetImage(const std::string& texName, K_Graphics::Texture* tex, bool isde = true);
 	void	SetSound();
 	void	SetEasing();
 
 	//取得処理
-	Status*				GetStatus();
-	Move*				GetMove();
-	ImageManager*		GetImage();
-	Easing*				GetEasing();
+	Status&				GetStatus();
+	Move&				GetMove();
+	ImageManager&		GetImage();
+	Easing&				GetEasing();
 
 	//ステータスの設定
 	void	SetPos(const K_Math::Vector3& vec);
@@ -36,7 +36,7 @@ public:
 	void	SetMoveVec(const K_Math::Vector3& vec);
 	void	SetState(const Status::State& state);
 	void	SetDirection(const Status::Direction& dir);
-	void	SetAttackPoint(const float& atPoint);
+	void	SetAttackPoint(const int& atPoint);
 	void	SetLife(const int& life);
 
 	//ステータスの取得処理
@@ -46,9 +46,22 @@ public:
 	K_Math::Vector3&	GetScale();
 	K_Math::Vector3&	GetMoveVec();
 	Status::Direction&	GetDirection();
-	float&				GetAttackPoint();
+	int&				GetAttackPoint();
 	int&				GetLife();
 
+	//画像の生成
+	//画像を作るには、画像がある場合は、1回deleteする必要がある
+	bool	CreateImage(K_Graphics::Texture* tex, bool isde = true);
+
+	bool	CreateImg(const std::string& texName, const std::string& filePath);
+
+	//画像の破棄
+	//画像がある場合、画像をdeleteする
+	//画像がない場合、画像はdeleteしない
+	bool	DeleteImage();
+
+private:
+	K_Graphics::Texture*	texture;
 private:
 	Status			status;		//Status
 	Move			move;		//移動処理

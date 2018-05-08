@@ -4,8 +4,10 @@
 //EnemyMovePatternをまとめたやつ
 class EnemyMoveSet
 {
-public:
+private:
 	std::vector<EnemyMovePattern*>		empattern;		//動作パターン
+
+public:
 
 	EnemyMoveSet();
 	~EnemyMoveSet();
@@ -21,8 +23,11 @@ public:
 								int				totalMoveNum,		//動作の総数
 								int				transitionNum);		//動作パターンの遷移条件の番号
 
-	//現在の動作パターンを実行する
-	void Move(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, K_Math::Vector3& moveVec);
+	//指定パターン番号のアニメーションを返す
+	const std::vector<AnimationCharaChip*> GetNowAnimChip(int nowPatternOrder);
+
+	//現在の動作パターンを実行し、現在プレイヤーが取得可能なスキル番号を返す
+	int EMove(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, CollisionManager& colmanager, Status& status, Move& move);
 
 	//動作パターンを指定番号に遷移させる
 	void PatternTransition(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, int patternNum);

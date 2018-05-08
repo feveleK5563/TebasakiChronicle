@@ -19,10 +19,7 @@ Player::Player()
 //-----------------------------------------------
 Player::~Player()
 {
-	delete input;
-	delete physics;
-	delete collision;
-	delete targetTag;
+	CC::RemoveCollisionShape(&shape);
 }
 
 //初期化
@@ -30,76 +27,115 @@ void	Player::Initliaze()
 {
 	//オブジェクトの初期化
 	//-----まとめて処理をしたい--------
-	K_Math::Vector3 vec = { 0,0,0 };
-	object.GetStatus()->GetPos() = vec;
-	object.GetStatus()->GetAngle() = vec;
-	object.GetStatus()->GetScale() = { 1,1,1 };
-	object.GetStatus()->GetDirection() = Status::Direction::Left;
-	object.GetStatus()->GetAttackPoint() = 1.0f;
-	object.GetStatus()->GetLife() = 1.0f;
-	object.GetStatus()->GetState() = Status::State::Jump;
-	
+	object.GetStatus().SetStatusData(
+		Status::State::Active,
+		K_Math::Vector3(0, 0, 0),
+		K_Math::Vector3(0, 0, 0),
+		K_Math::Vector3(1, 1, 1),
+		Status::Direction::Right,
+		1,
+		0
+	);
 
-	//コントローラーの初期化
-	controller.SetInput(input);
+	//画像の生成
+	object.CreateImg("Player", "./data/image/player.tga");
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 0, 32, 48), 5, 6, true);
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 0, 160, 48), 4, 6, false);
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 48, 32, 48), 10, 6, true);
+
+	//Moveの重力の設定
+	object.GetMove().SetAddVec(2.f);
+	object.GetMove().SetGravity(-0.04f);
+
 	//カメラガンの初期化
 	cameraGun.Initailize();
 
 	//こりじょんの設定-------------------------------
-	//物理を扱うBulletPhysics
-	physics = new K_Physics::BulletPhysics();
-
 	//ボックスの形の生成
-	shape = physics->CreateBoxShape(10, 10, 1);
+	shape = CC::CreateBoxShape(10, 10, 1);
 
 	//生成した[形]でコリジョンや剛体を作成
-	//K_Physics::RigidBodyData*	rigid = physics->CreateRigidBody(shape, 1.0f, false, 1);
-	collision = physics->CreateCollisionObject(shape, false, 1);
+	cManager.CreateBaseCollisionData(shape, object.GetPos(), object.GetAngle(), true);
+	cManager.CreateSubCollisionData(shape, CollisionMask::EnemyCollision | CollisionMask::TakeDamagePlayer, CollisionMask::PlayerCollision, object.GetPos());
 
 	//コリジョンに情報を持たせる
-	collision->tag.tagIndex = 2;
-	collision->tag.tagName = "Player";
+	cManager.SetSubCollisionTug(0, &object.GetStatus());
 }
 
 //更新
 void	Player::UpDate()
 {
 	//ジャンプボタンを押す
-	if (input->GetPad(K_Input::VpadIndex::Pad0)->IsPressButton(K_Input::VpadButton::R1))
+	if (INPUT::IsPressButton(VpadIndex::Pad0, K_Input::VpadButton::R1))
 	{
-		std::cout << "ジャンプボタン" << std::endl;
+		object.GetMove().JumpOperation();
 	}
 
-	//撮影ボタンを押す
-	if (input->GetPad(K_Input::VpadIndex::Pad0)->IsStayButton(K_Input::VpadButton::L1))
+	//撮影ボタンを押すとカメラを前方に射出する
+	if (INPUT::IsPressButton(VpadIndex::Pad0,K_Input::VpadButton::L1))
 	{
-		cameraGun.active = true;
-		K_Math::Vector3 dir;
-		if (object.GetDirection() == Status::Direction::Left)
-		{
-			dir = K_Math::Vector3(-2, 0, 0);
-		}
-		else
-		{
-			dir = K_Math::Vector3(2, 0, 0);
-		}
-		//カメラマーカーを前に飛ばす
-		cameraGun.MoveDir(dir);
+		cameraGun.SetDirection(object.GetDirection());	//方向を同期させる
+		cameraGun.SetMoveVec(true);
+		cameraGun.object.SetState(Status::State::Active);
 	}
 
 	//撮影ボタンを離す
-	if (input->GetPad(K_Input::VpadIndex::Pad0)->IsReaveButton(K_Input::VpadButton::L1))
+	if (INPUT::IsReaveButton(VpadIndex::Pad0,K_Input::VpadButton::L1))
 	{
 		//カメラマーカーをプレイヤーの位置に戻す
-		cameraGun.object.SetMoveVec(K_Math::Vector3(0, 0, 0));
-		cameraGun.MoveDir(K_Math::Vector3(0, 0, 0));
-		cameraGun.active = false;	//非表示
+		cameraGun.SetMoveVec(false);
+		cameraGun.object.SetState(Status::State::Non);
+	}
+	
+
+	if (object.GetMove().GetMoveVec().y() != 0)
+	{
+		object.GetImage().ChangeAnimationPattern(1);
 	}
 
+	//入力に応じて向きを変える
+	ChangeDir();
+
+	//カメラガンの更新
+	cameraGun.UpDate(object.GetPos());
+	
+	//コントローラーの更新
+	controller.UpDate(object.GetMoveVec());
+
+	//重力動作
+	object.GetMove().GravityOperation();
+	
+	//コリジョンを動かす
+	cManager.MoveBaseCollision(object.GetMoveVec(), object.GetDirection(), true);
+
+	object.GetPos() += object.GetMoveVec();
+	//プレイヤーとコリジョンの座標を同期させる
+	cManager.GetBaseCollisionObjectPosition() = object.GetPos();
+	//アニメーション
+	object.GetImage().Animation();
+}
+
+
+
+//描画
+void	Player::Render()
+{
+	cameraGun.Render();
+	object.GetImage().ImageDraw3D(object.GetPos(), object.GetAngle(), object.GetScale(), object.GetDirection());
+}
+
+
+
+
+
+
+//入力に応じて向きを変える
+void	Player::ChangeDir()
+{
 	//左スティックの倒れている深さ
-	float stickDepth = input->GetPad(K_Input::VpadIndex::Pad0)->GetStickPower(K_Input::VpadStick::L);
+	float stickDepth = INPUT::GetStickPower(VpadIndex::Pad0,K_Input::VpadStick::L);
 	//右方向を0度とした回転度
-	float stickAngle = input->GetPad(K_Input::VpadIndex::Pad0)->GetStickRotation(K_Input::VpadStick::L);
+	float stickAngle = INPUT::GetStickRotation(VpadIndex::Pad0,K_Input::VpadStick::L);
 
 	if (stickDepth != 0)
 	{
@@ -111,52 +147,46 @@ void	Player::UpDate()
 		{
 			object.SetDirection(Status::Direction::Left);
 		}
-	}
-	//カメラガンの更新
-	if (!cameraGun.active)
-	{
-		//プレイヤーの位置に常についていく
-		cameraGun.MoveDir(object.GetMoveVec());
-		cameraGun.object.GetPos() += cameraGun.object.GetMoveVec();
-		cameraGun.object.GetPos() = object.GetPos();
-		//-------------------------------------------
-		//コリジョンの位置を設定
-		cameraGun.collision->SetCollisionPosition(object.GetPos());
+
+		object.GetImage().ChangeAnimationPattern(2);
 	}
 	else
 	{
-		cameraGun.UpDate();
+		object.GetImage().ChangeAnimationPattern(0);
 	}
-	std::cout << "カメラコリジョン" << cameraGun.collision->GetCollisionPosition().x() << std::endl;
+}
 
-	
-	//コントローラーの更新
-	controller.UpDate(object.GetMoveVec());
 
-	//プレイヤーの移動
-	//位置の移動
-	if (object.GetMoveVec().x() != 0)
+//カメラガンを前に飛ばす
+void	Player::ShotCameraGun()
+{
+	//撮影ボタンを押すとカメラを前方に射出する
+	if (INPUT::IsPressButton(VpadIndex::Pad0,K_Input::VpadButton::L1))
 	{
-		object.GetPos() += object.GetMoveVec();
+		cameraGun.SetDirection(object.GetDirection());	//方向を同期させる
+		cameraGun.SetMoveVec(true);
+		cameraGun.object.SetState(Status::State::Active);
 	}
-
-	physics->MoveCharacter(collision, object.GetMoveVec());
-	physics->Run();
 }
 
-//描画
-void	Player::Render()
+//カメラガンを元に戻す
+void	Player::ReverseCameraGun()
 {
-	cameraGun.Render();
+	//撮影ボタンを離す
+	if (INPUT::IsReaveButton(VpadIndex::Pad0,K_Input::VpadButton::L1))
+	{
+		//カメラマーカーをプレイヤーの位置に戻す
+		cameraGun.SetMoveVec(false);
+		cameraGun.object.SetState(Status::State::Non);
+	}
 }
 
 
-//InputClassの取得処理
-void	Player::GetInputClass(K_Input::InputClass* input)
+//ジャンプ処理
+void	Player::Jump()
 {
-	this->input = input;
+	if (INPUT::IsPressButton(VpadIndex::Pad0,K_Input::VpadButton::R1))
+	{
+		object.GetMove().JumpOperation();
+	}
 }
-
-
-
-
