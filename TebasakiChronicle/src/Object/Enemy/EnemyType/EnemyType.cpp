@@ -1,10 +1,10 @@
 #include "EnemyType.h"
 
 EnemyType::EnemyType(	std::string texName,
-						int		maxlife,
-						int		hitdamage,
-						float	movespeed,
-						float	jumppower,
+						int			maxlife,
+						int			hitdamage,
+						float		movespeed,
+						float		jumppower,
 						K_Physics::CollisionShape* sBase,
 						K_Physics::CollisionShape* sReceive,
 						K_Physics::CollisionShape* sFieldofview,
@@ -131,4 +131,3 @@ K_Physics::CollisionData* EnemyType::GetCheckHeadCollisionData()
 {
 	return CC::CreateCollisionObject(checkShape, true, CollisionMask::Ground, CollisionMask::Non, checkHeadPos);
 }
-//-----------------------------------------------------------------------------

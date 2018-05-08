@@ -3,8 +3,7 @@
 //コンストラクタ
 EnemyController::EnemyController(EnemyMoveSet* cpyems) :
 	ems(cpyems),
-	skillId(0),
-	timeCnt(0) {}
+	skillId(0) {}
 
 //デストラクタ
 EnemyController::~EnemyController(){}

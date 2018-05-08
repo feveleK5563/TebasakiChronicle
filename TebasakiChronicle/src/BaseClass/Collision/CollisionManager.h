@@ -15,6 +15,8 @@ enum CollisionMask
 	EnemyCamCollision	= 1 << 6,
 };
 
+//コリジョンデータ管理くん
+//コリジョンの形状情報は格納しないので各自で管理すること
 class CollisionManager
 {
 private:
@@ -26,7 +28,7 @@ private:
 		K_Math::Vector3				relativePos;	//ベースコリジョンとの相対座標
 
 		Sub(K_Physics::CollisionData*	cln,
-			K_Math::Vector3&			rp) :
+			const K_Math::Vector3&		rp) :
 			collision(cln),
 			relativePos(rp){}
 	};
@@ -40,14 +42,18 @@ public:
 	~CollisionManager();
 
 	//ベースコリジョンを作成する
-	//第四引数をfalseで地形との接触判定等を行わない
+	//第四引数をfalseで地形とのめり込み判定を行わない
 	void CreateBaseCollisionData(K_Physics::CollisionShape* cs, const K_Math::Vector3& pos, const K_Math::Vector3& rot, bool isJudge);
 	//ベースコリジョンを設定する
 	void SetBaseCollisionData(K_Physics::CollisionData* cd, const K_Math::Vector3& pos);
 
+	//地形として振る舞うベースコリジョンを作成する
+	//※特に理由がない限り使用しないこと(第四引数をfalseでめり込み判定なし通常ベースコリジョンを作成する)
+	void CreateGroundCollisionData(K_Physics::CollisionShape* cs, const K_Math::Vector3& pos, const K_Math::Vector3& rot, bool doGround);
+
 	//サブコリジョンを作成する(指定座標はオブジェクトが右向き時のベースコリジョンとの相対座標)
 	//常にghostはtrue
-	void CreateSubCollisionData(K_Physics::CollisionShape* cs, int myselfMask, int giveMask, K_Math::Vector3& pos);
+	void CreateSubCollisionData(K_Physics::CollisionShape* cs, int myselfMask, int giveMask, const K_Math::Vector3& pos);
 	//サブコリジョンを設定する
 	void SetSubCollisionData(K_Physics::CollisionData* cd);
 
@@ -55,11 +61,17 @@ public:
 	void SetSubCollisionTug(int subNum, void* tug);
 
 	//ベースコリジョンを動かし、付随してサブの座標を設定する
-	//第三引数をtrueで軽量動作
+	//第三引数をtrueで軽量な処理(めり込み判定を行う場合はfalse推奨)
 	void MoveBaseCollision(K_Math::Vector3& moveVec, int direction, bool isLightness);
 
 	//指定したサブコリジョンの受け取ったタグを返す
 	std::vector<K_Physics::CollisionTag*>& GetConflictionObjectsUserData(int subNum);
+
+	//ベースコリジョンが地形コリジョンと衝突していたらtrueを返す
+	bool CheckHitBaseCollisionObject();
+
+	//指定したサブコリジョンが他コリジョンと衝突していたらtrueを返す
+	bool CheckHitSubCollisionObejct(int subNum);
 
 	//ベースコリジョンの座標を返す
 	K_Math::Vector3& GetBaseCollisionObjectPosition();

@@ -25,7 +25,7 @@ void EnemyTypeManager::LoadEnemyData(const std::string& filePath)
 	//移動速度
 	float moveSpeed = 1;
 	//ジャンプ力
-	float jumpPower = 10;
+	float jumpPower = 5;
 
 	//ベースコリジョン
 	float shapeSize[3];
@@ -34,7 +34,7 @@ void EnemyTypeManager::LoadEnemyData(const std::string& filePath)
 	//足元、頭上判定用コリジョン
 	K_Math::Vector3 cfpos = { 0.f, -shapeSize[1], 0.f };
 	K_Math::Vector3 chpos = { 0.f, shapeSize[1], 0.f };
-	shapeSize[0] = 16.f; shapeSize[1] = 1.f; shapeSize[2] = 1.f;
+	shapeSize[0] = 15.f; shapeSize[1] = 1.f; shapeSize[2] = 1.f;
 	K_Physics::CollisionShape* cs = CC::CreateBoxShape(shapeSize[0], shapeSize[1], shapeSize[2]);
 	//被ダメ、カメラ受け用コリジョン
 	K_Math::Vector3 rpos = { 0.f, 0.f, 0.f };

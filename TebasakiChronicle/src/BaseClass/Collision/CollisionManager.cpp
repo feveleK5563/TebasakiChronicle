@@ -25,13 +25,13 @@ void CollisionManager::CreateBaseCollisionData(K_Physics::CollisionShape* cs, co
 
 	if (isJudge == true)
 	{
-		//地形とのめり込み処理を行う
-		baseCollision = CC::CreateCollisionObject(cs, false, 1, 0, pos, rot);
+		//地形とのめり込み判定を行うコリジョンを作成
+		baseCollision = CC::CreateCollisionObject(cs, false, CollisionMask::Ground, CollisionMask::Non, pos, rot);
 	}
 	else
 	{
-		//処理を行わない
-		baseCollision = CC::CreateCollisionObject(cs, false, 1, 0, pos, rot);
+		//めり込み判定を行わないコリジョンを作成
+		baseCollision = CC::CreateCollisionObject(cs, true, CollisionMask::Ground, CollisionMask::Non, pos, rot);
 	}
 }
 //-----------------------------------------------------------------------------
@@ -46,8 +46,27 @@ void CollisionManager::SetBaseCollisionData(K_Physics::CollisionData* cd, const 
 }
 
 //-----------------------------------------------------------------------------
+//地形として振る舞うベースコリジョンを作成する
+//※特に理由がない限り使用しないこと(第四引数をfalseで通常のベースコリジョンを作成する)
+void CollisionManager::CreateGroundCollisionData(K_Physics::CollisionShape* cs, const K_Math::Vector3& pos, const K_Math::Vector3& rot, bool doGround)
+{
+	if (doGround == false)
+	{
+		CreateBaseCollisionData(cs, pos, rot, false);
+		return;
+	}
+
+	if (baseCollision != nullptr)
+		return;
+
+	//地形として振る舞うコリジョンを作成
+	baseCollision = CC::CreateCollisionObject(cs, false, CollisionMask::Non, CollisionMask::Ground, pos, rot);
+}
+
+
+//-----------------------------------------------------------------------------
 //サブコリジョンを作成する
-void CollisionManager::CreateSubCollisionData(K_Physics::CollisionShape* cs, int myselfMask, int giveMask, K_Math::Vector3& pos)
+void CollisionManager::CreateSubCollisionData(K_Physics::CollisionShape* cs, int myselfMask, int giveMask, const K_Math::Vector3& pos)
 {
 	if (baseCollision == nullptr)
 		return;
@@ -117,6 +136,19 @@ std::vector<K_Physics::CollisionTag*>& CollisionManager::GetConflictionObjectsUs
 	return CC::FindConfrictionObjects(subCollision[subNum]->collision);
 }
 
+//-----------------------------------------------------------------------------
+//ベースコリジョンが地形コリジョンと衝突していたらtrueを返す
+bool CollisionManager::CheckHitBaseCollisionObject()
+{
+	return CC::FindConfrictionObjects(baseCollision).size() > 0;
+}
+
+//-----------------------------------------------------------------------------
+//指定したサブコリジョンが他コリジョンと衝突していたらtrueを返す
+bool CollisionManager::CheckHitSubCollisionObejct(int subNum)
+{
+	return CC::FindConfrictionObjects(subCollision[subNum]->collision).size() > 0;
+}
 
 //-----------------------------------------------------------------------------
 //ベースコリジョンの座標を返す

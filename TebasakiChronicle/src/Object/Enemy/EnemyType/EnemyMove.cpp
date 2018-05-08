@@ -25,7 +25,7 @@ void EMove_Movement::EMove(CollisionManager& cmanager, Status& status, Move& mov
 //’n–Ê‚É‚Â‚¢‚Ä‚¢‚é‚Æ‚«‚Ì‚ÝƒWƒƒƒ“ƒv
 void EMove_Jump::EMove(CollisionManager& cmanager, Status& status, Move& move)
 {
-	if (cmanager.GetConflictionObjectsUserData(3).size() > 0)
+	if (cmanager.CheckHitSubCollisionObejct(3))
 	{
 		move.JumpOperation();
 	}

@@ -8,8 +8,8 @@ class EnemyController
 private:
 	EnemyMoveSet* ems;	//動作(delete禁止)
 
-	int skillId;		//現在の敵から読み取れるスキル番号
 	int timeCnt;		//時間計測
+	int skillId;		//現在の敵から読み取れるスキル番号
 
 public:
 
