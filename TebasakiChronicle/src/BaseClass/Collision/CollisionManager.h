@@ -58,9 +58,8 @@ public:
 	//第三引数をtrueで軽量動作
 	void MoveBaseCollision(K_Math::Vector3& moveVec, int direction, bool isLightness);
 
-	//指定したサブコリジョンの受け取ったタグの内、userDataのみを抽出して返す
-	//無効(tagIndexが同じ)なコリジョンと衝突した場合は除外する
-	std::vector<void*> GetConflictionObjectsUserData(int subNum);
+	//指定したサブコリジョンの受け取ったタグを返す
+	std::vector<K_Physics::CollisionTag*>& GetConflictionObjectsUserData(int subNum);
 
 	//ベースコリジョンの座標を返す
 	K_Math::Vector3& GetBaseCollisionObjectPosition();

@@ -37,7 +37,7 @@ const std::vector<AnimationCharaChip*> EnemyMoveSet::GetNowAnimChip(int nowPatte
 int EnemyMoveSet::EMove(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, CollisionManager& colmanager, Status& status, Move& move)
 {
 	bool endMovePattern = false;	//動作パターンが一巡したか(最後までいったか)どうかを格納
-	int idNum = empattern[nowPatternOrder]->EMove(nowMoveOrder, timeCnt, status, move, endMovePattern);
+	int idNum = empattern[nowPatternOrder]->EMove(nowMoveOrder, timeCnt, colmanager, status, move, endMovePattern);
 
 	//動作パターンが一巡したら、パターン変更のための処理を行う
 	if (endMovePattern == true)

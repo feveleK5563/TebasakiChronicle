@@ -111,22 +111,12 @@ void CollisionManager::SetSubCollisionPos(int angle)
 }
 
 //-----------------------------------------------------------------------------
-//指定したサブコリジョンの受け取ったタグの内、userDataのみを抽出して返す
-std::vector<void*> CollisionManager::GetConflictionObjectsUserData(int subNum)
+//指定したサブコリジョンの受け取ったタグを返す
+std::vector<K_Physics::CollisionTag*>& CollisionManager::GetConflictionObjectsUserData(int subNum)
 {
-	std::vector<void*> userData;
-	std::vector<K_Physics::CollisionTag*> fco = CC::FindConfrictionObjects(subCollision[subNum]->collision);
-	for (auto it : fco)
-	{
-		//tagIndexがこのコリジョンと同じ
-		if (it->tagIndex == subCollision[subNum]->collision->tag.tagIndex)
-		{
-			continue;
-		}
-		userData.emplace_back(it->userData);
-	}
-	return userData;
+	return CC::FindConfrictionObjects(subCollision[subNum]->collision);
 }
+
 
 //-----------------------------------------------------------------------------
 //ベースコリジョンの座標を返す

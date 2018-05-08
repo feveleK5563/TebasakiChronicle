@@ -38,7 +38,7 @@ EnemyMovePattern::~EnemyMovePattern()
 
 //-----------------------------------------------------------------------------
 //動作を行い、現在取得可能なスキルの番号を返す
-int EnemyMovePattern::EMove(int& nowMoveOrder, int& timeCnt, Status& status, Move& move, bool& endMovePattern)
+int EnemyMovePattern::EMove(int& nowMoveOrder, int& timeCnt, CollisionManager& colmanager, Status& status, Move& move, bool& endMovePattern)
 {
 	endMovePattern = false;
 	//timeCntがmoveTimeMaxを超えたら、次の動作に移行する
@@ -55,7 +55,7 @@ int EnemyMovePattern::EMove(int& nowMoveOrder, int& timeCnt, Status& status, Mov
 	}
 	++timeCnt;
 
-	mp[nowMoveOrder]->em->EMove(status, move);
+	mp[nowMoveOrder]->em->EMove(colmanager, status, move);
 	return mp[nowMoveOrder]->skillId;
 }
 

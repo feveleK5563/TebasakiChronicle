@@ -31,6 +31,9 @@ int main()
 	//シェーダーリスト
 	CST::CreateShader("data/shader/SpriteShader.vs", "data/shader/SpriteShader.ps");
 
+	//地形(仮)
+	CC::CreateCollisionObject(CC::CreateBoxShape(50.f, 50.f, 5.f), false, CollisionMask::Non, CollisionMask::Ground, K_Math::Vector3(0, -80, 0));
+
 	//敵の種類を作成
 	EnemyTypeManager* etm = new EnemyTypeManager();
 	etm->LoadEnemyData("");
@@ -45,6 +48,7 @@ int main()
 	while (sc->IsSystemEnd() == false)
 	{
 		sc->ProcessSystem();
+		CC::Run();
 
 		emanager->UpdateAllEnemy();
 
@@ -56,7 +60,7 @@ int main()
 		CST::GetOrthoCamera()->Draw();
 
 		emanager->DrawAllEnemy();
-		CC::DebugDraw(CST::GetShaderClass(), CST::GetPerspectiveCamera());
+		//CC::DebugDraw(CST::GetShaderClass(), CST::GetPerspectiveCamera());
 
 		//player.Render();
 

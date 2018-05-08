@@ -40,7 +40,7 @@ public:
 	~EnemyMovePattern();
 
 	//動作を行い、現在取得可能なスキルの番号を返す
-	int EMove(int& nowMoveOrder, int& timeCnt, Status& status, Move& move, bool& endMovePattern);
+	int EMove(int& nowMoveOrder, int& timeCnt, CollisionManager& colmanager, Status& status, Move& move, bool& endMovePattern);
 
 	//動作順をリセットする
 	void MoveReset(int& nowMoveOrder);

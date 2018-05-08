@@ -63,10 +63,14 @@ bool Enemy::Update()
 	gameObject.GetMove().GetMoveVec() = K_Math::Vector3(0, 0, 0);
 	eController->EMove(nowMoveOrder, nowPatternOrder, collisionManager, gameObject.GetStatus(), gameObject.GetMove());
 
+	//重力を加算する
+	gameObject.GetMove().GravityOperation();
+
+	//アニメーションの更新
 	AnimationUpdate();
 
 	//コリジョンを動かす
-	collisionManager.MoveBaseCollision(gameObject.GetMove().GetMoveVec(), gameObject.GetStatus().GetDirection(), true);
+	collisionManager.MoveBaseCollision(gameObject.GetMove().GetMoveVec(), gameObject.GetStatus().GetDirection(), false);
 	gameObject.GetPos() = collisionManager.GetBaseCollisionObjectPosition();
 
 	SetTugData();

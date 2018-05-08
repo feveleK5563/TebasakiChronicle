@@ -10,11 +10,11 @@
 //コンストラクタ
 //------------------------------------------------------
 Move::Move() :
-	moveVec(K_Math::Vector3(0,0,0)),
+	moveVec(K_Math::Vector3(0, 0, 0)),
 	addVec(0.0f),
-	jumpPower(0.0f), 
+	jumpPower(5.0f),
 	fallSpeed(1.0f),
-	gravity(-9.8f)
+	gravity(-0.5f)
 {
 
 }

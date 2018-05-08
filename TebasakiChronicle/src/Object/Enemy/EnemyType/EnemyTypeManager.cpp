@@ -23,29 +23,29 @@ void EnemyTypeManager::LoadEnemyData(const std::string& filePath)
 	//付与ダメージ
 	int hitDamage = 0;
 	//移動速度
-	float moveSpeed = 0;
+	float moveSpeed = 1;
 
 	//ベースコリジョン
 	float shapeSize[3];
-	shapeSize[0] = 16.f; shapeSize[1] = 32.f;
+	shapeSize[0] = 16.f; shapeSize[1] = 16.f;
 	K_Physics::CollisionShape* bs = CC::CreateCapsuleShape(shapeSize[0], shapeSize[1]);
+	//足元、頭上判定用コリジョン
+	K_Math::Vector3 cfpos = { 0.f, -(shapeSize[0] + (shapeSize[1] / 2) + 10), 0.f };
+	K_Math::Vector3 chpos = { 0.f, shapeSize[0] + (shapeSize[1] / 2 + 10), 0.f };
+	shapeSize[0] = 8.f; shapeSize[1] = 1.f; shapeSize[2] = 1.f;
+	K_Physics::CollisionShape* cs = CC::CreateBoxShape(shapeSize[0], shapeSize[1], shapeSize[2]);
 	//被ダメ、カメラ受け用コリジョン
 	K_Math::Vector3 rpos = { 0.f, 0.f, 0.f };
-	shapeSize[0] = 16.f; shapeSize[1] = 32.f;
+	shapeSize[0] = 16.f; shapeSize[1] = 16.f;
 	K_Physics::CollisionShape* rs = CC::CreateCapsuleShape(shapeSize[0], shapeSize[1]);
 	//視界用コリジョン
-	K_Math::Vector3 fovpos = { 64.f, 0.f, 0.f };
-	shapeSize[0] = 64.f; shapeSize[1] = 32.f; shapeSize[2] = 1.f;
+	K_Math::Vector3 fovpos = { 64.f, 32.f, 0.f };
+	shapeSize[0] = 64.f; shapeSize[1] = 64.f; shapeSize[2] = 1.f;
 	K_Physics::CollisionShape* fovs = CC::CreateBoxShape(shapeSize[0], shapeSize[1], shapeSize[2]);
 	//攻撃動作遷移用コリジョン
 	K_Math::Vector3 aapos = { 24.f, 0.f, 0.f };
 	shapeSize[0] = 24.f; shapeSize[1] = 24.f; shapeSize[2] = 1.f;
 	K_Physics::CollisionShape* aas = CC::CreateBoxShape(shapeSize[0], shapeSize[1], shapeSize[2]);
-	//足元、頭上判定用コリジョン
-	K_Math::Vector3 cfpos = { 0.f, 24.f, 0.f };
-	K_Math::Vector3 chpos = { 0.f, -24.f, 0.f };
-	shapeSize[0] = 8.f; shapeSize[1] = 1.f; shapeSize[2] = 1.f;
-	K_Physics::CollisionShape* cs = CC::CreateBoxShape(shapeSize[0], shapeSize[1], shapeSize[2]);
 
 	eType.emplace_back(new EnemyType("resource2", maxLife, hitDamage, moveSpeed, bs, rs, fovs, aas, cs, rpos, fovpos, aapos, cfpos, chpos));
 

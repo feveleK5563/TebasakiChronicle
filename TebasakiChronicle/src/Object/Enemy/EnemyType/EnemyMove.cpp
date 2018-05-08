@@ -2,14 +2,14 @@
 
 //-----------------------------------------------
 //何もしない
-void EMove_NoMotion::EMove(Status& status, Move& move)
+void EMove_NoMotion::EMove(CollisionManager& cmanager, Status& status, Move& move)
 {
 	//ここに「何もしない」処理を書く
 }
 
 //-----------------------------------------------
 //向いている方向に移動する
-void EMove_Movement::EMove(Status& status, Move& move)
+void EMove_Movement::EMove(CollisionManager& cmanager, Status& status, Move& move)
 {
 	if (status.GetDirection() == status.Right)
 	{
@@ -22,8 +22,11 @@ void EMove_Movement::EMove(Status& status, Move& move)
 }
 
 //-----------------------------------------------
-//ジャンプ
-void EMove_Jump::EMove(Status& status, Move& move)
+//地面についているときのみジャンプ
+void EMove_Jump::EMove(CollisionManager& cmanager, Status& status, Move& move)
 {
-	move.JumpOperation();
+	if (int a = cmanager.GetConflictionObjectsUserData(3).size() > 0)
+	{
+		move.JumpOperation();
+	}
 }
