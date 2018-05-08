@@ -12,6 +12,7 @@ private:
 	K_Graphics::Texture*		texture;		//テクスチャ
 	const int					maxLife;		//体力上限
 	const int					hitDamage;		//接触時、プレイヤーに与えるダメージ
+	const float					moveSpeed;		//移動速度
 
 	K_Physics::CollisionShape*	baseShape;			//地形用コリジョンの形状
 	K_Physics::CollisionShape*	receiveShape;		//被ダメ、カメラガン用コリジョンの形状
@@ -28,8 +29,9 @@ private:
 public:
 	//コンストラクタ
 	EnemyType(	std::string texName,
-				int maxlife,
-				int hitdamage,
+				int		maxlife,
+				int		hitdamage,
+				float	movespeed,
 				K_Physics::CollisionShape* sBase,
 				K_Physics::CollisionShape* sReceive,
 				K_Physics::CollisionShape* sFieldofview,
@@ -43,7 +45,7 @@ public:
 	//デストラクタ
 	~EnemyType();
 
-	//EnemyMoveSetを取得
+	//エネミーの動作設定を取得
 	EnemyMoveSet* GetEnemyMoveSet();
 	//画像名を取得
 	const std::string& GetTextureName();
@@ -51,6 +53,8 @@ public:
 	const int GetMaxLife();
 	//プレイヤーに与えるダメージ量を取得
 	const int GetHitDamage();
+	//1フレームの移動速度を取得
+	const float GetMoveSpeed();
 	//テクスチャを取得
 	K_Graphics::Texture* GetTexture();
 

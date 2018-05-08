@@ -19,17 +19,36 @@ public:
 	//設定処理
 	void	SetStatus();
 	void	SetMove(const Move* move);
-	void	SetImage();
+	void	SetImage(const std::string& texName, K_Graphics::Texture* tex, bool isde = true);
 	void	SetSound();
 	void	SetEasing();
 
 	//取得処理
-	Status*				GetStatus();
-	Move*				GetMove();
-	ImageManager*		GetImage();
-	Easing*				GetEasing();
+	Status&				GetStatus();
+	Move&				GetMove();
+	ImageManager&		GetImage();
+	Easing&				GetEasing();
 
-	
+	//ステータスの設定
+	void	SetPos(const K_Math::Vector3& vec);
+	void	SetAngle(const K_Math::Vector3& vec);
+	void	SetScale(const K_Math::Vector3& vec);
+	void	SetMoveVec(const K_Math::Vector3& vec);
+	void	SetState(const Status::State& state);
+	void	SetDirection(const Status::Direction& dir);
+	void	SetAttackPoint(const int& atPoint);
+	void	SetLife(const int& life);
+
+	//ステータスの取得処理
+	Status::State&		GetState();
+	K_Math::Vector3&	GetPos();
+	K_Math::Vector3&	GetAngle();
+	K_Math::Vector3&	GetScale();
+	K_Math::Vector3&	GetMoveVec();
+	Status::Direction&	GetDirection();
+	int&				GetAttackPoint();
+	int&				GetLife();
+
 private:
 	Status			status;		//Status
 	Move			move;		//移動処理

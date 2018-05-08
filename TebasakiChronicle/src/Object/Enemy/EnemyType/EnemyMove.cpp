@@ -2,28 +2,28 @@
 
 //-----------------------------------------------
 //何もしない
-void EMove_NoMotion::Move(K_Math::Vector3& moveVec)
+void EMove_NoMotion::EMove(Status& status, Move& move)
 {
 	//ここに「何もしない」処理を書く
 }
 
 //-----------------------------------------------
-//右に歩く
-void EMove_WalkRight::Move(K_Math::Vector3& moveVec)
+//向いている方向に移動する
+void EMove_Movement::EMove(Status& status, Move& move)
 {
-	++moveVec.x();
+	if (status.GetDirection() == status.Right)
+	{
+		move.GetMoveVec().x() += move.GetAddVec();
+	}
+	else
+	{
+		move.GetMoveVec().x() -= move.GetAddVec();
+	}
 }
 
 //-----------------------------------------------
-//上に移動する
-void EMove_Up::Move(K_Math::Vector3& moveVec)
+//ジャンプ
+void EMove_Jump::EMove(Status& status, Move& move)
 {
-	--moveVec.y();
-}
-
-//-----------------------------------------------
-//下に移動する
-void EMove_Down::Move(K_Math::Vector3& moveVec)
-{
-	++moveVec.y();
+	move.JumpOperation();
 }

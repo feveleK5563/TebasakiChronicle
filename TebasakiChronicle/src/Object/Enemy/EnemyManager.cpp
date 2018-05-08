@@ -12,18 +12,27 @@ EnemyManager::~EnemyManager()
 
 //-----------------------------------------------------------------------------
 //“G‚ğˆê‘Ìì¬‚·‚é
-void EnemyManager::CreateEnemy(EnemyType* cpyet, const K_Math::Vector3& setPos)
+void EnemyManager::CreateEnemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction)
 {
-	enemy.emplace_back(new Enemy(cpyet, setPos));
+	enemy.emplace_back(new Enemy(cpyet, setPos, direction));
 }
 
 //-----------------------------------------------------------------------------
 //‘S‚Ä‚Ì“G‚ğXV‚·‚é
 void EnemyManager::UpdateAllEnemy()
 {
-	for (auto it : enemy)
+	auto it = enemy.begin();
+	while (it != enemy.end())
 	{
-		it->Update();
+		if ((*it)->Update())	//€–S‚µ‚½‚çíœ
+		{
+			delete *(it);
+			enemy.erase(it);
+		}
+		else
+		{
+			++it;
+		}
 	}
 }
 
@@ -35,4 +44,15 @@ void EnemyManager::DrawAllEnemy()
 	{
 		it->Draw();
 	}
+}
+
+//-----------------------------------------------------------------------------
+//‘S‚Ä‚Ì“G‚ğíœ(‰ğ•ú)‚·‚é
+void EnemyManager::DeleteAllEnemy()
+{
+	for (auto it : enemy)
+		delete it;
+
+	enemy.clear();
+	enemy.shrink_to_fit();
 }

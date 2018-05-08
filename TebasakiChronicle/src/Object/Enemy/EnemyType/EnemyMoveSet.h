@@ -26,8 +26,8 @@ public:
 	//指定パターン番号のアニメーションを返す
 	const std::vector<AnimationCharaChip*> GetNowAnimChip(int nowPatternOrder);
 
-	//現在の動作パターンを実行し、現在取得可能なスキル番号を返す
-	int Move(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, K_Math::Vector3& moveVec);
+	//現在の動作パターンを実行し、現在プレイヤーが取得可能なスキル番号を返す
+	int EMove(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, CollisionManager& colmanager, Status& status, Move& move);
 
 	//動作パターンを指定番号に遷移させる
 	void PatternTransition(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, int patternNum);

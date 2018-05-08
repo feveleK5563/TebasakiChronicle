@@ -79,13 +79,14 @@ void	CameraGun::Chase(const K_Math::Vector3& targetPos)
 void	CameraGun::Initailize()
 {
 	//ステータスの設定
-	object.GetStatus()->SetStatusData(
-		Status::State::Walk,
+	object.GetStatus().SetStatusData(
+		Status::State::Non,
 		K_Math::Vector3(0, 0, 0),
 		K_Math::Vector3(0, 0, 0),
 		K_Math::Vector3(1, 1, 1),
-		Status::Direction::Left,
-		1.0f);
+		Status::Direction::Right,
+		1,
+		0);
 	
 	//動きの初期化
 	//動きはデフォルトで生成させる

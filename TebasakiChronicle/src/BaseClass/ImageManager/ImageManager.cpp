@@ -85,10 +85,12 @@ void ImageManager::Animation()
 
 //-----------------------------------------------------------------------------
 //描画(3D)
-void ImageManager::ImageDraw3D(	const K_Math::Vector3& posc,
-								const K_Math::Vector3& angle,
-								const K_Math::Vector3& scale)
+void ImageManager::ImageDraw3D(	const K_Math::Vector3&	posc,
+								const K_Math::Vector3&	anglec,
+								const K_Math::Vector3&	scalec,
+								int						direction)
 {
+	//テクスチャの読み込み位置の調整
 	K_Math::Box2D src = charaChip[nowAnimNum]->chip;
 	if (charaChip[nowAnimNum]->chipSheetNum >= 0)
 	{
@@ -98,11 +100,16 @@ void ImageManager::ImageDraw3D(	const K_Math::Vector3& posc,
 	{
 		src.x -= src.w * (int(animCnt) % charaChip[nowAnimNum]->chipSheetNum);
 	}
-	spobj->controlPoint = K_Math::Vector2(src.w / 2.f, src.h / 2.f);
+	spobj->controlPoint = K_Math::Vector2(src.w / 2.f, src.h / 2.f);	//回転の基準位置をテクスチャの中心に設定
 
+	//座標をテクスチャの中心に設定
 	K_Math::Vector3 pos = posc;
 	pos.x() -= (float)src.w / 2.f;
 	pos.y() += (float)src.h / 2.f;
+
+	//画像の向きを調整
+	K_Math::Vector3 angle = anglec;
+	angle.y() += K_Math::DegToRad((float)direction);
 
 	spobj->Draw3D(
 		CST::GetPerspectiveCamera(),
@@ -110,5 +117,5 @@ void ImageManager::ImageDraw3D(	const K_Math::Vector3& posc,
 		src,
 		pos,
 		angle,
-		scale);
+		scalec);
 }

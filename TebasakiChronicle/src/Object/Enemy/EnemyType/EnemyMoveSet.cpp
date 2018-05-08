@@ -33,20 +33,28 @@ const std::vector<AnimationCharaChip*> EnemyMoveSet::GetNowAnimChip(int nowPatte
 }
 
 //-----------------------------------------------------------------------------
-//現在の動作パターンを実行し、現在取得可能なスキル番号を返す
-int EnemyMoveSet::Move(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, K_Math::Vector3& moveVec)
+//現在の動作パターンを実行し、現在プレイヤーが取得可能なスキル番号を返す
+int EnemyMoveSet::EMove(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, CollisionManager& colmanager, Status& status, Move& move)
 {
-	//パターンの遷移条件を満たしたら即パターン変更
-	for (int i = 0; i < (int)empattern.size(); ++i)
+	bool endMovePattern = false;	//動作パターンが一巡したか(最後までいったか)どうかを格納
+	int idNum = empattern[nowPatternOrder]->EMove(nowMoveOrder, timeCnt, status, move, endMovePattern);
+
+	//動作パターンが一巡したら、パターン変更のための処理を行う
+	if (endMovePattern == true)
 	{
-		if (nowPatternOrder != i && 
-			empattern[i]->emt->Transition())
+		//パターンの遷移条件を満たしていたらパターン変更
+		for (int i = 0; i < (int)empattern.size(); ++i)
 		{
-			PatternTransition(nowMoveOrder, nowPatternOrder, timeCnt, i);
-			break;
+			if (nowPatternOrder != i &&
+				empattern[i]->emt->Transition(colmanager, status))
+			{
+				PatternTransition(nowMoveOrder, nowPatternOrder, timeCnt, i);
+				break;
+			}
 		}
 	}
-	return empattern[nowPatternOrder]->Move(nowMoveOrder, timeCnt, moveVec);
+
+	return idNum;
 }
 
 //-----------------------------------------------------------------------------

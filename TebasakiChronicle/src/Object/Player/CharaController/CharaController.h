@@ -19,12 +19,11 @@ public:
 
 private:
 	//’è”-------------------
-	const float Friction = 0.9f;
+	//const float Friction = 0.9f;
 
 	//•Ï”-------------------
 	Move*	move;					//ˆÚ“®
 	K_Input::InputClass*	input;	//“ü—Íƒ{ƒ^ƒ“
-	K_Math::Vector3 moveVec;		//ˆÚ“®—Ê
 };
 
 

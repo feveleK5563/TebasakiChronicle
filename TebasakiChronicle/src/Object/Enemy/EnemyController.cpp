@@ -18,9 +18,9 @@ int& EnemyController::GetSkillId()
 
 //-----------------------------------------------------------------------------
 //“®ì‚ÌŽÀs
-void EnemyController::Move(int& nowMoveOrder, int& nowPatternOrder, K_Math::Vector3& moveVec)
+void EnemyController::EMove(int& nowMoveOrder, int& nowPatternOrder, CollisionManager& cm, Status& status, Move& move)
 {
-	ems->Move(nowMoveOrder, nowPatternOrder, timeCnt, moveVec);
+	ems->EMove(nowMoveOrder, nowPatternOrder, timeCnt, cm, status, move);
 }
 
 //-----------------------------------------------------------------------------

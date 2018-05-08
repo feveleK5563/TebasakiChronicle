@@ -44,7 +44,8 @@ public:
 
 	//----------------------------------------------
 	//•`‰æ(3D)
-	void ImageDraw3D(	const K_Math::Vector3& posc, 
-						const K_Math::Vector3& angle,
-						const K_Math::Vector3& scale);
+	void ImageDraw3D(	const K_Math::Vector3&	posc, 
+						const K_Math::Vector3&	angle,
+						const K_Math::Vector3&	scale,
+						int						direction);
 };

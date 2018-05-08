@@ -7,6 +7,8 @@
 #include "Object/Enemy/EnemyType/EnemyTypeManager.h"
 #include "Object/Enemy/EnemyManager.h"
 
+#include "Object/Player/Player.h"
+
 int main()
 {
 	//ウィンドウ
@@ -33,28 +35,37 @@ int main()
 	EnemyTypeManager* etm = new EnemyTypeManager();
 	etm->LoadEnemyData("");
 	//敵1体に上記で作成した種類を割り当てる
-	EnemyManager emanager;
-	emanager.CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(0, 0, 0));
+	EnemyManager* emanager = new EnemyManager();
+	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(0, 0, 0), Status::Direction::Right);
 
+	//プレイヤー
+	/*Player player;
+	player.Initliaze();*/
 
 	while (sc->IsSystemEnd() == false)
 	{
 		sc->ProcessSystem();
 
-		emanager.UpdateAllEnemy();
+		emanager->UpdateAllEnemy();
+
+		//player.UpDate();
+
 
 		CST::FrameBufferBeginDraw(720, 540, 0.f, 0.f, 1.f);
 		CST::GetPerspectiveCamera()->Draw();
 		CST::GetOrthoCamera()->Draw();
 
-		emanager.DrawAllEnemy();
+		emanager->DrawAllEnemy();
 		CC::DebugDraw(CST::GetShaderClass(), CST::GetPerspectiveCamera());
+
+		//player.Render();
 
 		sc->SwapBuffer();
 	}
 
 	delete sc;
 	delete etm;
+	delete emanager;
 
 	CC::Delete();
 }

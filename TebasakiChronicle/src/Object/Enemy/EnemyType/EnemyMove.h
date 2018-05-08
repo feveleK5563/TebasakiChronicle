@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include "SystemClass.h"
+#include "../../../BaseClass/Status/Status.h"
+#include "../../../BaseClass/Move.h"
 
 //動作の基底クラス
 class EnemyMove
@@ -8,7 +10,7 @@ class EnemyMove
 public:
 	EnemyMove(){}
 	virtual ~EnemyMove() {}
-	virtual void Move(K_Math::Vector3& moveVec) = 0;
+	virtual void EMove(Status& status, Move& move) = 0;
 };
 
 //-----------------------------------------------
@@ -16,29 +18,21 @@ public:
 class EMove_NoMotion : public EnemyMove
 {
 public:
-	void Move(K_Math::Vector3& moveVec);
+	void EMove(Status& status, Move& move);
 };
 
 //-----------------------------------------------
-//右に移動する
-class EMove_WalkRight : public EnemyMove
+//向いている方向に移動する
+class EMove_Movement : public EnemyMove
 {
 public:
-	void Move(K_Math::Vector3& moveVec);
+	void EMove(Status& status, Move& move);
 };
 
 //-----------------------------------------------
-//上に移動する
-class EMove_Up : public EnemyMove
+//ジャンプする
+class EMove_Jump : public EnemyMove
 {
 public:
-	void Move(K_Math::Vector3& moveVec);
-};
-
-//-----------------------------------------------
-//下に移動する
-class EMove_Down : public EnemyMove
-{
-public:
-	void Move(K_Math::Vector3& moveVec);
+	void EMove(Status& status, Move& move);
 };

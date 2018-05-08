@@ -9,13 +9,21 @@
 //------------------------------------------------------
 //コンストラクタ
 //------------------------------------------------------
-Move::Move() : moveVec(K_Math::Vector3(0,0,0)),jumpPower(0.0f), 
-	fallSpeed(1.0f), gravity(-9.8f)
+Move::Move() :
+	moveVec(K_Math::Vector3(0,0,0)),
+	addVec(0.0f),
+	jumpPower(0.0f), 
+	fallSpeed(1.0f),
+	gravity(-9.8f)
 {
 
 }
-Move::Move(const K_Math::Vector3& vec,float jumpPow, float fallSpeed, float gravity)
-	: moveVec(vec),jumpPower(jumpPow),fallSpeed(fallSpeed),gravity(gravity)
+Move::Move(const K_Math::Vector3& vec, float add, float jumpPow, float fallSpeed, float gravity) :
+	moveVec(vec),
+	addVec(add),
+	jumpPower(jumpPow),
+	fallSpeed(fallSpeed),
+	gravity(gravity)
 {
 
 }
@@ -32,6 +40,12 @@ Move::~Move()
 //------------------------------------------------------
 //設定処理
 //------------------------------------------------------
+//加算移動量
+void	Move::SetAddVec(float addVec)
+{
+	this->addVec = addVec;
+}
+
 //ジャンプ力の設定
 void	Move::SetJumpPow(float jumpPow)
 {
@@ -51,10 +65,11 @@ void	Move::SetGravity(float gravity)
 }
 
 //データの設定
-void	Move::SetMoveDate(const K_Math::Vector3& moveVec, const float& jumpPow,
-	const float& fallSpeed, const float& gravity)
+void	Move::SetMoveDate(	const float& addVec, const float& jumpPow,
+							const float& fallSpeed, const float& gravity)
 {
-	this->moveVec = moveVec;
+	this->moveVec = K_Math::Vector3(0, 0, 0);
+	this->addVec = addVec;
 	this->jumpPower = jumpPow;
 	this->fallSpeed = fallSpeed;
 	this->gravity = gravity;
@@ -64,6 +79,18 @@ void	Move::SetMoveDate(const K_Math::Vector3& moveVec, const float& jumpPow,
 //------------------------------------------------------
 //取得処理
 //------------------------------------------------------
+//動作量を取得(変更可能)
+K_Math::Vector3& Move::GetMoveVec()
+{
+	return moveVec;
+}
+
+//加算移動量を取得
+float	Move::GetAddVec()
+{
+	return addVec;
+}
+
 //ジャンプ力の取得
 float	Move::GetJumpPow()
 {
@@ -93,14 +120,14 @@ void	Move::GravityOperation()
 	fallSpeed += gravity;
 }
 
-//移動動作
-void	Move::MovingOperation()
-{
-	K_Math::Vector3	vectorArg;	//引数で受けっとった変数
-
-	//1フレームで動く量をプラスしていく
-	moveVec += vectorArg;
-}
+////移動動作
+//void	Move::MovingOperation()
+//{
+//	K_Math::Vector3	vectorArg;	//引数で受けっとった変数
+//
+//	//1フレームで動く量をプラスしていく
+//	moveVec += vectorArg;
+//}
 
 //ジャンプ動作
 void	Move::JumpOperation()

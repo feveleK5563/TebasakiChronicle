@@ -16,24 +16,24 @@ public:
 	//Œü‚«
 	enum Direction
 	{
-		Left = 90,
-		Right = 180,
+		Right = 0,
+		Left = 180,
 	};
 
 	//ó‘Ô
 	enum State
 	{
-		Walk,
-		Run,
-		Jump
+		Non,
+		Active,
+		Death,
 	};
 
 public:
-	//İ’èˆ—
+	//ˆêŠ‡İ’èˆ—
 	void	SetStatusData(
 		const State& state,const K_Math::Vector3& pos,
 		const K_Math::Vector3& angle,const K_Math::Vector3& scale,
-		const Direction& dir,const float& attackPoint
+		const Direction& dir, const int& attackPoint,const int& life
 	);
 
 
@@ -43,7 +43,8 @@ public:
 	K_Math::Vector3&	GetAngle();
 	K_Math::Vector3&	GetScale();
 	Direction&			GetDirection();
-	float&				GetAttackPoint();
+	int&				GetAttackPoint();
+	int&				GetLife();
 
 private:
 	State				state;		//ó‘Ô
@@ -51,5 +52,6 @@ private:
 	K_Math::Vector3		angle;		//ŒX‚«
 	K_Math::Vector3		scale;		//Šg‘åk¬
 	Direction			direction;	//Œü‚«
-	float				attackPoint;//UŒ‚—Í
+	int					attackPoint;//UŒ‚—Í
+	int					life;		//‘Ì—Í
 };

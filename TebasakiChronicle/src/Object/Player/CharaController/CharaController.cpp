@@ -44,15 +44,16 @@ void	CharaController::UpDate()
 	float stickAngle = input->GetPad(K_Input::VpadIndex::Pad0)->GetStickRotation(K_Input::VpadStick::L);
 
 	K_Math::Vector3 moveVec = { 0,0,0 };
-	moveVec.x() += cosf(stickAngle) * stickDepth;	//ƒXƒeƒBƒbƒN‚ÌŠp“x•ûŒü‚É“|‚µ‚½•ª‚¾‚¯i‚Þ
-	moveVec.y() += sinf(stickAngle) * stickDepth;	
+	moveVec.x() += cosf(stickAngle) * stickDepth * move->GetAddVec();	//ƒXƒeƒBƒbƒN‚ÌŠp“x•ûŒü‚É“|‚µ‚½•ª‚¾‚¯i‚Þ
 
-	//ŒX‚«‚ª‚È‚¢ê‡‚ÍA“®‚©‚È‚¢(–€ŽC‚Å‚ä‚Á‚­‚èŽ~‚Ü‚é‚æ‚¤‚É‚·‚é
+	//ŒX‚«‚ª‚È‚¢ê‡‚Í“®ì‚ð’âŽ~‚·‚é
 	if (stickDepth == 0)
 	{
-		moveVec.x() *= 0.9f;
-		moveVec.y() *= 0.9f;
+		moveVec.x() = 0.f;
 	}
+
+	//moveƒNƒ‰ƒX‚ÌmoveVec‚ÉˆÚ“®—Ê‚ð‰ÁŽZ‚·‚é
+	move->GetMoveVec() = moveVec;
 
 	//ƒWƒƒƒ“ƒvƒ{ƒ^ƒ“‚ð‰Ÿ‚·
 	if (input->GetPad(K_Input::VpadIndex::Pad0)->IsPressButton(K_Input::VpadButton::R1))

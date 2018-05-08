@@ -30,15 +30,15 @@ public:
 	SkillAndCharaChip skillAndChip;
 
 	//コンストラクタ
-	Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos);
+	Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction);
 	//デストラクタ
 	~Enemy();
 
 	//敵情報を設定
-	void SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos);
+	void SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction);
 
-	//更新
-	void Update();
+	//更新(死亡したか否かを返す)
+	bool Update();
 
 	//スキル情報を格納
 	void SetTugData();

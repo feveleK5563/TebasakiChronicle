@@ -2,7 +2,8 @@
 
 //コンストラクタ
 CollisionManager::CollisionManager() :
-	baseCollision(nullptr) {}
+	baseCollision(nullptr),
+	basePosition(K_Math::Vector3(0, 0, 0)){}
 
 //デストラクタ
 CollisionManager::~CollisionManager()
@@ -12,6 +13,7 @@ CollisionManager::~CollisionManager()
 		CC::RemoveCollision(&it->collision);
 		delete it;
 	}
+	CC::RemoveCollision(&baseCollision);
 }
 
 //-----------------------------------------------------------------------------
@@ -34,12 +36,13 @@ void CollisionManager::CreateBaseCollisionData(K_Physics::CollisionShape* cs, co
 }
 //-----------------------------------------------------------------------------
 //ベースコリジョンを設定する
-void CollisionManager::SetBaseCollisionData(K_Physics::CollisionData* cd)
+void CollisionManager::SetBaseCollisionData(K_Physics::CollisionData* cd, const K_Math::Vector3& pos)
 {
 	if (baseCollision != nullptr)
 		return;
 
 	baseCollision = cd;
+	baseCollision->SetCollisionPosition(pos);
 }
 
 //-----------------------------------------------------------------------------
@@ -72,7 +75,7 @@ void CollisionManager::SetSubCollisionTug(int subNum, void* tug)
 
 //-----------------------------------------------------------------------------
 //ベースコリジョンを動かし、付随してサブの座標を設定する
-void CollisionManager::MoveBaseCollision(K_Math::Vector3 moveVec, int direction, bool isLightness)
+void CollisionManager::MoveBaseCollision(K_Math::Vector3& moveVec, int direction, bool isLightness)
 {
 	if (isLightness == true)
 	{
@@ -84,6 +87,9 @@ void CollisionManager::MoveBaseCollision(K_Math::Vector3 moveVec, int direction,
 		//重い&正確
 		CC::MoveCharacter(baseCollision, moveVec);
 	}
+
+	//座標を取得
+	basePosition = baseCollision->GetCollisionPosition();
 
 	//ベースコリジョンを基に各サブコリジョンの位置を設定
 	SetSubCollisionPos(direction);
@@ -97,7 +103,7 @@ void CollisionManager::SetSubCollisionPos(int angle)
 	{
 		K_Math::Vector3 setPos = it->relativePos;
 
-		if (angle == 90)	//向きが左だった場合位置を反転
+		if (angle == 180)	//向きが左だった場合位置を反転
 			setPos.x() *= -1.f;
 
 		it->collision->SetCollisionPosition(setPos + baseCollision->GetCollisionPosition());
@@ -120,4 +126,11 @@ std::vector<void*> CollisionManager::GetConflictionObjectsUserData(int subNum)
 		userData.emplace_back(it->userData);
 	}
 	return userData;
+}
+
+//-----------------------------------------------------------------------------
+//ベースコリジョンの座標を返す
+K_Math::Vector3& CollisionManager::GetBaseCollisionObjectPosition()
+{
+	return basePosition;
 }

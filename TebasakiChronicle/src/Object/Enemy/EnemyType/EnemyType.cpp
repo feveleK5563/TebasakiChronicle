@@ -1,8 +1,9 @@
 #include "EnemyType.h"
 
 EnemyType::EnemyType(	std::string texName,
-						int maxlife,
-						int hitdamage,
+						int		maxlife,
+						int		hitdamage,
+						float	movespeed,
 						K_Physics::CollisionShape* sBase,
 						K_Physics::CollisionShape* sReceive,
 						K_Physics::CollisionShape* sFieldofview,
@@ -16,6 +17,7 @@ EnemyType::EnemyType(	std::string texName,
 	textureName(texName),
 	maxLife(maxlife),
 	hitDamage(hitdamage),
+	moveSpeed(movespeed),
 	emSet(new EnemyMoveSet())
 {
 	texture = CST::LoadAndGetTexture(textureName, "data/image/" + textureName + ".tga");
@@ -65,6 +67,12 @@ const int EnemyType::GetMaxLife()
 const int EnemyType::GetHitDamage()
 {
 	return hitDamage;
+}
+//-----------------------------------------------------------------------------
+//1フレームの移動速度を取得
+const float EnemyType::GetMoveSpeed()
+{
+	return moveSpeed;
 }
 //-----------------------------------------------------------------------------
 //テクスチャを取得
