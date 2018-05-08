@@ -67,7 +67,7 @@ void	CharaController::UpDate()
 		//カメラマーカーを前に飛ばす
 	}
 
-	move->GravityOperation();	//重力動作
+	//move->GravityOperation();	//重力動作
 
 	input->Run();				//入力処理を動かす
 }

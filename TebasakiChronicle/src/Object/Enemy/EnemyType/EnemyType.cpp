@@ -4,6 +4,7 @@ EnemyType::EnemyType(	std::string texName,
 						int		maxlife,
 						int		hitdamage,
 						float	movespeed,
+						float	jumppower,
 						K_Physics::CollisionShape* sBase,
 						K_Physics::CollisionShape* sReceive,
 						K_Physics::CollisionShape* sFieldofview,
@@ -18,6 +19,7 @@ EnemyType::EnemyType(	std::string texName,
 	maxLife(maxlife),
 	hitDamage(hitdamage),
 	moveSpeed(movespeed),
+	jumpPower(jumppower),
 	emSet(new EnemyMoveSet())
 {
 	texture = CST::LoadAndGetTexture(textureName, "data/image/" + textureName + ".tga");
@@ -73,6 +75,12 @@ const int EnemyType::GetHitDamage()
 const float EnemyType::GetMoveSpeed()
 {
 	return moveSpeed;
+}
+//-----------------------------------------------------------------------------
+//ジャンプ力を取得
+const float EnemyType::GetJumpPower()
+{
+	return jumpPower;
 }
 //-----------------------------------------------------------------------------
 //テクスチャを取得

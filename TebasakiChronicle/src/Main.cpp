@@ -32,7 +32,7 @@ int main()
 	CST::CreateShader("data/shader/SpriteShader.vs", "data/shader/SpriteShader.ps");
 
 	//’nŒ`(‰¼)
-	CC::CreateCollisionObject(CC::CreateBoxShape(50.f, 50.f, 5.f), false, CollisionMask::Non, CollisionMask::Ground, K_Math::Vector3(0, -80, 0));
+	CC::CreateCollisionObject(CC::CreateBoxShape(50.f, 50.f, 10.f), false, CollisionMask::Non, CollisionMask::Ground, K_Math::Vector3(0, -80, 0));
 
 	//“G‚ÌŽí—Þ‚ðì¬
 	EnemyTypeManager* etm = new EnemyTypeManager();
@@ -60,7 +60,7 @@ int main()
 		CST::GetOrthoCamera()->Draw();
 
 		emanager->DrawAllEnemy();
-		//CC::DebugDraw(CST::GetShaderClass(), CST::GetPerspectiveCamera());
+		CC::DebugDraw(CST::GetShaderClass(), CST::GetPerspectiveCamera());
 
 		//player.Render();
 

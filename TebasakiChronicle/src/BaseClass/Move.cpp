@@ -12,8 +12,8 @@
 Move::Move() :
 	moveVec(K_Math::Vector3(0, 0, 0)),
 	addVec(0.0f),
-	jumpPower(5.0f),
-	fallSpeed(1.0f),
+	jumpPower(0.0f),
+	fallSpeed(0.0f),
 	gravity(-0.5f)
 {
 
@@ -114,23 +114,24 @@ float	Move::GetGravity()
 //動作
 //------------------------------------------------------
 //重力動作
-void	Move::GravityOperation()
+void	Move::GravityOperation(bool annulGravity)
 {
+	if (annulGravity == true)
+	{
+		moveVec.y() = 0;
+		fallSpeed = 0;
+		return;
+	}
+
 	moveVec.y() += fallSpeed;
 	fallSpeed += gravity;
 }
-
-////移動動作
-//void	Move::MovingOperation()
-//{
-//	K_Math::Vector3	vectorArg;	//引数で受けっとった変数
-//
-//	//1フレームで動く量をプラスしていく
-//	moveVec += vectorArg;
-//}
 
 //ジャンプ動作
 void	Move::JumpOperation()
 {
 	fallSpeed = jumpPower;
+
+	//ジャンプの設定と同時にキャラクターを少し動かす
+	moveVec.y() += fallSpeed;
 }

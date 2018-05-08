@@ -13,6 +13,7 @@ private:
 	const int					maxLife;		//体力上限
 	const int					hitDamage;		//接触時、プレイヤーに与えるダメージ
 	const float					moveSpeed;		//移動速度
+	const float					jumpPower;		//ジャンプ力
 
 	K_Physics::CollisionShape*	baseShape;			//地形用コリジョンの形状
 	K_Physics::CollisionShape*	receiveShape;		//被ダメ、カメラガン用コリジョンの形状
@@ -32,6 +33,7 @@ public:
 				int		maxlife,
 				int		hitdamage,
 				float	movespeed,
+				float	jumppower,
 				K_Physics::CollisionShape* sBase,
 				K_Physics::CollisionShape* sReceive,
 				K_Physics::CollisionShape* sFieldofview,
@@ -55,6 +57,8 @@ public:
 	const int GetHitDamage();
 	//1フレームの移動速度を取得
 	const float GetMoveSpeed();
+	//ジャンプ力を取得
+	const float GetJumpPower();
 	//テクスチャを取得
 	K_Graphics::Texture* GetTexture();
 

@@ -30,6 +30,7 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 											cpyet->GetMaxLife());
 
 	gameObject.GetMove().SetAddVec(cpyet->GetMoveSpeed());
+	gameObject.GetMove().SetJumpPow(cpyet->GetJumpPower());
 
 	//アニメーションと表示画像の設定
 	gameObject.SetImage(cpyet->GetTextureName(), cpyet->GetTexture(), false);
@@ -60,11 +61,14 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 //更新
 bool Enemy::Update()
 {
+	//移動量をゼロクリア
 	gameObject.GetMove().GetMoveVec() = K_Math::Vector3(0, 0, 0);
-	eController->EMove(nowMoveOrder, nowPatternOrder, collisionManager, gameObject.GetStatus(), gameObject.GetMove());
 
 	//重力を加算する
-	gameObject.GetMove().GravityOperation();
+	gameObject.GetMove().GravityOperation(collisionManager.GetConflictionObjectsUserData(3).size() > 0);
+
+	//設定されている動作を行う
+	eController->EMove(nowMoveOrder, nowPatternOrder, collisionManager, gameObject.GetStatus(), gameObject.GetMove());
 
 	//アニメーションの更新
 	AnimationUpdate();

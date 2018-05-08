@@ -31,9 +31,8 @@ public:
 	float	GetGravity();
 
 	//動作
-	void	GravityOperation();	//重力動作
-	//void	MovingOperation();	//移動動作
-	void	JumpOperation();	//ジャンプ動作
+	void	GravityOperation(bool annulGravity);	//重力動作
+	void	JumpOperation();						//ジャンプ動作
 
 private:
 	K_Math::Vector3		moveVec;		//移動量
