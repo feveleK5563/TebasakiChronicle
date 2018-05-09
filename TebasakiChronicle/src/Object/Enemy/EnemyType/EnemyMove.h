@@ -4,6 +4,7 @@
 #include "../../../BaseClass/Status/Status.h"
 #include "../../../BaseClass/Move.h"
 #include "../../../BaseClass/Collision/CollisionManager.h"
+#include "../../TemporaryCollision/TemporaryCollisionManager.h"
 
 //“®ì‚ÌŠî’êƒNƒ‰ƒX
 class EnemyMove
@@ -11,7 +12,8 @@ class EnemyMove
 public:
 	EnemyMove(){}
 	virtual ~EnemyMove() {}
-	virtual void EMove(CollisionManager& cmanager, Status& status, Move& move) = 0;
+	virtual void FirstMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move) = 0;
+	virtual void EMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move) = 0;
 };
 
 //-----------------------------------------------
@@ -19,7 +21,8 @@ public:
 class EMove_NoMotion : public EnemyMove
 {
 public:
-	void EMove(CollisionManager& cmanager, Status& status, Move& move);
+	void FirstMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void EMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
 };
 
 //-----------------------------------------------
@@ -27,7 +30,8 @@ public:
 class EMove_Movement : public EnemyMove
 {
 public:
-	void EMove(CollisionManager& cmanager, Status& status, Move& move);
+	void FirstMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void EMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
 };
 
 //-----------------------------------------------
@@ -35,5 +39,15 @@ public:
 class EMove_Jump : public EnemyMove
 {
 public:
-	void EMove(CollisionManager& cmanager, Status& status, Move& move);
+	void FirstMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void EMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+};
+
+//-----------------------------------------------
+//‘O•û‚ÉUŒ‚‚·‚é
+class EMove_FrontAttack : public EnemyMove
+{
+public:
+	void FirstMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void EMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
 };

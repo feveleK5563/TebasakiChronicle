@@ -21,7 +21,7 @@ void EnemyTypeManager::LoadEnemyData(const std::string& filePath)
 	//最大体力
 	int maxLife = 1;
 	//付与ダメージ
-	int hitDamage = 0;
+	int hitDamage = 10;
 	//移動速度
 	float moveSpeed = 1;
 	//ジャンプ力
@@ -48,7 +48,7 @@ void EnemyTypeManager::LoadEnemyData(const std::string& filePath)
 	K_Math::Vector3 aapos = { 24.f, 0.f, 0.f };
 	shapeSize[0] = 24.f; shapeSize[1] = 24.f; shapeSize[2] = 1.f;
 	K_Physics::CollisionShape* aas = CC::CreateBoxShape(shapeSize[0], shapeSize[1], shapeSize[2]);
-
+	
 	eType.emplace_back(new EnemyType("resource2", maxLife, hitDamage, moveSpeed, jumpPower, bs, rs, fovs, aas, cs, rpos, fovpos, aapos, cfpos, chpos));
 
 
@@ -57,7 +57,7 @@ void EnemyTypeManager::LoadEnemyData(const std::string& filePath)
 	{
 		//動作とアニメーションの設定
 		int totalMoveNum = 4;
-		int* moveNum = new int[totalMoveNum] {2, 0, 0, 0};
+		int* moveNum = new int[totalMoveNum] {2, 0, 3, 0};
 		int* skillId = new int[totalMoveNum] {0, 0, 0, 0};
 		int* durationTime = new int[totalMoveNum] {30, 30, 60, 30};
 		K_Math::Box2D* src = new K_Math::Box2D[totalMoveNum]{

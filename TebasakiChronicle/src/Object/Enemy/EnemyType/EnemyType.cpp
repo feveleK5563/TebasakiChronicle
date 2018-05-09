@@ -22,7 +22,7 @@ EnemyType::EnemyType(	std::string texName,
 	jumpPower(jumppower),
 	emSet(new EnemyMoveSet())
 {
-	texture = CST::LoadAndGetTexture(textureName, "data/image/" + textureName + ".tga");
+	texture = CST::LoadAndGetTexture(textureName, "data/image/" + textureName + ".png");
 	baseShape = sBase;
 	receiveShape = sReceive;
 	receivePos = pRecieve;

@@ -21,19 +21,19 @@ void EnemyManager::CreateEnemy(EnemyType* cpyet, const K_Math::Vector3& setPos, 
 //‘S‚Ä‚Ì“G‚ğXV‚·‚é
 void EnemyManager::UpdateAllEnemy()
 {
-	auto it = enemy.begin();
-	while (it != enemy.end())
+	for (auto it = enemy.begin(); it != enemy.end();)
 	{
 		if ((*it)->Update())	//€–S‚µ‚½‚çíœ
 		{
 			delete *(it);
-			enemy.erase(it);
+			it = enemy.erase(it);
 		}
 		else
 		{
 			++it;
 		}
 	}
+	enemy.shrink_to_fit();
 }
 
 //-----------------------------------------------------------------------------

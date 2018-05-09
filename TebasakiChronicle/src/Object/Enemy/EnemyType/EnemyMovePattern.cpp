@@ -38,7 +38,7 @@ EnemyMovePattern::~EnemyMovePattern()
 
 //-----------------------------------------------------------------------------
 //動作を行い、現在取得可能なスキルの番号を返す
-int EnemyMovePattern::EMove(int& nowMoveOrder, int& timeCnt, CollisionManager& colmanager, Status& status, Move& move, bool& endMovePattern)
+int EnemyMovePattern::EMove(int& nowMoveOrder, int& timeCnt, CollisionManager& colmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move, bool& endMovePattern)
 {
 	endMovePattern = false;
 	//timeCntがmoveTimeMaxを超えたら、次の動作に移行する
@@ -53,9 +53,17 @@ int EnemyMovePattern::EMove(int& nowMoveOrder, int& timeCnt, CollisionManager& c
 			endMovePattern = true;
 		}
 	}
-	++timeCnt;
 
-	mp[nowMoveOrder]->em->EMove(colmanager, status, move);
+	if (timeCnt == 0)	//最初に行う動作
+	{
+		mp[nowMoveOrder]->em->FirstMove(colmanager, tempmanager, status, move);
+	}
+	else				//通常の動作
+	{
+		mp[nowMoveOrder]->em->EMove(colmanager, tempmanager, status, move);
+	}
+
+	++timeCnt;
 	return mp[nowMoveOrder]->skillId;
 }
 
@@ -83,6 +91,10 @@ void EnemyMovePattern::SetMoveAndTime(int moveNum, int skillId, int durationTime
 
 	case 2:		//ジャンプする
 		mp.back()->em = new EMove_Jump();
+		break;
+
+	case 3:		//前方に攻撃する
+		mp.back()->em = new EMove_FrontAttack();
 		break;
 	}
 }

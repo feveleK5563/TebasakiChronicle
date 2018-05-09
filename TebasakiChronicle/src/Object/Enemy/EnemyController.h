@@ -22,7 +22,7 @@ public:
 	int& GetSkillId();
 
 	//動作の実行
-	void EMove(int& nowMoveOrder, int& nowPatternOrder, CollisionManager& cm, Status& status, Move& move);
+	void EMove(int& nowMoveOrder, int& nowPatternOrder, CollisionManager& cm, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
 
 	//EnemyMoveSetからキャラチップを取得
 	const std::vector<AnimationCharaChip*> GetNowCharaChip(int nowPatternOrder);

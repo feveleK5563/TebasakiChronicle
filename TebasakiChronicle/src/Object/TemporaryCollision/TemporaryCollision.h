@@ -16,27 +16,16 @@ private:
 public:
 	//コンストラクタ
 	//コリジョンの形状情報をdeleteする
-	TemporaryCollision(K_Physics::CollisionShape*	shape,				//コリジョンの形状
-						CollisionMask&				mmask,				//サブコリジョンのぶつかる対象
-						CollisionMask&				gmask,				//サブコリジョン自身を指す(無効の場合はNon)
-						K_Math::Vector3&			setpos,				//座標
-						K_Math::Vector3&			movevec,			//移動量
-						Status::Direction&			dir,				//テクスチャの向き
-						int							damage,				//対象に与えるダメージ量
-						int							deletetime,			//自身を削除するまでの時間
-						bool						ishitground,		//地形に接触したら消滅するフラグ
-						bool						doground );			//ベースコリジョンを地形として扱うフラグ
-
-	//コンストラクタ
-	//コリジョンの形状情報をdeleteしない(そもそも所有させない)
-	TemporaryCollision(	K_Physics::CollisionData*	basedata,		//ベースコリジョンのデータ
-						K_Physics::CollisionData*	subdata,		//サブコリジョンのデータ
-						K_Math::Vector3&			setpos,			//座標
-						K_Math::Vector3&			moveVec,		//移動量
-						Status::Direction&			dir,			//テクスチャの向き
-						int							damage,			//対象に与えるダメージ量
-						int							deletetime,		//自身を削除するまでの時間
-						bool						ishitground);	//地形に接触したら消滅するフラグ
+	TemporaryCollision(	K_Physics::CollisionShape*	shape,				//コリジョンの形状
+						const CollisionMask&		mmask,				//サブコリジョンのぶつかる対象
+						const CollisionMask&		gmask,				//サブコリジョン自身を指す(無効の場合はNon)
+						const K_Math::Vector3&		setpos,				//座標
+						const K_Math::Vector3&		movevec,			//移動量
+						const Status::Direction&	dir,				//テクスチャの向き
+						const int					damage,				//対象に与えるダメージ量
+						const int					deletetime,			//自身を削除するまでの時間
+						const bool					ishitground,		//地形に接触したら消滅するフラグ
+						const bool					doground );			//ベースコリジョンを地形として扱うフラグ
 
 	//デストラクタ
 	~TemporaryCollision();

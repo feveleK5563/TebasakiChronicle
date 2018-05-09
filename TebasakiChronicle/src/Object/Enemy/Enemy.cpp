@@ -68,7 +68,7 @@ bool Enemy::Update()
 	gameObject.GetMove().GravityOperation(collisionManager.GetConflictionObjectsUserData(3).size() > 0);
 
 	//設定されている動作を行う
-	eController->EMove(nowMoveOrder, nowPatternOrder, collisionManager, gameObject.GetStatus(), gameObject.GetMove());
+	eController->EMove(nowMoveOrder, nowPatternOrder, collisionManager, tempCollisionManager, gameObject.GetStatus(), gameObject.GetMove());
 
 	//アニメーションの更新
 	AnimationUpdate();
@@ -76,14 +76,46 @@ bool Enemy::Update()
 	//コリジョンを動かす
 	collisionManager.MoveBaseCollision(gameObject.GetMove().GetMoveVec(), gameObject.GetStatus().GetDirection(), false);
 	gameObject.GetPos() = collisionManager.GetBaseCollisionObjectPosition();
-
+	tempCollisionManager.Update();
+	//タグ情報を更新
 	SetTugData();
 
-	return false;
+	return RecieveCollisionOperation();
 }
 
 //-----------------------------------------------------------------------------
-//タグ情報を格納
+//コリジョンとの接触処理
+//被ダメージによって体力が0になったらtrueを返す
+bool Enemy::RecieveCollisionOperation()
+{
+	std::vector<K_Physics::CollisionTag*> tag;
+
+	//ダメージを受ける
+	tag = collisionManager.GetConflictionObjectsUserData(Enemy::EnemyCollisionName::RecieveDamage);
+	for (auto it : tag)
+	{
+		if (((Status*)it->userData)->GetState() == Status::State::Active)
+		{
+			gameObject.GetStatus().GetLife() -= ((Status*)it->userData)->GetAttackPoint();
+		}
+	}
+	int hp = gameObject.GetStatus().GetLife();
+
+	//カメラを受ける
+	tag = collisionManager.GetConflictionObjectsUserData(Enemy::EnemyCollisionName::RecieveCameraGan);
+	for (auto it : tag)
+	{
+		if (((Status*)it->userData)->GetState() == Status::State::Active)
+		{
+			
+		}
+	}
+
+	return gameObject.GetStatus().GetLife() <= 0;
+}
+
+//-----------------------------------------------------------------------------
+//タグに情報を格納
 void Enemy::SetTugData()
 {
 	skillAndChip.nowCharaChip = gameObject.GetImage().GetNowAnimationCharaChip();
@@ -119,4 +151,5 @@ void Enemy::Draw()
 										gameObject.GetStatus().GetAngle(),
 										gameObject.GetStatus().GetScale(),
 										gameObject.GetStatus().GetDirection());
+	tempCollisionManager.Render();
 }

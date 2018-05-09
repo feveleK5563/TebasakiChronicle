@@ -3,15 +3,15 @@
 //コンストラクタ
 //コリジョンの形状情報をdeleteする
 TemporaryCollision::TemporaryCollision(	K_Physics::CollisionShape*	shape,
-										CollisionMask&				mmask,
-										CollisionMask&				gmask,
-										K_Math::Vector3&			setpos,
-										K_Math::Vector3&			movevec,
-										Status::Direction&			dir,
-										int							damage,
-										int							deletetime,
-										bool						ishitground,
-										bool						doground):
+										const CollisionMask&		mmask,
+										const CollisionMask&		gmask,
+										const K_Math::Vector3&		setpos,
+										const K_Math::Vector3&		movevec,
+										const Status::Direction&	dir,
+										const int					damage,
+										const int					deletetime,
+										const bool					ishitground,
+										const bool					doground):
 	cShape(shape),
 	deleteTime(deletetime),
 	isHitGround(ishitground)
@@ -27,35 +27,7 @@ TemporaryCollision::TemporaryCollision(	K_Physics::CollisionShape*	shape,
 		dir,
 		damage,
 		0);
-
-	colmanager.SetSubCollisionTug(0, &gameObject.GetState());
-}
-
-//コンストラクタ
-//コリジョンの形状情報をdeleteしない(そもそも所有させない)
-TemporaryCollision::TemporaryCollision(	K_Physics::CollisionData*	basedata,
-										K_Physics::CollisionData*	subdata,
-										K_Math::Vector3&			setpos,
-										K_Math::Vector3&			moveVec,
-										Status::Direction&			dir,
-										int							damage,
-										int							deletetime,	
-										bool						ishitground):
-	cShape(nullptr),
-	deleteTime(deletetime),
-	isHitGround(ishitground)
-{
-	colmanager.SetBaseCollisionData(basedata, setpos);
-	colmanager.SetSubCollisionData(subdata);
-
-	gameObject.GetStatus().SetStatusData(
-		Status::State::Active,
-		setpos,
-		K_Math::Vector3(0, 0, 0),
-		K_Math::Vector3(1, 1, 1),
-		dir,
-		damage,
-		0);
+	gameObject.GetMove().GetMoveVec() = movevec;
 
 	colmanager.SetSubCollisionTug(0, &gameObject.GetState());
 }
@@ -63,10 +35,7 @@ TemporaryCollision::TemporaryCollision(	K_Physics::CollisionData*	basedata,
 //デストラクタ
 TemporaryCollision::~TemporaryCollision()
 {
-	if (cShape != nullptr)
-	{
-		CC::RemoveCollisionShape(&cShape);
-	}
+	CC::RemoveCollisionShape(&cShape);
 }
 
 //-----------------------------------------------------------------------------
@@ -96,6 +65,7 @@ bool TemporaryCollision::Update()
 	colmanager.MoveBaseCollision(	gameObject.GetMove().GetMoveVec(),
 									gameObject.GetStatus().GetDirection(),
 									true);
+	gameObject.GetPos() = colmanager.GetBaseCollisionObjectPosition();
 
 	//アニメーションの更新
 	if (&gameObject.GetImage() != nullptr)
