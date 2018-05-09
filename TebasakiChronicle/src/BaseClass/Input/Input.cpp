@@ -1,16 +1,19 @@
 #include "Input.h"
 
-Input*	Input::inputInstance = nullptr;
+//コンストラクタ
+Input::Input() : inputClass(nullptr) {}
+//デストラクタ
+Input::~Input()
+{
+}
+
 //----------------------------------------------------
 //インスタンスの取得
 //----------------------------------------------------
 Input*	Input::GetInstance()
 {
-	if (inputInstance == nullptr)
-	{
-		inputInstance = new Input();
-	}
-	return inputInstance;
+	static Input inputInstance;
+	return &inputInstance;
 }
 
 Input*	input = Input::GetInstance();

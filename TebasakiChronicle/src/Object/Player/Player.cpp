@@ -20,6 +20,7 @@ Player::Player()
 Player::~Player()
 {
 	CC::RemoveCollisionShape(&shape);
+	CC::RemoveCollisionShape(&shape2);
 }
 
 //初期化
@@ -38,25 +39,28 @@ void	Player::Initliaze()
 	);
 
 	//画像の生成
-	object.CreateImg("Player", "./data/image/player.tga");
+	object.SetImage("Player", CST::LoadAndGetTexture("Player", "data/image/resource2.png"), true);
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 0, 32, 48), 5, 6, true);
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 0, 160, 48), 4, 6, false);
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 48, 32, 48), 10, 6, true);
 
 	//Moveの重力の設定
 	object.GetMove().SetAddVec(2.f);
-	object.GetMove().SetGravity(-0.04f);
+	object.GetMove().SetJumpPow(5.f);
 
 	//カメラガンの初期化
 	cameraGun.Initailize();
 
 	//こりじょんの設定-------------------------------
 	//ボックスの形の生成
-	shape = CC::CreateBoxShape(10, 10, 1);
+	shape = CC::CreateBoxShape(16, 24, 1);
+	shape2 = CC::CreateBoxShape(15, 1, 1);
 
 	//生成した[形]でコリジョンや剛体を作成
-	cManager.CreateBaseCollisionData(shape, object.GetPos(), object.GetAngle(), true);
-	cManager.CreateSubCollisionData(shape, CollisionMask::EnemyCollision | CollisionMask::TakeDamagePlayer, CollisionMask::PlayerCollision, object.GetPos());
+	cManager.CreateBaseCollisionData(shape, object.GetPos(), object.GetAngle(), true);	//ベース
+	cManager.CreateSubCollisionData(shape, CollisionMask::EnemyCollision | CollisionMask::TakeDamagePlayer, CollisionMask::PlayerCollision, object.GetPos()); //被ダメ
+	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, -24, 0)); //足元
+	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, 24, 0)); //頭上
 
 	//コリジョンに情報を持たせる
 	cManager.SetSubCollisionTug(0, &object.GetStatus());
@@ -65,8 +69,18 @@ void	Player::Initliaze()
 //更新
 void	Player::UpDate()
 {
+	std::cout << object.GetPos().x() << std::endl;
+	std::cout << cManager.GetBaseCollisionObjectPosition().x() << std::endl;
+
+	//動作をゼロクリア
+	object.GetMove().GetMoveVec() = K_Math::Vector3(0, 0, 0);
+
+	//重力動作
+	object.GetMove().GravityOperation(cManager.CheckHitSubCollisionObejct(1));
+
 	//ジャンプボタンを押す
-	if (INPUT::IsPressButton(VpadIndex::Pad0, K_Input::VpadButton::R1))
+	if (cManager.CheckHitSubCollisionObejct(1) &&
+		INPUT::IsPressButton(VpadIndex::Pad0, K_Input::VpadButton::R1))
 	{
 		object.GetMove().JumpOperation();
 	}
@@ -85,12 +99,8 @@ void	Player::UpDate()
 		//カメラマーカーをプレイヤーの位置に戻す
 		cameraGun.SetMoveVec(false);
 		cameraGun.object.SetState(Status::State::Non);
-	}
-	
-
-	if (object.GetMove().GetMoveVec().y() != 0)
-	{
-		object.GetImage().ChangeAnimationPattern(1);
+		
+		cameraGun.DataReset();
 	}
 
 	//入力に応じて向きを変える
@@ -100,17 +110,12 @@ void	Player::UpDate()
 	cameraGun.UpDate(object.GetPos());
 	
 	//コントローラーの更新
-	controller.UpDate(object.GetMoveVec());
-
-	//重力動作
-	object.GetMove().GravityOperation();
+	controller.UpDate(object.GetMove());
 	
 	//コリジョンを動かす
-	cManager.MoveBaseCollision(object.GetMoveVec(), object.GetDirection(), true);
-
-	object.GetPos() += object.GetMoveVec();
+	cManager.MoveBaseCollision(object.GetMoveVec(), object.GetDirection(), false);
 	//プレイヤーとコリジョンの座標を同期させる
-	cManager.GetBaseCollisionObjectPosition() = object.GetPos();
+	object.GetPos() = cManager.GetBaseCollisionObjectPosition();
 	//アニメーション
 	object.GetImage().Animation();
 }
@@ -127,8 +132,6 @@ void	Player::Render()
 
 
 
-
-
 //入力に応じて向きを変える
 void	Player::ChangeDir()
 {
@@ -139,7 +142,7 @@ void	Player::ChangeDir()
 
 	if (stickDepth != 0)
 	{
-		if (K_Math::DegToRad(-90) < stickAngle && stickAngle < K_Math::DegToRad(90))
+		if ((K_Math::DegToRad(-90) < stickAngle) && (stickAngle < K_Math::DegToRad(90)))
 		{
 			object.SetDirection(Status::Direction::Right);
 		}
@@ -148,11 +151,11 @@ void	Player::ChangeDir()
 			object.SetDirection(Status::Direction::Left);
 		}
 
-		object.GetImage().ChangeAnimationPattern(2);
+		object.GetImage().ChangeAnimationPattern(2, true);
 	}
 	else
 	{
-		object.GetImage().ChangeAnimationPattern(0);
+		object.GetImage().ChangeAnimationPattern(0, true);
 	}
 }
 

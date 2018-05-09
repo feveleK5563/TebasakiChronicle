@@ -13,23 +13,12 @@ private:
 	//-----------------------------------------------------
 	//コンストラクタ
 	//-----------------------------------------------------
-	Input::Input() : inputClass(nullptr)
-	{
-
-	}
+	Input();
 
 	//-----------------------------------------------------
 	//デストラクタ
 	//-----------------------------------------------------
-	Input::~Input()
-	{
-		if (inputClass != nullptr)
-		{
-			delete inputClass;
-			inputClass = nullptr;
-		}
-	}
-	static Input*	inputInstance;
+	~Input();
 
 public:
 	//インスタンスの取得

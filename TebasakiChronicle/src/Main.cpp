@@ -28,11 +28,14 @@ int main()
 	CST::CreatePerspectiveCamera(position, target, screenWidth, screenHeight, clipNear, clipFar, fieldOfView);
 	CST::CreateOrthoCamera(position, target, screenWidth, screenHeight, clipNear, clipFar);
 
+	INPUT::SetInputClass(sc->GetInput());
+	INPUT::Create(K_Input::VpadIndex::Pad0);
+
 	//シェーダーリスト
 	CST::CreateShader("data/shader/SpriteShader.vs", "data/shader/SpriteShader.ps");
 
 	//地形(仮)
-	CC::CreateCollisionObject(CC::CreateBoxShape(50.f, 50.f, 10.f), false, CollisionMask::Non, CollisionMask::Ground, K_Math::Vector3(0, -80, 0));
+	CC::CreateCollisionObject(CC::CreateBoxShape(1000.f, 50.f, 10.f), false, CollisionMask::Non, CollisionMask::Ground, K_Math::Vector3(0, -80, 0));
 
 	//敵の種類を作成
 	EnemyTypeManager* etm = new EnemyTypeManager();
@@ -42,8 +45,8 @@ int main()
 	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(0, 0, 0), Status::Direction::Right);
 
 	//プレイヤー
-	/*Player player;
-	player.Initliaze();*/
+	Player* player = new Player();
+	player->Initliaze();
 
 	while (sc->IsSystemEnd() == false)
 	{
@@ -52,17 +55,17 @@ int main()
 
 		emanager->UpdateAllEnemy();
 
-		//player.UpDate();
+		player->UpDate();
 
 
 		CST::FrameBufferBeginDraw(720, 540, 0.f, 0.f, 1.f);
 		CST::GetPerspectiveCamera()->Draw();
 		CST::GetOrthoCamera()->Draw();
 
-		emanager->DrawAllEnemy();
 		CC::DebugDraw(CST::GetShaderClass(), CST::GetPerspectiveCamera());
 
-		//player.Render();
+		//emanager->DrawAllEnemy();
+		//player->Render();
 
 		sc->SwapBuffer();
 	}
@@ -70,6 +73,7 @@ int main()
 	delete sc;
 	delete etm;
 	delete emanager;
+	delete player;
 
 	CC::Delete();
 }

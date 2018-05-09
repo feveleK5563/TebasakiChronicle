@@ -63,7 +63,8 @@ bool ImageManager::ChangeCharaChip(const std::vector<AnimationCharaChip*>& acc)
 //アニメーションの変更
 void ImageManager::ChangeAnimationPattern(int motionNum, bool timeReset)
 {
-	if (timeReset)
+	if (timeReset &&
+		nowAnimNum != motionNum)
 		animCnt = 0.f;
 
 	nowAnimNum = motionNum;

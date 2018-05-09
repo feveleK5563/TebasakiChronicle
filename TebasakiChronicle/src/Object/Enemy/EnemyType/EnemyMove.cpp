@@ -47,16 +47,16 @@ void EMove_Jump::EMove(CollisionManager& cmanager, TemporaryCollisionManager& te
 //ëOï˚Ç…çUåÇÇ∑ÇÈ
 void EMove_FrontAttack::FirstMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
-	K_Math::Vector3 relative(10, 0, 0);
+	K_Math::Vector3 relative(16, 0, 0);
 	if (status.GetDirection() == Status::Direction::Left)
 		relative.x() *= -1;
 
 	tempmanager.CreateTemporaryCollision(
-		CC::CreateBoxShape(16.f, 24.f, 10.f),
+		CC::CreateBoxShape(14.f, 20.f, 10.f),
 		CollisionMask::Non,
-		CollisionMask::TakeDamagePlayer,
+		CollisionMask::Non,
 		status.GetPos() + relative,
-		K_Math::Vector3(0, 0, 0),
+		K_Math::Vector3(0, -0.1f, 0),
 		status.GetDirection(),
 		status.GetAttackPoint(),
 		60,

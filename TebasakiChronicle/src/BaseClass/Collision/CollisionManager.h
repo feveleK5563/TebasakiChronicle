@@ -75,4 +75,7 @@ public:
 
 	//ベースコリジョンの座標を返す
 	K_Math::Vector3& GetBaseCollisionObjectPosition();
+
+	//ベースコリジョンの座標を設定する
+	void SetBaseCollisionObjectPosition(const K_Math::Vector3& setpos);
 };

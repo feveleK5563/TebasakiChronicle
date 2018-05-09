@@ -107,9 +107,6 @@ void CollisionManager::MoveBaseCollision(K_Math::Vector3& moveVec, int direction
 		CC::MoveCharacter(baseCollision, moveVec);
 	}
 
-	//座標を取得
-	basePosition = baseCollision->GetCollisionPosition();
-
 	//ベースコリジョンを基に各サブコリジョンの位置を設定
 	SetSubCollisionPos(direction);
 }
@@ -154,5 +151,15 @@ bool CollisionManager::CheckHitSubCollisionObejct(int subNum)
 //ベースコリジョンの座標を返す
 K_Math::Vector3& CollisionManager::GetBaseCollisionObjectPosition()
 {
+	//座標を取得(直接baseCollision->GeteCollisionPositionを返すと寿命が尽きるため)
+	basePosition = baseCollision->GetCollisionPosition();
+
 	return basePosition;
+}
+
+//-----------------------------------------------------------------------------
+//ベースコリジョンの座標を設定する
+void CollisionManager::SetBaseCollisionObjectPosition(const K_Math::Vector3& setpos)
+{
+	baseCollision->SetCollisionPosition(setpos);
 }

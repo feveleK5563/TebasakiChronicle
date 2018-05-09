@@ -7,21 +7,8 @@
 class CSTList
 {
 private:
-	CSTList():
-		fList(nullptr)
-	{
-		for (int i = 0; i < 2; ++i)
-		{
-			cPers[i] = nullptr;
-			cOrtho[i] = nullptr;
-		}
-	}
-
-	~CSTList()
-	{
-		if (fList != nullptr)
-			delete fList;
-	}
+	CSTList();
+	~CSTList();
 
 public:
 	//ƒJƒƒ‰‚ÌŠÇ—

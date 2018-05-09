@@ -3,6 +3,7 @@
 #include "../src/Object/GameObject.h"
 #include "K_Physics\BulletPhysics.h"
 #include "../../../BaseClass/Collision/CollisionManager.h"
+#include "../../Enemy/Enemy.h"
 
 //----------------------------------------------------------------
 //カメラガン
@@ -33,6 +34,7 @@ public:
 	void	SetDirection(const Status::Direction& dir);	//向きの設定
 	float 	GetDir();
 	
+	void	DataReset();
 
 private:
 	bool	CheckNowState(const Status::State& state);	//現在の状態を調べる
@@ -44,5 +46,5 @@ public:
 private:
 	K_Physics::CollisionShape*	shape;			//形の作成
 	CollisionManager			cManager;		//コリジョンの管理
-	void*						targetUserData;	//ターゲットのスキルデータを格納する
+	Enemy::SkillAndCharaChip*	targetData;		//ターゲットのスキルデータを格納する
 };

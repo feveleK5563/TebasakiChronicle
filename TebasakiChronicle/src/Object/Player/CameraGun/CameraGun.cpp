@@ -9,31 +9,7 @@
 //コンストラクタ
 //-------------------------------------------------
 
-CameraGun::CameraGun() : 
-	targetUserData(nullptr)
-{
-	//ステータスの設定
-	object.GetStatus().SetStatusData(
-		Status::State::Non,
-		K_Math::Vector3(0, 0, 0),
-		K_Math::Vector3(0, 0, 0),
-		K_Math::Vector3(1, 1, 1),
-		Status::Direction::Right,
-		1,
-		1);
-	object.GetMove().SetAddVec(3.f);
-
-	//ボックスの形の生成
-	shape = CC::CreateBoxShape(10, 10, 1);
-
-	//生成した[形]でコリジョンや剛体を作成
-	cManager.CreateBaseCollisionData(shape, object.GetPos(), object.GetAngle(), false);
-	cManager.CreateSubCollisionData(shape, CollisionMask::EnemyCamCollision, CollisionMask::CameraGan, object.GetPos());
-
-	//コリジョンに情報を持たせる
-	cManager.SetSubCollisionTug(0, &object.GetStatus());
-}
-
+CameraGun::CameraGun() {}
 //-------------------------------------------------
 //デストラクタ
 //-------------------------------------------------
@@ -57,12 +33,12 @@ void	CameraGun::Initailize()
 		1,
 		1);
 
-	object.GetMove().SetAddVec(3.0f);
+	object.GetMove().SetAddVec(5.0f);
 
 	//動きの初期化
 	//動きはデフォルトで生成させる
-	object.CreateImg("cameraGun", "./data/image/target.png");
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 0, 353, 352), 1, 1, false);
+	object.SetImage("target", CST::LoadAndGetTexture("target", "data/image/target.png"), true);
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 0, 32, 32), 1, 1, false);
 
 	//ボックスの形の生成
 	shape = CC::CreateBoxShape(10, 10, 1);
@@ -90,21 +66,22 @@ void	CameraGun::UpDate(const K_Math::Vector3& pPos)
 	{
 		//カメラガンが有効のとき
 		//衝突した際の挙動
-		if (!CheckUserData())
+		if (CheckUserData())
 		{
-			//static_cast<SkillManager>(targetUserData).pos;
-			//K_Math::Vector3	tarPos = static_cast<K_Math::Vector3>(targetUserData);
-			//Chase(tarPos);
+			K_Math::Vector3	tarPos = *targetData->pos;;
+			Chase(tarPos);
 		}
 		else
 		{
-			//衝突していない場合、方向にすすみ続ける
+			//衝突していない場合、向いている方向にすすみ続ける
 			object.GetPos() += object.GetMoveVec();
-			float addSpeed = -GetDir() * 0.02f;
+			float addSpeed = -GetDir() * 0.05f;
 			if (CheckAddSpeed())
 			{
 				object.GetMoveVec().x() += addSpeed;
 			}
+
+			RecieveData();
 		}
 	}
 	
@@ -112,9 +89,10 @@ void	CameraGun::UpDate(const K_Math::Vector3& pPos)
 	object.GetImage().Animation();
 
 	//カメラガンの移動
-	cManager.MoveBaseCollision(object.GetMoveVec(), object.GetDirection(), false);
+	cManager.MoveBaseCollision(object.GetMoveVec(), object.GetDirection(), true);
 	//コリジョンの位置の同期
-	cManager.GetBaseCollisionObjectPosition() = object.GetPos();
+	object.GetPos() = cManager.GetBaseCollisionObjectPosition();
+	object.GetPos().z() = -1.f;
 }
 
 
@@ -132,7 +110,7 @@ void	CameraGun::Render()
 //プレイヤーの位置と同期
 void	CameraGun::SetPlayerPos(const K_Math::Vector3& pos)
 {
-	object.GetPos() = pos;
+	cManager.SetBaseCollisionObjectPosition(pos);
 	object.SetMoveVec(K_Math::Vector3(0, 0, 0));
 }
 
@@ -142,29 +120,18 @@ void	CameraGun::Chase(const K_Math::Vector3& targetPos)
 {
 	//敵とカメラガンとの距離
 	K_Math::Vector3 targetVec = targetPos - object.GetPos();
-
-	//チェック判定
-	if (targetVec.x() == 0 && targetVec.y() == 0)
-	{
-		//敵との座標はすでにあっている
-		return;
-	}
-
-	//追尾
-	float angle = atan2f(targetVec.y(), targetVec.x());	//角度
-	float speed = 3.0f;		//スピード
-
-	object.GetMoveVec().x() = cosf(K_Math::DegToRad(angle)) * speed;
+	object.GetMoveVec().x() = targetVec.x() / object.GetMove().GetAddVec();
+	object.GetMoveVec().y() = targetVec.y() / object.GetMove().GetAddVec();
 }
 
 //敵との衝突をした場合、スキルデータを取得する
 void	CameraGun::RecieveData()
 {
 	//当たり判定処理
-	std::vector<void*> data = cManager.GetConflictionObjectsUserData(0);
+	std::vector<K_Physics::CollisionTag*> data = cManager.GetConflictionObjectsUserData(0);
 	if (data.size() > 0)
 	{
-		targetUserData = data[0];
+		targetData = (Enemy::SkillAndCharaChip*)data[0]->userData;
 	}
 }
 
@@ -172,11 +139,11 @@ void	CameraGun::RecieveData()
 //ユーザーデータがあるかのチェック
 bool	CameraGun::CheckUserData()
 {
-	if (targetUserData == nullptr)
+	if (targetData == nullptr)
 	{
-		return true;
+		return false;
 	}
-	return false;
+	return true;
 }
 
 
@@ -207,10 +174,7 @@ float	CameraGun::GetDir()
 	{
 		return -1.0f;
 	}
-	else if (object.GetDirection() == Status::Direction::Right)
-	{
-		return 1.0f;
-	}
+
 	return 1.0f;
 }
 
@@ -247,4 +211,9 @@ bool	CameraGun::CheckAddSpeed()
 		}
 	}
 	return true;
+}
+
+void	CameraGun::DataReset()
+{
+	targetData = nullptr;
 }

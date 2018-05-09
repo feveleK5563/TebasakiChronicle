@@ -38,6 +38,7 @@ public:
 	CameraGun		cameraGun;	//カメラガン
 
 public:
-	K_Physics::CollisionShape*	shape;		//形の作成
+	K_Physics::CollisionShape*	shape;		//ベースコリジョンの形状
+	K_Physics::CollisionShape*	shape2;		//足元と頭上用コリジョンの形状
 	CollisionManager			cManager;	//コリジョンの管理者
 };

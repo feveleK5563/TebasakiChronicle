@@ -1,5 +1,23 @@
 #include "CSTList.h"
 
+//コンストラクタ
+CSTList::CSTList() :
+	fList(nullptr)
+{
+	for (int i = 0; i < 2; ++i)
+	{
+		cPers[i] = nullptr;
+		cOrtho[i] = nullptr;
+	}
+}
+
+//デストラクタ
+CSTList::~CSTList()
+{
+	if (fList != nullptr)
+		delete fList;
+}
+
 //-------------------------------------------------------------------
 //インスタンスを得る
 CSTList* CSTList::GetInstance()

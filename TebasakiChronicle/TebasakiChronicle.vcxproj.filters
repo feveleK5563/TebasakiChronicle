@@ -44,6 +44,9 @@
     <Filter Include="ソース ファイル\src\Object\TemporaryCollision">
       <UniqueIdentifier>{77c95856-dbaf-48de-b095-d4da6513d9ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\BaseClass\Input">
+      <UniqueIdentifier>{8be4abb2-3f7f-4a6c-8b5b-e772c2c4c27a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -118,6 +121,9 @@
     <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollisionManager.cpp">
       <Filter>ソース ファイル\src\Object\TemporaryCollision</Filter>
     </ClCompile>
+    <ClCompile Include="src\BaseClass\Input\Input.cpp">
+      <Filter>ソース ファイル\src\BaseClass\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BaseClass\Move.h">
@@ -191,6 +197,9 @@
     </ClInclude>
     <ClInclude Include="src\Object\TemporaryCollision\TemporaryCollisionManager.h">
       <Filter>ソース ファイル\src\Object\TemporaryCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BaseClass\Input\Input.h">
+      <Filter>ソース ファイル\src\BaseClass\Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
