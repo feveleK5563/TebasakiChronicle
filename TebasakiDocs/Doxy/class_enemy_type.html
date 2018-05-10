@@ -1,0 +1,897 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: EnemyType クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">公開メンバ関数</a> &#124;
+<a href="#pri-attribs">非公開変数類</a> &#124;
+<a href="class_enemy_type-members.html">全メンバ一覧</a>  </div>
+  <div class="headertitle">
+<div class="title">EnemyType クラス</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_enemy_type_8h_source.html">EnemyType.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:a90ac8c58b4efa5be17b18d3e3afae8d0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a90ac8c58b4efa5be17b18d3e3afae8d0">EnemyType</a> (std::string texName, int maxlife, int hitdamage, float movespeed, float jumppower, K_Physics::CollisionShape *sBase, K_Physics::CollisionShape *sReceive, K_Physics::CollisionShape *sFieldofview, K_Physics::CollisionShape *sAttackArea, K_Physics::CollisionShape *sCheck, K_Math::Vector3 &amp;pRecieve, K_Math::Vector3 &amp;pFieldofview, K_Math::Vector3 &amp;pAttackArea, K_Math::Vector3 &amp;pCheckFoot, K_Math::Vector3 &amp;pCheckHead)</td></tr>
+<tr class="separator:a90ac8c58b4efa5be17b18d3e3afae8d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7fe24732ec1443aca75d36832cd40e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#af7fe24732ec1443aca75d36832cd40e0">~EnemyType</a> ()</td></tr>
+<tr class="separator:af7fe24732ec1443aca75d36832cd40e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a886a4abf6df4ef08090e6cd22326ea68"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_enemy_move_set.html">EnemyMoveSet</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a886a4abf6df4ef08090e6cd22326ea68">GetEnemyMoveSet</a> ()</td></tr>
+<tr class="separator:a886a4abf6df4ef08090e6cd22326ea68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5ac016fc8176452b669008547112368"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#ac5ac016fc8176452b669008547112368">GetTextureName</a> ()</td></tr>
+<tr class="separator:ac5ac016fc8176452b669008547112368"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcf1d92cec3a587f46b92e7bd75cb788"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#afcf1d92cec3a587f46b92e7bd75cb788">GetMaxLife</a> ()</td></tr>
+<tr class="separator:afcf1d92cec3a587f46b92e7bd75cb788"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a905a0b613444e884b4827438e6dc2744"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a905a0b613444e884b4827438e6dc2744">GetHitDamage</a> ()</td></tr>
+<tr class="separator:a905a0b613444e884b4827438e6dc2744"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a329c848968ddeb7bc043c0413f675675"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a329c848968ddeb7bc043c0413f675675">GetMoveSpeed</a> ()</td></tr>
+<tr class="separator:a329c848968ddeb7bc043c0413f675675"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc54b43faad5a7a04303d3e6cbb7ddfe"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#adc54b43faad5a7a04303d3e6cbb7ddfe">GetJumpPower</a> ()</td></tr>
+<tr class="separator:adc54b43faad5a7a04303d3e6cbb7ddfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9c603349900398bd810b50762c7a15d"><td class="memItemLeft" align="right" valign="top">K_Graphics::Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#ac9c603349900398bd810b50762c7a15d">GetTexture</a> ()</td></tr>
+<tr class="separator:ac9c603349900398bd810b50762c7a15d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2906ad6ed46c935e40ac6c43cc15561f"><td class="memItemLeft" align="right" valign="top">K_Physics::CollisionData *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a2906ad6ed46c935e40ac6c43cc15561f">GetBaseCollisionData</a> ()</td></tr>
+<tr class="separator:a2906ad6ed46c935e40ac6c43cc15561f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a493d2a93afaf00a49c0a1458bfd58490"><td class="memItemLeft" align="right" valign="top">K_Physics::CollisionData *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a493d2a93afaf00a49c0a1458bfd58490">GetRecieveDamageCollisionData</a> ()</td></tr>
+<tr class="separator:a493d2a93afaf00a49c0a1458bfd58490"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacc056f8b3129bd4a791b8a67e08ee2f"><td class="memItemLeft" align="right" valign="top">K_Physics::CollisionData *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#aacc056f8b3129bd4a791b8a67e08ee2f">GetRecieveCameraCollisionData</a> ()</td></tr>
+<tr class="separator:aacc056f8b3129bd4a791b8a67e08ee2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af342208a99623aeabe25447734975b1d"><td class="memItemLeft" align="right" valign="top">K_Physics::CollisionData *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#af342208a99623aeabe25447734975b1d">GetFieldofviewCollisionData</a> ()</td></tr>
+<tr class="separator:af342208a99623aeabe25447734975b1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15d150862ffc84c167f8d449a8c097bb"><td class="memItemLeft" align="right" valign="top">K_Physics::CollisionData *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a15d150862ffc84c167f8d449a8c097bb">GetAttackAreaCollisionData</a> ()</td></tr>
+<tr class="separator:a15d150862ffc84c167f8d449a8c097bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57798aba452ae8c24b568a7065b93878"><td class="memItemLeft" align="right" valign="top">K_Physics::CollisionData *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a57798aba452ae8c24b568a7065b93878">GetCheckFootCollisionData</a> ()</td></tr>
+<tr class="separator:a57798aba452ae8c24b568a7065b93878"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a073b04833d4524e3d8ea72efe999ff2a"><td class="memItemLeft" align="right" valign="top">K_Physics::CollisionData *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a073b04833d4524e3d8ea72efe999ff2a">GetCheckHeadCollisionData</a> ()</td></tr>
+<tr class="separator:a073b04833d4524e3d8ea72efe999ff2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+非公開変数類</h2></td></tr>
+<tr class="memitem:a6b9f50b208f2973eec61a36836cf4bad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_enemy_move_set.html">EnemyMoveSet</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a6b9f50b208f2973eec61a36836cf4bad">emSet</a></td></tr>
+<tr class="separator:a6b9f50b208f2973eec61a36836cf4bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0186c0cef19246ab619a5d0a3213d740"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a0186c0cef19246ab619a5d0a3213d740">textureName</a></td></tr>
+<tr class="separator:a0186c0cef19246ab619a5d0a3213d740"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d81e51a059099b4d7256e0d74f1ea28"><td class="memItemLeft" align="right" valign="top">K_Graphics::Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a0d81e51a059099b4d7256e0d74f1ea28">texture</a></td></tr>
+<tr class="separator:a0d81e51a059099b4d7256e0d74f1ea28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18720b9559902557f4ab14f6ac4a5479"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a18720b9559902557f4ab14f6ac4a5479">maxLife</a></td></tr>
+<tr class="separator:a18720b9559902557f4ab14f6ac4a5479"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6136dc14c19af4336ffa827f8b02df4c"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a6136dc14c19af4336ffa827f8b02df4c">hitDamage</a></td></tr>
+<tr class="separator:a6136dc14c19af4336ffa827f8b02df4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52a958bfdf75036a4288f619c376fe65"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a52a958bfdf75036a4288f619c376fe65">moveSpeed</a></td></tr>
+<tr class="separator:a52a958bfdf75036a4288f619c376fe65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a742543d81aa46b267e0dbf883fc82e04"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a742543d81aa46b267e0dbf883fc82e04">jumpPower</a></td></tr>
+<tr class="separator:a742543d81aa46b267e0dbf883fc82e04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59e3b245b01b4e9ae77db204bc8a420a"><td class="memItemLeft" align="right" valign="top">K_Physics::CollisionShape *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a59e3b245b01b4e9ae77db204bc8a420a">baseShape</a></td></tr>
+<tr class="separator:a59e3b245b01b4e9ae77db204bc8a420a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28747b8bd0e2dfb10ded03a6e9370031"><td class="memItemLeft" align="right" valign="top">K_Physics::CollisionShape *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a28747b8bd0e2dfb10ded03a6e9370031">receiveShape</a></td></tr>
+<tr class="separator:a28747b8bd0e2dfb10ded03a6e9370031"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a70a716a3f573029da473689df8085d"><td class="memItemLeft" align="right" valign="top">K_Physics::CollisionShape *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a4a70a716a3f573029da473689df8085d">fovShape</a></td></tr>
+<tr class="separator:a4a70a716a3f573029da473689df8085d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bc2930ddc740a78de81a7a91831422c"><td class="memItemLeft" align="right" valign="top">K_Physics::CollisionShape *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a0bc2930ddc740a78de81a7a91831422c">attackAreaShape</a></td></tr>
+<tr class="separator:a0bc2930ddc740a78de81a7a91831422c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26566772f3c4621ebfa0ef5102af8de6"><td class="memItemLeft" align="right" valign="top">K_Physics::CollisionShape *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a26566772f3c4621ebfa0ef5102af8de6">checkShape</a></td></tr>
+<tr class="separator:a26566772f3c4621ebfa0ef5102af8de6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8de248223ed8395d1afb71f4b384c36"><td class="memItemLeft" align="right" valign="top">K_Math::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#af8de248223ed8395d1afb71f4b384c36">receivePos</a></td></tr>
+<tr class="separator:af8de248223ed8395d1afb71f4b384c36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfc5eb19e3fb167d05f1f5f85abb950f"><td class="memItemLeft" align="right" valign="top">K_Math::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#adfc5eb19e3fb167d05f1f5f85abb950f">fovPos</a></td></tr>
+<tr class="separator:adfc5eb19e3fb167d05f1f5f85abb950f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54ca4f154b8945af641d5573db881fd3"><td class="memItemLeft" align="right" valign="top">K_Math::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#a54ca4f154b8945af641d5573db881fd3">attackAreaPos</a></td></tr>
+<tr class="separator:a54ca4f154b8945af641d5573db881fd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5cd771046e1b584bd03e0c2e8377347"><td class="memItemLeft" align="right" valign="top">K_Math::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#ae5cd771046e1b584bd03e0c2e8377347">checkFootPos</a></td></tr>
+<tr class="separator:ae5cd771046e1b584bd03e0c2e8377347"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3c44c0c66c21998a8b49b2b3364e1af"><td class="memItemLeft" align="right" valign="top">K_Math::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_type.html#ac3c44c0c66c21998a8b49b2b3364e1af">checkHeadPos</a></td></tr>
+<tr class="separator:ac3c44c0c66c21998a8b49b2b3364e1af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">構築子と解体子</h2>
+<a id="a90ac8c58b4efa5be17b18d3e3afae8d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90ac8c58b4efa5be17b18d3e3afae8d0">&#9670;&nbsp;</a></span>EnemyType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EnemyType::EnemyType </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>texName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxlife</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>hitdamage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>movespeed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>jumppower</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">K_Physics::CollisionShape *&#160;</td>
+          <td class="paramname"><em>sBase</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">K_Physics::CollisionShape *&#160;</td>
+          <td class="paramname"><em>sReceive</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">K_Physics::CollisionShape *&#160;</td>
+          <td class="paramname"><em>sFieldofview</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">K_Physics::CollisionShape *&#160;</td>
+          <td class="paramname"><em>sAttackArea</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">K_Physics::CollisionShape *&#160;</td>
+          <td class="paramname"><em>sCheck</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">K_Math::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>pRecieve</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">K_Math::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>pFieldofview</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">K_Math::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>pAttackArea</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">K_Math::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>pCheckFoot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">K_Math::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>pCheckHead</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af7fe24732ec1443aca75d36832cd40e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7fe24732ec1443aca75d36832cd40e0">&#9670;&nbsp;</a></span>~EnemyType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EnemyType::~EnemyType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a id="a15d150862ffc84c167f8d449a8c097bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15d150862ffc84c167f8d449a8c097bb">&#9670;&nbsp;</a></span>GetAttackAreaCollisionData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Physics::CollisionData * EnemyType::GetAttackAreaCollisionData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2906ad6ed46c935e40ac6c43cc15561f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2906ad6ed46c935e40ac6c43cc15561f">&#9670;&nbsp;</a></span>GetBaseCollisionData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Physics::CollisionData * EnemyType::GetBaseCollisionData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a57798aba452ae8c24b568a7065b93878"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57798aba452ae8c24b568a7065b93878">&#9670;&nbsp;</a></span>GetCheckFootCollisionData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Physics::CollisionData * EnemyType::GetCheckFootCollisionData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a073b04833d4524e3d8ea72efe999ff2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a073b04833d4524e3d8ea72efe999ff2a">&#9670;&nbsp;</a></span>GetCheckHeadCollisionData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Physics::CollisionData * EnemyType::GetCheckHeadCollisionData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a886a4abf6df4ef08090e6cd22326ea68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a886a4abf6df4ef08090e6cd22326ea68">&#9670;&nbsp;</a></span>GetEnemyMoveSet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_enemy_move_set.html">EnemyMoveSet</a> * EnemyType::GetEnemyMoveSet </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af342208a99623aeabe25447734975b1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af342208a99623aeabe25447734975b1d">&#9670;&nbsp;</a></span>GetFieldofviewCollisionData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Physics::CollisionData * EnemyType::GetFieldofviewCollisionData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a905a0b613444e884b4827438e6dc2744"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a905a0b613444e884b4827438e6dc2744">&#9670;&nbsp;</a></span>GetHitDamage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int EnemyType::GetHitDamage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adc54b43faad5a7a04303d3e6cbb7ddfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc54b43faad5a7a04303d3e6cbb7ddfe">&#9670;&nbsp;</a></span>GetJumpPower()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const float EnemyType::GetJumpPower </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afcf1d92cec3a587f46b92e7bd75cb788"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcf1d92cec3a587f46b92e7bd75cb788">&#9670;&nbsp;</a></span>GetMaxLife()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int EnemyType::GetMaxLife </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a329c848968ddeb7bc043c0413f675675"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a329c848968ddeb7bc043c0413f675675">&#9670;&nbsp;</a></span>GetMoveSpeed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const float EnemyType::GetMoveSpeed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aacc056f8b3129bd4a791b8a67e08ee2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacc056f8b3129bd4a791b8a67e08ee2f">&#9670;&nbsp;</a></span>GetRecieveCameraCollisionData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Physics::CollisionData * EnemyType::GetRecieveCameraCollisionData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a493d2a93afaf00a49c0a1458bfd58490"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a493d2a93afaf00a49c0a1458bfd58490">&#9670;&nbsp;</a></span>GetRecieveDamageCollisionData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Physics::CollisionData * EnemyType::GetRecieveDamageCollisionData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac9c603349900398bd810b50762c7a15d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9c603349900398bd810b50762c7a15d">&#9670;&nbsp;</a></span>GetTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Graphics::Texture * EnemyType::GetTexture </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac5ac016fc8176452b669008547112368"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5ac016fc8176452b669008547112368">&#9670;&nbsp;</a></span>GetTextureName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; EnemyType::GetTextureName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">メンバ詳解</h2>
+<a id="a54ca4f154b8945af641d5573db881fd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54ca4f154b8945af641d5573db881fd3">&#9670;&nbsp;</a></span>attackAreaPos</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Math::Vector3 EnemyType::attackAreaPos</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0bc2930ddc740a78de81a7a91831422c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bc2930ddc740a78de81a7a91831422c">&#9670;&nbsp;</a></span>attackAreaShape</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Physics::CollisionShape* EnemyType::attackAreaShape</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a59e3b245b01b4e9ae77db204bc8a420a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59e3b245b01b4e9ae77db204bc8a420a">&#9670;&nbsp;</a></span>baseShape</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Physics::CollisionShape* EnemyType::baseShape</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae5cd771046e1b584bd03e0c2e8377347"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5cd771046e1b584bd03e0c2e8377347">&#9670;&nbsp;</a></span>checkFootPos</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Math::Vector3 EnemyType::checkFootPos</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac3c44c0c66c21998a8b49b2b3364e1af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3c44c0c66c21998a8b49b2b3364e1af">&#9670;&nbsp;</a></span>checkHeadPos</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Math::Vector3 EnemyType::checkHeadPos</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a26566772f3c4621ebfa0ef5102af8de6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26566772f3c4621ebfa0ef5102af8de6">&#9670;&nbsp;</a></span>checkShape</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Physics::CollisionShape* EnemyType::checkShape</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6b9f50b208f2973eec61a36836cf4bad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b9f50b208f2973eec61a36836cf4bad">&#9670;&nbsp;</a></span>emSet</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_enemy_move_set.html">EnemyMoveSet</a>* EnemyType::emSet</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adfc5eb19e3fb167d05f1f5f85abb950f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfc5eb19e3fb167d05f1f5f85abb950f">&#9670;&nbsp;</a></span>fovPos</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Math::Vector3 EnemyType::fovPos</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4a70a716a3f573029da473689df8085d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a70a716a3f573029da473689df8085d">&#9670;&nbsp;</a></span>fovShape</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Physics::CollisionShape* EnemyType::fovShape</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6136dc14c19af4336ffa827f8b02df4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6136dc14c19af4336ffa827f8b02df4c">&#9670;&nbsp;</a></span>hitDamage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int EnemyType::hitDamage</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a742543d81aa46b267e0dbf883fc82e04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a742543d81aa46b267e0dbf883fc82e04">&#9670;&nbsp;</a></span>jumpPower</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const float EnemyType::jumpPower</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a18720b9559902557f4ab14f6ac4a5479"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18720b9559902557f4ab14f6ac4a5479">&#9670;&nbsp;</a></span>maxLife</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int EnemyType::maxLife</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a52a958bfdf75036a4288f619c376fe65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52a958bfdf75036a4288f619c376fe65">&#9670;&nbsp;</a></span>moveSpeed</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const float EnemyType::moveSpeed</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af8de248223ed8395d1afb71f4b384c36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8de248223ed8395d1afb71f4b384c36">&#9670;&nbsp;</a></span>receivePos</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Math::Vector3 EnemyType::receivePos</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28747b8bd0e2dfb10ded03a6e9370031"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28747b8bd0e2dfb10ded03a6e9370031">&#9670;&nbsp;</a></span>receiveShape</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Physics::CollisionShape* EnemyType::receiveShape</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0d81e51a059099b4d7256e0d74f1ea28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d81e51a059099b4d7256e0d74f1ea28">&#9670;&nbsp;</a></span>texture</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Graphics::Texture* EnemyType::texture</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0186c0cef19246ab619a5d0a3213d740"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0186c0cef19246ab619a5d0a3213d740">&#9670;&nbsp;</a></span>textureName</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string EnemyType::textureName</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>Git用/TebasakiChronicle/TebasakiChronicle/src/Object/Enemy/EnemyType/<a class="el" href="_enemy_type_8h_source.html">EnemyType.h</a></li>
+<li>Git用/TebasakiChronicle/TebasakiChronicle/src/Object/Enemy/EnemyType/<a class="el" href="_enemy_type_8cpp.html">EnemyType.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+構築: &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+</body>
+</html>

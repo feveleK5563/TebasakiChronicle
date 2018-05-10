@@ -1,0 +1,584 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: CollisionManager クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">クラス</a> &#124;
+<a href="#pub-methods">公開メンバ関数</a> &#124;
+<a href="#pri-methods">非公開メンバ関数</a> &#124;
+<a href="#pri-attribs">非公開変数類</a> &#124;
+<a href="class_collision_manager-members.html">全メンバ一覧</a>  </div>
+  <div class="headertitle">
+<div class="title">CollisionManager クラス</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_collision_manager_8h_source.html">CollisionManager.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+クラス</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_collision_manager_1_1_sub.html">Sub</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:a81f0b3f0cc0268c80f54714cd7ddb55f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#a81f0b3f0cc0268c80f54714cd7ddb55f">CollisionManager</a> ()</td></tr>
+<tr class="separator:a81f0b3f0cc0268c80f54714cd7ddb55f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdbb3c842f0ef1c7a028d3f080855766"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#acdbb3c842f0ef1c7a028d3f080855766">~CollisionManager</a> ()</td></tr>
+<tr class="separator:acdbb3c842f0ef1c7a028d3f080855766"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43f5ac49734e364a04480aaa8bab73a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#a43f5ac49734e364a04480aaa8bab73a4">CreateBaseCollisionData</a> (K_Physics::CollisionShape *cs, const K_Math::Vector3 &amp;pos, const K_Math::Vector3 &amp;rot, bool isJudge)</td></tr>
+<tr class="separator:a43f5ac49734e364a04480aaa8bab73a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a947c67b2e93115dfd313f05ac7979aef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#a947c67b2e93115dfd313f05ac7979aef">SetBaseCollisionData</a> (K_Physics::CollisionData *cd, const K_Math::Vector3 &amp;pos)</td></tr>
+<tr class="separator:a947c67b2e93115dfd313f05ac7979aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e716c355a5b622eb572c063c60caa7d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#a8e716c355a5b622eb572c063c60caa7d">CreateGroundCollisionData</a> (K_Physics::CollisionShape *cs, const K_Math::Vector3 &amp;pos, const K_Math::Vector3 &amp;rot, bool doGround)</td></tr>
+<tr class="separator:a8e716c355a5b622eb572c063c60caa7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaf87fa1ece6b83dd6c7218c40c12b6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#adaf87fa1ece6b83dd6c7218c40c12b6b">CreateSubCollisionData</a> (K_Physics::CollisionShape *cs, int myselfMask, int giveMask, const K_Math::Vector3 &amp;pos)</td></tr>
+<tr class="separator:adaf87fa1ece6b83dd6c7218c40c12b6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5bcd29fc915209588970aed88211ba9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#af5bcd29fc915209588970aed88211ba9">SetSubCollisionData</a> (K_Physics::CollisionData *cd)</td></tr>
+<tr class="separator:af5bcd29fc915209588970aed88211ba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27347ae03b099c1d3941720def44265d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#a27347ae03b099c1d3941720def44265d">SetSubCollisionTug</a> (int subNum, void *tug)</td></tr>
+<tr class="separator:a27347ae03b099c1d3941720def44265d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65f70d1af64c4ef0564fd2e439ee42b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#a65f70d1af64c4ef0564fd2e439ee42b3">MoveBaseCollision</a> (K_Math::Vector3 &amp;moveVec, int direction, bool isLightness)</td></tr>
+<tr class="separator:a65f70d1af64c4ef0564fd2e439ee42b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3302f1428c9b3ee14d8260c3b6ee61e5"><td class="memItemLeft" align="right" valign="top">std::vector&lt; K_Physics::CollisionTag * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#a3302f1428c9b3ee14d8260c3b6ee61e5">GetConflictionObjectsUserData</a> (int subNum)</td></tr>
+<tr class="separator:a3302f1428c9b3ee14d8260c3b6ee61e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae893c8d87e881d87247276bd1be89185"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#ae893c8d87e881d87247276bd1be89185">CheckHitBaseCollisionObject</a> ()</td></tr>
+<tr class="separator:ae893c8d87e881d87247276bd1be89185"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a909d47437a4bf81c9d9f0c35a35242b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#a909d47437a4bf81c9d9f0c35a35242b2">CheckHitSubCollisionObejct</a> (int subNum)</td></tr>
+<tr class="separator:a909d47437a4bf81c9d9f0c35a35242b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73636cedc071e103cd6309786798ba00"><td class="memItemLeft" align="right" valign="top">K_Math::Vector3 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#a73636cedc071e103cd6309786798ba00">GetBaseCollisionObjectPosition</a> ()</td></tr>
+<tr class="separator:a73636cedc071e103cd6309786798ba00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ebe3c24ae8633cbc2850ca2396ad8f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#a5ebe3c24ae8633cbc2850ca2396ad8f1">SetBaseCollisionObjectPosition</a> (const K_Math::Vector3 &amp;setpos)</td></tr>
+<tr class="separator:a5ebe3c24ae8633cbc2850ca2396ad8f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+非公開メンバ関数</h2></td></tr>
+<tr class="memitem:a287943673c8f0a5a2ce93901bb1b6f5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#a287943673c8f0a5a2ce93901bb1b6f5e">SetSubCollisionPos</a> (int angle)</td></tr>
+<tr class="separator:a287943673c8f0a5a2ce93901bb1b6f5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+非公開変数類</h2></td></tr>
+<tr class="memitem:aef472dbe3f0b8c6cefa3e153aa805ab6"><td class="memItemLeft" align="right" valign="top">K_Physics::CollisionData *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#aef472dbe3f0b8c6cefa3e153aa805ab6">baseCollision</a></td></tr>
+<tr class="separator:aef472dbe3f0b8c6cefa3e153aa805ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a82a69d8a65072ba6e98a7d66d8cd90"><td class="memItemLeft" align="right" valign="top">K_Math::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#a9a82a69d8a65072ba6e98a7d66d8cd90">basePosition</a></td></tr>
+<tr class="separator:a9a82a69d8a65072ba6e98a7d66d8cd90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a157763239f951a5d5d68bd89b50dc4e7"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_collision_manager_1_1_sub.html">Sub</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision_manager.html#a157763239f951a5d5d68bd89b50dc4e7">subCollision</a></td></tr>
+<tr class="separator:a157763239f951a5d5d68bd89b50dc4e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">構築子と解体子</h2>
+<a id="a81f0b3f0cc0268c80f54714cd7ddb55f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81f0b3f0cc0268c80f54714cd7ddb55f">&#9670;&nbsp;</a></span>CollisionManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CollisionManager::CollisionManager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acdbb3c842f0ef1c7a028d3f080855766"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdbb3c842f0ef1c7a028d3f080855766">&#9670;&nbsp;</a></span>~CollisionManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CollisionManager::~CollisionManager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a id="ae893c8d87e881d87247276bd1be89185"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae893c8d87e881d87247276bd1be89185">&#9670;&nbsp;</a></span>CheckHitBaseCollisionObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CollisionManager::CheckHitBaseCollisionObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a909d47437a4bf81c9d9f0c35a35242b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a909d47437a4bf81c9d9f0c35a35242b2">&#9670;&nbsp;</a></span>CheckHitSubCollisionObejct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CollisionManager::CheckHitSubCollisionObejct </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>subNum</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a43f5ac49734e364a04480aaa8bab73a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43f5ac49734e364a04480aaa8bab73a4">&#9670;&nbsp;</a></span>CreateBaseCollisionData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CollisionManager::CreateBaseCollisionData </td>
+          <td>(</td>
+          <td class="paramtype">K_Physics::CollisionShape *&#160;</td>
+          <td class="paramname"><em>cs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const K_Math::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const K_Math::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>rot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isJudge</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8e716c355a5b622eb572c063c60caa7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e716c355a5b622eb572c063c60caa7d">&#9670;&nbsp;</a></span>CreateGroundCollisionData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CollisionManager::CreateGroundCollisionData </td>
+          <td>(</td>
+          <td class="paramtype">K_Physics::CollisionShape *&#160;</td>
+          <td class="paramname"><em>cs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const K_Math::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const K_Math::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>rot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>doGround</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adaf87fa1ece6b83dd6c7218c40c12b6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adaf87fa1ece6b83dd6c7218c40c12b6b">&#9670;&nbsp;</a></span>CreateSubCollisionData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CollisionManager::CreateSubCollisionData </td>
+          <td>(</td>
+          <td class="paramtype">K_Physics::CollisionShape *&#160;</td>
+          <td class="paramname"><em>cs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>myselfMask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>giveMask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const K_Math::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>pos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a73636cedc071e103cd6309786798ba00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73636cedc071e103cd6309786798ba00">&#9670;&nbsp;</a></span>GetBaseCollisionObjectPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Math::Vector3 &amp; CollisionManager::GetBaseCollisionObjectPosition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3302f1428c9b3ee14d8260c3b6ee61e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3302f1428c9b3ee14d8260c3b6ee61e5">&#9670;&nbsp;</a></span>GetConflictionObjectsUserData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; K_Physics::CollisionTag * &gt; &amp; CollisionManager::GetConflictionObjectsUserData </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>subNum</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a65f70d1af64c4ef0564fd2e439ee42b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65f70d1af64c4ef0564fd2e439ee42b3">&#9670;&nbsp;</a></span>MoveBaseCollision()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CollisionManager::MoveBaseCollision </td>
+          <td>(</td>
+          <td class="paramtype">K_Math::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>moveVec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isLightness</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a947c67b2e93115dfd313f05ac7979aef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a947c67b2e93115dfd313f05ac7979aef">&#9670;&nbsp;</a></span>SetBaseCollisionData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CollisionManager::SetBaseCollisionData </td>
+          <td>(</td>
+          <td class="paramtype">K_Physics::CollisionData *&#160;</td>
+          <td class="paramname"><em>cd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const K_Math::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>pos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5ebe3c24ae8633cbc2850ca2396ad8f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ebe3c24ae8633cbc2850ca2396ad8f1">&#9670;&nbsp;</a></span>SetBaseCollisionObjectPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CollisionManager::SetBaseCollisionObjectPosition </td>
+          <td>(</td>
+          <td class="paramtype">const K_Math::Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>setpos</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af5bcd29fc915209588970aed88211ba9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5bcd29fc915209588970aed88211ba9">&#9670;&nbsp;</a></span>SetSubCollisionData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CollisionManager::SetSubCollisionData </td>
+          <td>(</td>
+          <td class="paramtype">K_Physics::CollisionData *&#160;</td>
+          <td class="paramname"><em>cd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a287943673c8f0a5a2ce93901bb1b6f5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a287943673c8f0a5a2ce93901bb1b6f5e">&#9670;&nbsp;</a></span>SetSubCollisionPos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CollisionManager::SetSubCollisionPos </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>angle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a27347ae03b099c1d3941720def44265d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27347ae03b099c1d3941720def44265d">&#9670;&nbsp;</a></span>SetSubCollisionTug()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CollisionManager::SetSubCollisionTug </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>subNum</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>tug</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">メンバ詳解</h2>
+<a id="aef472dbe3f0b8c6cefa3e153aa805ab6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef472dbe3f0b8c6cefa3e153aa805ab6">&#9670;&nbsp;</a></span>baseCollision</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Physics::CollisionData* CollisionManager::baseCollision</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9a82a69d8a65072ba6e98a7d66d8cd90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a82a69d8a65072ba6e98a7d66d8cd90">&#9670;&nbsp;</a></span>basePosition</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">K_Math::Vector3 CollisionManager::basePosition</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a157763239f951a5d5d68bd89b50dc4e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a157763239f951a5d5d68bd89b50dc4e7">&#9670;&nbsp;</a></span>subCollision</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="struct_collision_manager_1_1_sub.html">Sub</a>*&gt; CollisionManager::subCollision</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>Git用/TebasakiChronicle/TebasakiChronicle/src/BaseClass/Collision/<a class="el" href="_collision_manager_8h_source.html">CollisionManager.h</a></li>
+<li>Git用/TebasakiChronicle/TebasakiChronicle/src/BaseClass/Collision/<a class="el" href="_collision_manager_8cpp.html">CollisionManager.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+構築: &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+</body>
+</html>

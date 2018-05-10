@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: EnemyMovePattern クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">クラス</a> &#124;
+<a href="#pub-methods">公開メンバ関数</a> &#124;
+<a href="#pub-attribs">公開変数類</a> &#124;
+<a href="class_enemy_move_pattern-members.html">全メンバ一覧</a>  </div>
+  <div class="headertitle">
+<div class="title">EnemyMovePattern クラス</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_enemy_move_pattern_8h_source.html">EnemyMovePattern.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+クラス</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_enemy_move_pattern_1_1_move_pattern.html">MovePattern</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:a7dd30ac7e839eb4fdc97b401eb3de9a2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_move_pattern.html#a7dd30ac7e839eb4fdc97b401eb3de9a2">EnemyMovePattern</a> (int *moveNum, int *skillId, int *durationTime, K_Math::Box2D *src, int *sheet, float *spd, bool *ir, int totalMoveNum, int transitionNum)</td></tr>
+<tr class="separator:a7dd30ac7e839eb4fdc97b401eb3de9a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d42aa7789474938533b35bdec1463e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_move_pattern.html#a3d42aa7789474938533b35bdec1463e7">~EnemyMovePattern</a> ()</td></tr>
+<tr class="separator:a3d42aa7789474938533b35bdec1463e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95accc5ff79164166cb96ecb5eee5d85"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_move_pattern.html#a95accc5ff79164166cb96ecb5eee5d85">EMove</a> (int &amp;nowMoveOrder, int &amp;timeCnt, <a class="el" href="class_collision_manager.html">CollisionManager</a> &amp;colmanager, <a class="el" href="class_temporary_collision_manager.html">TemporaryCollisionManager</a> &amp;tempmanager, <a class="el" href="class_status.html">Status</a> &amp;status, <a class="el" href="class_move.html">Move</a> &amp;move, bool &amp;endMovePattern)</td></tr>
+<tr class="separator:a95accc5ff79164166cb96ecb5eee5d85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70c8ef8123ac8cbad37c960d0f41f19b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_move_pattern.html#a70c8ef8123ac8cbad37c960d0f41f19b">MoveReset</a> (int &amp;nowMoveOrder)</td></tr>
+<tr class="separator:a70c8ef8123ac8cbad37c960d0f41f19b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4612d999e2af78108908e698cce35ad7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_move_pattern.html#a4612d999e2af78108908e698cce35ad7">SetMoveAndTime</a> (int moveNum, int skillId, int durationTime)</td></tr>
+<tr class="separator:a4612d999e2af78108908e698cce35ad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8920c6cd66ccf3ddb791b12336c8cea5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_move_pattern.html#a8920c6cd66ccf3ddb791b12336c8cea5">SetTransition</a> (int transitionNum)</td></tr>
+<tr class="separator:a8920c6cd66ccf3ddb791b12336c8cea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+公開変数類</h2></td></tr>
+<tr class="memitem:ac86ab27d0f22918db984251ba87bd6c1"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_enemy_move_pattern_1_1_move_pattern.html">MovePattern</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_move_pattern.html#ac86ab27d0f22918db984251ba87bd6c1">mp</a></td></tr>
+<tr class="separator:ac86ab27d0f22918db984251ba87bd6c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c40710104a10b51aa27e7318fd64ea8"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_animation_chara_chip.html">AnimationCharaChip</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_move_pattern.html#a1c40710104a10b51aa27e7318fd64ea8">animChip</a></td></tr>
+<tr class="separator:a1c40710104a10b51aa27e7318fd64ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0e12d414bbba3e98221053d535cc6b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_enemy_move_transition.html">EnemyMoveTransition</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_enemy_move_pattern.html#ad0e12d414bbba3e98221053d535cc6b0">emt</a></td></tr>
+<tr class="separator:ad0e12d414bbba3e98221053d535cc6b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">構築子と解体子</h2>
+<a id="a7dd30ac7e839eb4fdc97b401eb3de9a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dd30ac7e839eb4fdc97b401eb3de9a2">&#9670;&nbsp;</a></span>EnemyMovePattern()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EnemyMovePattern::EnemyMovePattern </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>moveNum</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>skillId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>durationTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">K_Math::Box2D *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>sheet</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>spd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool *&#160;</td>
+          <td class="paramname"><em>ir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>totalMoveNum</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>transitionNum</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3d42aa7789474938533b35bdec1463e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d42aa7789474938533b35bdec1463e7">&#9670;&nbsp;</a></span>~EnemyMovePattern()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">EnemyMovePattern::~EnemyMovePattern </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a id="a95accc5ff79164166cb96ecb5eee5d85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95accc5ff79164166cb96ecb5eee5d85">&#9670;&nbsp;</a></span>EMove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int EnemyMovePattern::EMove </td>
+          <td>(</td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>nowMoveOrder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>timeCnt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_collision_manager.html">CollisionManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>colmanager</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_temporary_collision_manager.html">TemporaryCollisionManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>tempmanager</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_status.html">Status</a> &amp;&#160;</td>
+          <td class="paramname"><em>status</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_move.html">Move</a> &amp;&#160;</td>
+          <td class="paramname"><em>move</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>endMovePattern</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a70c8ef8123ac8cbad37c960d0f41f19b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70c8ef8123ac8cbad37c960d0f41f19b">&#9670;&nbsp;</a></span>MoveReset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EnemyMovePattern::MoveReset </td>
+          <td>(</td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>nowMoveOrder</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4612d999e2af78108908e698cce35ad7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4612d999e2af78108908e698cce35ad7">&#9670;&nbsp;</a></span>SetMoveAndTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EnemyMovePattern::SetMoveAndTime </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>moveNum</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>skillId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>durationTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8920c6cd66ccf3ddb791b12336c8cea5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8920c6cd66ccf3ddb791b12336c8cea5">&#9670;&nbsp;</a></span>SetTransition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EnemyMovePattern::SetTransition </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>transitionNum</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">メンバ詳解</h2>
+<a id="a1c40710104a10b51aa27e7318fd64ea8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c40710104a10b51aa27e7318fd64ea8">&#9670;&nbsp;</a></span>animChip</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="class_animation_chara_chip.html">AnimationCharaChip</a>*&gt; EnemyMovePattern::animChip</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad0e12d414bbba3e98221053d535cc6b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0e12d414bbba3e98221053d535cc6b0">&#9670;&nbsp;</a></span>emt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_enemy_move_transition.html">EnemyMoveTransition</a>* EnemyMovePattern::emt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac86ab27d0f22918db984251ba87bd6c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac86ab27d0f22918db984251ba87bd6c1">&#9670;&nbsp;</a></span>mp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="struct_enemy_move_pattern_1_1_move_pattern.html">MovePattern</a>*&gt; EnemyMovePattern::mp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>Git用/TebasakiChronicle/TebasakiChronicle/src/Object/Enemy/EnemyType/<a class="el" href="_enemy_move_pattern_8h_source.html">EnemyMovePattern.h</a></li>
+<li>Git用/TebasakiChronicle/TebasakiChronicle/src/Object/Enemy/EnemyType/<a class="el" href="_enemy_move_pattern_8cpp.html">EnemyMovePattern.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+構築: &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+</body>
+</html>

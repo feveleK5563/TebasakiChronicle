@@ -1,0 +1,949 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: Gitç”¨/TebasakiChronicle/TebasakiChronicle/src/BaseClass/easing.h ã‚½ãƒ¼ã‚¹ãƒ•ã‚¡ã‚¤ãƒ«</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- æ§‹ç¯‰: Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'æ¤œç´¢');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','æ¤œç´¢');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_9136b864999bbae2cda3795afce3509a.html">Gitç”¨</a></li><li class="navelem"><a class="el" href="dir_fabde08326db4396ca854e934a224987.html">TebasakiChronicle</a></li><li class="navelem"><a class="el" href="dir_03d611a4ffaa47cb566cf6ec859169a6.html">TebasakiChronicle</a></li><li class="navelem"><a class="el" href="dir_50f879a21305879923071197422d05c5.html">src</a></li><li class="navelem"><a class="el" href="dir_e9d91bbddacbf7e010eb33ae6810d681.html">BaseClass</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">easing.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="easing_8h.html">[è©³è§£]</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div><div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="easing_8h.html#a525335710b53cb064ca56b936120431e">    2</a></span>&#160;<span class="preprocessor">#define _USE_MATH_DEFINES</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;math.h&gt;</span></div><div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="class_easing.html">    4</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_easing.html">Easing</a></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">private</span>:</div><div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="class_easing.html#a9556ff725b575ed045e1b62d374e6f1d">    7</a></span>&#160;    <span class="keywordtype">float</span>   <a class="code" href="class_easing.html#a9556ff725b575ed045e1b62d374e6f1d">cnt</a>;</div><div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="class_easing.html#afca541398368b01d0e923ccb39c1b30c">    8</a></span>&#160;    <span class="keywordtype">float</span>   <a class="code" href="class_easing.html#afca541398368b01d0e923ccb39c1b30c">duration</a>;</div><div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="class_easing.html#aa7fd57ceee10df0337cc5fa8300c97ea">    9</a></span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_easing.html#aa7fd57ceee10df0337cc5fa8300c97ea">easeEnd</a>;</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="comment">//ƒRƒ“ƒXƒgƒ‰ƒNƒ^</span></div><div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_easing.html#a14f8e53cdf73a9e5833f506a67a5732e">   12</a></span>&#160;    <a class="code" href="class_easing.html#a14f8e53cdf73a9e5833f506a67a5732e">Easing</a>() : <a class="code" href="class_easing.html#a9556ff725b575ed045e1b62d374e6f1d">cnt</a>(0), <a class="code" href="class_easing.html#aa7fd57ceee10df0337cc5fa8300c97ea">easeEnd</a>(false),</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <a class="code" href="class_easing.html#ac49f13bf7ef6817f0a67359f88b5daf8">linear</a>(&amp;<a class="code" href="class_easing.html#afca541398368b01d0e923ccb39c1b30c">duration</a>),</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <a class="code" href="class_easing.html#ae9bb54ebd77794a8e4d17c6ad9b06064">back</a>(&amp;<a class="code" href="class_easing.html#afca541398368b01d0e923ccb39c1b30c">duration</a>),</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <a class="code" href="class_easing.html#a61d9b5b89e1422e56fd9166616817314">bounce</a>(&amp;<a class="code" href="class_easing.html#afca541398368b01d0e923ccb39c1b30c">duration</a>),</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="class_easing.html#a9da1652abb0ca33d9da2eca6a5d85193">circ</a>(&amp;<a class="code" href="class_easing.html#afca541398368b01d0e923ccb39c1b30c">duration</a>),</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <a class="code" href="class_easing.html#ab664d9f54b98552f72ccf0e48cd66453">cubic</a>(&amp;<a class="code" href="class_easing.html#afca541398368b01d0e923ccb39c1b30c">duration</a>),</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <a class="code" href="class_easing.html#a3e1364d2b5ef3541319fe39e456330b7">elastic</a>(&amp;<a class="code" href="class_easing.html#afca541398368b01d0e923ccb39c1b30c">duration</a>),</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <a class="code" href="class_easing.html#af0193992c9a9da8062ac352836dee403">expo</a>(&amp;<a class="code" href="class_easing.html#afca541398368b01d0e923ccb39c1b30c">duration</a>),</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="class_easing.html#a0498b628b7c0209366c483495ce33b44">quad</a>(&amp;<a class="code" href="class_easing.html#afca541398368b01d0e923ccb39c1b30c">duration</a>),</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="class_easing.html#ac04d94c0935326c4b4ab7441d63ddb12">quart</a>(&amp;<a class="code" href="class_easing.html#afca541398368b01d0e923ccb39c1b30c">duration</a>),</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="class_easing.html#a2b7833ca9e9b50870d9a9c47f1570fb4">quint</a>(&amp;<a class="code" href="class_easing.html#afca541398368b01d0e923ccb39c1b30c">duration</a>),</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="class_easing.html#afcab5fb52ba0d2d03e3c1ee8553bcb80">sine</a>(&amp;<a class="code" href="class_easing.html#afca541398368b01d0e923ccb39c1b30c">duration</a>) {}</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">//ƒC[ƒWƒ“ƒO—pƒJƒEƒ“ƒ^</span></div><div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_easing.html#a436b894cf71e430d9379736352068957">   26</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_easing.html#a436b894cf71e430d9379736352068957">Time</a>(<span class="keywordtype">float</span> dur)</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    {</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <a class="code" href="class_easing.html#afca541398368b01d0e923ccb39c1b30c">duration</a> = dur;</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="class_easing.html#a9556ff725b575ed045e1b62d374e6f1d">cnt</a> &lt;= <a class="code" href="class_easing.html#afca541398368b01d0e923ccb39c1b30c">duration</a>)</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        {</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <a class="code" href="class_easing.html#a9556ff725b575ed045e1b62d374e6f1d">cnt</a> += 0.1f;</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <a class="code" href="class_easing.html#aa7fd57ceee10df0337cc5fa8300c97ea">easeEnd</a> = <span class="keyword">false</span>;</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        }</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">else</span></div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        {</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <a class="code" href="class_easing.html#aa7fd57ceee10df0337cc5fa8300c97ea">easeEnd</a> = <span class="keyword">true</span>;</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        }</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_easing.html#a9556ff725b575ed045e1b62d374e6f1d">cnt</a>;</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">//ƒC[ƒWƒ“ƒO‚ªI—¹‚µ‚½‚çtrue‚ª•Ô‚é     bool GetEaseEnd()
+    {
+        return easeEnd;
+    }
+
+    //t = ŠÔ d = n“_ c = I“_-n“_ d = Œo‰ßŠÔ
+    class Linear
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Linear(float* dur) : duration(dur){}
+
+        float None(float t, float b, float c)
+        {
+            return c*t / *duration + b;
+        }
+        float In(float t, float b, float c)
+        {
+            return c*t / *duration + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return c*t / *duration + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            return c*t / *duration + b;
+        }
+    }linear;
+
+    class Back
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Back(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            float s = 1.70158f;
+            float postFix = t /= *duration;
+            return c*(postFix)*t*((s + 1)*t - s) + b;
+        }
+        float Out(float t, float b, float c)
+        {
+
+            float s = 1.70158f;
+
+            return c*((t = t / *duration - 1)*t*((s + 1)*t + s) + 1) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            float s = 1.70158f;
+            if ((t /= *duration / 2) &lt; 1) return c / 2 * (t*t*(((s *= (1.525f)) + 1)*t - s)) + b;
+            float postFix = t -= 2;
+            return c / 2 * ((postFix)*t*(((s *= (1.525f)) + 1)*t + s) + 2) + b;
+        }
+    }back;
+    
+
+    class Bounce
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Bounce(float* dur) : duration(dur) {}
+
+        float Out(float t, float b, float c)
+        {
+
+            if ((t /= *duration) &lt; (1 / 2.75f))
+            {
+                return c*(7.5625f*t*t) + b;
+            }
+            else if (t &lt; (2 / 2.75f))
+            {
+                float postFix = t -= (1.5f / 2.75f);
+                return c*(7.5625f*(postFix)*t + .75f) + b;
+            }
+            else if (t &lt; (2.5 / 2.75))
+            {
+                float postFix = t -= (2.25f / 2.75f);
+                return c*(7.5625f*(postFix)*t + .9375f) + b;
+            }
+            else
+            {
+                float postFix = t -= (2.625f / 2.75f);
+                return c*(7.5625f*(postFix)*t + .984375f) + b;
+            }
+        }
+        float In(float t, float b, float c)
+        {
+            return c - Out(*duration - t, 0, c) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if (t &lt; *duration / 2) return In(t * 2, 0, c) * .5f + b;
+            else return Out(t * 2 - *duration, 0, c) * .5f + c*.5f + b;
+        }
+    }bounce;
+    
+    class Circ
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Circ(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c) //ƒoƒO‚ ‚è
+      {
+            return -c * static_cast&lt;float&gt;((sqrt(1 - (t /= *duration)*t) - 1)) + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return c * static_cast&lt;float&gt;(sqrt(1 - (t = t / *duration - 1)*t)) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if ((t /= *duration / 2) &lt; 1) return -c / 2 * static_cast&lt;float&gt;((sqrt(1 - t*t) - 1)) + b;
+            return c / 2 * static_cast&lt;float&gt;((sqrt(1 - t*(t -= 2)) + 1)) + b;
+        }
+    }circ;
+    
+    class Cubic
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Cubic(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return c*(t /= *duration)*t*t + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return c*((t = t / *duration - 1)*t*t + 1) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if ((t /= *duration / 2) &lt; 1) return c / 2 * t*t*t + b;
+            return c / 2 * ((t -= 2)*t*t + 2) + b;
+        }
+    }cubic;
+    
+    class Elastic
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Elastic(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            if (t == 0) return b;  if ((t /= *duration) == 1) return b + c;
+            float p = *duration*.3f;
+            float a = c;
+            float s = p / 4;
+            float postFix = static_cast&lt;float&gt;(a*pow(2, 10 * (t -= 1)));
+            return -static_cast&lt;float&gt;(postFix * sin((t*(*duration) - s)*(2 * (M_PI)) / p)) + b;
+        }
+
+        float Out(float t, float b, float c)
+        {
+            if (t == 0) return b;  if ((t /= *duration) == 1) return b + c;
+            float p = *duration*.3f;
+            float a = c;
+            float s = p / 4;
+            return (static_cast&lt;float&gt;(a*pow(2, -10 * t) * sin((t*(*duration) - s)*(2 * static_cast&lt;float&gt;(M_PI)) / p) + c + b));
+        }
+
+        float InOut(float t, float b, float c)
+        {
+            if (t == 0) return b;  if ((t /= *duration / 2) == 2) return b + c;
+            float p = *duration*(.3f*1.5f);
+            float a = c;
+            float s = p / 4;
+
+            if (t &lt; 1) {
+                float postFix = static_cast&lt;float&gt;(a*pow(2, 10 * (t -= 1)));
+                return -.5f*static_cast&lt;float&gt;((postFix* sin((t*(*duration) - s)*(2 * (M_PI)) / p))) + b;
+            }
+            float postFix = static_cast&lt;float&gt;(a*pow(2, -10 * (t -= 1)));
+            return static_cast&lt;float&gt;(postFix * sin((t*(*duration) - s)*(2 * static_cast&lt;float&gt;(M_PI)) / p)*.5f + c + b);
+        }
+    }elastic;
+
+    class Expo
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Expo(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return (t == 0) ? b : c * static_cast&lt;float&gt;(pow(2, 10 * (t / *duration - 1)) + b);
+        }
+        float Out(float t, float b, float c)
+        {
+            return (t == *duration) ? b + c : c * (static_cast&lt;float&gt;(-pow(2, -10 * t / *duration) + 1)) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if (t == 0) return b;
+            if (t == *duration) return b + c;
+            if ((t /= *duration / 2) &lt; 1) return c / 2 * static_cast&lt;float&gt;(pow(2, 10 * (t - 1))) + b;
+            return c / 2 * (static_cast&lt;float&gt;(-pow(2, -10 * --t) + 2)) + b;
+        }
+    }expo;
+    
+    class Quad
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Quad(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return c*(t /= *duration)*t + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return -c *(t /= *duration)*(t - 2) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if ((t /= *duration / 2) &lt; 1) return ((c / 2)*(t*t)) + b;
+            return -c / 2 * (((t - 2)*(--t)) - 1) + b;
+        }
+    }quad;
+
+    class Quart
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Quart(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return c*(t /= *duration)*t*t*t + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return -c * ((t = t / *duration - 1)*t*t*t - 1) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if ((t /= *duration / 2) &lt; 1) return c / 2 * t*t*t*t + b;
+            return -c / 2 * ((t -= 2)*t*t*t - 2) + b;
+        }
+    }quart;
+
+    class Quint
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Quint(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return c*(t /= *duration)*t*t*t*t + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return c*((t = t / *duration - 1)*t*t*t*t + 1) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if ((t /= *duration / 2) &lt; 1) return c / 2 * t*t*t*t*t + b;
+            return c / 2 * ((t -= 2)*t*t*t*t + 2) + b;
+        }
+    }quint;
+    
+    class Sine
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Sine(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return -c * static_cast&lt;float&gt;(cos(t / *duration * (M_PI / 2))) + c + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return c * static_cast&lt;float&gt;(sin(t / *duration * (M_PI / 2))) + b;
+        }
+
+        float InOut(float t, float b, float c)
+        {
+            return -c / 2 * static_cast&lt;float&gt;((cos(M_PI*t / *duration) - 1)) + b;
+        }
+    }sine;
+    
+};</span></div><div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_easing.html#a76500708d577f916bdaf01723f5a8569">   42</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_easing.html#a76500708d577f916bdaf01723f5a8569">GetEaseEnd</a>()</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_easing.html#aa7fd57ceee10df0337cc5fa8300c97ea">easeEnd</a>;</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">//t = ŠÔ d = n“_ c = I“_-n“_ d = Œo‰ßŠÔ     class Linear
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Linear(float* dur) : duration(dur){}
+
+        float None(float t, float b, float c)
+        {
+            return c*t / *duration + b;
+        }
+        float In(float t, float b, float c)
+        {
+            return c*t / *duration + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return c*t / *duration + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            return c*t / *duration + b;
+        }
+    }linear;
+
+    class Back
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Back(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            float s = 1.70158f;
+            float postFix = t /= *duration;
+            return c*(postFix)*t*((s + 1)*t - s) + b;
+        }
+        float Out(float t, float b, float c)
+        {
+
+            float s = 1.70158f;
+
+            return c*((t = t / *duration - 1)*t*((s + 1)*t + s) + 1) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            float s = 1.70158f;
+            if ((t /= *duration / 2) &lt; 1) return c / 2 * (t*t*(((s *= (1.525f)) + 1)*t - s)) + b;
+            float postFix = t -= 2;
+            return c / 2 * ((postFix)*t*(((s *= (1.525f)) + 1)*t + s) + 2) + b;
+        }
+    }back;
+    
+
+    class Bounce
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Bounce(float* dur) : duration(dur) {}
+
+        float Out(float t, float b, float c)
+        {
+
+            if ((t /= *duration) &lt; (1 / 2.75f))
+            {
+                return c*(7.5625f*t*t) + b;
+            }
+            else if (t &lt; (2 / 2.75f))
+            {
+                float postFix = t -= (1.5f / 2.75f);
+                return c*(7.5625f*(postFix)*t + .75f) + b;
+            }
+            else if (t &lt; (2.5 / 2.75))
+            {
+                float postFix = t -= (2.25f / 2.75f);
+                return c*(7.5625f*(postFix)*t + .9375f) + b;
+            }
+            else
+            {
+                float postFix = t -= (2.625f / 2.75f);
+                return c*(7.5625f*(postFix)*t + .984375f) + b;
+            }
+        }
+        float In(float t, float b, float c)
+        {
+            return c - Out(*duration - t, 0, c) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if (t &lt; *duration / 2) return In(t * 2, 0, c) * .5f + b;
+            else return Out(t * 2 - *duration, 0, c) * .5f + c*.5f + b;
+        }
+    }bounce;
+    
+    class Circ
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Circ(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c) //ƒoƒO‚ ‚è
+      {
+            return -c * static_cast&lt;float&gt;((sqrt(1 - (t /= *duration)*t) - 1)) + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return c * static_cast&lt;float&gt;(sqrt(1 - (t = t / *duration - 1)*t)) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if ((t /= *duration / 2) &lt; 1) return -c / 2 * static_cast&lt;float&gt;((sqrt(1 - t*t) - 1)) + b;
+            return c / 2 * static_cast&lt;float&gt;((sqrt(1 - t*(t -= 2)) + 1)) + b;
+        }
+    }circ;
+    
+    class Cubic
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Cubic(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return c*(t /= *duration)*t*t + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return c*((t = t / *duration - 1)*t*t + 1) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if ((t /= *duration / 2) &lt; 1) return c / 2 * t*t*t + b;
+            return c / 2 * ((t -= 2)*t*t + 2) + b;
+        }
+    }cubic;
+    
+    class Elastic
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Elastic(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            if (t == 0) return b;  if ((t /= *duration) == 1) return b + c;
+            float p = *duration*.3f;
+            float a = c;
+            float s = p / 4;
+            float postFix = static_cast&lt;float&gt;(a*pow(2, 10 * (t -= 1)));
+            return -static_cast&lt;float&gt;(postFix * sin((t*(*duration) - s)*(2 * (M_PI)) / p)) + b;
+        }
+
+        float Out(float t, float b, float c)
+        {
+            if (t == 0) return b;  if ((t /= *duration) == 1) return b + c;
+            float p = *duration*.3f;
+            float a = c;
+            float s = p / 4;
+            return (static_cast&lt;float&gt;(a*pow(2, -10 * t) * sin((t*(*duration) - s)*(2 * static_cast&lt;float&gt;(M_PI)) / p) + c + b));
+        }
+
+        float InOut(float t, float b, float c)
+        {
+            if (t == 0) return b;  if ((t /= *duration / 2) == 2) return b + c;
+            float p = *duration*(.3f*1.5f);
+            float a = c;
+            float s = p / 4;
+
+            if (t &lt; 1) {
+                float postFix = static_cast&lt;float&gt;(a*pow(2, 10 * (t -= 1)));
+                return -.5f*static_cast&lt;float&gt;((postFix* sin((t*(*duration) - s)*(2 * (M_PI)) / p))) + b;
+            }
+            float postFix = static_cast&lt;float&gt;(a*pow(2, -10 * (t -= 1)));
+            return static_cast&lt;float&gt;(postFix * sin((t*(*duration) - s)*(2 * static_cast&lt;float&gt;(M_PI)) / p)*.5f + c + b);
+        }
+    }elastic;
+
+    class Expo
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Expo(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return (t == 0) ? b : c * static_cast&lt;float&gt;(pow(2, 10 * (t / *duration - 1)) + b);
+        }
+        float Out(float t, float b, float c)
+        {
+            return (t == *duration) ? b + c : c * (static_cast&lt;float&gt;(-pow(2, -10 * t / *duration) + 1)) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if (t == 0) return b;
+            if (t == *duration) return b + c;
+            if ((t /= *duration / 2) &lt; 1) return c / 2 * static_cast&lt;float&gt;(pow(2, 10 * (t - 1))) + b;
+            return c / 2 * (static_cast&lt;float&gt;(-pow(2, -10 * --t) + 2)) + b;
+        }
+    }expo;
+    
+    class Quad
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Quad(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return c*(t /= *duration)*t + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return -c *(t /= *duration)*(t - 2) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if ((t /= *duration / 2) &lt; 1) return ((c / 2)*(t*t)) + b;
+            return -c / 2 * (((t - 2)*(--t)) - 1) + b;
+        }
+    }quad;
+
+    class Quart
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Quart(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return c*(t /= *duration)*t*t*t + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return -c * ((t = t / *duration - 1)*t*t*t - 1) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if ((t /= *duration / 2) &lt; 1) return c / 2 * t*t*t*t + b;
+            return -c / 2 * ((t -= 2)*t*t*t - 2) + b;
+        }
+    }quart;
+
+    class Quint
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Quint(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return c*(t /= *duration)*t*t*t*t + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return c*((t = t / *duration - 1)*t*t*t*t + 1) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if ((t /= *duration / 2) &lt; 1) return c / 2 * t*t*t*t*t + b;
+            return c / 2 * ((t -= 2)*t*t*t*t + 2) + b;
+        }
+    }quint;
+    
+    class Sine
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Sine(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return -c * static_cast&lt;float&gt;(cos(t / *duration * (M_PI / 2))) + c + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return c * static_cast&lt;float&gt;(sin(t / *duration * (M_PI / 2))) + b;
+        }
+
+        float InOut(float t, float b, float c)
+        {
+            return -c / 2 * static_cast&lt;float&gt;((cos(M_PI*t / *duration) - 1)) + b;
+        }
+    }sine;
+    
+};</span></div><div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_easing_1_1_linear.html">   48</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_easing_1_1_linear.html">Linear</a></div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    {</div><div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_easing_1_1_linear.html#a7c264beab4000159079206042fbefd82">   50</a></span>&#160;        <span class="keywordtype">float</span>* <a class="code" href="class_easing_1_1_linear.html#a7c264beab4000159079206042fbefd82">duration</a>;</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="comment">//ƒRƒ“ƒXƒgƒ‰ƒNƒ^</span></div><div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_easing_1_1_linear.html#a9f7f1327f55da852b061d3ae17379885">   53</a></span>&#160;        <a class="code" href="class_easing_1_1_linear.html#a9f7f1327f55da852b061d3ae17379885">Linear</a>(<span class="keywordtype">float</span>* dur) : <a class="code" href="class_easing_1_1_linear.html#a7c264beab4000159079206042fbefd82">duration</a>(dur){}</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div><div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="class_easing_1_1_linear.html#a13c7d863bb4a439982810290014c07ef">   55</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_linear.html#a13c7d863bb4a439982810290014c07ef">None</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        {</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordflow">return</span> c*t / *<a class="code" href="class_easing_1_1_linear.html#a7c264beab4000159079206042fbefd82">duration</a> + b;</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        }</div><div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_easing_1_1_linear.html#a387e8039bc31589119fd58b35e816152">   59</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_linear.html#a387e8039bc31589119fd58b35e816152">In</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        {</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keywordflow">return</span> c*t / *<a class="code" href="class_easing_1_1_linear.html#a7c264beab4000159079206042fbefd82">duration</a> + b;</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div><div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="class_easing_1_1_linear.html#aa18ec4db09031656fd8ad9958b3b463a">   63</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_linear.html#aa18ec4db09031656fd8ad9958b3b463a">Out</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        {</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordflow">return</span> c*t / *<a class="code" href="class_easing_1_1_linear.html#a7c264beab4000159079206042fbefd82">duration</a> + b;</div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        }</div><div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="class_easing_1_1_linear.html#af9cd04a6ab0a3dff49e67e76e17a2296">   67</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_linear.html#af9cd04a6ab0a3dff49e67e76e17a2296">InOut</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        {</div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keywordflow">return</span> c*t / *<a class="code" href="class_easing_1_1_linear.html#a7c264beab4000159079206042fbefd82">duration</a> + b;</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }<a class="code" href="class_easing.html#ac49f13bf7ef6817f0a67359f88b5daf8">linear</a>;</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div><div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="class_easing_1_1_back.html">   73</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_easing_1_1_back.html">Back</a></div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    {</div><div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="class_easing_1_1_back.html#a4d99a86487d6b2548c439383bf0a1e37">   75</a></span>&#160;        <span class="keywordtype">float</span>* <a class="code" href="class_easing_1_1_back.html#a4d99a86487d6b2548c439383bf0a1e37">duration</a>;</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="comment">//ƒRƒ“ƒXƒgƒ‰ƒNƒ^</span></div><div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="class_easing_1_1_back.html#ac5636ce74522c130fede1a7812d315ef">   78</a></span>&#160;        <a class="code" href="class_easing_1_1_back.html#ac5636ce74522c130fede1a7812d315ef">Back</a>(<span class="keywordtype">float</span>* dur) : <a class="code" href="class_easing_1_1_back.html#a4d99a86487d6b2548c439383bf0a1e37">duration</a>(dur) {}</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div><div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="class_easing_1_1_back.html#aabf2e3f1a40d59073709960755e18fc5">   80</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_back.html#aabf2e3f1a40d59073709960755e18fc5">In</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        {</div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordtype">float</span> s = 1.70158f;</div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordtype">float</span> postFix = t /= *<a class="code" href="class_easing_1_1_back.html#a4d99a86487d6b2548c439383bf0a1e37">duration</a>;</div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">return</span> c*(postFix)*t*((s + 1)*t - s) + b;</div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        }</div><div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="class_easing_1_1_back.html#ae9cd1c51976af6feb64a5a2c5cc9c7ec">   86</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_back.html#ae9cd1c51976af6feb64a5a2c5cc9c7ec">Out</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        {</div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <span class="keywordtype">float</span> s = 1.70158f;</div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="keywordflow">return</span> c*((t = t / *<a class="code" href="class_easing_1_1_back.html#a4d99a86487d6b2548c439383bf0a1e37">duration</a> - 1)*t*((s + 1)*t + s) + 1) + b;</div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        }</div><div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="class_easing_1_1_back.html#a60c3917fd2975b3a075086960ac0ec8a">   93</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_back.html#a60c3917fd2975b3a075086960ac0ec8a">InOut</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        {</div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keywordtype">float</span> s = 1.70158f;</div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="keywordflow">if</span> ((t /= *<a class="code" href="class_easing_1_1_back.html#a4d99a86487d6b2548c439383bf0a1e37">duration</a> / 2) &lt; 1) <span class="keywordflow">return</span> c / 2 * (t*t*(((s *= (1.525f)) + 1)*t - s)) + b;</div><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordtype">float</span> postFix = t -= 2;</div><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <span class="keywordflow">return</span> c / 2 * ((postFix)*t*(((s *= (1.525f)) + 1)*t + s) + 2) + b;</div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        }</div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }<a class="code" href="class_easing.html#ae9bb54ebd77794a8e4d17c6ad9b06064">back</a>;</div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    </div><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div><div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="class_easing_1_1_bounce.html">  103</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_easing_1_1_bounce.html">Bounce</a></div><div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    {</div><div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="class_easing_1_1_bounce.html#a08c8a0ea47db2c7c5779ad1c1d9aaf36">  105</a></span>&#160;        <span class="keywordtype">float</span>* <a class="code" href="class_easing_1_1_bounce.html#a08c8a0ea47db2c7c5779ad1c1d9aaf36">duration</a>;</div><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="comment">//ƒRƒ“ƒXƒgƒ‰ƒNƒ^</span></div><div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="class_easing_1_1_bounce.html#a21b61855ac161c3381a9d1925a19e041">  108</a></span>&#160;        <a class="code" href="class_easing_1_1_bounce.html#a21b61855ac161c3381a9d1925a19e041">Bounce</a>(<span class="keywordtype">float</span>* dur) : <a class="code" href="class_easing_1_1_bounce.html#a08c8a0ea47db2c7c5779ad1c1d9aaf36">duration</a>(dur) {}</div><div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div><div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="class_easing_1_1_bounce.html#a23f1b1433ca3ff08dce167692694f9b9">  110</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_bounce.html#a23f1b1433ca3ff08dce167692694f9b9">Out</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        {</div><div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div><div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="keywordflow">if</span> ((t /= *<a class="code" href="class_easing_1_1_bounce.html#a08c8a0ea47db2c7c5779ad1c1d9aaf36">duration</a>) &lt; (1 / 2.75f))</div><div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            {</div><div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                <span class="keywordflow">return</span> c*(7.5625f*t*t) + b;</div><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            }</div><div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (t &lt; (2 / 2.75f))</div><div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            {</div><div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                <span class="keywordtype">float</span> postFix = t -= (1.5f / 2.75f);</div><div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                <span class="keywordflow">return</span> c*(7.5625f*(postFix)*t + .75f) + b;</div><div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            }</div><div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (t &lt; (2.5 / 2.75))</div><div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            {</div><div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                <span class="keywordtype">float</span> postFix = t -= (2.25f / 2.75f);</div><div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                <span class="keywordflow">return</span> c*(7.5625f*(postFix)*t + .9375f) + b;</div><div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            }</div><div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <span class="keywordflow">else</span></div><div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            {</div><div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                <span class="keywordtype">float</span> postFix = t -= (2.625f / 2.75f);</div><div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                <span class="keywordflow">return</span> c*(7.5625f*(postFix)*t + .984375f) + b;</div><div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            }</div><div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        }</div><div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="class_easing_1_1_bounce.html#a5ed3c12a87c11d6c5c64ea7640aa2d03">  133</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_bounce.html#a5ed3c12a87c11d6c5c64ea7640aa2d03">In</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        {</div><div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            <span class="keywordflow">return</span> c - <a class="code" href="class_easing_1_1_bounce.html#a23f1b1433ca3ff08dce167692694f9b9">Out</a>(*<a class="code" href="class_easing_1_1_bounce.html#a08c8a0ea47db2c7c5779ad1c1d9aaf36">duration</a> - t, 0, c) + b;</div><div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        }</div><div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="class_easing_1_1_bounce.html#aac2ac00bcb8bf1926e3082d39441e99f">  137</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_bounce.html#aac2ac00bcb8bf1926e3082d39441e99f">InOut</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        {</div><div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <span class="keywordflow">if</span> (t &lt; *<a class="code" href="class_easing_1_1_bounce.html#a08c8a0ea47db2c7c5779ad1c1d9aaf36">duration</a> / 2) <span class="keywordflow">return</span> <a class="code" href="class_easing_1_1_bounce.html#a5ed3c12a87c11d6c5c64ea7640aa2d03">In</a>(t * 2, 0, c) * .5f + b;</div><div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">return</span> <a class="code" href="class_easing_1_1_bounce.html#a23f1b1433ca3ff08dce167692694f9b9">Out</a>(t * 2 - *<a class="code" href="class_easing_1_1_bounce.html#a08c8a0ea47db2c7c5779ad1c1d9aaf36">duration</a>, 0, c) * .5f + c*.5f + b;</div><div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        }</div><div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    }<a class="code" href="class_easing.html#a61d9b5b89e1422e56fd9166616817314">bounce</a>;</div><div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    </div><div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="class_easing_1_1_circ.html">  144</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_easing_1_1_circ.html">Circ</a></div><div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    {</div><div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="class_easing_1_1_circ.html#a9be204be01a0c9bb8d83378ee1c71ae8">  146</a></span>&#160;        <span class="keywordtype">float</span>* <a class="code" href="class_easing_1_1_circ.html#a9be204be01a0c9bb8d83378ee1c71ae8">duration</a>;</div><div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <span class="comment">//ƒRƒ“ƒXƒgƒ‰ƒNƒ^</span></div><div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="class_easing_1_1_circ.html#a4b2d153854cc5988b075ea5e4a40c76d">  149</a></span>&#160;        <a class="code" href="class_easing_1_1_circ.html#a4b2d153854cc5988b075ea5e4a40c76d">Circ</a>(<span class="keywordtype">float</span>* dur) : <a class="code" href="class_easing_1_1_circ.html#a9be204be01a0c9bb8d83378ee1c71ae8">duration</a>(dur) {}</div><div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div><div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="class_easing_1_1_circ.html#ae1e625e89441725866f33e24db36f43e">  151</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_circ.html#ae1e625e89441725866f33e24db36f43e">In</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c) <span class="comment">//ƒoƒO‚ ‚è       {
+            return -c * static_cast&lt;float&gt;((sqrt(1 - (t /= *duration)*t) - 1)) + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return c * static_cast&lt;float&gt;(sqrt(1 - (t = t / *duration - 1)*t)) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if ((t /= *duration / 2) &lt; 1) return -c / 2 * static_cast&lt;float&gt;((sqrt(1 - t*t) - 1)) + b;
+            return c / 2 * static_cast&lt;float&gt;((sqrt(1 - t*(t -= 2)) + 1)) + b;
+        }
+    }circ;
+    
+    class Cubic
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Cubic(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return c*(t /= *duration)*t*t + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return c*((t = t / *duration - 1)*t*t + 1) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if ((t /= *duration / 2) &lt; 1) return c / 2 * t*t*t + b;
+            return c / 2 * ((t -= 2)*t*t + 2) + b;
+        }
+    }cubic;
+    
+    class Elastic
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Elastic(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            if (t == 0) return b;  if ((t /= *duration) == 1) return b + c;
+            float p = *duration*.3f;
+            float a = c;
+            float s = p / 4;
+            float postFix = static_cast&lt;float&gt;(a*pow(2, 10 * (t -= 1)));
+            return -static_cast&lt;float&gt;(postFix * sin((t*(*duration) - s)*(2 * (M_PI)) / p)) + b;
+        }
+
+        float Out(float t, float b, float c)
+        {
+            if (t == 0) return b;  if ((t /= *duration) == 1) return b + c;
+            float p = *duration*.3f;
+            float a = c;
+            float s = p / 4;
+            return (static_cast&lt;float&gt;(a*pow(2, -10 * t) * sin((t*(*duration) - s)*(2 * static_cast&lt;float&gt;(M_PI)) / p) + c + b));
+        }
+
+        float InOut(float t, float b, float c)
+        {
+            if (t == 0) return b;  if ((t /= *duration / 2) == 2) return b + c;
+            float p = *duration*(.3f*1.5f);
+            float a = c;
+            float s = p / 4;
+
+            if (t &lt; 1) {
+                float postFix = static_cast&lt;float&gt;(a*pow(2, 10 * (t -= 1)));
+                return -.5f*static_cast&lt;float&gt;((postFix* sin((t*(*duration) - s)*(2 * (M_PI)) / p))) + b;
+            }
+            float postFix = static_cast&lt;float&gt;(a*pow(2, -10 * (t -= 1)));
+            return static_cast&lt;float&gt;(postFix * sin((t*(*duration) - s)*(2 * static_cast&lt;float&gt;(M_PI)) / p)*.5f + c + b);
+        }
+    }elastic;
+
+    class Expo
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Expo(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return (t == 0) ? b : c * static_cast&lt;float&gt;(pow(2, 10 * (t / *duration - 1)) + b);
+        }
+        float Out(float t, float b, float c)
+        {
+            return (t == *duration) ? b + c : c * (static_cast&lt;float&gt;(-pow(2, -10 * t / *duration) + 1)) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if (t == 0) return b;
+            if (t == *duration) return b + c;
+            if ((t /= *duration / 2) &lt; 1) return c / 2 * static_cast&lt;float&gt;(pow(2, 10 * (t - 1))) + b;
+            return c / 2 * (static_cast&lt;float&gt;(-pow(2, -10 * --t) + 2)) + b;
+        }
+    }expo;
+    
+    class Quad
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Quad(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return c*(t /= *duration)*t + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return -c *(t /= *duration)*(t - 2) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if ((t /= *duration / 2) &lt; 1) return ((c / 2)*(t*t)) + b;
+            return -c / 2 * (((t - 2)*(--t)) - 1) + b;
+        }
+    }quad;
+
+    class Quart
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Quart(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return c*(t /= *duration)*t*t*t + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return -c * ((t = t / *duration - 1)*t*t*t - 1) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if ((t /= *duration / 2) &lt; 1) return c / 2 * t*t*t*t + b;
+            return -c / 2 * ((t -= 2)*t*t*t - 2) + b;
+        }
+    }quart;
+
+    class Quint
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Quint(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return c*(t /= *duration)*t*t*t*t + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return c*((t = t / *duration - 1)*t*t*t*t + 1) + b;
+        }
+        float InOut(float t, float b, float c)
+        {
+            if ((t /= *duration / 2) &lt; 1) return c / 2 * t*t*t*t*t + b;
+            return c / 2 * ((t -= 2)*t*t*t*t + 2) + b;
+        }
+    }quint;
+    
+    class Sine
+    {
+        float* duration;
+    public:
+        //ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        Sine(float* dur) : duration(dur) {}
+
+        float In(float t, float b, float c)
+        {
+            return -c * static_cast&lt;float&gt;(cos(t / *duration * (M_PI / 2))) + c + b;
+        }
+        float Out(float t, float b, float c)
+        {
+            return c * static_cast&lt;float&gt;(sin(t / *duration * (M_PI / 2))) + b;
+        }
+
+        float InOut(float t, float b, float c)
+        {
+            return -c / 2 * static_cast&lt;float&gt;((cos(M_PI*t / *duration) - 1)) + b;
+        }
+    }sine;
+    
+};</span></div><div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        {</div><div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="keywordflow">return</span> -c * <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>((sqrt(1 - (t /= *<a class="code" href="class_easing_1_1_circ.html#a9be204be01a0c9bb8d83378ee1c71ae8">duration</a>)*t) - 1)) + b;</div><div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        }</div><div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="class_easing_1_1_circ.html#ae548bff3181a8ea557d29b284cc3250d">  155</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_circ.html#ae548bff3181a8ea557d29b284cc3250d">Out</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        {</div><div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <span class="keywordflow">return</span> c * <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(sqrt(1 - (t = t / *<a class="code" href="class_easing_1_1_circ.html#a9be204be01a0c9bb8d83378ee1c71ae8">duration</a> - 1)*t)) + b;</div><div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        }</div><div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="class_easing_1_1_circ.html#aa6770c8027f5f2bd5536700fbe20dab2">  159</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_circ.html#aa6770c8027f5f2bd5536700fbe20dab2">InOut</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        {</div><div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            <span class="keywordflow">if</span> ((t /= *<a class="code" href="class_easing_1_1_circ.html#a9be204be01a0c9bb8d83378ee1c71ae8">duration</a> / 2) &lt; 1) <span class="keywordflow">return</span> -c / 2 * <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>((sqrt(1 - t*t) - 1)) + b;</div><div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;            <span class="keywordflow">return</span> c / 2 * <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>((sqrt(1 - t*(t -= 2)) + 1)) + b;</div><div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        }</div><div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    }<a class="code" href="class_easing.html#a9da1652abb0ca33d9da2eca6a5d85193">circ</a>;</div><div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    </div><div class="line"><a name="l00166"></a><span class="lineno"><a class="line" href="class_easing_1_1_cubic.html">  166</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_easing_1_1_cubic.html">Cubic</a></div><div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    {</div><div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="class_easing_1_1_cubic.html#a37b741a426988d5aff6aa29b351c795d">  168</a></span>&#160;        <span class="keywordtype">float</span>* <a class="code" href="class_easing_1_1_cubic.html#a37b741a426988d5aff6aa29b351c795d">duration</a>;</div><div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="comment">//ƒRƒ“ƒXƒgƒ‰ƒNƒ^</span></div><div class="line"><a name="l00171"></a><span class="lineno"><a class="line" href="class_easing_1_1_cubic.html#a59954e25d1378826e83f9aee0bfbd4b1">  171</a></span>&#160;        <a class="code" href="class_easing_1_1_cubic.html#a59954e25d1378826e83f9aee0bfbd4b1">Cubic</a>(<span class="keywordtype">float</span>* dur) : <a class="code" href="class_easing_1_1_cubic.html#a37b741a426988d5aff6aa29b351c795d">duration</a>(dur) {}</div><div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;</div><div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="class_easing_1_1_cubic.html#ade6a9737f93f823a39b3ee03e264a87b">  173</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_cubic.html#ade6a9737f93f823a39b3ee03e264a87b">In</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        {</div><div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            <span class="keywordflow">return</span> c*(t /= *<a class="code" href="class_easing_1_1_cubic.html#a37b741a426988d5aff6aa29b351c795d">duration</a>)*t*t + b;</div><div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        }</div><div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="class_easing_1_1_cubic.html#adaa1ab82379648d37cfe621e179a283f">  177</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_cubic.html#adaa1ab82379648d37cfe621e179a283f">Out</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        {</div><div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            <span class="keywordflow">return</span> c*((t = t / *<a class="code" href="class_easing_1_1_cubic.html#a37b741a426988d5aff6aa29b351c795d">duration</a> - 1)*t*t + 1) + b;</div><div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        }</div><div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="class_easing_1_1_cubic.html#af0dcfa4b79a338c35b3f5ae4c19b5adb">  181</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_cubic.html#af0dcfa4b79a338c35b3f5ae4c19b5adb">InOut</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        {</div><div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            <span class="keywordflow">if</span> ((t /= *<a class="code" href="class_easing_1_1_cubic.html#a37b741a426988d5aff6aa29b351c795d">duration</a> / 2) &lt; 1) <span class="keywordflow">return</span> c / 2 * t*t*t + b;</div><div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            <span class="keywordflow">return</span> c / 2 * ((t -= 2)*t*t + 2) + b;</div><div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        }</div><div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    }<a class="code" href="class_easing.html#ab664d9f54b98552f72ccf0e48cd66453">cubic</a>;</div><div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    </div><div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="class_easing_1_1_elastic.html">  188</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_easing_1_1_elastic.html">Elastic</a></div><div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    {</div><div class="line"><a name="l00190"></a><span class="lineno"><a class="line" href="class_easing_1_1_elastic.html#a5a74867fd1708cfb482c57ef57284671">  190</a></span>&#160;        <span class="keywordtype">float</span>* <a class="code" href="class_easing_1_1_elastic.html#a5a74867fd1708cfb482c57ef57284671">duration</a>;</div><div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <span class="comment">//ƒRƒ“ƒXƒgƒ‰ƒNƒ^</span></div><div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="class_easing_1_1_elastic.html#a10d112f199d50680b4a8f3bc2ffc1fe2">  193</a></span>&#160;        <a class="code" href="class_easing_1_1_elastic.html#a10d112f199d50680b4a8f3bc2ffc1fe2">Elastic</a>(<span class="keywordtype">float</span>* dur) : <a class="code" href="class_easing_1_1_elastic.html#a5a74867fd1708cfb482c57ef57284671">duration</a>(dur) {}</div><div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;</div><div class="line"><a name="l00195"></a><span class="lineno"><a class="line" href="class_easing_1_1_elastic.html#a96162c017cf69c723b35446aa78bc6ec">  195</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_elastic.html#a96162c017cf69c723b35446aa78bc6ec">In</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        {</div><div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;            <span class="keywordflow">if</span> (t == 0) <span class="keywordflow">return</span> b;  <span class="keywordflow">if</span> ((t /= *<a class="code" href="class_easing_1_1_elastic.html#a5a74867fd1708cfb482c57ef57284671">duration</a>) == 1) <span class="keywordflow">return</span> b + c;</div><div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;            <span class="keywordtype">float</span> p = *<a class="code" href="class_easing_1_1_elastic.html#a5a74867fd1708cfb482c57ef57284671">duration</a>*.3f;</div><div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;            <span class="keywordtype">float</span> a = c;</div><div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            <span class="keywordtype">float</span> s = p / 4;</div><div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            <span class="keywordtype">float</span> postFix = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(a*pow(2, 10 * (t -= 1)));</div><div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            <span class="keywordflow">return</span> -<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(postFix * sin((t*(*<a class="code" href="class_easing_1_1_elastic.html#a5a74867fd1708cfb482c57ef57284671">duration</a>) - s)*(2 * (M_PI)) / p)) + b;</div><div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        }</div><div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div><div class="line"><a name="l00205"></a><span class="lineno"><a class="line" href="class_easing_1_1_elastic.html#a17649d2d7754303d522f95c344f91ca3">  205</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_elastic.html#a17649d2d7754303d522f95c344f91ca3">Out</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        {</div><div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            <span class="keywordflow">if</span> (t == 0) <span class="keywordflow">return</span> b;  <span class="keywordflow">if</span> ((t /= *<a class="code" href="class_easing_1_1_elastic.html#a5a74867fd1708cfb482c57ef57284671">duration</a>) == 1) <span class="keywordflow">return</span> b + c;</div><div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="keywordtype">float</span> p = *<a class="code" href="class_easing_1_1_elastic.html#a5a74867fd1708cfb482c57ef57284671">duration</a>*.3f;</div><div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            <span class="keywordtype">float</span> a = c;</div><div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            <span class="keywordtype">float</span> s = p / 4;</div><div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            <span class="keywordflow">return</span> (static_cast&lt;float&gt;(a*pow(2, -10 * t) * sin((t*(*<a class="code" href="class_easing_1_1_elastic.html#a5a74867fd1708cfb482c57ef57284671">duration</a>) - s)*(2 * static_cast&lt;float&gt;(M_PI)) / p) + c + b));</div><div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        }</div><div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;</div><div class="line"><a name="l00214"></a><span class="lineno"><a class="line" href="class_easing_1_1_elastic.html#ac6dd7276fcd72ef489431325781d9ce7">  214</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_elastic.html#ac6dd7276fcd72ef489431325781d9ce7">InOut</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        {</div><div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;            <span class="keywordflow">if</span> (t == 0) <span class="keywordflow">return</span> b;  <span class="keywordflow">if</span> ((t /= *<a class="code" href="class_easing_1_1_elastic.html#a5a74867fd1708cfb482c57ef57284671">duration</a> / 2) == 2) <span class="keywordflow">return</span> b + c;</div><div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;            <span class="keywordtype">float</span> p = *<a class="code" href="class_easing_1_1_elastic.html#a5a74867fd1708cfb482c57ef57284671">duration</a>*(.3f*1.5f);</div><div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            <span class="keywordtype">float</span> a = c;</div><div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            <span class="keywordtype">float</span> s = p / 4;</div><div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;</div><div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;            <span class="keywordflow">if</span> (t &lt; 1) {</div><div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                <span class="keywordtype">float</span> postFix = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(a*pow(2, 10 * (t -= 1)));</div><div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                <span class="keywordflow">return</span> -.5f*<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>((postFix* sin((t*(*<a class="code" href="class_easing_1_1_elastic.html#a5a74867fd1708cfb482c57ef57284671">duration</a>) - s)*(2 * (M_PI)) / p))) + b;</div><div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            }</div><div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            <span class="keywordtype">float</span> postFix = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(a*pow(2, -10 * (t -= 1)));</div><div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(postFix * sin((t*(*<a class="code" href="class_easing_1_1_elastic.html#a5a74867fd1708cfb482c57ef57284671">duration</a>) - s)*(2 * static_cast&lt;float&gt;(M_PI)) / p)*.5f + c + b);</div><div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        }</div><div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    }<a class="code" href="class_easing.html#a3e1364d2b5ef3541319fe39e456330b7">elastic</a>;</div><div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;</div><div class="line"><a name="l00230"></a><span class="lineno"><a class="line" href="class_easing_1_1_expo.html">  230</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_easing_1_1_expo.html">Expo</a></div><div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    {</div><div class="line"><a name="l00232"></a><span class="lineno"><a class="line" href="class_easing_1_1_expo.html#a638a0486a9bdb1ca0cf7b30518ccdeb7">  232</a></span>&#160;        <span class="keywordtype">float</span>* <a class="code" href="class_easing_1_1_expo.html#a638a0486a9bdb1ca0cf7b30518ccdeb7">duration</a>;</div><div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="comment">//ƒRƒ“ƒXƒgƒ‰ƒNƒ^</span></div><div class="line"><a name="l00235"></a><span class="lineno"><a class="line" href="class_easing_1_1_expo.html#a646d3907a69d3f225bba20bcf99ba8e3">  235</a></span>&#160;        <a class="code" href="class_easing_1_1_expo.html#a646d3907a69d3f225bba20bcf99ba8e3">Expo</a>(<span class="keywordtype">float</span>* dur) : <a class="code" href="class_easing_1_1_expo.html#a638a0486a9bdb1ca0cf7b30518ccdeb7">duration</a>(dur) {}</div><div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;</div><div class="line"><a name="l00237"></a><span class="lineno"><a class="line" href="class_easing_1_1_expo.html#a7134a30829a527b780d399e4c438459a">  237</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_expo.html#a7134a30829a527b780d399e4c438459a">In</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        {</div><div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            <span class="keywordflow">return</span> (t == 0) ? b : c * <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(pow(2, 10 * (t / *<a class="code" href="class_easing_1_1_expo.html#a638a0486a9bdb1ca0cf7b30518ccdeb7">duration</a> - 1)) + b);</div><div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        }</div><div class="line"><a name="l00241"></a><span class="lineno"><a class="line" href="class_easing_1_1_expo.html#a4f008924899392683806f9f96499d3e3">  241</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_expo.html#a4f008924899392683806f9f96499d3e3">Out</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        {</div><div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <span class="keywordflow">return</span> (t == *<a class="code" href="class_easing_1_1_expo.html#a638a0486a9bdb1ca0cf7b30518ccdeb7">duration</a>) ? b + c : c * (<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(-pow(2, -10 * t / *<a class="code" href="class_easing_1_1_expo.html#a638a0486a9bdb1ca0cf7b30518ccdeb7">duration</a>) + 1)) + b;</div><div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        }</div><div class="line"><a name="l00245"></a><span class="lineno"><a class="line" href="class_easing_1_1_expo.html#afc386ec3289e3687a4ca750bffab00d5">  245</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_expo.html#afc386ec3289e3687a4ca750bffab00d5">InOut</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        {</div><div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            <span class="keywordflow">if</span> (t == 0) <span class="keywordflow">return</span> b;</div><div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            <span class="keywordflow">if</span> (t == *<a class="code" href="class_easing_1_1_expo.html#a638a0486a9bdb1ca0cf7b30518ccdeb7">duration</a>) <span class="keywordflow">return</span> b + c;</div><div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;            <span class="keywordflow">if</span> ((t /= *<a class="code" href="class_easing_1_1_expo.html#a638a0486a9bdb1ca0cf7b30518ccdeb7">duration</a> / 2) &lt; 1) <span class="keywordflow">return</span> c / 2 * <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(pow(2, 10 * (t - 1))) + b;</div><div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            <span class="keywordflow">return</span> c / 2 * (<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(-pow(2, -10 * --t) + 2)) + b;</div><div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        }</div><div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    }<a class="code" href="class_easing.html#af0193992c9a9da8062ac352836dee403">expo</a>;</div><div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    </div><div class="line"><a name="l00254"></a><span class="lineno"><a class="line" href="class_easing_1_1_quad.html">  254</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_easing_1_1_quad.html">Quad</a></div><div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    {</div><div class="line"><a name="l00256"></a><span class="lineno"><a class="line" href="class_easing_1_1_quad.html#aec116c6c0875b002678ffe63b2b2c423">  256</a></span>&#160;        <span class="keywordtype">float</span>* <a class="code" href="class_easing_1_1_quad.html#aec116c6c0875b002678ffe63b2b2c423">duration</a>;</div><div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        <span class="comment">//ƒRƒ“ƒXƒgƒ‰ƒNƒ^</span></div><div class="line"><a name="l00259"></a><span class="lineno"><a class="line" href="class_easing_1_1_quad.html#acc8a05025a746bd940ab5c7d69d588c6">  259</a></span>&#160;        <a class="code" href="class_easing_1_1_quad.html#acc8a05025a746bd940ab5c7d69d588c6">Quad</a>(<span class="keywordtype">float</span>* dur) : <a class="code" href="class_easing_1_1_quad.html#aec116c6c0875b002678ffe63b2b2c423">duration</a>(dur) {}</div><div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;</div><div class="line"><a name="l00261"></a><span class="lineno"><a class="line" href="class_easing_1_1_quad.html#aadd2cd02aa69a2af4566f107aa87ef8d">  261</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_quad.html#aadd2cd02aa69a2af4566f107aa87ef8d">In</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        {</div><div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            <span class="keywordflow">return</span> c*(t /= *<a class="code" href="class_easing_1_1_quad.html#aec116c6c0875b002678ffe63b2b2c423">duration</a>)*t + b;</div><div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        }</div><div class="line"><a name="l00265"></a><span class="lineno"><a class="line" href="class_easing_1_1_quad.html#a6845b376009588ec73d4f6e2458b33d5">  265</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_quad.html#a6845b376009588ec73d4f6e2458b33d5">Out</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        {</div><div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;            <span class="keywordflow">return</span> -c *(t /= *<a class="code" href="class_easing_1_1_quad.html#aec116c6c0875b002678ffe63b2b2c423">duration</a>)*(t - 2) + b;</div><div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        }</div><div class="line"><a name="l00269"></a><span class="lineno"><a class="line" href="class_easing_1_1_quad.html#a6024ab0959e5e7dc964e8223116dd7c3">  269</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_quad.html#a6024ab0959e5e7dc964e8223116dd7c3">InOut</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        {</div><div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            <span class="keywordflow">if</span> ((t /= *<a class="code" href="class_easing_1_1_quad.html#aec116c6c0875b002678ffe63b2b2c423">duration</a> / 2) &lt; 1) <span class="keywordflow">return</span> ((c / 2)*(t*t)) + b;</div><div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            <span class="keywordflow">return</span> -c / 2 * (((t - 2)*(--t)) - 1) + b;</div><div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        }</div><div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    }<a class="code" href="class_easing.html#a0498b628b7c0209366c483495ce33b44">quad</a>;</div><div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;</div><div class="line"><a name="l00276"></a><span class="lineno"><a class="line" href="class_easing_1_1_quart.html">  276</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_easing_1_1_quart.html">Quart</a></div><div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    {</div><div class="line"><a name="l00278"></a><span class="lineno"><a class="line" href="class_easing_1_1_quart.html#a1b440175664e0640c436d1cef0c1b487">  278</a></span>&#160;        <span class="keywordtype">float</span>* <a class="code" href="class_easing_1_1_quart.html#a1b440175664e0640c436d1cef0c1b487">duration</a>;</div><div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        <span class="comment">//ƒRƒ“ƒXƒgƒ‰ƒNƒ^</span></div><div class="line"><a name="l00281"></a><span class="lineno"><a class="line" href="class_easing_1_1_quart.html#a457556cdeb5641e2dc3b6f2a2a5bae3a">  281</a></span>&#160;        <a class="code" href="class_easing_1_1_quart.html#a457556cdeb5641e2dc3b6f2a2a5bae3a">Quart</a>(<span class="keywordtype">float</span>* dur) : <a class="code" href="class_easing_1_1_quart.html#a1b440175664e0640c436d1cef0c1b487">duration</a>(dur) {}</div><div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;</div><div class="line"><a name="l00283"></a><span class="lineno"><a class="line" href="class_easing_1_1_quart.html#a2db07962caea722cf7e03cc57c12d3ca">  283</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_quart.html#a2db07962caea722cf7e03cc57c12d3ca">In</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        {</div><div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;            <span class="keywordflow">return</span> c*(t /= *<a class="code" href="class_easing_1_1_quart.html#a1b440175664e0640c436d1cef0c1b487">duration</a>)*t*t*t + b;</div><div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        }</div><div class="line"><a name="l00287"></a><span class="lineno"><a class="line" href="class_easing_1_1_quart.html#a982bbef819cd57fbb88181d1197b1024">  287</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_quart.html#a982bbef819cd57fbb88181d1197b1024">Out</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        {</div><div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;            <span class="keywordflow">return</span> -c * ((t = t / *<a class="code" href="class_easing_1_1_quart.html#a1b440175664e0640c436d1cef0c1b487">duration</a> - 1)*t*t*t - 1) + b;</div><div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        }</div><div class="line"><a name="l00291"></a><span class="lineno"><a class="line" href="class_easing_1_1_quart.html#a1c97e242baaf31a75b9407f775e50560">  291</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_quart.html#a1c97e242baaf31a75b9407f775e50560">InOut</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        {</div><div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            <span class="keywordflow">if</span> ((t /= *<a class="code" href="class_easing_1_1_quart.html#a1b440175664e0640c436d1cef0c1b487">duration</a> / 2) &lt; 1) <span class="keywordflow">return</span> c / 2 * t*t*t*t + b;</div><div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;            <span class="keywordflow">return</span> -c / 2 * ((t -= 2)*t*t*t - 2) + b;</div><div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        }</div><div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    }<a class="code" href="class_easing.html#ac04d94c0935326c4b4ab7441d63ddb12">quart</a>;</div><div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;</div><div class="line"><a name="l00298"></a><span class="lineno"><a class="line" href="class_easing_1_1_quint.html">  298</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_easing_1_1_quint.html">Quint</a></div><div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    {</div><div class="line"><a name="l00300"></a><span class="lineno"><a class="line" href="class_easing_1_1_quint.html#aa6794bc88c2e0c0f500f00e3acd77c6c">  300</a></span>&#160;        <span class="keywordtype">float</span>* <a class="code" href="class_easing_1_1_quint.html#aa6794bc88c2e0c0f500f00e3acd77c6c">duration</a>;</div><div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <span class="comment">//ƒRƒ“ƒXƒgƒ‰ƒNƒ^</span></div><div class="line"><a name="l00303"></a><span class="lineno"><a class="line" href="class_easing_1_1_quint.html#a807b37ce4c819cc06af49bfba95085f5">  303</a></span>&#160;        <a class="code" href="class_easing_1_1_quint.html#a807b37ce4c819cc06af49bfba95085f5">Quint</a>(<span class="keywordtype">float</span>* dur) : <a class="code" href="class_easing_1_1_quint.html#aa6794bc88c2e0c0f500f00e3acd77c6c">duration</a>(dur) {}</div><div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;</div><div class="line"><a name="l00305"></a><span class="lineno"><a class="line" href="class_easing_1_1_quint.html#a814631c6f3145369bb74a0c2a0690130">  305</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_quint.html#a814631c6f3145369bb74a0c2a0690130">In</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        {</div><div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;            <span class="keywordflow">return</span> c*(t /= *<a class="code" href="class_easing_1_1_quint.html#aa6794bc88c2e0c0f500f00e3acd77c6c">duration</a>)*t*t*t*t + b;</div><div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        }</div><div class="line"><a name="l00309"></a><span class="lineno"><a class="line" href="class_easing_1_1_quint.html#a03750981a312063d3719ea8b2443d444">  309</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_quint.html#a03750981a312063d3719ea8b2443d444">Out</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        {</div><div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;            <span class="keywordflow">return</span> c*((t = t / *<a class="code" href="class_easing_1_1_quint.html#aa6794bc88c2e0c0f500f00e3acd77c6c">duration</a> - 1)*t*t*t*t + 1) + b;</div><div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        }</div><div class="line"><a name="l00313"></a><span class="lineno"><a class="line" href="class_easing_1_1_quint.html#a2ea0f7652bd2e41407feb3365d0c4a50">  313</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_quint.html#a2ea0f7652bd2e41407feb3365d0c4a50">InOut</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        {</div><div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;            <span class="keywordflow">if</span> ((t /= *<a class="code" href="class_easing_1_1_quint.html#aa6794bc88c2e0c0f500f00e3acd77c6c">duration</a> / 2) &lt; 1) <span class="keywordflow">return</span> c / 2 * t*t*t*t*t + b;</div><div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;            <span class="keywordflow">return</span> c / 2 * ((t -= 2)*t*t*t*t + 2) + b;</div><div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        }</div><div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    }<a class="code" href="class_easing.html#a2b7833ca9e9b50870d9a9c47f1570fb4">quint</a>;</div><div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    </div><div class="line"><a name="l00320"></a><span class="lineno"><a class="line" href="class_easing_1_1_sine.html">  320</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_easing_1_1_sine.html">Sine</a></div><div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    {</div><div class="line"><a name="l00322"></a><span class="lineno"><a class="line" href="class_easing_1_1_sine.html#aff0a7c10d97f4ce304cb437f3a2575f1">  322</a></span>&#160;        <span class="keywordtype">float</span>* <a class="code" href="class_easing_1_1_sine.html#aff0a7c10d97f4ce304cb437f3a2575f1">duration</a>;</div><div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        <span class="comment">//ƒRƒ“ƒXƒgƒ‰ƒNƒ^</span></div><div class="line"><a name="l00325"></a><span class="lineno"><a class="line" href="class_easing_1_1_sine.html#af322632852fa8d48c42c69904d6acb18">  325</a></span>&#160;        <a class="code" href="class_easing_1_1_sine.html#af322632852fa8d48c42c69904d6acb18">Sine</a>(<span class="keywordtype">float</span>* dur) : <a class="code" href="class_easing_1_1_sine.html#aff0a7c10d97f4ce304cb437f3a2575f1">duration</a>(dur) {}</div><div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;</div><div class="line"><a name="l00327"></a><span class="lineno"><a class="line" href="class_easing_1_1_sine.html#aa013b10fa04a8e1f0167afdc213eda58">  327</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_sine.html#aa013b10fa04a8e1f0167afdc213eda58">In</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        {</div><div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;            <span class="keywordflow">return</span> -c * <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(cos(t / *<a class="code" href="class_easing_1_1_sine.html#aff0a7c10d97f4ce304cb437f3a2575f1">duration</a> * (M_PI / 2))) + c + b;</div><div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        }</div><div class="line"><a name="l00331"></a><span class="lineno"><a class="line" href="class_easing_1_1_sine.html#a246912d491ac36560c1c8b8da3ac7f31">  331</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_sine.html#a246912d491ac36560c1c8b8da3ac7f31">Out</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        {</div><div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;            <span class="keywordflow">return</span> c * <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(sin(t / *<a class="code" href="class_easing_1_1_sine.html#aff0a7c10d97f4ce304cb437f3a2575f1">duration</a> * (M_PI / 2))) + b;</div><div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        }</div><div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;</div><div class="line"><a name="l00336"></a><span class="lineno"><a class="line" href="class_easing_1_1_sine.html#a4f6fea409cbc475719f9e0b332fa6170">  336</a></span>&#160;        <span class="keywordtype">float</span> <a class="code" href="class_easing_1_1_sine.html#a4f6fea409cbc475719f9e0b332fa6170">InOut</a>(<span class="keywordtype">float</span> t, <span class="keywordtype">float</span> b, <span class="keywordtype">float</span> c)</div><div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        {</div><div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;            <span class="keywordflow">return</span> -c / 2 * <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>((cos(M_PI*t / *<a class="code" href="class_easing_1_1_sine.html#aff0a7c10d97f4ce304cb437f3a2575f1">duration</a>) - 1)) + b;</div><div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        }</div><div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    }<a class="code" href="class_easing.html#afcab5fb52ba0d2d03e3c1ee8553bcb80">sine</a>;</div><div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    </div><div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;};</div><div class="ttc" id="class_easing_1_1_quad_html_a6024ab0959e5e7dc964e8223116dd7c3"><div class="ttname"><a href="class_easing_1_1_quad.html#a6024ab0959e5e7dc964e8223116dd7c3">Easing::Quad::InOut</a></div><div class="ttdeci">float InOut(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:269</div></div>
+<div class="ttc" id="class_easing_1_1_circ_html"><div class="ttname"><a href="class_easing_1_1_circ.html">Easing::Circ</a></div><div class="ttdef"><b>Definition:</b> easing.h:144</div></div>
+<div class="ttc" id="class_easing_1_1_quint_html_a2ea0f7652bd2e41407feb3365d0c4a50"><div class="ttname"><a href="class_easing_1_1_quint.html#a2ea0f7652bd2e41407feb3365d0c4a50">Easing::Quint::InOut</a></div><div class="ttdeci">float InOut(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:313</div></div>
+<div class="ttc" id="class_easing_1_1_circ_html_ae548bff3181a8ea557d29b284cc3250d"><div class="ttname"><a href="class_easing_1_1_circ.html#ae548bff3181a8ea557d29b284cc3250d">Easing::Circ::Out</a></div><div class="ttdeci">float Out(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:155</div></div>
+<div class="ttc" id="class_easing_1_1_back_html_a60c3917fd2975b3a075086960ac0ec8a"><div class="ttname"><a href="class_easing_1_1_back.html#a60c3917fd2975b3a075086960ac0ec8a">Easing::Back::InOut</a></div><div class="ttdeci">float InOut(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:93</div></div>
+<div class="ttc" id="class_easing_1_1_linear_html_a7c264beab4000159079206042fbefd82"><div class="ttname"><a href="class_easing_1_1_linear.html#a7c264beab4000159079206042fbefd82">Easing::Linear::duration</a></div><div class="ttdeci">float * duration</div><div class="ttdef"><b>Definition:</b> easing.h:50</div></div>
+<div class="ttc" id="class_easing_1_1_sine_html_a246912d491ac36560c1c8b8da3ac7f31"><div class="ttname"><a href="class_easing_1_1_sine.html#a246912d491ac36560c1c8b8da3ac7f31">Easing::Sine::Out</a></div><div class="ttdeci">float Out(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:331</div></div>
+<div class="ttc" id="class_easing_1_1_linear_html"><div class="ttname"><a href="class_easing_1_1_linear.html">Easing::Linear</a></div><div class="ttdef"><b>Definition:</b> easing.h:48</div></div>
+<div class="ttc" id="class_easing_1_1_quart_html_a457556cdeb5641e2dc3b6f2a2a5bae3a"><div class="ttname"><a href="class_easing_1_1_quart.html#a457556cdeb5641e2dc3b6f2a2a5bae3a">Easing::Quart::Quart</a></div><div class="ttdeci">Quart(float *dur)</div><div class="ttdef"><b>Definition:</b> easing.h:281</div></div>
+<div class="ttc" id="class_easing_1_1_expo_html_a7134a30829a527b780d399e4c438459a"><div class="ttname"><a href="class_easing_1_1_expo.html#a7134a30829a527b780d399e4c438459a">Easing::Expo::In</a></div><div class="ttdeci">float In(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:237</div></div>
+<div class="ttc" id="class_easing_html_a9da1652abb0ca33d9da2eca6a5d85193"><div class="ttname"><a href="class_easing.html#a9da1652abb0ca33d9da2eca6a5d85193">Easing::circ</a></div><div class="ttdeci">class Easing::Circ circ</div></div>
+<div class="ttc" id="class_easing_html_afcab5fb52ba0d2d03e3c1ee8553bcb80"><div class="ttname"><a href="class_easing.html#afcab5fb52ba0d2d03e3c1ee8553bcb80">Easing::sine</a></div><div class="ttdeci">class Easing::Sine sine</div></div>
+<div class="ttc" id="class_easing_1_1_back_html_ae9cd1c51976af6feb64a5a2c5cc9c7ec"><div class="ttname"><a href="class_easing_1_1_back.html#ae9cd1c51976af6feb64a5a2c5cc9c7ec">Easing::Back::Out</a></div><div class="ttdeci">float Out(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:86</div></div>
+<div class="ttc" id="class_easing_1_1_quint_html_a814631c6f3145369bb74a0c2a0690130"><div class="ttname"><a href="class_easing_1_1_quint.html#a814631c6f3145369bb74a0c2a0690130">Easing::Quint::In</a></div><div class="ttdeci">float In(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:305</div></div>
+<div class="ttc" id="class_easing_html_a2b7833ca9e9b50870d9a9c47f1570fb4"><div class="ttname"><a href="class_easing.html#a2b7833ca9e9b50870d9a9c47f1570fb4">Easing::quint</a></div><div class="ttdeci">class Easing::Quint quint</div></div>
+<div class="ttc" id="class_easing_1_1_quad_html_aadd2cd02aa69a2af4566f107aa87ef8d"><div class="ttname"><a href="class_easing_1_1_quad.html#aadd2cd02aa69a2af4566f107aa87ef8d">Easing::Quad::In</a></div><div class="ttdeci">float In(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:261</div></div>
+<div class="ttc" id="class_easing_1_1_bounce_html_aac2ac00bcb8bf1926e3082d39441e99f"><div class="ttname"><a href="class_easing_1_1_bounce.html#aac2ac00bcb8bf1926e3082d39441e99f">Easing::Bounce::InOut</a></div><div class="ttdeci">float InOut(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:137</div></div>
+<div class="ttc" id="class_easing_1_1_back_html_aabf2e3f1a40d59073709960755e18fc5"><div class="ttname"><a href="class_easing_1_1_back.html#aabf2e3f1a40d59073709960755e18fc5">Easing::Back::In</a></div><div class="ttdeci">float In(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:80</div></div>
+<div class="ttc" id="class_easing_html"><div class="ttname"><a href="class_easing.html">Easing</a></div><div class="ttdef"><b>Definition:</b> easing.h:4</div></div>
+<div class="ttc" id="class_easing_1_1_cubic_html"><div class="ttname"><a href="class_easing_1_1_cubic.html">Easing::Cubic</a></div><div class="ttdef"><b>Definition:</b> easing.h:166</div></div>
+<div class="ttc" id="class_easing_1_1_back_html_a4d99a86487d6b2548c439383bf0a1e37"><div class="ttname"><a href="class_easing_1_1_back.html#a4d99a86487d6b2548c439383bf0a1e37">Easing::Back::duration</a></div><div class="ttdeci">float * duration</div><div class="ttdef"><b>Definition:</b> easing.h:75</div></div>
+<div class="ttc" id="class_easing_html_ae9bb54ebd77794a8e4d17c6ad9b06064"><div class="ttname"><a href="class_easing.html#ae9bb54ebd77794a8e4d17c6ad9b06064">Easing::back</a></div><div class="ttdeci">class Easing::Back back</div></div>
+<div class="ttc" id="class_easing_html_a9556ff725b575ed045e1b62d374e6f1d"><div class="ttname"><a href="class_easing.html#a9556ff725b575ed045e1b62d374e6f1d">Easing::cnt</a></div><div class="ttdeci">float cnt</div><div class="ttdef"><b>Definition:</b> easing.h:7</div></div>
+<div class="ttc" id="class_easing_1_1_quad_html"><div class="ttname"><a href="class_easing_1_1_quad.html">Easing::Quad</a></div><div class="ttdef"><b>Definition:</b> easing.h:254</div></div>
+<div class="ttc" id="class_easing_1_1_bounce_html_a08c8a0ea47db2c7c5779ad1c1d9aaf36"><div class="ttname"><a href="class_easing_1_1_bounce.html#a08c8a0ea47db2c7c5779ad1c1d9aaf36">Easing::Bounce::duration</a></div><div class="ttdeci">float * duration</div><div class="ttdef"><b>Definition:</b> easing.h:105</div></div>
+<div class="ttc" id="class_easing_1_1_quad_html_aec116c6c0875b002678ffe63b2b2c423"><div class="ttname"><a href="class_easing_1_1_quad.html#aec116c6c0875b002678ffe63b2b2c423">Easing::Quad::duration</a></div><div class="ttdeci">float * duration</div><div class="ttdef"><b>Definition:</b> easing.h:256</div></div>
+<div class="ttc" id="class_easing_1_1_elastic_html_a5a74867fd1708cfb482c57ef57284671"><div class="ttname"><a href="class_easing_1_1_elastic.html#a5a74867fd1708cfb482c57ef57284671">Easing::Elastic::duration</a></div><div class="ttdeci">float * duration</div><div class="ttdef"><b>Definition:</b> easing.h:190</div></div>
+<div class="ttc" id="class_easing_html_afca541398368b01d0e923ccb39c1b30c"><div class="ttname"><a href="class_easing.html#afca541398368b01d0e923ccb39c1b30c">Easing::duration</a></div><div class="ttdeci">float duration</div><div class="ttdef"><b>Definition:</b> easing.h:8</div></div>
+<div class="ttc" id="class_easing_1_1_back_html_ac5636ce74522c130fede1a7812d315ef"><div class="ttname"><a href="class_easing_1_1_back.html#ac5636ce74522c130fede1a7812d315ef">Easing::Back::Back</a></div><div class="ttdeci">Back(float *dur)</div><div class="ttdef"><b>Definition:</b> easing.h:78</div></div>
+<div class="ttc" id="class_easing_1_1_circ_html_aa6770c8027f5f2bd5536700fbe20dab2"><div class="ttname"><a href="class_easing_1_1_circ.html#aa6770c8027f5f2bd5536700fbe20dab2">Easing::Circ::InOut</a></div><div class="ttdeci">float InOut(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:159</div></div>
+<div class="ttc" id="class_easing_1_1_sine_html_aff0a7c10d97f4ce304cb437f3a2575f1"><div class="ttname"><a href="class_easing_1_1_sine.html#aff0a7c10d97f4ce304cb437f3a2575f1">Easing::Sine::duration</a></div><div class="ttdeci">float * duration</div><div class="ttdef"><b>Definition:</b> easing.h:322</div></div>
+<div class="ttc" id="class_easing_1_1_cubic_html_adaa1ab82379648d37cfe621e179a283f"><div class="ttname"><a href="class_easing_1_1_cubic.html#adaa1ab82379648d37cfe621e179a283f">Easing::Cubic::Out</a></div><div class="ttdeci">float Out(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:177</div></div>
+<div class="ttc" id="class_easing_1_1_quart_html_a982bbef819cd57fbb88181d1197b1024"><div class="ttname"><a href="class_easing_1_1_quart.html#a982bbef819cd57fbb88181d1197b1024">Easing::Quart::Out</a></div><div class="ttdeci">float Out(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:287</div></div>
+<div class="ttc" id="class_easing_1_1_cubic_html_af0dcfa4b79a338c35b3f5ae4c19b5adb"><div class="ttname"><a href="class_easing_1_1_cubic.html#af0dcfa4b79a338c35b3f5ae4c19b5adb">Easing::Cubic::InOut</a></div><div class="ttdeci">float InOut(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:181</div></div>
+<div class="ttc" id="class_easing_1_1_linear_html_a9f7f1327f55da852b061d3ae17379885"><div class="ttname"><a href="class_easing_1_1_linear.html#a9f7f1327f55da852b061d3ae17379885">Easing::Linear::Linear</a></div><div class="ttdeci">Linear(float *dur)</div><div class="ttdef"><b>Definition:</b> easing.h:53</div></div>
+<div class="ttc" id="class_easing_html_a61d9b5b89e1422e56fd9166616817314"><div class="ttname"><a href="class_easing.html#a61d9b5b89e1422e56fd9166616817314">Easing::bounce</a></div><div class="ttdeci">class Easing::Bounce bounce</div></div>
+<div class="ttc" id="class_easing_1_1_elastic_html_a10d112f199d50680b4a8f3bc2ffc1fe2"><div class="ttname"><a href="class_easing_1_1_elastic.html#a10d112f199d50680b4a8f3bc2ffc1fe2">Easing::Elastic::Elastic</a></div><div class="ttdeci">Elastic(float *dur)</div><div class="ttdef"><b>Definition:</b> easing.h:193</div></div>
+<div class="ttc" id="class_easing_1_1_quint_html"><div class="ttname"><a href="class_easing_1_1_quint.html">Easing::Quint</a></div><div class="ttdef"><b>Definition:</b> easing.h:298</div></div>
+<div class="ttc" id="class_easing_html_a3e1364d2b5ef3541319fe39e456330b7"><div class="ttname"><a href="class_easing.html#a3e1364d2b5ef3541319fe39e456330b7">Easing::elastic</a></div><div class="ttdeci">class Easing::Elastic elastic</div></div>
+<div class="ttc" id="class_easing_1_1_sine_html_af322632852fa8d48c42c69904d6acb18"><div class="ttname"><a href="class_easing_1_1_sine.html#af322632852fa8d48c42c69904d6acb18">Easing::Sine::Sine</a></div><div class="ttdeci">Sine(float *dur)</div><div class="ttdef"><b>Definition:</b> easing.h:325</div></div>
+<div class="ttc" id="class_easing_1_1_linear_html_a13c7d863bb4a439982810290014c07ef"><div class="ttname"><a href="class_easing_1_1_linear.html#a13c7d863bb4a439982810290014c07ef">Easing::Linear::None</a></div><div class="ttdeci">float None(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:55</div></div>
+<div class="ttc" id="class_easing_html_af0193992c9a9da8062ac352836dee403"><div class="ttname"><a href="class_easing.html#af0193992c9a9da8062ac352836dee403">Easing::expo</a></div><div class="ttdeci">class Easing::Expo expo</div></div>
+<div class="ttc" id="class_easing_1_1_elastic_html"><div class="ttname"><a href="class_easing_1_1_elastic.html">Easing::Elastic</a></div><div class="ttdef"><b>Definition:</b> easing.h:188</div></div>
+<div class="ttc" id="class_easing_1_1_linear_html_af9cd04a6ab0a3dff49e67e76e17a2296"><div class="ttname"><a href="class_easing_1_1_linear.html#af9cd04a6ab0a3dff49e67e76e17a2296">Easing::Linear::InOut</a></div><div class="ttdeci">float InOut(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:67</div></div>
+<div class="ttc" id="class_easing_1_1_expo_html_a646d3907a69d3f225bba20bcf99ba8e3"><div class="ttname"><a href="class_easing_1_1_expo.html#a646d3907a69d3f225bba20bcf99ba8e3">Easing::Expo::Expo</a></div><div class="ttdeci">Expo(float *dur)</div><div class="ttdef"><b>Definition:</b> easing.h:235</div></div>
+<div class="ttc" id="class_easing_1_1_quart_html_a1c97e242baaf31a75b9407f775e50560"><div class="ttname"><a href="class_easing_1_1_quart.html#a1c97e242baaf31a75b9407f775e50560">Easing::Quart::InOut</a></div><div class="ttdeci">float InOut(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:291</div></div>
+<div class="ttc" id="class_easing_1_1_quint_html_aa6794bc88c2e0c0f500f00e3acd77c6c"><div class="ttname"><a href="class_easing_1_1_quint.html#aa6794bc88c2e0c0f500f00e3acd77c6c">Easing::Quint::duration</a></div><div class="ttdeci">float * duration</div><div class="ttdef"><b>Definition:</b> easing.h:300</div></div>
+<div class="ttc" id="class_easing_1_1_quart_html_a1b440175664e0640c436d1cef0c1b487"><div class="ttname"><a href="class_easing_1_1_quart.html#a1b440175664e0640c436d1cef0c1b487">Easing::Quart::duration</a></div><div class="ttdeci">float * duration</div><div class="ttdef"><b>Definition:</b> easing.h:278</div></div>
+<div class="ttc" id="class_easing_html_a14f8e53cdf73a9e5833f506a67a5732e"><div class="ttname"><a href="class_easing.html#a14f8e53cdf73a9e5833f506a67a5732e">Easing::Easing</a></div><div class="ttdeci">Easing()</div><div class="ttdef"><b>Definition:</b> easing.h:12</div></div>
+<div class="ttc" id="class_easing_1_1_expo_html_a638a0486a9bdb1ca0cf7b30518ccdeb7"><div class="ttname"><a href="class_easing_1_1_expo.html#a638a0486a9bdb1ca0cf7b30518ccdeb7">Easing::Expo::duration</a></div><div class="ttdeci">float * duration</div><div class="ttdef"><b>Definition:</b> easing.h:232</div></div>
+<div class="ttc" id="class_easing_1_1_quart_html"><div class="ttname"><a href="class_easing_1_1_quart.html">Easing::Quart</a></div><div class="ttdef"><b>Definition:</b> easing.h:276</div></div>
+<div class="ttc" id="class_easing_1_1_elastic_html_ac6dd7276fcd72ef489431325781d9ce7"><div class="ttname"><a href="class_easing_1_1_elastic.html#ac6dd7276fcd72ef489431325781d9ce7">Easing::Elastic::InOut</a></div><div class="ttdeci">float InOut(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:214</div></div>
+<div class="ttc" id="class_easing_1_1_bounce_html_a5ed3c12a87c11d6c5c64ea7640aa2d03"><div class="ttname"><a href="class_easing_1_1_bounce.html#a5ed3c12a87c11d6c5c64ea7640aa2d03">Easing::Bounce::In</a></div><div class="ttdeci">float In(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:133</div></div>
+<div class="ttc" id="class_easing_1_1_elastic_html_a17649d2d7754303d522f95c344f91ca3"><div class="ttname"><a href="class_easing_1_1_elastic.html#a17649d2d7754303d522f95c344f91ca3">Easing::Elastic::Out</a></div><div class="ttdeci">float Out(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:205</div></div>
+<div class="ttc" id="class_easing_html_a436b894cf71e430d9379736352068957"><div class="ttname"><a href="class_easing.html#a436b894cf71e430d9379736352068957">Easing::Time</a></div><div class="ttdeci">float Time(float dur)</div><div class="ttdef"><b>Definition:</b> easing.h:26</div></div>
+<div class="ttc" id="class_easing_html_ab664d9f54b98552f72ccf0e48cd66453"><div class="ttname"><a href="class_easing.html#ab664d9f54b98552f72ccf0e48cd66453">Easing::cubic</a></div><div class="ttdeci">class Easing::Cubic cubic</div></div>
+<div class="ttc" id="class_easing_1_1_sine_html_aa013b10fa04a8e1f0167afdc213eda58"><div class="ttname"><a href="class_easing_1_1_sine.html#aa013b10fa04a8e1f0167afdc213eda58">Easing::Sine::In</a></div><div class="ttdeci">float In(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:327</div></div>
+<div class="ttc" id="class_easing_html_a0498b628b7c0209366c483495ce33b44"><div class="ttname"><a href="class_easing.html#a0498b628b7c0209366c483495ce33b44">Easing::quad</a></div><div class="ttdeci">class Easing::Quad quad</div></div>
+<div class="ttc" id="class_easing_1_1_cubic_html_a37b741a426988d5aff6aa29b351c795d"><div class="ttname"><a href="class_easing_1_1_cubic.html#a37b741a426988d5aff6aa29b351c795d">Easing::Cubic::duration</a></div><div class="ttdeci">float * duration</div><div class="ttdef"><b>Definition:</b> easing.h:168</div></div>
+<div class="ttc" id="class_easing_1_1_bounce_html_a21b61855ac161c3381a9d1925a19e041"><div class="ttname"><a href="class_easing_1_1_bounce.html#a21b61855ac161c3381a9d1925a19e041">Easing::Bounce::Bounce</a></div><div class="ttdeci">Bounce(float *dur)</div><div class="ttdef"><b>Definition:</b> easing.h:108</div></div>
+<div class="ttc" id="class_easing_1_1_circ_html_a9be204be01a0c9bb8d83378ee1c71ae8"><div class="ttname"><a href="class_easing_1_1_circ.html#a9be204be01a0c9bb8d83378ee1c71ae8">Easing::Circ::duration</a></div><div class="ttdeci">float * duration</div><div class="ttdef"><b>Definition:</b> easing.h:146</div></div>
+<div class="ttc" id="class_easing_1_1_circ_html_a4b2d153854cc5988b075ea5e4a40c76d"><div class="ttname"><a href="class_easing_1_1_circ.html#a4b2d153854cc5988b075ea5e4a40c76d">Easing::Circ::Circ</a></div><div class="ttdeci">Circ(float *dur)</div><div class="ttdef"><b>Definition:</b> easing.h:149</div></div>
+<div class="ttc" id="class_easing_1_1_expo_html_afc386ec3289e3687a4ca750bffab00d5"><div class="ttname"><a href="class_easing_1_1_expo.html#afc386ec3289e3687a4ca750bffab00d5">Easing::Expo::InOut</a></div><div class="ttdeci">float InOut(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:245</div></div>
+<div class="ttc" id="class_easing_1_1_back_html"><div class="ttname"><a href="class_easing_1_1_back.html">Easing::Back</a></div><div class="ttdef"><b>Definition:</b> easing.h:73</div></div>
+<div class="ttc" id="class_easing_1_1_quad_html_a6845b376009588ec73d4f6e2458b33d5"><div class="ttname"><a href="class_easing_1_1_quad.html#a6845b376009588ec73d4f6e2458b33d5">Easing::Quad::Out</a></div><div class="ttdeci">float Out(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:265</div></div>
+<div class="ttc" id="class_easing_1_1_quint_html_a807b37ce4c819cc06af49bfba95085f5"><div class="ttname"><a href="class_easing_1_1_quint.html#a807b37ce4c819cc06af49bfba95085f5">Easing::Quint::Quint</a></div><div class="ttdeci">Quint(float *dur)</div><div class="ttdef"><b>Definition:</b> easing.h:303</div></div>
+<div class="ttc" id="class_easing_1_1_circ_html_ae1e625e89441725866f33e24db36f43e"><div class="ttname"><a href="class_easing_1_1_circ.html#ae1e625e89441725866f33e24db36f43e">Easing::Circ::In</a></div><div class="ttdeci">float In(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:151</div></div>
+<div class="ttc" id="class_easing_html_ac49f13bf7ef6817f0a67359f88b5daf8"><div class="ttname"><a href="class_easing.html#ac49f13bf7ef6817f0a67359f88b5daf8">Easing::linear</a></div><div class="ttdeci">class Easing::Linear linear</div></div>
+<div class="ttc" id="class_easing_html_aa7fd57ceee10df0337cc5fa8300c97ea"><div class="ttname"><a href="class_easing.html#aa7fd57ceee10df0337cc5fa8300c97ea">Easing::easeEnd</a></div><div class="ttdeci">bool easeEnd</div><div class="ttdef"><b>Definition:</b> easing.h:9</div></div>
+<div class="ttc" id="class_easing_html_a76500708d577f916bdaf01723f5a8569"><div class="ttname"><a href="class_easing.html#a76500708d577f916bdaf01723f5a8569">Easing::GetEaseEnd</a></div><div class="ttdeci">bool GetEaseEnd()</div><div class="ttdef"><b>Definition:</b> easing.h:42</div></div>
+<div class="ttc" id="class_easing_1_1_sine_html_a4f6fea409cbc475719f9e0b332fa6170"><div class="ttname"><a href="class_easing_1_1_sine.html#a4f6fea409cbc475719f9e0b332fa6170">Easing::Sine::InOut</a></div><div class="ttdeci">float InOut(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:336</div></div>
+<div class="ttc" id="class_easing_html_ac04d94c0935326c4b4ab7441d63ddb12"><div class="ttname"><a href="class_easing.html#ac04d94c0935326c4b4ab7441d63ddb12">Easing::quart</a></div><div class="ttdeci">class Easing::Quart quart</div></div>
+<div class="ttc" id="class_easing_1_1_expo_html"><div class="ttname"><a href="class_easing_1_1_expo.html">Easing::Expo</a></div><div class="ttdef"><b>Definition:</b> easing.h:230</div></div>
+<div class="ttc" id="class_easing_1_1_quad_html_acc8a05025a746bd940ab5c7d69d588c6"><div class="ttname"><a href="class_easing_1_1_quad.html#acc8a05025a746bd940ab5c7d69d588c6">Easing::Quad::Quad</a></div><div class="ttdeci">Quad(float *dur)</div><div class="ttdef"><b>Definition:</b> easing.h:259</div></div>
+<div class="ttc" id="class_easing_1_1_bounce_html_a23f1b1433ca3ff08dce167692694f9b9"><div class="ttname"><a href="class_easing_1_1_bounce.html#a23f1b1433ca3ff08dce167692694f9b9">Easing::Bounce::Out</a></div><div class="ttdeci">float Out(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:110</div></div>
+<div class="ttc" id="class_easing_1_1_quart_html_a2db07962caea722cf7e03cc57c12d3ca"><div class="ttname"><a href="class_easing_1_1_quart.html#a2db07962caea722cf7e03cc57c12d3ca">Easing::Quart::In</a></div><div class="ttdeci">float In(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:283</div></div>
+<div class="ttc" id="class_easing_1_1_elastic_html_a96162c017cf69c723b35446aa78bc6ec"><div class="ttname"><a href="class_easing_1_1_elastic.html#a96162c017cf69c723b35446aa78bc6ec">Easing::Elastic::In</a></div><div class="ttdeci">float In(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:195</div></div>
+<div class="ttc" id="class_easing_1_1_quint_html_a03750981a312063d3719ea8b2443d444"><div class="ttname"><a href="class_easing_1_1_quint.html#a03750981a312063d3719ea8b2443d444">Easing::Quint::Out</a></div><div class="ttdeci">float Out(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:309</div></div>
+<div class="ttc" id="class_easing_1_1_expo_html_a4f008924899392683806f9f96499d3e3"><div class="ttname"><a href="class_easing_1_1_expo.html#a4f008924899392683806f9f96499d3e3">Easing::Expo::Out</a></div><div class="ttdeci">float Out(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:241</div></div>
+<div class="ttc" id="class_easing_1_1_linear_html_aa18ec4db09031656fd8ad9958b3b463a"><div class="ttname"><a href="class_easing_1_1_linear.html#aa18ec4db09031656fd8ad9958b3b463a">Easing::Linear::Out</a></div><div class="ttdeci">float Out(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:63</div></div>
+<div class="ttc" id="class_easing_1_1_sine_html"><div class="ttname"><a href="class_easing_1_1_sine.html">Easing::Sine</a></div><div class="ttdef"><b>Definition:</b> easing.h:320</div></div>
+<div class="ttc" id="class_easing_1_1_cubic_html_ade6a9737f93f823a39b3ee03e264a87b"><div class="ttname"><a href="class_easing_1_1_cubic.html#ade6a9737f93f823a39b3ee03e264a87b">Easing::Cubic::In</a></div><div class="ttdeci">float In(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:173</div></div>
+<div class="ttc" id="class_easing_1_1_cubic_html_a59954e25d1378826e83f9aee0bfbd4b1"><div class="ttname"><a href="class_easing_1_1_cubic.html#a59954e25d1378826e83f9aee0bfbd4b1">Easing::Cubic::Cubic</a></div><div class="ttdeci">Cubic(float *dur)</div><div class="ttdef"><b>Definition:</b> easing.h:171</div></div>
+<div class="ttc" id="class_easing_1_1_linear_html_a387e8039bc31589119fd58b35e816152"><div class="ttname"><a href="class_easing_1_1_linear.html#a387e8039bc31589119fd58b35e816152">Easing::Linear::In</a></div><div class="ttdeci">float In(float t, float b, float c)</div><div class="ttdef"><b>Definition:</b> easing.h:59</div></div>
+<div class="ttc" id="class_easing_1_1_bounce_html"><div class="ttname"><a href="class_easing_1_1_bounce.html">Easing::Bounce</a></div><div class="ttdef"><b>Definition:</b> easing.h:103</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+æ§‹ç¯‰: &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+</body>
+</html>
