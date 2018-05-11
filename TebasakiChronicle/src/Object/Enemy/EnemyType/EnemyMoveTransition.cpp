@@ -4,14 +4,14 @@ EnemyMoveTransition::EnemyMoveTransition(){}
 EnemyMoveTransition::~EnemyMoveTransition(){}
 
 //-----------------------------------------------------------------------------
-//常時使用
-bool ETransition_Default::Transition(CollisionManager& cm, Status& status)
+//0：常にfalseを返す
+bool ETransition_NotTrans::Transition(CollisionManager& cm, Status& status)
 {
-	return true;
+	return false;
 }
 
 //-----------------------------------------------------------------------------
-//視界内にプレイヤーが入っているとき
+//1：視界内にプレイヤーが入っているとき
 bool ETransition_PIntoView::Transition(CollisionManager& cm, Status& status)
 {
 	if (cm.CheckHitSubCollisionObejct(1))
@@ -21,7 +21,7 @@ bool ETransition_PIntoView::Transition(CollisionManager& cm, Status& status)
 }
 
 //-----------------------------------------------------------------------------
-//視界内に入っているプレイヤーが自身の反対方向に移動したとき
+//2：視界内に入っているプレイヤーが自身の反対方向に移動したとき
 bool ETransition_PMoveOtherSide::Transition(CollisionManager& cm, Status& status)
 {
 	//視界用コリジョンからプレイヤーの座標を受け取る

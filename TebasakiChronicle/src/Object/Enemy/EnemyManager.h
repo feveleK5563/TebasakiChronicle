@@ -15,7 +15,7 @@ public:
 	//作成した全ての敵を更新する
 	void UpdateAllEnemy();
 	//全ての敵を描画する
-	void DrawAllEnemy();
+	void RenderAllEnemy();
 
 	//全ての敵を削除(解放)する
 	void DeleteAllEnemy();

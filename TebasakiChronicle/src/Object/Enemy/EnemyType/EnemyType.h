@@ -11,7 +11,7 @@ private:
 	const std::string			textureName;	//画像名
 	K_Graphics::Texture*		texture;		//テクスチャ
 	const int					maxLife;		//体力上限
-	const int					hitDamage;		//接触時、プレイヤーに与えるダメージ
+	const int					hitDamage;		//プレイヤーに与えるダメージ
 	const float					moveSpeed;		//移動速度
 	const float					jumpPower;		//ジャンプ力
 
@@ -30,6 +30,7 @@ private:
 public:
 	//コンストラクタ
 	EnemyType(	std::string texName,
+				std::string texPass,
 				int		maxlife,
 				int		hitdamage,
 				float	movespeed,

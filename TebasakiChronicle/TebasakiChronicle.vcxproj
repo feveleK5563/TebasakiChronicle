@@ -55,6 +55,7 @@
     <ClInclude Include="src\BaseClass\Move.h" />
     <ClInclude Include="src\BaseClass\Status\Status.h" />
     <ClInclude Include="src\CSTList.h" />
+    <ClInclude Include="src\Helper.h" />
     <ClInclude Include="src\Object\Enemy\Enemy.h" />
     <ClInclude Include="src\Object\Enemy\EnemyController.h" />
     <ClInclude Include="src\Object\Enemy\EnemyManager.h" />
@@ -169,6 +170,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>include\libpng;include\K_Physics;include\K_Math;include\K_Input;include\K_Graphics;include\K_Audio;include\GLFW;include\GLEW;include\FreeType;include\fbxsdk;include\Eigen;include\Effekseer;include\bullet;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -176,6 +178,9 @@
       <AdditionalLibraryDirectories>lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>MyFrameWorks.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

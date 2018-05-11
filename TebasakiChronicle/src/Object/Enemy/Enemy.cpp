@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "../../Helper.h"
 
 //コンストラクタ
 Enemy::Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction) :
@@ -13,7 +14,8 @@ Enemy::Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Dire
 //デストラクタ
 Enemy::~Enemy()
 {
-	delete eController;
+	Memory::SafeDelete(eController);
+	Memory::SafeDelete(skillAndChip);
 }
 
 //-----------------------------------------------------------------------------
@@ -47,9 +49,10 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	collisionManager.SetSubCollisionData(cpyet->GetRecieveCameraCollisionData());	//5 被カメラガン用コリジョン
 
 	//タグの設定
-	skillAndChip.pos = &gameObject.GetStatus().GetPos();
-	skillAndChip.textureName = &gameObject.GetImage().GetTextureName();
-	skillAndChip.skillId = &eController->GetSkillId();
+	skillAndChip = new SkillAndCharaChip();
+	skillAndChip->pos = &gameObject.GetStatus().GetPos();
+	skillAndChip->textureName = &gameObject.GetImage().GetTextureName();
+	skillAndChip->skillId = &eController->GetSkillId();
 	for (int i = 0; i < 5; ++i)
 	{
 		collisionManager.SetSubCollisionTug(i, &gameObject.GetStatus());
@@ -74,7 +77,7 @@ bool Enemy::Update()
 	AnimationUpdate();
 
 	//コリジョンを動かす
-	collisionManager.MoveBaseCollision(gameObject.GetMove().GetMoveVec(), gameObject.GetStatus().GetDirection(), false);
+	collisionManager.MoveBaseCollision(gameObject.GetMove().GetMoveVec(), gameObject.GetStatus().GetDirection(), true);
 	gameObject.GetPos() = collisionManager.GetBaseCollisionObjectPosition();
 	tempCollisionManager.Update();
 	//タグ情報を更新
@@ -118,8 +121,8 @@ bool Enemy::RecieveCollisionOperation()
 //タグに情報を格納
 void Enemy::SetTugData()
 {
-	skillAndChip.nowCharaChip = gameObject.GetImage().GetNowAnimationCharaChip();
-	collisionManager.SetSubCollisionTug(5, &skillAndChip);
+	skillAndChip->nowCharaChip = gameObject.GetImage().GetNowAnimationCharaChip();
+	collisionManager.SetSubCollisionTug(5, skillAndChip);
 }
 
 //-----------------------------------------------------------------------------
@@ -145,7 +148,7 @@ void Enemy::AnimationUpdate()
 
 //-----------------------------------------------------------------------------
 //描画
-void Enemy::Draw()
+void Enemy::Render()
 {
 	gameObject.GetImage().ImageDraw3D(	gameObject.GetStatus().GetPos(),
 										gameObject.GetStatus().GetAngle(),

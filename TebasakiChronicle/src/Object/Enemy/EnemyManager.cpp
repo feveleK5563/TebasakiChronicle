@@ -38,11 +38,11 @@ void EnemyManager::UpdateAllEnemy()
 
 //-----------------------------------------------------------------------------
 //‘S‚Ä‚Ì“G‚ğ•`‰æ‚·‚é
-void EnemyManager::DrawAllEnemy()
+void EnemyManager::RenderAllEnemy()
 {
 	for (auto it : enemy)
 	{
-		it->Draw();
+		it->Render();
 	}
 }
 

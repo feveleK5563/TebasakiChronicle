@@ -1,6 +1,7 @@
 #include "EnemyType.h"
 
 EnemyType::EnemyType(	std::string texName,
+						std::string texPath,
 						int			maxlife,
 						int			hitdamage,
 						float		movespeed,
@@ -22,7 +23,7 @@ EnemyType::EnemyType(	std::string texName,
 	jumpPower(jumppower),
 	emSet(new EnemyMoveSet())
 {
-	texture = CST::LoadAndGetTexture(textureName, "data/image/" + textureName + ".png");
+	texture = CST::LoadAndGetTexture(textureName, texPath);
 	baseShape = sBase;
 	receiveShape = sReceive;
 	receivePos = pRecieve;

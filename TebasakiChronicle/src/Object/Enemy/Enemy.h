@@ -37,7 +37,7 @@ public:
 		int*				skillId;
 		AnimationCharaChip* nowCharaChip;
 	};
-	SkillAndCharaChip skillAndChip;
+	SkillAndCharaChip* skillAndChip;
 
 	//コンストラクタ
 	Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction);
@@ -62,5 +62,5 @@ public:
 	void AnimationUpdate();
 	
 	//描画
-	void Draw();
+	void Render();
 };

@@ -112,9 +112,10 @@ void ImageManager::ImageDraw3D(	const K_Math::Vector3&	posc,
 	K_Math::Vector3 angle = anglec;
 	angle.y() += K_Math::DegToRad((float)direction);
 
+	CST::GetShaderClass(0)->UseShader();
 	spobj->Draw3D(
 		CST::GetPerspectiveCamera(),
-		CST::GetShaderClass(),
+		CST::GetShaderClass(0),
 		src,
 		pos,
 		angle,

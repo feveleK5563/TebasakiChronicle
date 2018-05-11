@@ -69,9 +69,7 @@ void	Player::Initliaze()
 //更新
 void	Player::UpDate()
 {
-	std::cout << object.GetPos().x() << std::endl;
-	std::cout << cManager.GetBaseCollisionObjectPosition().x() << std::endl;
-
+	
 	//動作をゼロクリア
 	object.GetMove().GetMoveVec() = K_Math::Vector3(0, 0, 0);
 

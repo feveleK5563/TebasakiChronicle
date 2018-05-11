@@ -14,15 +14,15 @@ public:
 //条件が重複する場合、パターン番号の若いほうが優先される
 
 //-----------------------------------------------
-//常時使用
-class ETransition_Default : public EnemyMoveTransition
+//0：遷移しない
+class ETransition_NotTrans : public EnemyMoveTransition
 {
 public:
 	bool Transition(CollisionManager& cm, Status& status);
 };
 
 //-----------------------------------------------
-//視界内にプレイヤーが入っているとき
+//1：視界内にプレイヤーが入っているとき
 class ETransition_PIntoView : public EnemyMoveTransition
 {
 public:
@@ -30,7 +30,7 @@ public:
 };
 
 //-----------------------------------------------
-//視界内に入っているプレイヤーが自身の反対方向に移動したとき
+//2：視界内に入っているプレイヤーが自身の反対方向に移動したとき
 class ETransition_PMoveOtherSide : public EnemyMoveTransition
 {
 public:

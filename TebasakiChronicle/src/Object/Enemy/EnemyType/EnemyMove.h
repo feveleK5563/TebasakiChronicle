@@ -47,6 +47,9 @@ public:
 //‘O•û‚ÉUŒ‚‚·‚é
 class EMove_FrontAttack : public EnemyMove
 {
+private:
+	void CreateAttackCollision();
+
 public:
 	void FirstMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
 	void EMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);

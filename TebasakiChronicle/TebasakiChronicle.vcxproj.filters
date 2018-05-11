@@ -115,14 +115,14 @@
     <ClCompile Include="src\Object\Enemy\EnemyManager.cpp">
       <Filter>ソース ファイル\src\Object\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollision.cpp">
-      <Filter>ソース ファイル\src\Object\TemporaryCollision</Filter>
-    </ClCompile>
     <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollisionManager.cpp">
       <Filter>ソース ファイル\src\Object\TemporaryCollision</Filter>
     </ClCompile>
     <ClCompile Include="src\BaseClass\Input\Input.cpp">
       <Filter>ソース ファイル\src\BaseClass\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollision.cpp">
+      <Filter>ソース ファイル\src\Object\TemporaryCollision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +200,9 @@
     </ClInclude>
     <ClInclude Include="src\BaseClass\Input\Input.h">
       <Filter>ソース ファイル\src\BaseClass\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Helper.h">
+      <Filter>ソース ファイル\src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

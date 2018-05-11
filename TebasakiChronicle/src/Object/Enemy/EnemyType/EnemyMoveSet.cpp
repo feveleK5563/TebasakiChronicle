@@ -12,17 +12,18 @@ EnemyMoveSet::~EnemyMoveSet()
 
 //-----------------------------------------------------------------------------
 //動作パターン集合の生成
-void EnemyMoveSet::CreateMotionPattern(	int* moveNum,		//動作番号を入れた配列のアドレス値
-										int* skillId,		//動作中に取得可能なスキル番号
-										int* durationTime,	//動作の継続時間を入れた配列のアドレス値
+void EnemyMoveSet::CreateMotionPattern( int* moveIdArr,			//動作番号を入れた配列のアドレス値
+										int* skillIdArr,		//動作中に取得可能なスキル番号
+										int* durationTimeArr,	//動作の継続時間を入れた配列のアドレス値
 										K_Math::Box2D*	src,	//アニメーション画像の最初の位置
 										int*			sheet,	//アニメーション枚数
 										float*			spd,	//アニメーション速度
 										bool*			ir,		//ループするか否か
-										int				totalMoveNum,		//動作の総数
-										int				transitionNum)		//動作パターンの遷移条件の番号
+										int*			transitionIdArr,	//他動作パターンへの遷移条件の番号
+										int				patternNum,			//動作パターンの総数
+										int				totalMoveNum)		//動作の総数
 {
-	empattern.emplace_back(new EnemyMovePattern(moveNum, skillId, durationTime, src, sheet, spd, ir, totalMoveNum, transitionNum));
+	empattern.emplace_back(new EnemyMovePattern(moveIdArr, skillIdArr, durationTimeArr, src, sheet, spd, ir, transitionIdArr, patternNum, totalMoveNum));
 }
 
 //-----------------------------------------------------------------------------
@@ -39,18 +40,13 @@ int EnemyMoveSet::EMove(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, C
 	bool endMovePattern = false;	//動作パターンが一巡したか(最後までいったか)どうかを格納
 	int idNum = empattern[nowPatternOrder]->EMove(nowMoveOrder, timeCnt, colmanager, tempmanager, status, move, endMovePattern);
 
-	//動作パターンが一巡したら、パターン変更のための処理を行う
-	if (endMovePattern == true)
+	//パターンの遷移条件を満たしていたらパターン変更
+	for (int i = 0; i < (int)empattern.size(); ++i)
 	{
-		//パターンの遷移条件を満たしていたらパターン変更
-		for (int i = 0; i < (int)empattern.size(); ++i)
+		if (empattern[nowPatternOrder]->emt[i]->Transition(colmanager, status))
 		{
-			if (nowPatternOrder != i &&
-				empattern[i]->emt->Transition(colmanager, status))
-			{
-				PatternTransition(nowMoveOrder, nowPatternOrder, timeCnt, i);
-				break;
-			}
+			PatternTransition(nowMoveOrder, nowPatternOrder, timeCnt, i);
+			break;
 		}
 	}
 

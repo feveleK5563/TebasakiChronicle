@@ -45,6 +45,10 @@ void EMove_Jump::EMove(CollisionManager& cmanager, TemporaryCollisionManager& te
 
 //-----------------------------------------------
 //ëOï˚Ç…çUåÇÇ∑ÇÈ
+void EMove_FrontAttack::CreateAttackCollision()
+{
+
+}
 void EMove_FrontAttack::FirstMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	K_Math::Vector3 relative(16, 0, 0);
@@ -54,9 +58,9 @@ void EMove_FrontAttack::FirstMove(CollisionManager& cmanager, TemporaryCollision
 	tempmanager.CreateTemporaryCollision(
 		CC::CreateBoxShape(14.f, 20.f, 10.f),
 		CollisionMask::Non,
-		CollisionMask::Non,
+		CollisionMask::TakeDamageEnemy,
 		status.GetPos() + relative,
-		K_Math::Vector3(0, -0.1f, 0),
+		K_Math::Vector3(0, 0, 0),
 		status.GetDirection(),
 		status.GetAttackPoint(),
 		60,

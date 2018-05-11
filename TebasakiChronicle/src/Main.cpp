@@ -11,6 +11,9 @@
 
 int main()
 {
+	//メモリリーク検知くん
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	//ウィンドウ
 	K_System::SystemClass* sc = new K_System::SystemClass("TebasakiChronicle", 720, 540, false);
 
@@ -33,16 +36,18 @@ int main()
 
 	//シェーダーリスト
 	CST::CreateShader("data/shader/SpriteShader.vs", "data/shader/SpriteShader.ps");
-
+	CST::CreateShader("data/shader/SimpleShader.vs", "data/shader/SimpleShader.ps");
 	//地形(仮)
 	CC::CreateCollisionObject(CC::CreateBoxShape(1000.f, 50.f, 10.f), false, CollisionMask::Non, CollisionMask::Ground, K_Math::Vector3(0, -80, 0));
 
 	//敵の種類を作成
 	EnemyTypeManager* etm = new EnemyTypeManager();
-	etm->LoadEnemyData("");
+	etm->LoadEnemyData("", 0);
+	etm->LoadEnemyData("", 1);
 	//敵1体に上記で作成した種類を割り当てる
 	EnemyManager* emanager = new EnemyManager();
-	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(0, 0, 0), Status::Direction::Right);
+	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(-10, 0, 0), Status::Direction::Left);
+	emanager->CreateEnemy(etm->GetEnemyTypeData(1), K_Math::Vector3(10, 0, 0), Status::Direction::Right);
 
 	//プレイヤー
 	Player* player = new Player();
@@ -62,11 +67,10 @@ int main()
 		CST::GetPerspectiveCamera()->Draw();
 		CST::GetOrthoCamera()->Draw();
 
-		CC::DebugDraw(CST::GetShaderClass(), CST::GetPerspectiveCamera());
+		emanager->RenderAllEnemy();
+		player->Render();
 
-		//emanager->DrawAllEnemy();
-		//player->Render();
-
+		//CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 		sc->SwapBuffer();
 	}
 
