@@ -1,25 +1,16 @@
 #include "EnemyMovePattern.h"
 
 //コンストラクタ
-EnemyMovePattern::EnemyMovePattern(	int* moveIdArr,			//動作番号を入れた配列のアドレス値
-									int* skillIdArr,		//動作中に取得可能なスキル番号
-									int* durationTimeArr,	//動作の継続時間を入れた配列のアドレス値
-									K_Math::Box2D*	src,	//アニメーション画像の最初の位置
-									int*			sheet,	//アニメーション枚数
-									float*			spd,	//アニメーション速度
-									bool*			ir,		//ループするか否か
-									int*			transitionIdArr,	//他動作パターンへの遷移条件の番号
-									int				patternNum,			//動作パターンの総数
-									int				totalMoveNum)		//動作の総数
+EnemyMovePattern::EnemyMovePattern(const MoveSetUpData& msud)
 {
-	for (int i = 0; i < totalMoveNum; ++i)
+	for (int i = 0; i < msud.totalMoveNum; ++i)
 	{
-		SetMoveAndTime(*(moveIdArr + i), *(skillIdArr + i), *(durationTimeArr + i));
-		animChip.emplace_back(new AnimationCharaChip(*(src + i), *(sheet + i), *(spd + i), *(ir + i)));
+		SetMoveAndTime(*(msud.moveIdArr + i), *(msud.skillIdArr + i), *(msud.durationTimeArr + i));
+		animChip.emplace_back(new AnimationCharaChip(*(msud.srcArr + i), *(msud.sheetArr + i), *(msud.spdArr + i), *(msud.isRoopArr + i)));
 	}
-	for (int i = 0; i < patternNum; ++i)
+	for (int i = 0; i < msud.patternNum; ++i)
 	{
-		SetTransition(*(transitionIdArr + i));
+		SetTransition(*(msud.transitionIdArr + i));
 	}
 }
 
@@ -125,4 +116,18 @@ void EnemyMovePattern::SetTransition(int transitionNum)
 		emt.back() = new ETransition_PMoveOtherSide();
 		break;
 	}
+}
+
+//-----------------------------------------------------------------------------
+//アニメーションのキャラチップを返す
+const std::vector<AnimationCharaChip*>&  EnemyMovePattern::GetNowAnimChip()
+{
+	return animChip;
+}
+
+//-----------------------------------------------------------------------------
+//指定番号の遷移条件を返す
+bool EnemyMovePattern::GetTransition(int num, CollisionManager& colmanager, Status& status)
+{
+	return emt[num]->Transition(colmanager, status);
 }
