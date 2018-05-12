@@ -29,7 +29,7 @@ TemporaryCollision::TemporaryCollision(	K_Physics::CollisionShape*	shape,
 		0);
 	gameObject.GetMove().GetMoveVec() = movevec;
 
-	colmanager.SetSubCollisionTug(0, &gameObject.GetState());
+	colmanager.SetSubCollisionUserData(0, &gameObject.GetState());
 }
 
 //デストラクタ

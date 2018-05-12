@@ -86,10 +86,22 @@ void CollisionManager::SetSubCollisionData(K_Physics::CollisionData* cd)
 }
 
 //-----------------------------------------------------------------------------
-//サブコリジョンのタグを設定する
-void CollisionManager::SetSubCollisionTug(int subNum, void* tug)
+//指定したサブコリジョンにタグ(TagName)を設定する
+void CollisionManager::SetSubCollisionTagName(int subNum, std::string& name)
 {
-	subCollision[subNum]->collision->tag.userData = tug;
+	subCollision[subNum]->collision->tag.tagName = name;
+}
+//-----------------------------------------------------------------------------
+//指定したサブコリジョンにタグ(TagIndex)を設定する
+void CollisionManager::SetSubCollisionTagIndex(int subNum, int indexNum)
+{
+	subCollision[subNum]->collision->tag.tagIndex = indexNum;
+}
+//-----------------------------------------------------------------------------
+//サブコリジョンのタグを設定する
+void CollisionManager::SetSubCollisionUserData(int subNum, void* data)
+{
+	subCollision[subNum]->collision->tag.userData = data;
 }
 
 //-----------------------------------------------------------------------------
@@ -128,7 +140,7 @@ void CollisionManager::SetSubCollisionPos(int angle)
 
 //-----------------------------------------------------------------------------
 //指定したサブコリジョンの受け取ったタグを返す
-std::vector<K_Physics::CollisionTag*>& CollisionManager::GetConflictionObjectsUserData(int subNum)
+std::vector<K_Physics::CollisionTag*>& CollisionManager::GetConflictionObjectsTag(int subNum)
 {
 	return CC::FindConfrictionObjects(subCollision[subNum]->collision);
 }

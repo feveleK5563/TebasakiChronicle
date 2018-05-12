@@ -30,7 +30,7 @@ public:
 	void	Render();									//描画
 
 	void	SetPlayerPos(const K_Math::Vector3& pos);	//プレイヤーの座標と同期する
-	void	SetMoveVec(bool isInjection);				//カメラの速度の設定
+	void	SetCameraGun(bool isInjection);				//カメラの速度の設定
 	void	SetDirection(const Status::Direction& dir);	//向きの設定
 	float 	GetDir();
 	
@@ -46,5 +46,7 @@ public:
 private:
 	K_Physics::CollisionShape*	shape;			//形の作成
 	CollisionManager			cManager;		//コリジョンの管理
+
+	int							targetNum;		//ターゲットの番号を格納する
 	Enemy::SkillAndCharaChip*	targetData;		//ターゲットのスキルデータを格納する
 };

@@ -11,7 +11,7 @@ enum CollisionMask
 	EnemyCollision		= 1 << 2,
 	TakeDamagePlayer	= 1 << 3,
 	TakeDamageEnemy		= 1 << 4,
-	CameraGan			= 1 << 5,
+	CameraGunCollision	= 1 << 5,
 	EnemyCamCollision	= 1 << 6,
 };
 
@@ -57,15 +57,19 @@ public:
 	//サブコリジョンを設定する
 	void SetSubCollisionData(K_Physics::CollisionData* cd);
 
-	//指定したサブコリジョンにタグ(userData)を設定する
-	void SetSubCollisionTug(int subNum, void* tug);
+	//指定したサブコリジョンにタグ(TagName)を設定する
+	void SetSubCollisionTagName(int subNum, std::string& name);
+	//指定したサブコリジョンにタグ(TagIndex)を設定する
+	void SetSubCollisionTagIndex(int subNum, int indexNum);
+	//指定したサブコリジョンにタグ(UserData)を設定する
+	void SetSubCollisionUserData(int subNum, void* data);
 
 	//ベースコリジョンを動かし、付随してサブの座標を設定する
 	//第三引数をtrueで軽量な処理(めり込み判定を行う場合はfalse推奨)
 	void MoveBaseCollision(K_Math::Vector3& moveVec, int direction, bool isLightness);
 
 	//指定したサブコリジョンの受け取ったタグを返す
-	std::vector<K_Physics::CollisionTag*>& GetConflictionObjectsUserData(int subNum);
+	std::vector<K_Physics::CollisionTag*>& GetConflictionObjectsTag(int subNum);
 
 	//ベースコリジョンが地形コリジョンと衝突していたらtrueを返す
 	bool CheckHitBaseCollisionObject();

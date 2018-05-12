@@ -63,7 +63,7 @@ void	Player::Initliaze()
 	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, 24, 0)); //頭上
 
 	//コリジョンに情報を持たせる
-	cManager.SetSubCollisionTug(0, &object.GetStatus());
+	cManager.SetSubCollisionUserData(0, &object.GetStatus());
 }
 
 //更新
@@ -87,18 +87,14 @@ void	Player::UpDate()
 	if (INPUT::IsPressButton(VpadIndex::Pad0,K_Input::VpadButton::L1))
 	{
 		cameraGun.SetDirection(object.GetDirection());	//方向を同期させる
-		cameraGun.SetMoveVec(true);
-		cameraGun.object.SetState(Status::State::Active);
+		cameraGun.SetCameraGun(true);
 	}
 
 	//撮影ボタンを離す
 	if (INPUT::IsReaveButton(VpadIndex::Pad0,K_Input::VpadButton::L1))
 	{
 		//カメラマーカーをプレイヤーの位置に戻す
-		cameraGun.SetMoveVec(false);
-		cameraGun.object.SetState(Status::State::Non);
-		
-		cameraGun.DataReset();
+		cameraGun.SetCameraGun(false);
 	}
 
 	//入力に応じて向きを変える
@@ -165,7 +161,7 @@ void	Player::ShotCameraGun()
 	if (INPUT::IsPressButton(VpadIndex::Pad0,K_Input::VpadButton::L1))
 	{
 		cameraGun.SetDirection(object.GetDirection());	//方向を同期させる
-		cameraGun.SetMoveVec(true);
+		cameraGun.SetCameraGun(true);
 		cameraGun.object.SetState(Status::State::Active);
 	}
 }
@@ -177,7 +173,7 @@ void	Player::ReverseCameraGun()
 	if (INPUT::IsReaveButton(VpadIndex::Pad0,K_Input::VpadButton::L1))
 	{
 		//カメラマーカーをプレイヤーの位置に戻す
-		cameraGun.SetMoveVec(false);
+		cameraGun.SetCameraGun(false);
 		cameraGun.object.SetState(Status::State::Non);
 	}
 }

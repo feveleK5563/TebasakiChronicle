@@ -106,7 +106,7 @@ K_Physics::CollisionData* EnemyType::GetRecieveDamageCollisionData()
 //被カメラガン用コリジョンデータの生成と取得
 K_Physics::CollisionData* EnemyType::GetRecieveCameraCollisionData()
 {
-	return CC::CreateCollisionObject(receiveShape, true, CollisionMask::CameraGan, CollisionMask::EnemyCamCollision, receivePos);
+	return CC::CreateCollisionObject(receiveShape, true, CollisionMask::CameraGunCollision, CollisionMask::EnemyCamCollision, receivePos);
 }
 //-----------------------------------------------------------------------------
 //視界用コリジョンデータの生成と取得

@@ -45,10 +45,12 @@ void	CameraGun::Initailize()
 
 	//生成した[形]でコリジョンや剛体を作成
 	cManager.CreateBaseCollisionData(shape, object.GetPos(), object.GetAngle(), false);
-	cManager.CreateSubCollisionData(shape, CollisionMask::EnemyCamCollision, CollisionMask::CameraGan, object.GetPos());
+	cManager.CreateSubCollisionData(shape, CollisionMask::EnemyCamCollision, CollisionMask::CameraGunCollision, object.GetPos());
 
 	//コリジョンに情報を持たせる
-	cManager.SetSubCollisionTug(0, &object.GetState());
+	cManager.SetSubCollisionUserData(0, &object.GetState());
+	targetNum = -1;
+	targetData = nullptr;
 }
 
 //-----------------------------------
@@ -68,7 +70,7 @@ void	CameraGun::UpDate(const K_Math::Vector3& pPos)
 		//衝突した際の挙動
 		if (CheckUserData())
 		{
-			K_Math::Vector3	tarPos = *targetData->pos;;
+			K_Math::Vector3	tarPos = *targetData->pos;
 			Chase(tarPos);
 		}
 		else
@@ -128,9 +130,10 @@ void	CameraGun::Chase(const K_Math::Vector3& targetPos)
 void	CameraGun::RecieveData()
 {
 	//当たり判定処理
-	std::vector<K_Physics::CollisionTag*> data = cManager.GetConflictionObjectsUserData(0);
+	std::vector<K_Physics::CollisionTag*> data = cManager.GetConflictionObjectsTag(0);
 	if (data.size() > 0)
 	{
+		targetNum = data[0]->tagIndex;
 		targetData = (Enemy::SkillAndCharaChip*)data[0]->userData;
 	}
 }
@@ -140,23 +143,38 @@ void	CameraGun::RecieveData()
 bool	CameraGun::CheckUserData()
 {
 	if (targetData == nullptr)
-	{
 		return false;
+
+	std::vector<K_Physics::CollisionTag*> data = cManager.GetConflictionObjectsTag(0);
+	if (data.size() > 0)
+	{
+		for (auto it : data)
+		{
+			if (targetNum == it->tagIndex)
+			{
+				return true;
+			}
+		}
 	}
-	return true;
+
+	SetCameraGun(false);
+	return false;
 }
 
 
 //ベクトルの設定
-void	CameraGun::SetMoveVec(bool isInjection)
+void	CameraGun::SetCameraGun(bool isInjection)
 {
 	if (isInjection)
 	{
+		object.SetState(Status::State::Active);
 		object.SetMoveVec(K_Math::Vector3(GetDir() * object.GetMove().GetAddVec(), 0, 0));
 	}
 	else
 	{
 		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
+		object.SetState(Status::State::Non);
+		DataReset();
 	}
 }
 
@@ -215,5 +233,6 @@ bool	CameraGun::CheckAddSpeed()
 
 void	CameraGun::DataReset()
 {
+	targetNum = -1;
 	targetData = nullptr;
 }

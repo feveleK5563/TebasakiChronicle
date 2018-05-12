@@ -2,13 +2,13 @@
 #include "../../Helper.h"
 
 //コンストラクタ
-Enemy::Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction) :
+Enemy::Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction, const int indexNum) :
 	nowMoveOrder(0),
 	nowPatternOrder(0),
 	beforeMoveOrder(0),
 	beforePatternOrder(0)
 {
-	SetEnemyType(cpyet, setPos, direction);
+	SetEnemyType(cpyet, setPos, direction, indexNum);
 }
 
 //デストラクタ
@@ -20,7 +20,7 @@ Enemy::~Enemy()
 
 //-----------------------------------------------------------------------------
 //敵情報を設定
-void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction)
+void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction, const int indexNum)
 {
 	eController = new EnemyController(cpyet->GetEnemyMoveSet());
 	gameObject.GetStatus().SetStatusData(	Status::State::Active,
@@ -53,10 +53,14 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	skillAndChip->pos = &gameObject.GetStatus().GetPos();
 	skillAndChip->textureName = &gameObject.GetImage().GetTextureName();
 	skillAndChip->skillId = &eController->GetSkillId();
-	for (int i = 0; i < 5; ++i)
+	int i = 0;
+	for (; i < 5; ++i)
 	{
-		collisionManager.SetSubCollisionTug(i, &gameObject.GetStatus());
+		collisionManager.SetSubCollisionTagIndex(i, indexNum);
+		collisionManager.SetSubCollisionUserData(i, &gameObject.GetStatus());
 	}
+	collisionManager.SetSubCollisionTagIndex(i, indexNum);
+	collisionManager.SetSubCollisionUserData(i, skillAndChip);
 	SetTugData();
 }
 
@@ -68,7 +72,7 @@ bool Enemy::Update()
 	gameObject.GetMove().GetMoveVec() = K_Math::Vector3(0, 0, 0);
 
 	//重力を加算する
-	gameObject.GetMove().GravityOperation(collisionManager.GetConflictionObjectsUserData(3).size() > 0);
+	gameObject.GetMove().GravityOperation(collisionManager.GetConflictionObjectsTag(3).size() > 0);
 
 	//設定されている動作を行う
 	eController->EMove(nowMoveOrder, nowPatternOrder, collisionManager, tempCollisionManager, gameObject.GetStatus(), gameObject.GetMove());
@@ -94,7 +98,7 @@ bool Enemy::RecieveCollisionOperation()
 	std::vector<K_Physics::CollisionTag*> tag;
 
 	//ダメージを受ける
-	tag = collisionManager.GetConflictionObjectsUserData(Enemy::EnemyCollisionName::RecieveDamage);
+	tag = collisionManager.GetConflictionObjectsTag(Enemy::EnemyCollisionName::RecieveDamage);
 	for (auto it : tag)
 	{
 		if (((Status*)it->userData)->GetState() == Status::State::Active)
@@ -105,7 +109,7 @@ bool Enemy::RecieveCollisionOperation()
 	int hp = gameObject.GetStatus().GetLife();
 
 	//カメラを受ける
-	tag = collisionManager.GetConflictionObjectsUserData(Enemy::EnemyCollisionName::RecieveCameraGan);
+	tag = collisionManager.GetConflictionObjectsTag(Enemy::EnemyCollisionName::RecieveCameraGan);
 	for (auto it : tag)
 	{
 		if (((Status*)it->userData)->GetState() == Status::State::Active)
@@ -122,7 +126,6 @@ bool Enemy::RecieveCollisionOperation()
 void Enemy::SetTugData()
 {
 	skillAndChip->nowCharaChip = gameObject.GetImage().GetNowAnimationCharaChip();
-	collisionManager.SetSubCollisionTug(5, skillAndChip);
 }
 
 //-----------------------------------------------------------------------------

@@ -40,12 +40,12 @@ public:
 	SkillAndCharaChip* skillAndChip;
 
 	//コンストラクタ
-	Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction);
+	Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction, const int indexNum);
 	//デストラクタ
 	~Enemy();
 
 	//敵情報を設定
-	void SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction);
+	void SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction, const int indexNum);
 
 	//更新(死亡したか否かを返す)
 	bool Update();

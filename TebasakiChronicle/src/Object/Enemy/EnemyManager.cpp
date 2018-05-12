@@ -14,7 +14,8 @@ EnemyManager::~EnemyManager()
 //“G‚ğˆê‘Ìì¬‚·‚é
 void EnemyManager::CreateEnemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction)
 {
-	enemy.emplace_back(new Enemy(cpyet, setPos, direction));
+	int indexNum = (int)enemy.size();
+	enemy.emplace_back(new Enemy(cpyet, setPos, direction, indexNum));
 }
 
 //-----------------------------------------------------------------------------

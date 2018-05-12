@@ -25,7 +25,7 @@ bool ETransition_PIntoView::Transition(CollisionManager& cm, Status& status)
 bool ETransition_PMoveOtherSide::Transition(CollisionManager& cm, Status& status)
 {
 	//視界用コリジョンからプレイヤーの座標を受け取る
-	for (auto it : cm.GetConflictionObjectsUserData(1))
+	for (auto it : cm.GetConflictionObjectsTag(1))
 	{
 		Status* pst = (Status*)it->userData;
 		if (status.GetState() == Status::Right)
