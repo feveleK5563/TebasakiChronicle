@@ -163,6 +163,7 @@ bool	CameraGun::CheckUserData()
 
 
 //ベクトルの設定
+//状態の設定
 void	CameraGun::SetCameraGun(bool isInjection)
 {
 	if (isInjection)
@@ -235,4 +236,12 @@ void	CameraGun::DataReset()
 {
 	targetNum = -1;
 	targetData = nullptr;
+}
+
+
+//!@brief カメラガンが受け取ったスキルデータを渡す
+//!@return skillAndCharaChip スキルのデータ
+Enemy::SkillAndCharaChip& CameraGun::GetSkillAndCharaChip()
+{
+	return *targetData;
 }

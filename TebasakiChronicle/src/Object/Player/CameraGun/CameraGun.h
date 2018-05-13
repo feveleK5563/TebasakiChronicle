@@ -16,11 +16,6 @@ public:
 	CameraGun();
 	~CameraGun();
 
-	//****************************
-	//1:向いている方向に移動するのは、Moveクラスが行う
-	//2:衝突判定は、Collisionクラスが行う
-	//3:追尾処理は問題ない
-	//****************************
 	void	Chase(const K_Math::Vector3& targetPos);	//敵の座標をゆっくり追尾する
 	void	RecieveData();
 	bool	CheckUserData();
@@ -35,6 +30,10 @@ public:
 	float 	GetDir();
 	
 	void	DataReset();
+
+	//!@brief カメラガンが受け取ったスキルデータを渡す
+	//!@return skillAndCharaChip スキルのデータ
+	Enemy::SkillAndCharaChip& GetSkillAndCharaChip();
 
 private:
 	bool	CheckNowState(const Status::State& state);	//現在の状態を調べる

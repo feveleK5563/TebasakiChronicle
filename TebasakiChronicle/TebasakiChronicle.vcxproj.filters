@@ -62,6 +62,9 @@
     <Filter Include="ソース ファイル\src\Object\Player\Skill\SkillType">
       <UniqueIdentifier>{df787194-7b65-41dd-a125-f09e0abd28cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\Object\Player\Skill\SkillType\SkillSword">
+      <UniqueIdentifier>{df45246d-28e7-4dc6-8e3e-28296598442b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -150,6 +153,9 @@
     </ClCompile>
     <ClCompile Include="src\Object\Player\Skill\SkillType.cpp">
       <Filter>ソース ファイル\src\Object\Player\Skill\SkillType</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Player\Skill\SkillSword\SkillSword.cpp">
+      <Filter>ソース ファイル\src\Object\Player\Skill\SkillType\SkillSword</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -242,6 +248,9 @@
     </ClInclude>
     <ClInclude Include="src\Object\Player\Skill\SkillType.h">
       <Filter>ソース ファイル\src\Object\Player\Skill\SkillType</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Player\Skill\SkillSword\SkillSword.h">
+      <Filter>ソース ファイル\src\Object\Player\Skill\SkillType\SkillSword</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

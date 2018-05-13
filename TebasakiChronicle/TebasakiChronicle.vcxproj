@@ -44,6 +44,7 @@
     <ClCompile Include="src\Object\Player\Skill\SkiiData.cpp" />
     <ClCompile Include="src\Object\Player\Skill\SkillManager.cpp" />
     <ClCompile Include="src\Object\Player\Skill\SkillObject.cpp" />
+    <ClCompile Include="src\Object\Player\Skill\SkillSword\SkillSword.cpp" />
     <ClCompile Include="src\Object\Player\Skill\SkillType.cpp" />
     <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollision.cpp" />
     <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollisionManager.cpp" />
@@ -76,6 +77,7 @@
     <ClInclude Include="src\Object\Player\Skill\SkillData.h" />
     <ClInclude Include="src\Object\Player\Skill\SkillManager.h" />
     <ClInclude Include="src\Object\Player\Skill\SkillObject.h" />
+    <ClInclude Include="src\Object\Player\Skill\SkillSword\SkillSword.h" />
     <ClInclude Include="src\Object\Player\Skill\SkillType.h" />
     <ClInclude Include="src\Object\TemporaryCollision\TemporaryCollision.h" />
     <ClInclude Include="src\Object\TemporaryCollision\TemporaryCollisionManager.h" />
