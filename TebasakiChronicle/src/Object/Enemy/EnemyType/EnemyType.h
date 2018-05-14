@@ -8,14 +8,15 @@ class EnemyType
 public:
 	struct ParameterData	//敵の各種情報
 	{
-		std::string				textureName;	//画像名
+		std::string				texturePath;	//テクスチャのパス
+		std::string				textureName;	//テクスチャ名
 		int						maxLife;		//体力上限
 		int						hitDamage;		//プレイヤーに与えるダメージ
 		float					moveSpeed;		//移動速度
 		float					jumpPower;		//ジャンプ力
 
-		ParameterData(std::string& tn, int ml, int hd, float ms, float jp):
-			textureName(tn), maxLife(ml), hitDamage(hd), moveSpeed(ms), jumpPower(jp){}
+		ParameterData(std::string& tp, std::string& tn, int ml, int hd, float ms, float jp):
+			texturePath(tp), textureName(tn), maxLife(ml), hitDamage(hd), moveSpeed(ms), jumpPower(jp){}
 	};
 	struct CollisionData	//コリジョンの情報
 	{
@@ -44,7 +45,7 @@ private:
 
 public:
 	//コンストラクタ
-	EnemyType(const std::string& texPath, const ParameterData& param, const CollisionData& col);
+	EnemyType(const ParameterData& param, const CollisionData& col);
 	//デストラクタ
 	~EnemyType();
 

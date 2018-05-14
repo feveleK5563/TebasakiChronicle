@@ -1,7 +1,7 @@
 #include "EnemyMove.h"
 
 //-----------------------------------------------
-//何もしない
+//0：何もしない
 void EMove_NoMotion::FirstMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager,Status& status, Move& move)
 {
 	//何もしない
@@ -12,7 +12,7 @@ void EMove_NoMotion::EMove(CollisionManager& cmanager, TemporaryCollisionManager
 }
 
 //-----------------------------------------------
-//向いている方向に移動する
+//1：向いている方向に移動する
 void EMove_Movement::FirstMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	//何もしない
@@ -30,7 +30,7 @@ void EMove_Movement::EMove(CollisionManager& cmanager, TemporaryCollisionManager
 }
 
 //-----------------------------------------------
-//地面についているときのみジャンプ
+//2：地面についているときのみジャンプ
 void EMove_Jump::FirstMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	//何もしない
@@ -44,7 +44,7 @@ void EMove_Jump::EMove(CollisionManager& cmanager, TemporaryCollisionManager& te
 }
 
 //-----------------------------------------------
-//前方に攻撃する
+//3：前方に攻撃する
 void EMove_FrontAttack::CreateAttackCollision()
 {
 

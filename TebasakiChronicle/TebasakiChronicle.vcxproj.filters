@@ -47,6 +47,9 @@
     <Filter Include="ソース ファイル\src\BaseClass\Input">
       <UniqueIdentifier>{8be4abb2-3f7f-4a6c-8b5b-e772c2c4c27a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\Loader">
+      <UniqueIdentifier>{150e9a0f-9f8c-46c8-98ba-8b9f449b5cad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -123,6 +126,9 @@
     </ClCompile>
     <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollision.cpp">
       <Filter>ソース ファイル\src\Object\TemporaryCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Loader\EnemyLoader.cpp">
+      <Filter>ソース ファイル\src\Loader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +209,9 @@
     </ClInclude>
     <ClInclude Include="src\Helper.h">
       <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Loader\EnemyLoader.h">
+      <Filter>ソース ファイル\src\Loader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

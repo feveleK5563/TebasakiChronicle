@@ -3,6 +3,7 @@
 #include "MeshModel.h"
 #include "SystemClass.h"
 
+#include "Loader/EnemyLoader.h"
 #include "BaseClass/ImageManager/ImageManager.h"
 #include "Object/Enemy/EnemyType/EnemyTypeManager.h"
 #include "Object/Enemy/EnemyManager.h"
@@ -37,17 +38,19 @@ int main()
 	//シェーダーリスト
 	CST::CreateShader("data/shader/SpriteShader.vs", "data/shader/SpriteShader.ps");
 	CST::CreateShader("data/shader/SimpleShader.vs", "data/shader/SimpleShader.ps");
+	//リソースローダー
+
 	//地形(仮)
 	CC::CreateCollisionObject(CC::CreateBoxShape(1000.f, 50.f, 10.f), false, CollisionMask::Non, CollisionMask::Ground, K_Math::Vector3(0, -80, 0));
 
+	EnemyLoader eLoader;
+
 	//敵の種類を作成
 	EnemyTypeManager* etm = new EnemyTypeManager();
-	etm->LoadEnemyData("", 0);
-	etm->LoadEnemyData("", 1);
-	//敵1体に上記で作成した種類を割り当てる
+	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/TestData.txt"));
+	//上記で作成した種類を基に敵を生成する
 	EnemyManager* emanager = new EnemyManager();
 	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(-10, 0, 0), Status::Direction::Left);
-	emanager->CreateEnemy(etm->GetEnemyTypeData(1), K_Math::Vector3(10, 0, 0), Status::Direction::Right);
 
 	//プレイヤー
 	Player* player = new Player();

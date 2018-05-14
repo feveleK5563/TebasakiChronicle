@@ -2,6 +2,7 @@
 #include "EnemyMove.h"
 #include "EnemyMoveTransition.h"
 #include "../../../BaseClass/ImageManager/AnimationCharaChip.h"
+#include "../../../Helper.h"
 
 //敵動作のパターンを作成するよ！
 class EnemyMovePattern
@@ -24,6 +25,18 @@ public:
 						float* spdarr, bool* irarr, int* tiarr, int pnum, int tmnum):
 			moveIdArr(miarr), skillIdArr(siarr), durationTimeArr(dtarr), srcArr(srcarr), sheetArr(shtarr), 
 			spdArr(spdarr), isRoopArr(irarr), transitionIdArr(tiarr), patternNum(pnum), totalMoveNum(tmnum){}
+
+		~MoveSetUpData()
+		{
+			Memory::SafeDelete(moveIdArr);
+			Memory::SafeDelete(skillIdArr);
+			Memory::SafeDelete(durationTimeArr);
+			Memory::SafeDelete(srcArr);
+			Memory::SafeDelete(sheetArr);
+			Memory::SafeDelete(spdArr);
+			Memory::SafeDelete(isRoopArr);
+			Memory::SafeDelete(transitionIdArr);
+		}
 	};
 
 private:

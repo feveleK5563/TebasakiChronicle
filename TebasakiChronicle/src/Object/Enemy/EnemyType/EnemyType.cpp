@@ -1,11 +1,11 @@
 #include "EnemyType.h"
 
-EnemyType::EnemyType(const std::string& texPath, const ParameterData& param, const CollisionData& col) :
+EnemyType::EnemyType(const ParameterData& param, const CollisionData& col) :
 	paramData(param),
 	collisionData(col),
 	emSet(new EnemyMoveSet())
 {
-	textureData = CST::LoadAndGetTexture(param.textureName, texPath);
+	textureData = CST::LoadAndGetTexture(param.textureName, param.texturePath);
 }
 
 EnemyType::~EnemyType()

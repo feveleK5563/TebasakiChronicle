@@ -27,6 +27,7 @@
     <ClCompile Include="src\BaseClass\Move.cpp" />
     <ClCompile Include="src\BaseClass\Status\Status.cpp" />
     <ClCompile Include="src\CSTList.cpp" />
+    <ClCompile Include="src\Loader\EnemyLoader.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Object\Enemy\Enemy.cpp" />
     <ClCompile Include="src\Object\Enemy\EnemyController.cpp" />
@@ -56,6 +57,7 @@
     <ClInclude Include="src\BaseClass\Status\Status.h" />
     <ClInclude Include="src\CSTList.h" />
     <ClInclude Include="src\Helper.h" />
+    <ClInclude Include="src\Loader\EnemyLoader.h" />
     <ClInclude Include="src\Object\Enemy\Enemy.h" />
     <ClInclude Include="src\Object\Enemy\EnemyController.h" />
     <ClInclude Include="src\Object\Enemy\EnemyManager.h" />
