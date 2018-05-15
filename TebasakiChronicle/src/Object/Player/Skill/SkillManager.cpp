@@ -7,9 +7,12 @@
 //コンストラクタ
 //----------------------------------------------------------------
 SkillManager::SkillManager()
-	: skillChangeFlag(false)
+	: registFlag(false), createSkillFlag(false)
 {
-
+	for (int i = 0; i < 5; ++i)
+	{
+		skillDatas[i].Clear();
+	}
 }
 
 //----------------------------------------------------------------
@@ -17,14 +20,7 @@ SkillManager::SkillManager()
 //----------------------------------------------------------------
 SkillManager::~SkillManager()
 {
-	for (auto it : skillObj)
-	{
-		if (it != nullptr)
-		{
-			delete it;
-			it = nullptr;
-		}
-	}
+	
 }
 
 
@@ -51,14 +47,7 @@ bool	SkillManager::CheckSkillID(const int& skillID_)
 //!@param[in] num 番号
 void	SkillManager::CreateSkill(const int& num)
 {
-	//番号の種類のオブジェクトを生成
-	//ここで、skllTypeに応じたものを生成
-
-	//持っているスキルデータを生成する
-	skill.emplace_back(CreateSkillType(skillDatas[num].GetSkillID()));
-	
-	skillObj.emplace_back(new SkillObject(skillDatas[num].GetSkillType(), skillDatas[num].GetAnimCharaChip()));
-
+	skill.emplace_back(CreateSkillType(skillDatas[num].GetSkillID(),num));
 }
 
 //!@brief SkillIDが0(存在しない)でないかをチェック
@@ -92,8 +81,6 @@ bool	SkillManager::ReceiveSkillAndCharaChip(const Enemy::SkillAndCharaChip& skil
 	skillDatas[skillNum - 1].SetSkillAppearPos(*skill.pos);
 
 	std::cout << "スキルデータを受け取りました" << std::endl;
-	std::cout << "受け取る前のSkillID:" << *skill.skillId << std::endl;
-	std::cout << "受け取ったあとのSkillID:" << skillDatas[skillNum - 1].GetSkillID() << std::endl;
 	return true;
 }
 
@@ -101,29 +88,35 @@ bool	SkillManager::ReceiveSkillAndCharaChip(const Enemy::SkillAndCharaChip& skil
 //!@brief SkillIDによってスキル生成するものを変える
 //!@param[in] SkillType スキルの種類
 //!@return スキルの種類(派生クラス)
-SkillType*	SkillManager::CreateSkillType(const int& skillID_)
+SkillType*	SkillManager::CreateSkillType(const int& skillID_,const int& btn)
 {
-	switch (skillID_) {
-	case 0:
-		return new SkillSword(10,3,K_Math::Vector3(0,0,0));
-	case 2:
-		//return new Walk();
-	default:
-		return nullptr;
-	}
-}
+	SkillType*	skillType = nullptr;
 
-
-//!@brief Skillを交換するのか使用するかのチェック
-//!@return スキルを交換するならtrue、使用するならfalse
-bool	SkillManager::CheckSkillChangeFlag()
-{
-	if (!skillChangeFlag)
+	//生成する前に使用回数があるかチェック
+	if (skillDatas[btn].CheckUseNum())
 	{
-		return false;
+		switch (skillID_) {
+		case 0:
+			skillType = new SkillSword(skillDatas[btn].GetContinueTime(), skillDatas[btn].GetDistance(), object, 
+				skillDatas[btn].GetSkillImageName(), skillDatas[btn].GetAnimCharaChip());
+			break;
+		case 2:
+			//return new Walk();
+		default:
+			return nullptr;
+		}
+		//生成した後に
+		//スキルデータの使用回数を減らす
+		skillDatas[btn].CountDownUseNum();
 	}
-	return true;
+	else
+	{
+		skillDatas[btn].Clear();	//クリアし続ける
+	}
+	return skillType;
 }
+
+
 
 
 //!@brief Skillを登録する
@@ -140,16 +133,20 @@ void	SkillManager::RegistSkill(const int& num)
 			skillDatas[num].SetSkillID(skillDatas[skillNum - 1].GetSkillID());
 			skillDatas[num].SetSkillType(&skillDatas[skillNum - 1].GetSkillType());
 			skillDatas[num].SetSkillImageName(skillDatas[skillNum - 1].GetSkillImageName());
+			skillDatas[num].SetAnimCharaChip(&skillDatas[skillNum - 1].GetAnimCharaChip());
 			skillDatas[num].SetSkillAppearPos(skillDatas[skillNum - 1].GetSkillAppearPos());
-
+			skillDatas[skillNum - 1].Clear();
 		}
 		else
 		{
+			skillDatas[num].Clear();
 			//前のデータを削除して、新しいスキルデータを渡す
 			skillDatas[num].SetSkillID(skillDatas[skillNum - 1].GetSkillID());
 			skillDatas[num].SetSkillType(&skillDatas[skillNum - 1].GetSkillType());
 			skillDatas[num].SetSkillImageName(skillDatas[skillNum - 1].GetSkillImageName());
+			skillDatas[num].SetAnimCharaChip(&skillDatas[skillNum - 1].GetAnimCharaChip());
 			skillDatas[num].SetSkillAppearPos(skillDatas[skillNum - 1].GetSkillAppearPos());
+			skillDatas[skillNum - 1].Clear();
 		}
 	}
 }
@@ -157,53 +154,58 @@ void	SkillManager::RegistSkill(const int& num)
 //!@brief 使用するか登録するか判断し、それぞれの処理を行う
 void	SkillManager::Process(const int& btnNum)
 {
-	if (CheckSkillChangeFlag())
+	createSkillFlag = false;	//常に使用しない
+
+	//登録状態のとき
+	if (CheckRegistFlag())
 	{
 		RegistSkill(btnNum);
+		skillDatas[btnNum].DecideSkillParam();	//使用回数を決定
+		ChangeRegistFlag(false);				//登録モード終了
 		std::cout << "スキルを" << btnNum << "に登録" << std::endl;
-		ChangeSkillFlag(false);
+	}
+	else   //ここのelseをはずすと登録と同時にスキル使用可能
+	//スキルを存在するとき
+	if (skillDatas[btnNum].CheckUseNum())
+	{
+		createSkillFlag = true;
+		CreateSkill(btnNum);
+		std::cout << "スキル:" << btnNum << "使いました" << std::endl;
 	}
 	else
 	{
-		CreateSkill(btnNum);
-		std::cout << "スキルを" << btnNum << "使いました" << std::endl;
+		createSkillFlag = false;
+		std::cout << "スキルがありません" << std::endl;
 	}
 }
 
 
-//!@brief スキルを交換するかのフラグ切り替え
-//!@param[in] skillChangeFlag_ スキルチェンジフラグ
-void	SkillManager::ChangeSkillFlag(bool skillChangeFlag_)
+
+//!@brief オブジェクトのデータを参照
+//!@param[in] obj ゲームオブジェクトの参照
+void	SkillManager::SetObjectData(const GameObject& obj)
 {
-	skillChangeFlag = skillChangeFlag_;
+	object = obj;
 }
 
 
 //!@brief 更新処理
 void	SkillManager::UpDate()
 {
-	for (auto it = skill.begin(); it != skill.end(); ++it)
+	for (auto it = skill.begin(); it != skill.end();)
 	{
 		if ((*it) != nullptr)
 		{
-			(*it)->UpDate();
-		}
-	}
-	for (auto it = skillObj.begin(); it != skillObj.end();)
-	{
-		if ((*it) != nullptr)
-		{
-			(*it)->UpDate();
-			//時間が来たらvectorから排除
-			if ((*it)->CheckContinueTime())
+			if ((*it)->KillTime())
 			{
 				delete (*it);
 				(*it) = nullptr;
-				it = skillObj.erase(it);
+				it = skill.erase(it);
 			}
 			else
 			{
-				++it;
+				(*it)->UpDate();
+				it++;
 			}
 		}
 	}
@@ -220,19 +222,28 @@ void	SkillManager::Render()
 			(*it)->Render();
 		}
 	}
-	for (auto it = skillObj.begin(); it != skillObj.end(); ++it)
-	{
-		if ((*it) != nullptr)
-		{
-			(*it)->Render();
-		}
-	}
 }
 
-//private:
 
-//!@brief SkillIDに基づいた、SkillObjectを生成する
-void	SkillManager::Create()
+
+//!@brief 登録フラグの切り替え
+//!@param[in] 登録フラグ registFlag
+void	SkillManager::ChangeRegistFlag(bool registFlag_)
 {
+	registFlag = registFlag_;
+}
 
+//!@brief 現在の登録フラグの取得
+//!@return 登録状態ならtrue
+bool	SkillManager::CheckRegistFlag() const
+{
+	return registFlag;
+}
+
+
+//!@brief 現在の使用中フラグの取得
+//!@return 使用中ならtrue
+bool	SkillManager::CheckCreateSkillFlag() const
+{
+	return createSkillFlag;
 }

@@ -6,7 +6,8 @@
 //----------------------------------------------------------------
 SkillData::SkillData()
 {
-
+	skillID = -1;
+	Clear();
 }
 
 //----------------------------------------------------------------
@@ -115,4 +116,83 @@ void	SkillData::SetSkillImageName(const std::string& skillImageName_)
 void	SkillData::SetSkillAppearPos(const K_Math::Vector3& appearPos_)
 {
 	appearPos = appearPos_;
+}
+
+//!@brief 中身のデータをすべてクリアする
+void	SkillData::Clear()
+{
+	skillID = -1;				//スキルID
+	skillType = nullptr;		//スキルの種類
+	spriteObj = nullptr;		//スプライト
+	animCharaChip = nullptr;	//アニメーションキャラチップ
+
+	skillImageName = "";					//スキルの画像名
+	appearPos = K_Math::Vector3(0,0,0);		//出現位置
+	
+	useNum = 0;			//使用回数を0
+	continueTime = 0;
+	distance = 0;
+}
+
+
+//!@brief 使用回数をスキルIDで決める
+void	SkillData::DecideSkillParam()
+{
+	switch (skillID) {
+	case 0:
+		useNum = 10;			//使用回数10回
+		continueTime = 120;		//継続時間120フレーム
+		distance = 30;			//プレイヤーからの距離30
+		break;
+	case 1:
+		useNum = 7;
+		continueTime = 60;
+		distance = 50;
+		break;
+	default:
+		useNum = 0;
+		continueTime = 0;
+		distance = 0;
+		break;
+	}
+}
+
+//!@brief 使用回数を設定
+void	SkillData::SetUseNum(const int& useNum_)
+{
+	useNum = useNum_;
+}
+//!@brief 現在の使用回数を取得
+int		SkillData::GetNowUseNum() const
+{
+	return useNum;
+}
+//!@brief 使用回数が0以上かのチェック
+bool	SkillData::CheckUseNum()
+{
+	if (useNum <= 0)
+	{
+		return false;
+	}
+	return true;
+}
+//!@brief 使用回数を減らす処理
+void	SkillData::CountDownUseNum()
+{
+	useNum--;
+}
+
+
+//!@brief 継続時間の取得
+//!@return 継続時間データ
+int		SkillData::GetContinueTime() const
+{
+	return continueTime;
+}
+
+//!@brief 距離の取得
+//!@return 距離データ
+float	SkillData::GetDistance() const 
+{
+	return distance;
 }

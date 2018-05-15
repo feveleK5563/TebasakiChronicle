@@ -1,5 +1,4 @@
 #pragma once
-#include "SkillData.h"
 #include "../src/Object/GameObject.h"
 #include "../src/BaseClass/Collision/CollisionManager.h"
 
@@ -11,15 +10,25 @@
 class SkillObject
 {
 public:
-	explicit SkillObject(const SkillType& skillType_, const AnimationCharaChip& animCharaChip);
+	
+	//!@brief SkillTypeから情報をもらい当たり判定付きオブジェクトを生成
+	//!@param[in] obj ゲームオブジェクトの参照
+	//!@param[in] distance 距離
+	//!@param[in] imageName 画像名
+	//!@param[in] animCharaChip	アニメーションキャラチップ
+	SkillObject(GameObject& obj,
+				const float& distance,
+				const std::string& imageName,
+				const AnimationCharaChip& animCharaChip);
+
 	~SkillObject();
 
 	//!@brief SkillTypeに応じた効果処理
 	void	SkillEffect();
 
-	//!@brief SkillObject自身が消えるかの判断
-	//!@return 消える時間が来たらtrue
-	bool	CheckContinueTime();
+	//!@brief 向きを返す
+	//!@return -1.0fなら左,1.0fなら右
+	float	GetDir();
 
 	//!@brief 更新処理
 	void	UpDate();
@@ -31,5 +40,4 @@ private:
 	GameObject					object;	//ゲームオブジェクト
 	K_Physics::CollisionShape*	shape;	//ベースコリジョン
 	CollisionManager		cManager;	//コリジョン管理者
-	int						continueTime;	//継続時間
 };

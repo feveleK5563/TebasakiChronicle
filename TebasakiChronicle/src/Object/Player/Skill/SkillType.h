@@ -1,5 +1,7 @@
 #pragma once
 #include "K_Math\MyMathFanctions.h"
+#include "SkillObject.h"
+
 
 //----------------------------------------------------------
 //スキルの種類のインターフェイス
@@ -10,18 +12,27 @@ class SkillType
 {
 protected:
 	//!@brief コンストラクタ
-	//!@param[in] maxUseNum_ 最大使用回数
 	//!@param[in] continueTime_ 継続時間
+	//!@param[in] distance_ 距離
 	//!@param[in] appearPos_ 出現位置
-	explicit SkillType(const int& maxUseNum_,const int& continueTime_,const K_Math::Vector3& appearPos_);
+	//!@param[in] animCharaChip アニメーションキャラチップ
+	explicit SkillType(const int& continueTime_,
+		const float& distance_,
+		GameObject& obj,
+		const std::string& textureName,
+		const AnimationCharaChip& animCharaChip);
 public:
-	virtual ~SkillType() {};
+	virtual ~SkillType();
 
 	virtual void	UpDate() = 0;
 	virtual void	Render() = 0;
 
+	virtual bool	KillTime() = 0;
+
 protected:
-	int				maxUseNum;		//最大使用回数
 	int				continueTime;	//継続時間
+	float			distance;		//距離
 	K_Math::Vector3	appearPos;		//出現位置
+	SkillObject*	skillObject;	//スキルの当たり判定など
 };
+

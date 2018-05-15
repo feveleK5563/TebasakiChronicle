@@ -95,6 +95,7 @@ void	Player::UpDate()
 
 	//スキルの使用---------------------
 	SkillBtnDown();
+	skillManager.SetObjectData(object);
 	skillManager.UpDate();
 
 	//当たり判定動作-------------------
@@ -164,7 +165,7 @@ void	Player::ReverseCameraGun()
 		//---------------------------------------------------
 		if (&cameraGun.GetSkillAndCharaChip() != nullptr)
 		{
-			skillManager.ChangeSkillFlag(true);
+			skillManager.ChangeRegistFlag(true);	//登録モードへ
 			//カメラガンからスキルデータを受け取る
 			skillManager.ReceiveSkillAndCharaChip(cameraGun.GetSkillAndCharaChip());
 		}

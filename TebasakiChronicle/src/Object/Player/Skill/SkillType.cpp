@@ -4,11 +4,27 @@
 //-----------------------------------------------------------
 //コンストラクタ
 //-----------------------------------------------------------
-SkillType::SkillType(const int& maxUseNum_, const int& continueTime_, const K_Math::Vector3& appearPos_)
-	:maxUseNum(maxUseNum_), continueTime(continueTime_), appearPos(appearPos_)
+SkillType::SkillType(const int& continueTime_, const float& distance_,
+	GameObject& obj,const std::string& textureName,const AnimationCharaChip& animCharaChip)
+	: continueTime(continueTime_), distance(distance_),appearPos(obj.GetPos())
 {
-
+	skillObject = new SkillObject(obj,distance,textureName,animCharaChip);
+	std::cout << "SkillObjectを生成しました" << std::endl;
 }
+
+//-----------------------------------------------------------
+//デストラクタ
+//-----------------------------------------------------------
+SkillType::~SkillType()
+{
+	if (skillObject != nullptr)
+	{
+		delete skillObject;
+		skillObject = nullptr;
+		std::cout << "SkillObjectを消去しました" << std::endl;
+	}
+}
+
 
 
 //-----------------------------------------------------------
@@ -26,3 +42,4 @@ void	SkillType::Render()
 {
 
 }
+

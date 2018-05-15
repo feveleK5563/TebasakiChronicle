@@ -62,6 +62,29 @@ public:
 	//!@param[in] appearPos_ 取得した出現位置
 	void	SetSkillAppearPos(const K_Math::Vector3& appearPos_);
 
+public:
+	//!@brief 中身のデータをすべてクリアする
+	void	Clear();
+
+	//!@brief スキルIDスキルのパラメータを決める
+	void	DecideSkillParam();
+	//!@brief 使用回数を設定
+	void	SetUseNum(const int& useNum_);
+	//!@brief 現在の使用回数を取得
+	int		GetNowUseNum() const;
+	//!@brief 使用回数があるかチェック
+	//!@return 0以上ならtrue
+	bool	CheckUseNum();
+	//!@brief 使用回数を減らす処理
+	void	CountDownUseNum();
+
+	//!@brief 継続時間の取得
+	//!@return 継続時間データ
+	int		GetContinueTime() const;
+	//!@brief 距離の取得
+	//!@return 距離データ
+	float	GetDistance() const;
+
 private:
 	int							skillID;		//スキルID
 	SkillType*					skillType;		//スキルの種類
@@ -70,4 +93,7 @@ private:
 
 	std::string					skillImageName;	//スキルの画像名
 	K_Math::Vector3				appearPos;		//出現位置
+	int							useNum;			//使用回数
+	int							continueTime;	//継続時間
+	float						distance;		//距離
 };

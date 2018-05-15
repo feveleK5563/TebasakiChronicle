@@ -10,11 +10,21 @@ class SkillSword : public SkillType
 {
 public:
 	//!@brief コンストラクタ
-	//!@param[in] maxUseNum_ 最大使用回数
 	//!@param[in] continueTime_ 継続時間
+	//!@param[in] distance_ 距離
 	//!@param[in] appearPos_ 出現位置
-	explicit SkillSword(const int& maxUseNum_, const int& continueTime_, const K_Math::Vector3& appearPos_);
-	
+	explicit SkillSword(const int& continueTime_, const float& distance_,
+		GameObject& obj,const std::string& textureName,const AnimationCharaChip& animCharaChip);
+	~SkillSword();
+
+	//!@brief 更新処理
 	void	UpDate();
+	//!@brief 描画処理
 	void	Render();
+
+	//!@brief 自身が消える時間を計測
+	//!@return 0秒になったらtrue
+	bool	KillTime();
+
+private:
 };

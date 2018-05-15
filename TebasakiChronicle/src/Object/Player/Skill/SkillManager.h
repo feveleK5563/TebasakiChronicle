@@ -37,12 +37,9 @@ public:
 
 	//!@brief SkillIDによってスキル生成するものを変える
 	//!@param[in] skillID_ スキルのID
+	//!@param[in] btn ボタン番号
 	//!@return スキルの種類(派生クラス)
-	SkillType*	CreateSkillType(const int& skillID_);
-
-	//!@brief Skillを交換するのか使用するかのチェック
-	//!@return スキルを交換するならtrue、使用するならfalse
-	bool	CheckSkillChangeFlag();
+	SkillType*	CreateSkillType(const int& skillID_,const int& btn);
 
 	//!@brief Skillを登録する
 	void	RegistSkill(const int& num);
@@ -50,23 +47,34 @@ public:
 	//!@brief 使用するか登録するか判断し、それぞれの処理を行う
 	void	Process(const int& btnNum);
 
-	//!@brief スキルを交換するかのフラグ切り替え
-	//!@param[in] skillChangeFlag_ スキルチェンジフラグ
-	void	ChangeSkillFlag(bool skillChangeFlag_);
+
+	//!@brief オブジェクトのデータを参照
+	//!@param[in] obj ゲームオブジェクトの参照
+	void	SetObjectData(const GameObject& obj);
+
 
 	//!@brief 更新処理
 	void	UpDate();
 	//!@brief 描画処理
 	void	Render();
+	
+public:
+	//!@brief 登録フラグの切り替え
+	//!@param[in] registFlag_ 登録フラグ
+	void	ChangeRegistFlag(bool registFlag_);
+	//!@brief 現在の登録フラグの取得
+	//!@return 登録状態ならtrue
+	bool	CheckRegistFlag() const;
 
-private:
-	//!@brief SkillIDに基づいた、SkillObjectを生成する
-	void	Create();
+	//!@brief 現在の使用中フラグの取得
+	//!@return 使用中ならtrue
+	bool	CheckCreateSkillFlag() const;
 
 private:
 	static const int			skillNum = 5;	//スキル数
 	std::array<SkillData, skillNum>	skillDatas;	//スキルデータ
-	std::vector<SkillObject*>	skillObj;		//スキルオブジェクト
-	bool						skillChangeFlag;//スキルを交換するかのフラグ
-	std::vector<SkillType*>		skill;
+	std::vector<SkillType*>		skill;			//スキル
+	GameObject					object;			//ゲームオブジェクト
+	bool						registFlag;		//登録フラグ
+	bool						createSkillFlag;//使用中フラグ
 };
