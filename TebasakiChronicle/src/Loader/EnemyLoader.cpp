@@ -72,12 +72,7 @@ void EnemyLoader::LoadEnemyMoveData(std::ifstream& ifs, EnemyTypeManager::EnemyD
 		}
 
 		//動作に合わせたアニメーションの設定
-		K_Math::Box2D* srcArr = new K_Math::Box2D[totalMoveNum]{
-			{ 0,   240, 32, 48 },
-		{ 400, 240, 32, 48 },
-		{ 96,  240, 40, 48 },
-		{ 336, 240, 32, 48 }
-		};
+		K_Math::Box2D* srcArr = new K_Math::Box2D[totalMoveNum];
 		int* sheetArr = new int[totalMoveNum];
 		float* spdArr = new float[totalMoveNum];
 		bool* irArr = new bool[totalMoveNum];

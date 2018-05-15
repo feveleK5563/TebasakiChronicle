@@ -34,7 +34,8 @@ int EnemyMoveSet::EMove(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, C
 	//パターンの遷移条件を満たしていたらパターン変更
 	for (int i = 0; i < (int)empattern.size(); ++i)
 	{
-		if (empattern[nowPatternOrder]->GetTransition(i, colmanager, status))
+		if (i != nowPatternOrder &&
+			empattern[nowPatternOrder]->GetTransition(i, colmanager, status, endMovePattern))
 		{
 			PatternTransition(nowMoveOrder, nowPatternOrder, timeCnt, i);
 			break;

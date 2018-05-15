@@ -4,40 +4,42 @@ EnemyMoveTransition::EnemyMoveTransition(){}
 EnemyMoveTransition::~EnemyMoveTransition(){}
 
 //-----------------------------------------------------------------------------
-//0：常にfalseを返す
-bool ETransition_NotTrans::Transition(CollisionManager& cm, Status& status)
+//0：遷移しない
+bool ETransition_NotTransition::Transition(CollisionManager& cm, Status& status, const bool endMovePattern)
 {
 	return false;
 }
 
 //-----------------------------------------------------------------------------
-//1：視界内にプレイヤーが入っているとき
-bool ETransition_PIntoView::Transition(CollisionManager& cm, Status& status)
+//1：一連の動作が終了したとき
+ETransition_EndMovePattern::ETransition_EndMovePattern(int transitionNum)
+{
+	if (transitionNum > 0)
+		isTrue = true;
+	else
+		isTrue = false;
+}
+bool ETransition_EndMovePattern::Transition(CollisionManager& cm, Status& status, const bool endMovePattern)
+{
+	if (endMovePattern == true)
+		return true == isTrue;
+
+	return false == isTrue;
+}
+
+//-----------------------------------------------------------------------------
+//2：視界内にプレイヤーが入っているとき
+ETransition_PlayerIntoVisibility::ETransition_PlayerIntoVisibility(int transitionNum)
+{
+	if (transitionNum > 0)
+		isTrue = true;
+	else
+		isTrue = false;
+}
+bool ETransition_PlayerIntoVisibility::Transition(CollisionManager& cm, Status& status, const bool endMovePattern)
 {
 	if (cm.CheckHitSubCollisionObejct(1))
-		return true;
+		return true == isTrue;
 
-	return false;
-}
-
-//-----------------------------------------------------------------------------
-//2：視界内に入っているプレイヤーが自身の反対方向に移動したとき
-bool ETransition_PMoveOtherSide::Transition(CollisionManager& cm, Status& status)
-{
-	//視界用コリジョンからプレイヤーの座標を受け取る
-	for (auto it : cm.GetConflictionObjectsTag(1))
-	{
-		Status* pst = (Status*)it->userData;
-		if (status.GetState() == Status::Right)
-		{
-			if ((status.GetPos().x() - pst->GetPos().x()) > 0.f)
-				return true;
-		}
-		else
-		{
-			if ((status.GetPos().x() - pst->GetPos().x()) < 0.f)
-				return true;
-		}
-	}
-	return false;
+	return false == isTrue;
 }

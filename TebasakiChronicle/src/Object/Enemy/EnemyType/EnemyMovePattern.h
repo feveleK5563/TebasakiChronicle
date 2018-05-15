@@ -1,4 +1,5 @@
 #pragma once
+#include <math.h>
 #include "EnemyMove.h"
 #include "EnemyMoveTransition.h"
 #include "../../../BaseClass/ImageManager/AnimationCharaChip.h"
@@ -28,14 +29,14 @@ public:
 
 		~MoveSetUpData()
 		{
-			Memory::SafeDelete(moveIdArr);
-			Memory::SafeDelete(skillIdArr);
-			Memory::SafeDelete(durationTimeArr);
-			Memory::SafeDelete(srcArr);
-			Memory::SafeDelete(sheetArr);
-			Memory::SafeDelete(spdArr);
-			Memory::SafeDelete(isRoopArr);
-			Memory::SafeDelete(transitionIdArr);
+			Memory::SafeDeleteArr(moveIdArr);
+			Memory::SafeDeleteArr(skillIdArr);
+			Memory::SafeDeleteArr(durationTimeArr);
+			Memory::SafeDeleteArr(srcArr);
+			Memory::SafeDeleteArr(sheetArr);
+			Memory::SafeDeleteArr(spdArr);
+			Memory::SafeDeleteArr(isRoopArr);
+			Memory::SafeDeleteArr(transitionIdArr);
 		}
 	};
 
@@ -78,5 +79,5 @@ public:
 	const std::vector<AnimationCharaChip*>& GetNowAnimChip();
 
 	//w’è”Ô†‚Ì‘JˆÚğŒ‚ğÀs‚µAtf‚ğ•Ô‚·
-	bool GetTransition(int num, CollisionManager& colmanager, Status& status);
+	bool GetTransition(int num, CollisionManager& colmanager, Status& status, const bool endMovePattern);
 };

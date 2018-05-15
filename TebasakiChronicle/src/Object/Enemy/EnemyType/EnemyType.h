@@ -65,17 +65,17 @@ public:
 	K_Graphics::Texture* GetTexture();
 
 	//地形用コリジョンデータの生成と取得
-	K_Physics::CollisionData* GetBaseCollisionData();
+	K_Physics::CollisionData* CreateAndGetBaseCollisionData();
 	//被ダメ用コリジョンデータの生成と取得
-	K_Physics::CollisionData* GetRecieveDamageCollisionData();
+	K_Physics::CollisionData* CreateAndGetRecieveDamageCollisionData();
 	//被カメラガン用コリジョンデータの生成と取得
-	K_Physics::CollisionData* GetRecieveCameraCollisionData();
+	K_Physics::CollisionData* CreateAndGetRecieveCameraCollisionData();
 	//視界用コリジョンデータの生成と取得
-	K_Physics::CollisionData* GetFieldofviewCollisionData();
+	K_Physics::CollisionData* CreateAndGetFieldofviewCollisionData();
 	//攻撃動作遷移用コリジョンの生成と取得
-	K_Physics::CollisionData* GetAttackAreaCollisionData();
+	K_Physics::CollisionData* CreateAndGetAttackAreaCollisionData();
 	//足元用コリジョンの生成と取得
-	K_Physics::CollisionData* GetCheckFootCollisionData();
+	K_Physics::CollisionData* CreateAndGetCheckFootCollisionData();
 	//頭上用コリジョンの生成と取得
-	K_Physics::CollisionData* GetCheckHeadCollisionData();
+	K_Physics::CollisionData* CreateAndGetCheckHeadCollisionData();
 };

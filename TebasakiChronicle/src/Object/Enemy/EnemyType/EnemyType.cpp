@@ -64,43 +64,43 @@ K_Graphics::Texture* EnemyType::GetTexture()
 
 //-----------------------------------------------------------------------------
 //地形用コリジョンデータの生成と取得
-K_Physics::CollisionData* EnemyType::GetBaseCollisionData()
+K_Physics::CollisionData* EnemyType::CreateAndGetBaseCollisionData()
 {
 	return CC::CreateCollisionObject(collisionData.baseShape, false, CollisionMask::Ground, CollisionMask::Non);
 }
 //-----------------------------------------------------------------------------
 //被ダメ用コリジョンデータの生成と取得
-K_Physics::CollisionData* EnemyType::GetRecieveDamageCollisionData()
+K_Physics::CollisionData* EnemyType::CreateAndGetRecieveDamageCollisionData()
 {
 	return CC::CreateCollisionObject(collisionData.receiveShape, true, CollisionMask::TakeDamageEnemy, CollisionMask::EnemyCollision, collisionData.receivePos);
 }
 //-----------------------------------------------------------------------------
 //被カメラガン用コリジョンデータの生成と取得
-K_Physics::CollisionData* EnemyType::GetRecieveCameraCollisionData()
+K_Physics::CollisionData* EnemyType::CreateAndGetRecieveCameraCollisionData()
 {
 	return CC::CreateCollisionObject(collisionData.receiveShape, true, CollisionMask::CameraGunCollision, CollisionMask::EnemyCamCollision, collisionData.receivePos);
 }
 //-----------------------------------------------------------------------------
 //視界用コリジョンデータの生成と取得
-K_Physics::CollisionData* EnemyType::GetFieldofviewCollisionData()
+K_Physics::CollisionData* EnemyType::CreateAndGetFieldofviewCollisionData()
 {
 	return CC::CreateCollisionObject(collisionData.visibilityShape, true, CollisionMask::PlayerCollision, CollisionMask::Non, collisionData.visibilityPos);
 }
 //-----------------------------------------------------------------------------
 //攻撃動作遷移用コリジョンの生成と取得
-K_Physics::CollisionData* EnemyType::GetAttackAreaCollisionData()
+K_Physics::CollisionData* EnemyType::CreateAndGetAttackAreaCollisionData()
 {
 	return CC::CreateCollisionObject(collisionData.attackAreaShape, true, CollisionMask::PlayerCollision, CollisionMask::Non, collisionData.attackAreaPos);
 }
 //-----------------------------------------------------------------------------
 //足元用コリジョンの生成と取得
-K_Physics::CollisionData* EnemyType::GetCheckFootCollisionData()
+K_Physics::CollisionData* EnemyType::CreateAndGetCheckFootCollisionData()
 {
 	return CC::CreateCollisionObject(collisionData.checkShape, true, CollisionMask::Ground, CollisionMask::Non, collisionData.checkFootPos);
 }
 //-----------------------------------------------------------------------------
 //頭上用コリジョンの生成と取得
-K_Physics::CollisionData* EnemyType::GetCheckHeadCollisionData()
+K_Physics::CollisionData* EnemyType::CreateAndGetCheckHeadCollisionData()
 {
 	return CC::CreateCollisionObject(collisionData.checkShape, true, CollisionMask::Ground, CollisionMask::Non, collisionData.checkHeadPos);
 }

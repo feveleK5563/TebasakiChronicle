@@ -58,7 +58,7 @@ void EMove_FrontAttack::FirstMove(CollisionManager& cmanager, TemporaryCollision
 	tempmanager.CreateTemporaryCollision(
 		CC::CreateBoxShape(14.f, 20.f, 10.f),
 		CollisionMask::Non,
-		CollisionMask::TakeDamageEnemy,
+		CollisionMask::TakeDamagePlayer,
 		status.GetPos() + relative,
 		K_Math::Vector3(0, 0, 0),
 		status.GetDirection(),

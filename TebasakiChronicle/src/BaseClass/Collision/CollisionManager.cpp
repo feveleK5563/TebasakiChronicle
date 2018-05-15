@@ -98,10 +98,31 @@ void CollisionManager::SetSubCollisionTagIndex(int subNum, int indexNum)
 	subCollision[subNum]->collision->tag.tagIndex = indexNum;
 }
 //-----------------------------------------------------------------------------
-//サブコリジョンのタグを設定する
+//指定したサブコリジョンのタグ(UserData)を設定する
 void CollisionManager::SetSubCollisionUserData(int subNum, void* data)
 {
 	subCollision[subNum]->collision->tag.userData = data;
+}
+
+//-----------------------------------------------------------------------------
+//指定したサブコリジョンのマスクを設定する
+void CollisionManager::SetSubCollisionMyselfMask(int subNum, int myselfMask)
+{
+	subCollision[subNum]->collision->SetMyselfMask(myselfMask);
+}
+void CollisionManager::SetSubCollisionGiveMask(int subNum, int giveMask)
+{
+	subCollision[subNum]->collision->SetGiveMask(giveMask);
+}
+//-----------------------------------------------------------------------------
+//指定したサブコリジョンのマスクを調べる
+int CollisionManager::GetSubCollisionMyselfMask(int subNum)
+{
+	return subCollision[subNum]->collision->GetMyselfMask();
+}
+int CollisionManager::GetSubCollisionGiveMask(int subNum)
+{
+	return subCollision[subNum]->collision->GetGiveMask();
 }
 
 //-----------------------------------------------------------------------------

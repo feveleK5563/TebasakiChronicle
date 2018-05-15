@@ -64,6 +64,13 @@ public:
 	//指定したサブコリジョンにタグ(UserData)を設定する
 	void SetSubCollisionUserData(int subNum, void* data);
 
+	//指定したサブコリジョンのマスクを設定する
+	void SetSubCollisionMyselfMask(int subNum, int myselfMask);
+	void SetSubCollisionGiveMask(int subNum, int giveMask);
+	//指定したサブコリジョンのマスクを調べる
+	int GetSubCollisionMyselfMask(int subNum);
+	int GetSubCollisionGiveMask(int subNum);
+
 	//ベースコリジョンを動かし、付随してサブの座標を設定する
 	//第三引数をtrueで軽量な処理(めり込み判定を行う場合はfalse推奨)
 	void MoveBaseCollision(K_Math::Vector3& moveVec, int direction, bool isLightness);

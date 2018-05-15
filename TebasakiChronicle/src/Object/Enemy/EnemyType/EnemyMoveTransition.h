@@ -4,35 +4,40 @@
 //動作パターン遷移の基底クラス
 class EnemyMoveTransition
 {
+protected:
+	bool isTrue;	//これがfalseだと戻り値のbool型が反転する
+
 public:
 	EnemyMoveTransition();
 	virtual ~EnemyMoveTransition();
 
-	virtual bool Transition(CollisionManager& cm, Status& status) = 0;
+	virtual bool Transition(CollisionManager& cm, Status& status, const bool endMovePattern) = 0;
 };
 
 //条件が重複する場合、パターン番号の若いほうが優先される
 
 //-----------------------------------------------
 //0：遷移しない
-class ETransition_NotTrans : public EnemyMoveTransition
+class ETransition_NotTransition : public EnemyMoveTransition
 {
 public:
-	bool Transition(CollisionManager& cm, Status& status);
+	bool Transition(CollisionManager& cm, Status& status, const bool endMovePattern);
 };
 
 //-----------------------------------------------
-//1：視界内にプレイヤーが入っているとき
-class ETransition_PIntoView : public EnemyMoveTransition
+//1：一連の動作が終了したとき
+class ETransition_EndMovePattern : public EnemyMoveTransition
 {
 public:
-	bool Transition(CollisionManager& cm, Status& status);
+	ETransition_EndMovePattern(int transitionNum);
+	bool Transition(CollisionManager& cm, Status& status, const bool endMovePattern);
 };
 
 //-----------------------------------------------
-//2：視界内に入っているプレイヤーが自身の反対方向に移動したとき
-class ETransition_PMoveOtherSide : public EnemyMoveTransition
+//2：視界内にプレイヤーが入っているとき
+class ETransition_PlayerIntoVisibility : public EnemyMoveTransition
 {
 public:
-	bool Transition(CollisionManager& cm, Status& status);
+	ETransition_PlayerIntoVisibility(int transitionNum);
+	bool Transition(CollisionManager& cm, Status& status, bool endMovePattern);
 };
