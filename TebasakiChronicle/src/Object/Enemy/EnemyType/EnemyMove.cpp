@@ -47,7 +47,7 @@ void EMove_Jump::EMove(CollisionManager& cmanager, TemporaryCollisionManager& te
 //3：前方に攻撃する
 void EMove_FrontAttack::CreateAttackCollision()
 {
-
+	//何もしない
 }
 void EMove_FrontAttack::FirstMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
@@ -55,6 +55,7 @@ void EMove_FrontAttack::FirstMove(CollisionManager& cmanager, TemporaryCollision
 	if (status.GetDirection() == Status::Direction::Left)
 		relative.x() *= -1;
 
+	//攻撃用コリジョンを作成
 	tempmanager.CreateTemporaryCollision(
 		CC::CreateBoxShape(14.f, 20.f, 10.f),
 		CollisionMask::Non,

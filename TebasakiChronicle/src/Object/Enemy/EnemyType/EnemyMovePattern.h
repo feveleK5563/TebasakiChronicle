@@ -78,6 +78,6 @@ public:
 	//アニメーションのキャラチップを返す
 	const std::vector<AnimationCharaChip*>& GetNowAnimChip();
 
-	//指定番号の遷移条件を実行し、tfを返す
-	bool GetTransition(int num, CollisionManager& colmanager, Status& status, const bool endMovePattern);
+	//指定番号の遷移条件を実行し、クリアしたらtrueを返す
+	bool IsTransition(int num, CollisionManager& colmanager, Status& status, const bool endMovePattern);
 };

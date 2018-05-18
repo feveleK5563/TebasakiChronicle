@@ -35,7 +35,7 @@ int EnemyMoveSet::EMove(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, C
 	for (int i = 0; i < (int)empattern.size(); ++i)
 	{
 		if (i != nowPatternOrder &&
-			empattern[nowPatternOrder]->GetTransition(i, colmanager, status, endMovePattern))
+			empattern[nowPatternOrder]->IsTransition(i, colmanager, status, endMovePattern))
 		{
 			PatternTransition(nowMoveOrder, nowPatternOrder, timeCnt, i);
 			break;

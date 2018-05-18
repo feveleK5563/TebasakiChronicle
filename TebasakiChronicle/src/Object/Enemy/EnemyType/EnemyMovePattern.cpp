@@ -101,19 +101,18 @@ void EnemyMovePattern::SetMoveAndTime(int moveNum, int skillId, int durationTime
 //動作パターン遷移条件を設定する
 void EnemyMovePattern::SetTransition(int transitionNum)
 {
-	emt.emplace_back();
-	switch (int(fabsf(transitionNum)))
+	switch (abs(transitionNum))
 	{
 	case 0:	//遷移しない
-		emt.back() = new ETransition_NotTransition();
+		emt.emplace_back(new EnemyMoveTransition(new ETransition_NotTransition(), transitionNum));
 		break;
 
 	case 1: //一連の動作が終了したとき
-		emt.back() = new ETransition_EndMovePattern(transitionNum);
+		emt.emplace_back(new EnemyMoveTransition(new ETransition_EndMovePattern(), transitionNum));
 		break;
 
 	case 2: //視界内にプレイヤーが入っているとき
-		emt.back() = new ETransition_PlayerIntoVisibility(transitionNum);
+		emt.emplace_back(new EnemyMoveTransition(new ETransition_PlayerIntoVisibility(), transitionNum));
 		break;
 	}
 }
@@ -126,8 +125,8 @@ const std::vector<AnimationCharaChip*>&  EnemyMovePattern::GetNowAnimChip()
 }
 
 //-----------------------------------------------------------------------------
-//指定番号の遷移条件を返す
-bool EnemyMovePattern::GetTransition(int num, CollisionManager& colmanager, Status& status, const bool endMovePattern)
+//指定番号の遷移条件を実行し、クリアしたらtrueを返す
+bool EnemyMovePattern::IsTransition(int num, CollisionManager& colmanager, Status& status, const bool endMovePattern)
 {
-	return emt[num]->Transition(colmanager, status, endMovePattern);
+	return emt[num]->IsTransition(colmanager, status, endMovePattern);
 }
