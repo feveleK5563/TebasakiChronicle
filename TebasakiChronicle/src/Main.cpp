@@ -8,6 +8,7 @@
 #include "Object/Enemy/EnemyManager.h"
 
 #include "Object/Player/Player.h"
+#include "MapPolygon.h"
 
 int main()
 {
@@ -37,8 +38,10 @@ int main()
 	//シェーダーリスト
 	CST::CreateShader("data/shader/SpriteShader.vs", "data/shader/SpriteShader.ps");
 	CST::CreateShader("data/shader/SimpleShader.vs", "data/shader/SimpleShader.ps");
+	CST::CreateShader("data/shader/VertexShader.vs", "data/shader/TextureSampler.ps"); //追加
+
 	//地形(仮)
-	CC::CreateCollisionObject(CC::CreateBoxShape(1000.f, 50.f, 10.f), false, CollisionMask::Non, CollisionMask::Ground, K_Math::Vector3(0, -80, 0));
+	//CC::CreateCollisionObject(CC::CreateBoxShape(1000.f, 50.f, 10.f), false, CollisionMask::Non, CollisionMask::Ground, K_Math::Vector3(0, -80, 0));
 
 	//敵の種類を作成
 	EnemyTypeManager* etm = new EnemyTypeManager();
@@ -53,6 +56,35 @@ int main()
 	Player* player = new Player();
 	player->Initliaze();
 
+	//モデルの使用例
+	//***********************************************************************
+	//テクスチャ
+	K_Graphics::TextureList* textureList = new K_Graphics::TextureList();
+
+	if (textureList->LoadTexture("fbxFile", "./data/image/player.tga"))
+	{
+		std::cout << "テクスチャGet" << std::endl;
+	}
+
+	//メッシュモデルクラス
+	K_Graphics::ModelDatas*	modelData;
+	//ファクトリを作成
+	K_Graphics::ModelDataFactory factory;
+	modelData = factory.LoadFBXModel("./data/model/testMap2d.fbx",textureList);
+
+	//手順2、データを元にモデルクラスを初期化
+	K_Graphics::MeshModel*	model = new K_Graphics::MeshModel(modelData);
+	//手順3,MeshModelをより扱いやすくするMeshObjectクラスを初期化
+	K_Graphics::MeshObject* object = new K_Graphics::MeshObject(model);
+
+	//マップの処理
+	K_Physics::MapPolygon* map = new K_Physics::MapPolygon("./data/model/testMap2d.fbx",CC::GetBulletPhysics(), CollisionMask::Non, CollisionMask::Ground);
+	
+	K_Math::Vector3 scale = { 10,50,40 };
+	K_Math::Vector3 rotation = { K_Math::DegToRad(-90),0,K_Math::DegToRad(-90) };
+	K_Math::Vector3 pos = { -120.0f,-50.0f,0.f };
+	//******************************************************************
+	
 	while (sc->IsSystemEnd() == false)
 	{
 		sc->ProcessSystem();
@@ -70,6 +102,20 @@ int main()
 		emanager->RenderAllEnemy();
 		player->Render();
 
+		//***************************
+		//MapPolygonの位置調整
+		map->GetRigidBody()->SetCollisionPosition(pos);
+		map->GetRigidBody()->SetCollisionRotation(rotation);
+		map->SetScaling(scale);
+		//***************************
+
+
+		//*****************************
+		//FBXモデルの描画
+		CST::GetShaderClass(2)->UseShader();
+		object->Draw(CST::GetPerspectiveCamera(), CST::GetShaderClass(2), pos, rotation, scale);
+		//*****************************
+
 		//CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 		sc->SwapBuffer();
 	}
@@ -78,6 +124,8 @@ int main()
 	delete etm;
 	delete emanager;
 	delete player;
+	
+	delete object;
 
 	CC::Delete();
 }

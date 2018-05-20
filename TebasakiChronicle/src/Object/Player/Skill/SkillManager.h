@@ -21,9 +21,6 @@ public:
 	//!@return IDが同じならtrue
 	bool	CheckSkillID(const int& skillID_);
 
-	//!@brief Skillを生成するボタンに対応してスキルを出現させる
-	//!@param[in] num 番号
-	void	CreateSkill(const int& num);
 
 	//!@brief SkillIDが0(存在しない)でないかをチェック
 	//!@param[in] skillID_ 取得したスキルID
@@ -35,22 +32,18 @@ public:
 	//!@return 受け取れるデータなら(正常に受け取れたなら)true
 	bool	ReceiveSkillAndCharaChip(const Enemy::SkillAndCharaChip& skill);
 
-	//!@brief SkillIDによってスキル生成するものを変える
-	//!@param[in] skillID_ スキルのID
-	//!@param[in] btn ボタン番号
-	//!@return スキルの種類(派生クラス)
-	SkillType*	CreateSkillType(const int& skillID_,const int& btn);
-
+	
 	//!@brief Skillを登録する
-	void	RegistSkill(const int& num);
+	//!@param[in] btnNum ボタン番号
+	void	RegistSkill(const int& btnNum);
+	//!@brief Skillを使用する
+	//!@param[in] btnNum ボタン番号
+	//!@param[in] obj オブジェクトの参照
+	void	UseSkill(const int& btnNum,GameObject& obj);
 
 	//!@brief 使用するか登録するか判断し、それぞれの処理を行う
-	void	Process(const int& btnNum);
+	void	Process(const int& btnNumconst,GameObject& obj);
 
-
-	//!@brief オブジェクトのデータを参照
-	//!@param[in] obj ゲームオブジェクトの参照
-	void	SetObjectData(const GameObject& obj);
 
 
 	//!@brief 更新処理
@@ -70,11 +63,17 @@ public:
 	//!@return 使用中ならtrue
 	bool	CheckCreateSkillFlag() const;
 
+
+private:
+	//!@brief 生成したSkillTypeからSkillObjを作成
+	//!@brief btn ボタン番号
+	//!@brief 成功したらtrue
+	bool	CreateSkillObject(const int& btn,GameObject& obj);
+
 private:
 	static const int			skillNum = 5;	//スキル数
 	std::array<SkillData, skillNum>	skillDatas;	//スキルデータ
-	std::vector<SkillType*>		skill;			//スキル
-	GameObject					object;			//ゲームオブジェクト
+	std::vector<SkillObject*>		skillObj;	//スキルオブジェクト
 	bool						registFlag;		//登録フラグ
 	bool						createSkillFlag;//使用中フラグ
 };

@@ -10,29 +10,24 @@
 //----------------------------------------------------------
 class SkillType
 {
-protected:
-	//!@brief コンストラクタ
-	//!@param[in] continueTime_ 継続時間
-	//!@param[in] distance_ 距離
-	//!@param[in] appearPos_ 出現位置
-	//!@param[in] animCharaChip アニメーションキャラチップ
-	explicit SkillType(const int& continueTime_,
-		const float& distance_,
-		GameObject& obj,
-		const std::string& textureName,
-		const AnimationCharaChip& animCharaChip);
 public:
+	//!@brief コンストラクタ
+	//!@param[in] 最大使用回数
+	//!@param[in] 出現距離
+	//!@param[in] 継続時間
+	SkillType(const int& maxUseNum,const float& appearDist,const int& continueTime);
 	virtual ~SkillType();
 
 	virtual void	UpDate() = 0;
-	virtual void	Render() = 0;
-
-	virtual bool	KillTime() = 0;
+	
+public:
+	int		GetContinueTime() const;
+	float	GetAppearDist() const;
+	int		GetMaxUseNum() const;
 
 protected:
 	int				continueTime;	//継続時間
-	float			distance;		//距離
-	K_Math::Vector3	appearPos;		//出現位置
-	SkillObject*	skillObject;	//スキルの当たり判定など
+	float			appearDist;		//出現距離
+	int				maxUseNum;		//最大使用回数
 };
 

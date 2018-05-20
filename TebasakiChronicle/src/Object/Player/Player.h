@@ -22,6 +22,7 @@ public:
 		Fall,		//落下中
 		TakeOff,	//飛ぶ前
 		Landing,	//着地
+		SkillRegist,//スキル登録中
 		SkillUse,	//スキル使用中
 	};
 
@@ -54,6 +55,11 @@ private:
 
 	//!@brief スキルのためのボタン
 	void	SkillBtnDown();
+
+	//!@brief スキルの登録処理
+	void	RegistSkill();
+	//!@brief スキルの使用処理
+	void	UseSkill();
 
 private:
 	Motion			motion;		//モーション

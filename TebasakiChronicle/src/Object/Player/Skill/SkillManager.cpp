@@ -43,13 +43,6 @@ bool	SkillManager::CheckSkillID(const int& skillID_)
 }
 
 
-//!@brief Skillを生成するボタンに対応してスキルを出現させる
-//!@param[in] num 番号
-void	SkillManager::CreateSkill(const int& num)
-{
-	skill.emplace_back(CreateSkillType(skillDatas[num].GetSkillID(),num));
-}
-
 //!@brief SkillIDが0(存在しない)でないかをチェック
 //!@param[in] skillID_ 取得したスキルID
 //!@return IDが0ならtrue
@@ -78,43 +71,14 @@ bool	SkillManager::ReceiveSkillAndCharaChip(const Enemy::SkillAndCharaChip& skil
 	skillDatas[skillNum - 1].SetSkillID(*skill.skillId);
 	skillDatas[skillNum - 1].SetSkillImageName(*skill.textureName);
 	skillDatas[skillNum - 1].SetAnimCharaChip(skill.nowCharaChip);
-	skillDatas[skillNum - 1].SetSkillAppearPos(*skill.pos);
+
 
 	std::cout << "スキルデータを受け取りました" << std::endl;
 	return true;
 }
 
 
-//!@brief SkillIDによってスキル生成するものを変える
-//!@param[in] SkillType スキルの種類
-//!@return スキルの種類(派生クラス)
-SkillType*	SkillManager::CreateSkillType(const int& skillID_,const int& btn)
-{
-	SkillType*	skillType = nullptr;
 
-	//生成する前に使用回数があるかチェック
-	if (skillDatas[btn].CheckUseNum())
-	{
-		switch (skillID_) {
-		case 0:
-			skillType = new SkillSword(skillDatas[btn].GetContinueTime(), skillDatas[btn].GetDistance(), object, 
-				skillDatas[btn].GetSkillImageName(), skillDatas[btn].GetAnimCharaChip());
-			break;
-		case 2:
-			//return new Walk();
-		default:
-			return nullptr;
-		}
-		//生成した後に
-		//スキルデータの使用回数を減らす
-		skillDatas[btn].CountDownUseNum();
-	}
-	else
-	{
-		skillDatas[btn].Clear();	//クリアし続ける
-	}
-	return skillType;
-}
 
 
 
@@ -134,7 +98,6 @@ void	SkillManager::RegistSkill(const int& num)
 			skillDatas[num].SetSkillType(&skillDatas[skillNum - 1].GetSkillType());
 			skillDatas[num].SetSkillImageName(skillDatas[skillNum - 1].GetSkillImageName());
 			skillDatas[num].SetAnimCharaChip(&skillDatas[skillNum - 1].GetAnimCharaChip());
-			skillDatas[num].SetSkillAppearPos(skillDatas[skillNum - 1].GetSkillAppearPos());
 			skillDatas[skillNum - 1].Clear();
 		}
 		else
@@ -145,23 +108,34 @@ void	SkillManager::RegistSkill(const int& num)
 			skillDatas[num].SetSkillType(&skillDatas[skillNum - 1].GetSkillType());
 			skillDatas[num].SetSkillImageName(skillDatas[skillNum - 1].GetSkillImageName());
 			skillDatas[num].SetAnimCharaChip(&skillDatas[skillNum - 1].GetAnimCharaChip());
-			skillDatas[num].SetSkillAppearPos(skillDatas[skillNum - 1].GetSkillAppearPos());
 			skillDatas[skillNum - 1].Clear();
 		}
 	}
 }
 
+//!@brief Skillを使用する
+//!@param[in] btnNum ボタン番号
+//!@param[in] obj ゲームオブジェクトの参照
+void	SkillManager::UseSkill(const int& btnNum,GameObject& obj)
+{
+	if (skillDatas[btnNum].CheckUseNum())
+	{
+		CreateSkillObject(btnNum,obj);
+	}
+}
+
 //!@brief 使用するか登録するか判断し、それぞれの処理を行う
-void	SkillManager::Process(const int& btnNum)
+void	SkillManager::Process(const int& btnNum,GameObject& obj)
 {
 	createSkillFlag = false;	//常に使用しない
 
 	//登録状態のとき
 	if (CheckRegistFlag())
 	{
-		RegistSkill(btnNum);
-		skillDatas[btnNum].DecideSkillParam();	//使用回数を決定
-		ChangeRegistFlag(false);				//登録モード終了
+		RegistSkill(btnNum);						//スキルを登録
+		skillDatas[btnNum].CreateSkillType();		//スキルの種類を生成
+
+		ChangeRegistFlag(false);					//登録モード終了
 		std::cout << "スキルを" << btnNum << "に登録" << std::endl;
 	}
 	else   //ここのelseをはずすと登録と同時にスキル使用可能
@@ -169,11 +143,19 @@ void	SkillManager::Process(const int& btnNum)
 	if (skillDatas[btnNum].CheckUseNum())
 	{
 		createSkillFlag = true;
-		CreateSkill(btnNum);
+		CreateSkillObject(btnNum,obj);	//SkillObjを生成
+
+		skillDatas[btnNum].CountUseNum();	//数をカウント
 		std::cout << "スキル:" << btnNum << "使いました" << std::endl;
 	}
 	else
 	{
+		if (skillDatas[btnNum].GetSkillID() != -1)
+		{
+			delete &skillDatas[btnNum].GetSkillType();
+			skillDatas[btnNum].Clear();
+		}
+
 		createSkillFlag = false;
 		std::cout << "スキルがありません" << std::endl;
 	}
@@ -181,31 +163,24 @@ void	SkillManager::Process(const int& btnNum)
 
 
 
-//!@brief オブジェクトのデータを参照
-//!@param[in] obj ゲームオブジェクトの参照
-void	SkillManager::SetObjectData(const GameObject& obj)
-{
-	object = obj;
-}
-
 
 //!@brief 更新処理
 void	SkillManager::UpDate()
 {
-	for (auto it = skill.begin(); it != skill.end();)
+	for (auto it = skillObj.begin(); it != skillObj.end();)
 	{
 		if ((*it) != nullptr)
 		{
-			if ((*it)->KillTime())
+			if ((*it)->CheckSurvivalTime())
 			{
-				delete (*it);
-				(*it) = nullptr;
-				it = skill.erase(it);
+				(*it)->UpDate();
+				++it;
 			}
 			else
 			{
-				(*it)->UpDate();
-				it++;
+				delete (*it);
+				(*it) = nullptr;
+				it = skillObj.erase(it);
 			}
 		}
 	}
@@ -215,7 +190,7 @@ void	SkillManager::UpDate()
 //!@brief 描画処理
 void	SkillManager::Render()
 {
-	for (auto it = skill.begin(); it != skill.end(); ++it)
+	for (auto it = skillObj.begin(); it != skillObj.end(); ++it)
 	{
 		if ((*it) != nullptr)
 		{
@@ -246,4 +221,14 @@ bool	SkillManager::CheckRegistFlag() const
 bool	SkillManager::CheckCreateSkillFlag() const
 {
 	return createSkillFlag;
+}
+
+
+//!@brief 生成したSkillTypeからSkillObjを作成
+//!@brief 成功したらtrue
+bool	SkillManager::CreateSkillObject(const int& btn,GameObject& obj)
+{
+	skillObj.emplace_back(new SkillObject(&skillDatas[btn].GetSkillType(),obj,
+		skillDatas[btn].GetSkillImageName(),skillDatas[btn].GetAnimCharaChip()));
+	return true;
 }

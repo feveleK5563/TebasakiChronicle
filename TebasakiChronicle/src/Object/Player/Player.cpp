@@ -95,14 +95,13 @@ void	Player::UpDate()
 
 	//スキルの使用---------------------
 	SkillBtnDown();
-	skillManager.SetObjectData(object);
 	skillManager.UpDate();
 
 	//当たり判定動作-------------------
 	cManager.MoveBaseCollision(object.GetMoveVec(), object.GetDirection(), false);
 
 	//位置同期処理---------------------
-	object.GetPos() = cManager.GetBaseCollisionObjectPosition();
+	object.SetPos(cManager.GetBaseCollisionObjectPosition());
 
 	//アニメーション-------------------
 	object.GetImage().Animation();
@@ -199,7 +198,7 @@ void	Player::Think()
 	case Idle:	//待機
 		if (controller.IsLStickInput()) { nowMotion = Walk; }
 		if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::R1)) { nowMotion = TakeOff; }
-		if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A)) { nowMotion = SkillUse; }
+		//if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A)) { nowMotion = SkillUse; }
 		break;
 	case Walk:	//歩く
 		//1フレーム
@@ -234,6 +233,9 @@ void	Player::Think()
 		{
 			nowMotion = Idle;
 		}
+	case SkillRegist:	//スキル登録中
+
+		break;
 	case SkillUse:	//スキル使用中
 		if (motionCnt > maxFrame / 3)
 		{
@@ -302,7 +304,17 @@ void	Player::Move()
 		break;
 	case Landing:	//着地
 		break;
+	case SkillRegist://スキル登録中
+		if (motionCnt == 0)
+		{
+			RegistSkill();
+		}
+		break;
 	case SkillUse:	//スキル使用中
+		if (motionCnt == 0)
+		{
+			UseSkill();
+		}
 		break;
 	}
 }
@@ -329,21 +341,75 @@ void	Player::SkillBtnDown()
 	//0番 = Y
 	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::Y))
 	{
-		skillManager.Process(0);
+		skillManager.Process(0,object);
 	}
 	//1番 = X
 	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::X))
 	{
-		skillManager.Process(1);
+		skillManager.Process(1,object);
 	}
 	//2番 = B
 	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::B))
 	{
-		skillManager.Process(2);
+		skillManager.Process(2,object);
 	}
 	//3番 = A
 	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
 	{
-		skillManager.Process(3);
+		skillManager.Process(3,object);
+	}
+}
+
+
+//------------------------------------
+//プレイヤー側が登録か使用かを判断
+
+//!@brief スキルの登録処理
+void	Player::RegistSkill()
+{
+	//0番 = Y
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::Y))
+	{
+		skillManager.RegistSkill(0);
+	}
+	//1番 = X
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::X))
+	{
+		skillManager.RegistSkill(1);
+	}
+	//2番 = B
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::B))
+	{
+		skillManager.RegistSkill(2);
+	}
+	//3番 = A
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
+	{
+		skillManager.RegistSkill(3);
+	}
+}
+
+//!@brief スキルの使用処理
+void	Player::UseSkill()
+{
+	//0番 = Y
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::Y))
+	{
+		skillManager.UseSkill(0,object);
+	}
+	//1番 = X
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::X))
+	{
+		skillManager.UseSkill(1, object);
+	}
+	//2番 = B
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::B))
+	{
+		skillManager.UseSkill(2, object);
+	}
+	//3番 = A
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
+	{
+		skillManager.UseSkill(3, object);
 	}
 }
