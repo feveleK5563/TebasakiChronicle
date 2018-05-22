@@ -153,7 +153,7 @@ void CollisionManager::SetSubCollisionPos(int angle)
 		K_Math::Vector3 setPos = it->relativePos;
 
 		if (angle == 180)	//Œü‚«‚ª¶‚¾‚Á‚½ê‡ˆÊ’u‚ð”½“]
-			setPos.x() *= -1.f;
+			setPos.x *= -1.f;
 
 		it->collision->SetCollisionPosition(setPos + baseCollision->GetCollisionPosition());
 	}

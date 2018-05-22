@@ -41,12 +41,12 @@ void	CharaController::UpDate(Move& move)
 	if (stickDepth != 0)
 	{
 		//スティックの角度方向に倒した分だけ進む
-		move.GetMoveVec().x() = cosf(stickAngle) * stickDepth * move.GetAddVec();
+		move.GetMoveVec().x = cosf(stickAngle) * stickDepth * move.GetAddVec();
 	}
 	else
 	//傾きがない場合は、動かない(摩擦でゆっくり止まるようにする)
 	{
-		move.GetMoveVec().x() *= Friction;
+		move.GetMoveVec().x *= Friction;
 	}
 	INPUT::Run(VpadIndex::Pad0);				//入力処理を動かす
 }

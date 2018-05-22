@@ -105,12 +105,12 @@ void ImageManager::ImageDraw3D(	const K_Math::Vector3&	posc,
 
 	//座標をテクスチャの中心に設定
 	K_Math::Vector3 pos = posc;
-	pos.x() -= (float)src.w / 2.f;
-	pos.y() += (float)src.h / 2.f;
+	pos.x -= (float)src.w / 2.f;
+	pos.y += (float)src.h / 2.f;
 
 	//画像の向きを調整
 	K_Math::Vector3 angle = anglec;
-	angle.y() += K_Math::DegToRad((float)direction);
+	angle.y += K_Math::DegToRad((float)direction);
 
 	CST::GetShaderClass(0)->UseShader();
 	spobj->Draw3D(

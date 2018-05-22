@@ -21,11 +21,11 @@ void EMove_Movement::EMove(CollisionManager& cmanager, TemporaryCollisionManager
 {
 	if (status.GetDirection() == status.Right)
 	{
-		move.GetMoveVec().x() += move.GetAddVec();
+		move.GetMoveVec().x += move.GetAddVec();
 	}
 	else
 	{
-		move.GetMoveVec().x() -= move.GetAddVec();
+		move.GetMoveVec().x -= move.GetAddVec();
 	}
 }
 
@@ -53,7 +53,7 @@ void EMove_FrontAttack::FirstMove(CollisionManager& cmanager, TemporaryCollision
 {
 	K_Math::Vector3 relative(16, 0, 0);
 	if (status.GetDirection() == Status::Direction::Left)
-		relative.x() *= -1;
+		relative.x *= -1;
 
 	//UŒ‚—pƒRƒŠƒWƒ‡ƒ“‚ğì¬
 	tempmanager.CreateTemporaryCollision(

@@ -34,19 +34,19 @@ void EnemyLoader::LoadEnemyCollisionData(std::ifstream& ifs, EnemyTypeManager::E
 	K_Math::Vector3 cfp = { 0.f, -shapeSize[1], 0.f };
 	K_Math::Vector3 chp = { 0.f, shapeSize[1], 0.f };
 	K_Physics::CollisionShape* cs = CC::CreateBoxShape(shapeSize[0] - 1.f, 1.f, 1.f);
-	//被ダメ、カメラ受け用コリジョンの形状
+	//被ダメ、被カメラ用コリジョンの形状
 	K_Math::Vector3 rp;
-	ifs >> rp.x() >> rp.y() >> rp.z();
+	ifs >> rp.x >> rp.y >> rp.z;
 	ifs >> shapeSize[0] >> shapeSize[1] >> shapeSize[2];
 	K_Physics::CollisionShape* rs = CC::CreateBoxShape(shapeSize[0], shapeSize[1], shapeSize[2]);
 	//視界用コリジョンの形状
 	K_Math::Vector3 vp;
-	ifs >> vp.x() >> vp.y() >> vp.z();
+	ifs >> vp.x >> vp.y >> vp.z;
 	ifs >> shapeSize[0] >> shapeSize[1] >> shapeSize[2];
 	K_Physics::CollisionShape* vs = CC::CreateBoxShape(shapeSize[0], shapeSize[1], shapeSize[2]);
 	//攻撃動作遷移用コリジョンの形状
 	K_Math::Vector3 aap;
-	ifs >> aap.x() >> aap.y() >> aap.z();
+	ifs >> aap.x >> aap.y >> aap.z;
 	ifs >> shapeSize[0] >> shapeSize[1] >> shapeSize[2];
 	K_Physics::CollisionShape* aas = CC::CreateBoxShape(shapeSize[0], shapeSize[1], shapeSize[2]);
 
@@ -63,24 +63,23 @@ void EnemyLoader::LoadEnemyMoveData(std::ifstream& ifs, EnemyTypeManager::EnemyD
 		//動作の設定
 		int totalMoveNum;	//動作の数
 		ifs >> totalMoveNum;
-		int* moveIdArr = new int[totalMoveNum] {};
-		int* skillIdArr = new int[totalMoveNum] {};
-		int* durationTimeArr = new int[totalMoveNum] {};
-		for (int i = 0; i < totalMoveNum; ++i)
-		{
-			ifs >> *(moveIdArr + i) >> *(skillIdArr + i) >> *(durationTimeArr + i);
-		}
 
+		int* moveIdArr = new int[totalMoveNum] {};			//動作番号
+		int* skillIdArr = new int[totalMoveNum] {};			//その動作中に受け取れるスキル番号(ID)
+		int* durationTimeArr = new int[totalMoveNum] {};	//次の動作に移行するまでの時間
 		//動作に合わせたアニメーションの設定
 		K_Math::Box2D* srcArr = new K_Math::Box2D[totalMoveNum];
 		int* sheetArr = new int[totalMoveNum];
 		float* spdArr = new float[totalMoveNum];
 		bool* irArr = new bool[totalMoveNum];
+		
 		for (int i = 0; i < totalMoveNum; ++i)
 		{
-			ifs >> (srcArr + i)->x >> (srcArr + i)->y >> (srcArr + i)->w >> (srcArr + i)->h >>
+			ifs >> *(moveIdArr + i) >> *(skillIdArr + i) >> *(durationTimeArr + i) >>
+				 (srcArr + i)->x >> (srcArr + i)->y >> (srcArr + i)->w >> (srcArr + i)->h >>
 				*(sheetArr + i) >> *(spdArr + i) >> *(irArr + i);
 		}
+		
 		//他の動作への遷移条件
 		int* transitionIdArr = new int[patternNum];
 		for (int i = 0; i < patternNum; ++i)
