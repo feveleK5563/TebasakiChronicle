@@ -3,6 +3,7 @@
 #include "../src/BaseClass/Collision/CollisionManager.h"
 
 #include "SkillType.h"
+#include <memory>
 
 class SkillType;
 //--------------------------------------------------------------
@@ -17,7 +18,7 @@ public:
 	//!@brief SkillTypeから振る舞いを生成
 	//!@brief SkillType 振る舞いを受け取る
 	//!@brief obj ゲームオブジェクトの参照
-	SkillObject(SkillType* skillType_, GameObject& obj,
+	SkillObject(std::shared_ptr<SkillType> skillType_, GameObject& obj,
 		const std::string& imageName,
 		const AnimationCharaChip& animCharaChip);
 
@@ -32,7 +33,7 @@ public:
 
 	//!@brief 振る舞いをセットする
 	//!@param[in] skillType_ スキルのふるまい
-	void	SetSkillType(SkillType* skillType_);
+	void	SetSkillType(std::shared_ptr<SkillType> skillType_);
 
 	//!@brief 生存時間内かをチェック
 	//!@return 生存時間内ならtrue
@@ -44,7 +45,7 @@ private:
 	float	GetDir();
 
 private:
-	SkillType*					skillType;	//スキル動作
+	std::shared_ptr<SkillType>	skillType;	//スキル動作
 	GameObject					object;		//ゲームオブジェクト
 	K_Physics::CollisionShape*	shape;		//ベースコリジョン
 	CollisionManager			cManager;	//コリジョン管理者

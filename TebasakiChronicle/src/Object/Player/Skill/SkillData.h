@@ -5,6 +5,9 @@
 #include "SkillType.h"
 #include "SkillSword\SkillSword.h"
 
+#include <memory>
+
+class SkillType;
 //------------------------------------------------------------
 //スキルのデータ
 //概要:スキルのデータを持っている
@@ -21,7 +24,7 @@ public:
 	int		GetSkillID();
 	//!@brief スキルの種類を返す
 	//!@return SkillTypeを返す
-	SkillType& GetSkillType() const;
+	std::shared_ptr<SkillType>  GetSkillType() const;
 	//!@brief スキルの画像名を返す
 	//!@return SkillImageNameを返す
 	std::string& GetSkillImageName();
@@ -37,7 +40,7 @@ public:
 public:
 	//!@brief スキルの種類のセット
 	//!@param[in] skillType_ 取得したスキルの種類
-	void	SetSkillType(SkillType* skillType_);
+	void	SetSkillType(std::shared_ptr<SkillType> skillType_);
 	//!@brief スキルIDのセット
 	//!@brief[in] skillID_ 取得したスキルID
 	void	SetSkillID(const int& skillID_);
@@ -69,7 +72,7 @@ public:
 
 private:
 	int							skillID;		//スキルID
-	SkillType*					skillType;		//スキルの種類
+	std::shared_ptr<SkillType>	skillType;		//スキルの種類
 	AnimationCharaChip*			animCharaChip;	//アニメーションキャラチップ
 	std::string					skillImageName;	//スキルの画像名
 	int							useNum;			//使用回数

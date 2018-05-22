@@ -40,6 +40,7 @@ void	Player::Initliaze()
 	motion = Idle;
 	motionCnt = 0;
 	maxFrame = 60;
+	minJumpForce = 1.5f;
 
 	//画像の生成
 	object.SetImage("Player", CST::LoadAndGetTexture("Player", "data/image/resource2.png"), true);
@@ -55,8 +56,8 @@ void	Player::Initliaze()
 
 
 	//Moveの重力の設定
-	object.GetMove().SetAddVec(2.f);
-	object.GetMove().SetJumpPow(5.f);
+	object.GetMove().SetAddVec(4.f);
+	object.GetMove().SetJumpPow(9.f);
 
 	//カメラガンの初期化
 	cameraGun.Initailize();
@@ -94,7 +95,7 @@ void	Player::UpDate()
 	cameraGun.UpDate(object.GetPos());
 
 	//スキルの使用---------------------
-	SkillBtnDown();
+	RegistSkill();
 	skillManager.UpDate();
 
 	//当たり判定動作-------------------
@@ -114,12 +115,16 @@ void	Player::Render()
 {
 	cameraGun.Render();
 	object.GetImage().ImageDraw3D(object.GetPos(), object.GetAngle(), object.GetScale(), object.GetDirection());
-
+	
 	//スキルの描画----------------------------
 	skillManager.Render();
 }
 
-
+//ダメージを与える
+int		Player::GiveDamege()
+{
+	return object.GetAttackPoint();
+}
 
 //入力に応じて向きを変える
 void	Player::ChangeDir()
@@ -182,6 +187,10 @@ void	Player::JumpMove()
 	{
 		object.GetMove().JumpOperation();
 	}
+	if (INPUT::IsReaveButton(VpadIndex::Pad0, K_Input::VpadButton::R1) && (object.GetMove().GetFallSpeed() > 1.5f))
+	{
+		object.GetMove().SetFallSpeed(1.5f);
+	}
 }
 
 
@@ -192,13 +201,13 @@ void	Player::JumpMove()
 void	Player::Think()
 {
 	Motion nowMotion = motion;
-
+	
 	//モーションの変更のみを行う
 	switch (nowMotion) {
 	case Idle:	//待機
 		if (controller.IsLStickInput()) { nowMotion = Walk; }
 		if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::R1)) { nowMotion = TakeOff; }
-		//if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A)) { nowMotion = SkillUse; }
+		ChangeSkillMotion(nowMotion);
 		break;
 	case Walk:	//歩く
 		//1フレーム
@@ -233,9 +242,6 @@ void	Player::Think()
 		{
 			nowMotion = Idle;
 		}
-	case SkillRegist:	//スキル登録中
-
-		break;
 	case SkillUse:	//スキル使用中
 		if (motionCnt > maxFrame / 3)
 		{
@@ -274,7 +280,6 @@ void	Player::Move()
 	//移動 & カメラガンをSkillUse中は使用しない
 	switch (motion) {
 	default:
-
 		controller.UpDate(object.GetMove());
 		break;
 		//移動操作を無視するモーション
@@ -297,6 +302,10 @@ void	Player::Move()
 		{
 			object.GetMove().JumpOperation();
 		}
+		if (INPUT::IsReaveButton(VpadIndex::Pad0, K_Input::VpadButton::R1) && (object.GetMove().GetFallSpeed() > minJumpForce))
+		{
+			object.GetMove().SetFallSpeed(minJumpForce);
+		}
 		break;
 	case Fall:		//落下中
 		break;
@@ -304,18 +313,13 @@ void	Player::Move()
 		break;
 	case Landing:	//着地
 		break;
-	case SkillRegist://スキル登録中
-		if (motionCnt == 0)
-		{
-			RegistSkill();
-		}
-		break;
 	case SkillUse:	//スキル使用中
 		if (motionCnt == 0)
 		{
 			UseSkill();
 		}
 		break;
+
 	}
 }
 
@@ -334,33 +338,6 @@ bool	Player::UpDateMotion(const Motion& nowMotion)
 
 
 
-
-//!@brief スキルのためのボタン
-void	Player::SkillBtnDown()
-{
-	//0番 = Y
-	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::Y))
-	{
-		skillManager.Process(0,object);
-	}
-	//1番 = X
-	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::X))
-	{
-		skillManager.Process(1,object);
-	}
-	//2番 = B
-	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::B))
-	{
-		skillManager.Process(2,object);
-	}
-	//3番 = A
-	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
-	{
-		skillManager.Process(3,object);
-	}
-}
-
-
 //------------------------------------
 //プレイヤー側が登録か使用かを判断
 
@@ -370,46 +347,80 @@ void	Player::RegistSkill()
 	//0番 = Y
 	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::Y))
 	{
-		skillManager.RegistSkill(0);
+		skillManager.RegistSkillData(0);
 	}
 	//1番 = X
 	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::X))
 	{
-		skillManager.RegistSkill(1);
+		skillManager.RegistSkillData(1);
 	}
 	//2番 = B
 	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::B))
 	{
-		skillManager.RegistSkill(2);
+		skillManager.RegistSkillData(2);
 	}
 	//3番 = A
 	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
 	{
-		skillManager.RegistSkill(3);
+		skillManager.RegistSkillData(3);
 	}
 }
 
 //!@brief スキルの使用処理
-void	Player::UseSkill()
+void		Player::UseSkill()
 {
 	//0番 = Y
 	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::Y))
 	{
-		skillManager.UseSkill(0,object);
+		skillManager.UseSkillData(0, object);
 	}
 	//1番 = X
 	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::X))
 	{
-		skillManager.UseSkill(1, object);
+		skillManager.UseSkillData(1, object);
 	}
 	//2番 = B
 	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::B))
 	{
-		skillManager.UseSkill(2, object);
+		skillManager.UseSkillData(2, object);
 	}
 	//3番 = A
 	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
 	{
-		skillManager.UseSkill(3, object);
+		skillManager.UseSkillData(3, object);
+	}
+}
+
+
+//!@brief スキルの状態変異
+void	Player::SkillState(Motion& nowMotion,const int& btnNum)
+{
+	if (!skillManager.CheckRegistFlag())
+	{
+		if (skillManager.CheckExistSkill(btnNum))
+		{
+			nowMotion = SkillUse;
+		}
+	}
+}
+
+//!@brief スキルの状態へ
+void	Player::ChangeSkillMotion(Motion& nowMotion)
+{
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
+	{
+		SkillState(nowMotion, 3);
+	}
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::B))
+	{
+		SkillState(nowMotion, 2);
+	}
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::X))
+	{
+		SkillState(nowMotion, 1);
+	}
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::Y))
+	{
+		SkillState(nowMotion, 0);
 	}
 }

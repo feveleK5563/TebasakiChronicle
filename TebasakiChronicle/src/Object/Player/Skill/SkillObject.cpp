@@ -1,6 +1,5 @@
 #include "SkillObject.h"
 
-
 //--------------------------------------------------------------------
 //コンストラクタ
 //--------------------------------------------------------------------
@@ -8,7 +7,7 @@
 //!@brief SkillTypeから振る舞いを生成
 //!@brief SkillType 振る舞いを受け取る
 //!@brief obj ゲームオブジェクトの参照
-SkillObject::SkillObject(SkillType* skillType_,GameObject& obj,const std::string& imageName, const AnimationCharaChip& animCharaChip)
+SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,const std::string& imageName, const AnimationCharaChip& animCharaChip)
 	:skillType(skillType_)
 {
 	object.GetStatus().SetStatusData(
@@ -67,7 +66,7 @@ void	SkillObject::Render()
 
 //!@brief 振る舞いをセットする
 //!@param[in] skillType_ スキルのふるまい
-void	SkillObject::SetSkillType(SkillType* skillType_)
+void	SkillObject::SetSkillType(std::shared_ptr<SkillType> skillType_)
 {
 	skillType = skillType_;
 }

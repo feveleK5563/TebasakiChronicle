@@ -29,9 +29,9 @@ int		SkillData::GetSkillID()
 
 //!@brief スキルの種類を返す
 //!@return SkillTypeを返す
-SkillType& SkillData::GetSkillType() const
+std::shared_ptr<SkillType>  SkillData::GetSkillType() const
 {
-	return *skillType;
+	return skillType;
 }
 
 //!@brief スキルの画像名を返す
@@ -66,7 +66,7 @@ void	SkillData::SetSkillData(const int& skillID_,
 
 //!@brief スキルの種類のセット
 //!@param[in] skillType_ 取得したスキルの種類
-void	SkillData::SetSkillType(SkillType* skillType_)
+void	SkillData::SetSkillType(std::shared_ptr<SkillType> skillType_)
 {
 	skillType = skillType_;
 }
@@ -140,7 +140,7 @@ void	SkillData::CreateSkillType()
 {
 	switch (skillID) {
 	case 0:
-		skillType = new SkillSword(10, 30.0f, 120);
+		skillType = std::shared_ptr<SkillType>(new SkillSword(10, 30.0f, 120));
 		break;
 	case 1:
 		break;
