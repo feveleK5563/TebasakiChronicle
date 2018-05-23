@@ -22,7 +22,12 @@ public:
 		Fall,		//落下中
 		TakeOff,	//飛ぶ前
 		Landing,	//着地
-		SkillUse,	//スキル使用中
+		SkillUse,		//停止中にスキル使用
+		SkillMoveUse,	//移動中にスキル使用
+		SkillAirUse,	//空中でスキル使用
+		CameraGunUse,		//カメラガン停止中に構え
+		CameraGunMoveUse,	//カメラガン移動中に構え
+		CameraGunAirUse,	//カメラガン空中で構え
 	};
 
 	//コリジョンの種類
@@ -62,9 +67,9 @@ private:
 	void	UseSkill();
 
 	//!@brief スキルの状態変異
-	void	SkillState(Motion& nowMotion,const int& btnNum);
+	void	SkillState(Motion& nowMotion,const Motion& nextMotion,const int& btnNum);
 	//!@brief スキルの状態へ
-	void	ChangeSkillMotion(Motion& nowMotion);
+	void	ChangeSkillMotion(Motion& nowMotion,const Motion& nextMotion);
 
 public:
 	GameObject		object;			//ゲームオブジェクト

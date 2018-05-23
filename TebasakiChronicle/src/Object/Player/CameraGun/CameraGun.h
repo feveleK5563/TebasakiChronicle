@@ -26,6 +26,7 @@ public:
 
 	void	SetPlayerPos(const K_Math::Vector3& pos);	//プレイヤーの座標と同期する
 	void	SetCameraGun(bool isInjection);				//カメラの速度の設定
+	void	SetMoveSpeed(float moveSpeed);				//移動速度の設定
 	void	SetDirection(const Status::Direction& dir);	//向きの設定
 	float 	GetDir();
 	

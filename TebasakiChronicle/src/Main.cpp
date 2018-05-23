@@ -10,6 +10,8 @@
 #include "Object/Player/Player.h"
 #include "MapPolygon.h"
 
+#include "../src/Object/Object3D/Object3D.h"
+
 int main()
 {
 	//スクリーン
@@ -57,30 +59,11 @@ int main()
 	//プレイヤー
 	Player* player = new Player();
 	player->Initliaze();
+	
+	//地形判定付きオブジェクト
+	//オブジェクト
+	Object3D*	mapObj = new Object3D("./data/model/testMap2d.fbx", "./data/image/player.tga");
 
-	//モデルの使用例
-	//***********************************************************************
-	//テクスチャ
-	K_Graphics::TextureList* textureList = new K_Graphics::TextureList();
-
-	if (textureList->LoadTexture("fbxFile", "./data/image/player.tga"))
-	{
-		std::cout << "テクスチャGet" << std::endl;
-	}
-
-	//メッシュモデルクラス
-	K_Graphics::ModelDatas*	modelData;
-	//ファクトリを作成
-	K_Graphics::ModelDataFactory factory;
-	modelData = factory.LoadFBXModel("./data/model/testMap2d.fbx",textureList);
-
-	//手順2、データを元にモデルクラスを初期化
-	K_Graphics::MeshModel*	model = new K_Graphics::MeshModel(modelData);
-	//手順3,MeshModelをより扱いやすくするMeshObjectクラスを初期化
-	K_Graphics::MeshObject* object = new K_Graphics::MeshObject(model);
-
-	//マップの処理
-	K_Physics::MapPolygon* map = new K_Physics::MapPolygon("./data/model/testMap2d.fbx",CC::GetBulletPhysics(), CollisionMask::Non, CollisionMask::Ground);
 	
 	K_Math::Vector3 scale = { 10,50,40 };
 	K_Math::Vector3 rotation = { K_Math::DegToRad(-90),0,K_Math::DegToRad(-90) };
@@ -106,19 +89,14 @@ int main()
 		emanager->RenderAllEnemy();
 		player->Render();
 
-		//***************************
-		//MapPolygonの位置調整
-		map->GetRigidBody()->SetCollisionPosition(pos);
-		map->GetRigidBody()->SetCollisionRotation(rotation);
-		map->SetScaling(scale);
-		//***************************
-
 
 		//*****************************
 		//FBXモデルの描画
 		CST::GetShaderClass(2)->UseShader();
-		object->Draw(CST::GetPerspectiveCamera(), CST::GetShaderClass(2), pos, rotation, scale);
-		//*****************************
+		//----------------------------
+		//地形判定付きオブジェクト
+		mapObj->SetDecisionParam(pos, rotation, scale);
+		mapObj->Render();
 
 		//CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 		sc->SwapBuffer();
@@ -129,7 +107,7 @@ int main()
 	delete emanager;
 	delete player;
 	
-	delete object;
+	delete mapObj;
 
 	CC::Delete();
 }

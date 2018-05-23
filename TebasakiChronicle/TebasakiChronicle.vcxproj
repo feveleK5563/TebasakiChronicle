@@ -38,6 +38,7 @@
     <ClCompile Include="src\Object\Enemy\EnemyType\EnemyType.cpp" />
     <ClCompile Include="src\Object\Enemy\EnemyType\EnemyTypeManager.cpp" />
     <ClCompile Include="src\Object\GameObject.cpp" />
+    <ClCompile Include="src\Object\Object3D\Object3D.cpp" />
     <ClCompile Include="src\Object\Player\CameraGun\CameraGun.cpp" />
     <ClCompile Include="src\Object\Player\CharaController\CharaController.cpp" />
     <ClCompile Include="src\Object\Player\Player.cpp" />
@@ -71,6 +72,7 @@
     <ClInclude Include="src\Object\Enemy\EnemyType\EnemyType.h" />
     <ClInclude Include="src\Object\Enemy\EnemyType\EnemyTypeManager.h" />
     <ClInclude Include="src\Object\GameObject.h" />
+    <ClInclude Include="src\Object\Object3D\Object3D.h" />
     <ClInclude Include="src\Object\Player\CameraGun\CameraGun.h" />
     <ClInclude Include="src\Object\Player\CharaController\CharaController.h" />
     <ClInclude Include="src\Object\Player\Player.h" />

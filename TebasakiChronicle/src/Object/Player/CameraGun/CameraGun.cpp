@@ -175,8 +175,15 @@ void	CameraGun::SetCameraGun(bool isInjection)
 	{
 		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
 		object.SetState(Status::State::Non);
+		object.GetMove().SetAddVec(5.0f);	//Œ³‚É–ß‚·
 		DataReset();
 	}
+}
+
+//ƒJƒƒ‰ƒKƒ“‚ÌˆÚ“®‘¬“x‚Ìİ’è
+void	CameraGun::SetMoveSpeed(float moveSpeed)
+{
+	object.GetMove().SetAddVec(moveSpeed);
 }
 
 

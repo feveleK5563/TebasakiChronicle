@@ -37,7 +37,7 @@ void TemporaryCollisionManager::CreateTemporaryCollision(
 void TemporaryCollisionManager::SetAnimationCharaChip(
 	const std::string&			texName,
 	K_Graphics::Texture*		texture,
-	cosnt K_Math::Box2D&		src,
+	const K_Math::Box2D&		src,
 	int							sheet,
 	float						spd,
 	bool						isroop)
