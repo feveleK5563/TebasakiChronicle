@@ -68,16 +68,18 @@ void EnemyLoader::LoadEnemyMoveData(std::ifstream& ifs, EnemyTypeManager::EnemyD
 		int* skillIdArr = new int[totalMoveNum] {};			//その動作中に受け取れるスキル番号(ID)
 		int* durationTimeArr = new int[totalMoveNum] {};	//次の動作に移行するまでの時間
 		//動作に合わせたアニメーションの設定
-		K_Math::Box2D* srcArr = new K_Math::Box2D[totalMoveNum];
-		int* sheetArr = new int[totalMoveNum];
-		float* spdArr = new float[totalMoveNum];
-		bool* irArr = new bool[totalMoveNum];
+		K_Math::Box2D* srcArr = new K_Math::Box2D[totalMoveNum];			//一枚目のテクスチャ読み込み位置
+		K_Math::Vector2* basisPosArr = new K_Math::Vector2[totalMoveNum]{};	//描画基準座標
+		int* sheetArr = new int[totalMoveNum];								//1アニメーションのテクスチャ枚数
+		float* spdArr = new float[totalMoveNum];							//アニメーション待機時間
+		bool* irArr = new bool[totalMoveNum];								//ループするか否か
 		
 		for (int i = 0; i < totalMoveNum; ++i)
 		{
-			ifs >> *(moveIdArr + i) >> *(skillIdArr + i) >> *(durationTimeArr + i) >>
-				 (srcArr + i)->x >> (srcArr + i)->y >> (srcArr + i)->w >> (srcArr + i)->h >>
-				*(sheetArr + i) >> *(spdArr + i) >> *(irArr + i);
+			ifs >>	*(moveIdArr + i) >> *(skillIdArr + i) >> *(durationTimeArr + i) >>
+					(srcArr + i)->x >> (srcArr + i)->y >> (srcArr + i)->w >> (srcArr + i)->h >>
+					(basisPosArr + i)->x >> (basisPosArr + i)->y >>
+					*(sheetArr + i) >> *(spdArr + i) >> *(irArr + i);
 		}
 		
 		//他の動作への遷移条件
@@ -92,6 +94,7 @@ void EnemyLoader::LoadEnemyMoveData(std::ifstream& ifs, EnemyTypeManager::EnemyD
 			skillIdArr,
 			durationTimeArr,
 			srcArr,
+			basisPosArr,
 			sheetArr,
 			spdArr,
 			irArr,

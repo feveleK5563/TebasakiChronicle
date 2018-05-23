@@ -114,7 +114,7 @@ bool Enemy::RecieveCollisionOperation()
 	{
 		if (((Status*)it->userData)->GetState() == Status::State::Active)
 		{
-			//カメラガンから受ける影響をここに書きなされ……
+			//カメラガンから受ける影響をここに書きなされ
 
 		}
 	}

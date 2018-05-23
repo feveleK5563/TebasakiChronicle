@@ -86,9 +86,9 @@ void ImageManager::Animation()
 
 //-----------------------------------------------------------------------------
 //描画(3D)
-void ImageManager::ImageDraw3D(	const K_Math::Vector3&	posc,
-								const K_Math::Vector3&	anglec,
-								const K_Math::Vector3&	scalec,
+void ImageManager::ImageDraw3D(	const K_Math::Vector3&	pos,
+								const K_Math::Vector3&	angle,
+								const K_Math::Vector3&	scale,
 								int						direction)
 {
 	//テクスチャの読み込み位置の調整
@@ -101,16 +101,12 @@ void ImageManager::ImageDraw3D(	const K_Math::Vector3&	posc,
 	{
 		src.x -= src.w * (int(animCnt) % charaChip[nowAnimNum]->chipSheetNum);
 	}
-	spobj->controlPoint = K_Math::Vector2(src.w / 2.f, src.h / 2.f);	//回転の基準位置をテクスチャの中心に設定
-
-	//座標をテクスチャの中心に設定
-	K_Math::Vector3 pos = posc;
-	pos.x -= (float)src.w / 2.f;
-	pos.y += (float)src.h / 2.f;
+	spobj->controlPoint = K_Math::Vector2(src.w / 2.f, src.h / 2.f);	//描画基準位置をテクスチャの中心に設定(デフォルト)
+	spobj->controlPoint += charaChip[nowAnimNum]->basisRenderPos;		//中心から描画基準位置をずらす
 
 	//画像の向きを調整
-	K_Math::Vector3 angle = anglec;
-	angle.y += K_Math::DegToRad((float)direction);
+	K_Math::Vector3 anglec = angle;
+	anglec.y += K_Math::DegToRad((float)direction);
 
 	CST::GetShaderClass(0)->UseShader();
 	spobj->Draw3D(
@@ -118,6 +114,6 @@ void ImageManager::ImageDraw3D(	const K_Math::Vector3&	posc,
 		CST::GetShaderClass(0),
 		src,
 		pos,
-		angle,
-		scalec);
+		anglec,
+		scale);
 }

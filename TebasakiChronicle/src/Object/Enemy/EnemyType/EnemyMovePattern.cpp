@@ -6,7 +6,7 @@ EnemyMovePattern::EnemyMovePattern(const MoveSetUpData& msud)
 	for (int i = 0; i < msud.totalMoveNum; ++i)
 	{
 		SetMoveAndTime(*(msud.moveIdArr + i), *(msud.skillIdArr + i), *(msud.durationTimeArr + i));
-		animChip.emplace_back(new AnimationCharaChip(*(msud.srcArr + i), *(msud.sheetArr + i), *(msud.spdArr + i), *(msud.isRoopArr + i)));
+		animChip.emplace_back(new AnimationCharaChip(*(msud.srcArr + i), *(msud.sheetArr + i), *(msud.spdArr + i), *(msud.isRoopArr + i), *(msud.basisPosArr + i)));
 	}
 	for (int i = 0; i < msud.patternNum; ++i)
 	{

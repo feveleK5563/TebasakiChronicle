@@ -11,20 +11,21 @@ class EnemyMovePattern
 public:
 	struct MoveSetUpData	//敵の動作パターン生成に必要なデータ
 	{
-		int*			moveIdArr;			//動作番号を入れた配列のアドレス値
-		int*			skillIdArr;			//動作中に取得可能なスキル番号
-		int*			durationTimeArr;	//動作の継続時間を入れた配列のアドレス値
-		K_Math::Box2D*	srcArr;				//アニメーション画像の最初の位置
-		int*			sheetArr;			//アニメーション枚数
-		float*			spdArr;				//アニメーション速度
-		bool*			isRoopArr;			//ループするか否か
-		int*			transitionIdArr;	//他動作パターンへの遷移条件の番号
-		int				patternNum;			//動作パターンの総数
-		int				totalMoveNum;		//動作の総数
+		int*				moveIdArr;			//動作番号を入れた配列のアドレス値
+		int*				skillIdArr;			//動作中に取得可能なスキル番号
+		int*				durationTimeArr;	//動作の継続時間を入れた配列のアドレス値
+		K_Math::Box2D*		srcArr;				//アニメーション画像の最初の位置
+		K_Math::Vector2*	basisPosArr;		//描画の基準座標(0, 0で中心)
+		int*				sheetArr;			//アニメーション枚数
+		float*				spdArr;				//アニメーション速度
+		bool*				isRoopArr;			//ループするか否か
+		int*				transitionIdArr;	//他動作パターンへの遷移条件の番号
+		int					patternNum;			//動作パターンの総数
+		int					totalMoveNum;		//動作の総数
 
-		MoveSetUpData(	int* miarr, int* siarr, int* dtarr, K_Math::Box2D* srcarr, int* shtarr,
+		MoveSetUpData(	int* miarr, int* siarr, int* dtarr, K_Math::Box2D* srcarr, K_Math::Vector2* basisposarr, int* shtarr,
 						float* spdarr, bool* irarr, int* tiarr, int pnum, int tmnum):
-			moveIdArr(miarr), skillIdArr(siarr), durationTimeArr(dtarr), srcArr(srcarr), sheetArr(shtarr), 
+			moveIdArr(miarr), skillIdArr(siarr), durationTimeArr(dtarr), srcArr(srcarr), basisPosArr(basisposarr), sheetArr(shtarr), 
 			spdArr(spdarr), isRoopArr(irarr), transitionIdArr(tiarr), patternNum(pnum), totalMoveNum(tmnum){}
 
 		~MoveSetUpData()
