@@ -25,9 +25,9 @@ public:
 									const bool					doground);		//ベースコリジョンを地形として扱うフラグ
 
 	//生成したコリジョンにテクスチャを設定する
-	void SetAnimationCharaChip(	std::string&			texName,
+	void SetAnimationCharaChip(	const std::string&		texName,
 								K_Graphics::Texture*	texture,
-								K_Math::Box2D&			src,
+								const K_Math::Box2D&	src,
 								int						sheet,
 								float					spd,
 								bool					isroop);
