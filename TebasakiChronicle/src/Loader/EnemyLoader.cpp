@@ -18,9 +18,12 @@ void EnemyLoader::LoadEnemyParamaterData(std::ifstream& ifs, EnemyTypeManager::E
 	float moveSpeed;
 	//ジャンプ力
 	float jumpPower;
-	ifs >> texPath >> texName >> maxLife >> hitDamage >> moveSpeed >> jumpPower;
+	//重力を使用するか否か
+	bool isUseGravity;
 
-	ed->paramater = new EnemyType::ParameterData(texPath, texName, maxLife, hitDamage, moveSpeed, jumpPower);
+	ifs >> texPath >> texName >> maxLife >> hitDamage >> moveSpeed >> jumpPower >> isUseGravity;
+
+	ed->paramater = new EnemyType::ParameterData(texPath, texName, maxLife, hitDamage, moveSpeed, jumpPower, isUseGravity);
 }
 
 //順番2：コリジョン形状の生成と配置データの読み込み

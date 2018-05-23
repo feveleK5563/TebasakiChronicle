@@ -30,6 +30,10 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 											direction,
 											cpyet->GetHitDamage(),
 											cpyet->GetMaxLife());
+	if (cpyet->GetIsUseGravity() == false)
+	{
+		gameObject.GetMove().SetGravity(0.f);
+	}
 
 	gameObject.GetMove().SetAddVec(cpyet->GetMoveSpeed());
 	gameObject.GetMove().SetJumpPow(cpyet->GetJumpPower());

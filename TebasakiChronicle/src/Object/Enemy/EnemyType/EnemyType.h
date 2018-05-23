@@ -8,15 +8,16 @@ class EnemyType
 public:
 	struct ParameterData	//敵の各種情報
 	{
-		std::string				texturePath;	//テクスチャのパス
-		std::string				textureName;	//テクスチャ名
-		int						maxLife;		//体力上限
-		int						hitDamage;		//プレイヤーに与えるダメージ
-		float					moveSpeed;		//移動速度
-		float					jumpPower;		//ジャンプ力
+		std::string		texturePath;	//テクスチャのパス
+		std::string		textureName;	//テクスチャ名
+		int				maxLife;		//体力上限
+		int				hitDamage;		//プレイヤーに与えるダメージ
+		float			moveSpeed;		//移動速度
+		float			jumpPower;		//ジャンプ力
+		bool			isUseGravity;	//重力を利用するか否か
 
-		ParameterData(std::string& tp, std::string& tn, int ml, int hd, float ms, float jp):
-			texturePath(tp), textureName(tn), maxLife(ml), hitDamage(hd), moveSpeed(ms), jumpPower(jp){}
+		ParameterData(std::string& tp, std::string& tn, int ml, int hd, float ms, float jp, bool isug):
+			texturePath(tp), textureName(tn), maxLife(ml), hitDamage(hd), moveSpeed(ms), jumpPower(jp), isUseGravity(isug){}
 	};
 	struct CollisionData	//コリジョンの情報
 	{
@@ -61,6 +62,8 @@ public:
 	const float GetMoveSpeed();
 	//ジャンプ力を取得
 	const float GetJumpPower();
+	//重力を利用するか否かを取得
+	const bool GetIsUseGravity();
 	//テクスチャを取得
 	K_Graphics::Texture* GetTexture();
 

@@ -5,7 +5,7 @@
 #include "../../../BaseClass/ImageManager/AnimationCharaChip.h"
 #include "../../../Helper.h"
 
-//敵動作のパターンを作成するよ！
+//敵動作のパターンを保持する
 class EnemyMovePattern
 {
 public:

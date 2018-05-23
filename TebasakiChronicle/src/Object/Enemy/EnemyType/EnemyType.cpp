@@ -56,6 +56,12 @@ const float EnemyType::GetJumpPower()
 	return paramData.jumpPower;
 }
 //-----------------------------------------------------------------------------
+//重力を利用するか否かを取得
+const bool EnemyType::GetIsUseGravity()
+{
+	return paramData.isUseGravity;
+}
+//-----------------------------------------------------------------------------
 //テクスチャを取得
 K_Graphics::Texture* EnemyType::GetTexture()
 {
