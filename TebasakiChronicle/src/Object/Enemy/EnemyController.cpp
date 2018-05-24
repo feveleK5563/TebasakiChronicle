@@ -3,23 +3,23 @@
 //コンストラクタ
 EnemyController::EnemyController(EnemyMoveSet* cpyems) :
 	ems(cpyems),
-	skillId(0) {}
+	behaviorId(0) {}
 
 //デストラクタ
 EnemyController::~EnemyController(){}
 
 //-----------------------------------------------------------------------------
 //スキル番号を取得
-int& EnemyController::GetSkillId()
+int& EnemyController::GetBehaviorId()
 {
-	return skillId;
+	return behaviorId;
 }
 
 //-----------------------------------------------------------------------------
 //動作の実行
 void EnemyController::EMove(int& nowMoveOrder, int& nowPatternOrder, CollisionManager& cm, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
-	ems->EMove(nowMoveOrder, nowPatternOrder, timeCnt, cm, tempmanager, status, move);
+	behaviorId = ems->EMove(nowMoveOrder, nowPatternOrder, timeCnt, cm, tempmanager, status, move);
 }
 
 //-----------------------------------------------------------------------------

@@ -118,12 +118,12 @@ void	Move::GravityOperation(bool annulGravity)
 {
 	if (annulGravity == true)
 	{
-		moveVec.y() = 0;
+		moveVec.y = 0;
 		fallSpeed = 0;
 		return;
 	}
 
-	moveVec.y() += fallSpeed;
+	moveVec.y += fallSpeed;
 	fallSpeed += gravity;
 }
 
@@ -133,5 +133,5 @@ void	Move::JumpOperation()
 	fallSpeed = jumpPower;
 
 	//ジャンプの設定と同時にキャラクターを少し動かす
-	moveVec.y() += fallSpeed;
+	moveVec.y += fallSpeed;
 }

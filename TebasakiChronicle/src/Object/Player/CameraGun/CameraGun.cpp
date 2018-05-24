@@ -80,7 +80,7 @@ void	CameraGun::UpDate(const K_Math::Vector3& pPos)
 			float addSpeed = -GetDir() * 0.05f;
 			if (CheckAddSpeed())
 			{
-				object.GetMoveVec().x() += addSpeed;
+				object.GetMoveVec().x += addSpeed;
 			}
 
 			RecieveData();
@@ -94,7 +94,7 @@ void	CameraGun::UpDate(const K_Math::Vector3& pPos)
 	cManager.MoveBaseCollision(object.GetMoveVec(), object.GetDirection(), true);
 	//コリジョンの位置の同期
 	object.GetPos() = cManager.GetBaseCollisionObjectPosition();
-	object.GetPos().z() = -1.f;
+	object.GetPos().z = -1.f;
 }
 
 
@@ -122,8 +122,8 @@ void	CameraGun::Chase(const K_Math::Vector3& targetPos)
 {
 	//敵とカメラガンとの距離
 	K_Math::Vector3 targetVec = targetPos - object.GetPos();
-	object.GetMoveVec().x() = targetVec.x() / object.GetMove().GetAddVec();
-	object.GetMoveVec().y() = targetVec.y() / object.GetMove().GetAddVec();
+	object.GetMoveVec().x = targetVec.x / object.GetMove().GetAddVec();
+	object.GetMoveVec().y = targetVec.y / object.GetMove().GetAddVec();
 }
 
 //敵との衝突をした場合、スキルデータを取得する
@@ -222,17 +222,17 @@ bool	CameraGun::CheckAddSpeed()
 {
 	if (object.GetDirection() == Status::Direction::Left)
 	{
-		if (object.GetMoveVec().x() >= 0.0f)
+		if (object.GetMoveVec().x >= 0.0f)
 		{
-			object.GetMoveVec().x() = 0.0f;
+			object.GetMoveVec().x = 0.0f;
 			return false;
 		}
 	}
 	if (object.GetDirection() == Status::Direction::Right)
 	{
-		if (object.GetMoveVec().x() <= 0.0f)
+		if (object.GetMoveVec().x <= 0.0f)
 		{
-			object.GetMoveVec().x() = 0.0f;
+			object.GetMoveVec().x = 0.0f;
 			return false;
 		}
 	}

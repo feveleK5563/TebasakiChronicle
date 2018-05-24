@@ -17,7 +17,7 @@ public:
 };
 
 //-----------------------------------------------
-//何もしない
+//0：何もしない
 class EMove_NoMotion : public EnemyMove
 {
 public:
@@ -26,7 +26,7 @@ public:
 };
 
 //-----------------------------------------------
-//向いている方向に移動する
+//1：向いている方向に移動する
 class EMove_Movement : public EnemyMove
 {
 public:
@@ -35,7 +35,7 @@ public:
 };
 
 //-----------------------------------------------
-//ジャンプする
+//2：ジャンプする
 class EMove_Jump : public EnemyMove
 {
 public:
@@ -44,7 +44,7 @@ public:
 };
 
 //-----------------------------------------------
-//前方に攻撃する
+//3：前方に攻撃する
 class EMove_FrontAttack : public EnemyMove
 {
 private:

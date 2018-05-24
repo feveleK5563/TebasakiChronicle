@@ -30,6 +30,10 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 											direction,
 											cpyet->GetHitDamage(),
 											cpyet->GetMaxLife());
+	if (cpyet->GetIsUseGravity() == false)
+	{
+		gameObject.GetMove().SetGravity(0.f);
+	}
 
 	gameObject.GetMove().SetAddVec(cpyet->GetMoveSpeed());
 	gameObject.GetMove().SetJumpPow(cpyet->GetJumpPower());
@@ -40,19 +44,19 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	gameObject.GetImage().ChangeCharaChip(eController->GetNowCharaChip(nowPatternOrder));
 
 	//コリジョンの設定
-	collisionManager.SetBaseCollisionData(cpyet->GetBaseCollisionData(), setPos);	//ベースコリジョン
-	collisionManager.SetSubCollisionData(cpyet->GetRecieveDamageCollisionData());	//0 被ダメージ用コリジョン
-	collisionManager.SetSubCollisionData(cpyet->GetFieldofviewCollisionData());		//1 視界用コリジョン
-	collisionManager.SetSubCollisionData(cpyet->GetAttackAreaCollisionData());		//2 攻撃動作遷移用コリジョン
-	collisionManager.SetSubCollisionData(cpyet->GetCheckFootCollisionData());		//3 足元判定用コリジョン
-	collisionManager.SetSubCollisionData(cpyet->GetCheckHeadCollisionData());		//4 頭上判定用コリジョン
-	collisionManager.SetSubCollisionData(cpyet->GetRecieveCameraCollisionData());	//5 被カメラガン用コリジョン
+	collisionManager.SetBaseCollisionData(cpyet->CreateAndGetBaseCollisionData(), setPos);	//ベースコリジョン
+	collisionManager.SetSubCollisionData(cpyet->CreateAndGetRecieveDamageCollisionData());	//0 被ダメージ用コリジョン
+	collisionManager.SetSubCollisionData(cpyet->CreateAndGetFieldofviewCollisionData());	//1 視界用コリジョン
+	collisionManager.SetSubCollisionData(cpyet->CreateAndGetAttackAreaCollisionData());		//2 攻撃動作遷移用コリジョン
+	collisionManager.SetSubCollisionData(cpyet->CreateAndGetCheckFootCollisionData());		//3 足元判定用コリジョン
+	collisionManager.SetSubCollisionData(cpyet->CreateAndGetCheckHeadCollisionData());		//4 頭上判定用コリジョン
+	collisionManager.SetSubCollisionData(cpyet->CreateAndGetRecieveCameraCollisionData());	//5 被カメラガン用コリジョン
 
 	//タグの設定
 	skillAndChip = new SkillAndCharaChip();
 	skillAndChip->pos = &gameObject.GetStatus().GetPos();
 	skillAndChip->textureName = &gameObject.GetImage().GetTextureName();
-	skillAndChip->skillId = &eController->GetSkillId();
+	skillAndChip->behaviorId = &eController->GetBehaviorId();
 	int i = 0;
 	for (; i < 5; ++i)
 	{
@@ -114,7 +118,8 @@ bool Enemy::RecieveCollisionOperation()
 	{
 		if (((Status*)it->userData)->GetState() == Status::State::Active)
 		{
-			
+			//カメラガンから受ける影響をここに書きなされ
+
 		}
 	}
 

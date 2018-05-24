@@ -4,14 +4,18 @@
 //!@brief コンストラクタ
 //!@param[in] filePath モデルのパス
 //!@param[in] texName テクスチャのパス
-Object3D::Object3D(const std::string& filePath_, const std::string& texFilePath_)
-	:	modelData(nullptr),model(nullptr),object(nullptr),decisionObj(nullptr),
-		texList(new K_Graphics::TextureList()), filePath(filePath_), texFilePath(texFilePath_)
+Object3D::Object3D(const std::string& filePath_, const std::string& texFilePath_,
+	const K_Math::Vector3& pos_, const K_Math::Vector3& rotation_, const K_Math::Vector3& scale_)
+	:	modelData(nullptr), model(nullptr), object(nullptr), decisionObj(nullptr),
+		texList(new K_Graphics::TextureList()),
+		decisionPos(pos_), decisionRotation(rotation_), decisionScale(scale_), 
+		filePath(filePath_), texFilePath(texFilePath_)
 {
 	Load(filePath, texFilePath);
 	CreateMeshModel();
 	CreateMeshObject();
 	CreateDecisionObj();
+	SetDecisionParam(decisionPos, decisionRotation, decisionScale);
 }
 
 //!@brief デストラクタ
@@ -48,18 +52,21 @@ void	Object3D::SetDecisionParam(const K_Math::Vector3& decisionPos_,
 	const K_Math::Vector3& decisionRotation_,
 	const K_Math::Vector3& decisionScale_)
 {
-	decisionObj->GetRigidBody()->SetCollisionPosition(decisionPos_);
-	decisionObj->GetRigidBody()->SetCollisionRotation(decisionRotation_);
-	decisionObj->SetScaling(decisionScale_);
+	decisionScale = decisionPos_;
+	decisionRotation = decisionRotation_;
+	decisionScale = decisionScale_;
+	decisionObj->GetRigidBody()->SetCollisionPosition(decisionPos);
+	decisionObj->GetRigidBody()->SetCollisionRotation(decisionRotation);
+	decisionObj->SetScaling(decisionScale);
 }
 
 //!@brief モデルの描画
 void	Object3D::Render()
 {
 	object->Draw(CST::GetPerspectiveCamera(), CST::GetShaderClass(2),
-		decisionObj->GetRigidBody()->GetCollisionPosition(),
-		decisionObj->GetRigidBody()->GetCollisionRotation(),
-		K_Math::Vector3(10.0f, 50.0f, 40.0f));	//改善すべき点
+		decisionPos,
+		decisionRotation,
+		decisionScale);
 }
 
 //!@brief モデルデータをもとにMeshModelクラスを作成

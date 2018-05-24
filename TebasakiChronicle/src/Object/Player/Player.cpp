@@ -158,7 +158,7 @@ void	Player::ShotCameraGun()
 	//撮影ボタンを押すとカメラを前方に射出する
 	if (INPUT::IsPressButton(VpadIndex::Pad0,K_Input::VpadButton::L1))
 	{
-		if (object.GetMoveVec().x() != 0)
+		if (object.GetMoveVec().x != 0)
 		{
 			cameraGun.SetMoveSpeed(7.0f);
 		}
@@ -212,9 +212,13 @@ void	Player::Think()
 	switch (nowMotion) {
 	case Idle:	//待機
 		if (controller.IsLStickInput()) { nowMotion = Walk; }
-		if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::R1)) { nowMotion = TakeOff; }
+		if (cManager.CheckHitSubCollisionObejct(Foot))
+		{
+			if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::R1)) { nowMotion = TakeOff; }
+		}
 		ChangeSkillMotion(nowMotion,SkillUse);
 		if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::L1)) { nowMotion = CameraGunUse; }
+		if (!cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Fall; }
 		break;
 	case Walk:	//歩く
 		//1フレーム
@@ -240,6 +244,7 @@ void	Player::Think()
 		if (cManager.CheckHitSubCollisionObejct(Head)) { nowMotion = Fall; }
 		ChangeSkillMotion(nowMotion, SkillAirUse);
 		if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::L1)) { nowMotion = CameraGunAirUse; }
+		if (cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Fall; std::cout << "足元当たり" << std::endl; }
 		break;
 	case Fall:	//落下中
 		if (cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Landing; }
@@ -277,6 +282,8 @@ void	Player::Think()
 	}
 	//モーションの更新
 	UpDateMotion(nowMotion);
+
+	std::cout << nowMotion << std::endl;
 }
 
 
@@ -289,14 +296,14 @@ void	Player::Move()
 	default:
 
 		//上昇中もしくは足元に地面がない
-		if (object.GetMoveVec().y() > 0.0f ||
+		if (object.GetMoveVec().y > 0.0f ||
 			!cManager.CheckHitSubCollisionObejct(Foot))
 		{
 			object.GetMove().GravityOperation(cManager.CheckHitSubCollisionObejct(Foot));
 		}
 		else //地面と接している
 		{
-			object.GetMoveVec().y() = 0.0f;
+			object.GetMoveVec().y = 0.0f;
 		}
 
 		break;

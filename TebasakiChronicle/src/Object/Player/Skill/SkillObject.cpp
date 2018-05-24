@@ -20,7 +20,7 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 		0
 	);
 	
-	object.SetPos(K_Math::Vector3(object.GetPos().x() + GetDir() * skillType->GetAppearDist(), object.GetPos().y(), object.GetPos().z()));
+	object.SetPos(K_Math::Vector3(object.GetPos().x + GetDir() * skillType->GetAppearDist(), object.GetPos().y, object.GetPos().z));
 
 	object.SetImage(imageName, nullptr, true);
 	object.GetImage().CreateCharaChip(animCharaChip.chip, animCharaChip.chipSheetNum, animCharaChip.animSpd, animCharaChip.isAnimRoop);

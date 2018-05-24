@@ -34,7 +34,7 @@ public:
 	{
 		K_Math::Vector3*	pos;
 		std::string*		textureName;
-		int*				skillId;
+		int*				behaviorId;
 		AnimationCharaChip* nowCharaChip;
 	};
 	SkillAndCharaChip* skillAndChip;

@@ -1,43 +1,47 @@
 #include "EnemyMoveTransition.h"
 
-EnemyMoveTransition::EnemyMoveTransition(){}
-EnemyMoveTransition::~EnemyMoveTransition(){}
+EnemyMoveTransitionAbstract::~EnemyMoveTransitionAbstract(){}
+
+//コンストラクタ
+EnemyMoveTransition::EnemyMoveTransition(EnemyMoveTransitionAbstract* emta, int transitionNum) :
+	transition(emta),
+	isTrue(transitionNum >= 0) {}
+//デストラクタ
+EnemyMoveTransition::~EnemyMoveTransition()
+{
+	delete transition;
+}
+
+//-----------------------------------------------
+//遷移条件をクリアしたらtrueを返す
+bool EnemyMoveTransition::IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern)
+{
+	return transition->IsTransition(cm, status, endMovePattern) == isTrue;
+}
 
 //-----------------------------------------------------------------------------
-//0：常にfalseを返す
-bool ETransition_NotTrans::Transition(CollisionManager& cm, Status& status)
+//0：遷移しない
+bool ETransition_NotTransition::IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern)
 {
 	return false;
 }
 
 //-----------------------------------------------------------------------------
-//1：視界内にプレイヤーが入っているとき
-bool ETransition_PIntoView::Transition(CollisionManager& cm, Status& status)
+//1：一連の動作が終了したとき
+bool ETransition_EndMovePattern::IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern)
 {
-	if (cm.CheckHitSubCollisionObejct(1))
+	if (endMovePattern == true)
 		return true;
 
 	return false;
 }
 
 //-----------------------------------------------------------------------------
-//2：視界内に入っているプレイヤーが自身の反対方向に移動したとき
-bool ETransition_PMoveOtherSide::Transition(CollisionManager& cm, Status& status)
+//2：視界内にプレイヤーが入っているとき
+bool ETransition_PlayerIntoVisibility::IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern)
 {
-	//視界用コリジョンからプレイヤーの座標を受け取る
-	for (auto it : cm.GetConflictionObjectsTag(1))
-	{
-		Status* pst = (Status*)it->userData;
-		if (status.GetState() == Status::Right)
-		{
-			if ((status.GetPos().x() - pst->GetPos().x()) > 0.f)
-				return true;
-		}
-		else
-		{
-			if ((status.GetPos().x() - pst->GetPos().x()) < 0.f)
-				return true;
-		}
-	}
+	if (cm.CheckHitSubCollisionObejct(1))
+		return true;
+
 	return false;
 }

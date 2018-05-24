@@ -27,6 +27,7 @@
     <ClCompile Include="src\BaseClass\Move.cpp" />
     <ClCompile Include="src\BaseClass\Status\Status.cpp" />
     <ClCompile Include="src\CSTList.cpp" />
+    <ClCompile Include="src\Loader\EnemyLoader.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Object\Enemy\Enemy.cpp" />
     <ClCompile Include="src\Object\Enemy\EnemyController.cpp" />
@@ -62,6 +63,7 @@
     <ClInclude Include="src\BaseClass\Status\Status.h" />
     <ClInclude Include="src\CSTList.h" />
     <ClInclude Include="src\Helper.h" />
+    <ClInclude Include="src\Loader\EnemyLoader.h" />
     <ClInclude Include="src\Object\Enemy\Enemy.h" />
     <ClInclude Include="src\Object\Enemy\EnemyController.h" />
     <ClInclude Include="src\Object\Enemy\EnemyManager.h" />
@@ -152,6 +154,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>include\libpng;include\K_Physics;include\K_Math;include\K_Input;include\K_Graphics;include\K_Audio;include\GLFW;include\GLEW;include\FreeType;include\fbxsdk;include\Eigen;include\Effekseer;include\bullet;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -183,6 +186,7 @@
       <AdditionalIncludeDirectories>include\libpng;include\K_Physics;include\K_Math;include\K_Input;include\K_Graphics;include\K_Audio;include\GLFW;include\GLEW;include\FreeType;include\fbxsdk;include\Eigen;include\Effekseer;include\bullet;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <BrowseInformation>true</BrowseInformation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

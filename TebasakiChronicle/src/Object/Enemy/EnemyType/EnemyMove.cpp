@@ -1,7 +1,7 @@
 #include "EnemyMove.h"
 
 //-----------------------------------------------
-//何もしない
+//0：何もしない
 void EMove_NoMotion::FirstMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager,Status& status, Move& move)
 {
 	//何もしない
@@ -12,7 +12,7 @@ void EMove_NoMotion::EMove(CollisionManager& cmanager, TemporaryCollisionManager
 }
 
 //-----------------------------------------------
-//向いている方向に移動する
+//1：向いている方向に移動する
 void EMove_Movement::FirstMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	//何もしない
@@ -21,16 +21,16 @@ void EMove_Movement::EMove(CollisionManager& cmanager, TemporaryCollisionManager
 {
 	if (status.GetDirection() == status.Right)
 	{
-		move.GetMoveVec().x() += move.GetAddVec();
+		move.GetMoveVec().x += move.GetAddVec();
 	}
 	else
 	{
-		move.GetMoveVec().x() -= move.GetAddVec();
+		move.GetMoveVec().x -= move.GetAddVec();
 	}
 }
 
 //-----------------------------------------------
-//地面についているときのみジャンプ
+//2：地面についているときのみジャンプ
 void EMove_Jump::FirstMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	//何もしない
@@ -44,21 +44,22 @@ void EMove_Jump::EMove(CollisionManager& cmanager, TemporaryCollisionManager& te
 }
 
 //-----------------------------------------------
-//前方に攻撃する
+//3：前方に攻撃する
 void EMove_FrontAttack::CreateAttackCollision()
 {
-
+	//何もしない
 }
 void EMove_FrontAttack::FirstMove(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	K_Math::Vector3 relative(16, 0, 0);
 	if (status.GetDirection() == Status::Direction::Left)
-		relative.x() *= -1;
+		relative.x *= -1;
 
+	//攻撃用コリジョンを作成
 	tempmanager.CreateTemporaryCollision(
 		CC::CreateBoxShape(14.f, 20.f, 10.f),
 		CollisionMask::Non,
-		CollisionMask::TakeDamageEnemy,
+		CollisionMask::TakeDamagePlayer,
 		status.GetPos() + relative,
 		K_Math::Vector3(0, 0, 0),
 		status.GetDirection(),
