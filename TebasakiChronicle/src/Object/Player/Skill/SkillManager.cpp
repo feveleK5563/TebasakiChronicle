@@ -90,14 +90,14 @@ void	SkillManager::RegistSkill(const int& num)
 bool	SkillManager::ReceiveSkillAndCharaChip(const Enemy::SkillAndCharaChip& skill)
 {
 	//SkillIDが0でないかをチェック
-	if (IsNonSkillID(*skill.skillId))
+	if (IsNonSkillID(*skill.behaviorId))
 	{
 		//return false;
 	}
 
 	skillDatas[skillNum - 1].Clear();	//クリア
 	//スキルは一時的にボタン5に入る
-	skillDatas[skillNum - 1].SetSkillID(*skill.skillId);
+	skillDatas[skillNum - 1].SetSkillID(*skill.behaviorId);
 	skillDatas[skillNum - 1].SetSkillImageName(*skill.textureName);
 	skillDatas[skillNum - 1].SetAnimCharaChip(skill.nowCharaChip);
 

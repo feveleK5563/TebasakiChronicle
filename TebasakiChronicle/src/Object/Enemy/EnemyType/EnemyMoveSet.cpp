@@ -29,7 +29,7 @@ const std::vector<AnimationCharaChip*>& EnemyMoveSet::GetNowAnimChip(int nowPatt
 int EnemyMoveSet::EMove(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, CollisionManager& colmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	bool endMovePattern = false;	//動作パターンが一巡したか(最後までいったか)どうかを格納
-	int idNum = empattern[nowPatternOrder]->EMove(nowMoveOrder, timeCnt, colmanager, tempmanager, status, move, endMovePattern);
+	int behaviorId = empattern[nowPatternOrder]->EMove(nowMoveOrder, timeCnt, colmanager, tempmanager, status, move, endMovePattern);
 
 	//パターンの遷移条件を満たしていたらパターン変更
 	for (int i = 0; i < (int)empattern.size(); ++i)
@@ -42,7 +42,7 @@ int EnemyMoveSet::EMove(int& nowMoveOrder, int& nowPatternOrder, int& timeCnt, C
 		}
 	}
 
-	return idNum;
+	return behaviorId;
 }
 
 //-----------------------------------------------------------------------------

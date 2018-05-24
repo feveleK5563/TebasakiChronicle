@@ -5,7 +5,7 @@ EnemyMovePattern::EnemyMovePattern(const MoveSetUpData& msud)
 {
 	for (int i = 0; i < msud.totalMoveNum; ++i)
 	{
-		SetMoveAndTime(*(msud.moveIdArr + i), *(msud.skillIdArr + i), *(msud.durationTimeArr + i));
+		SetMoveAndTime(*(msud.moveIdArr + i), *(msud.behaviorIdArr + i), *(msud.durationTimeArr + i));
 		animChip.emplace_back(new AnimationCharaChip(*(msud.srcArr + i), *(msud.sheetArr + i), *(msud.spdArr + i), *(msud.isRoopArr + i), *(msud.basisPosArr + i)));
 	}
 	for (int i = 0; i < msud.patternNum; ++i)
@@ -62,7 +62,7 @@ int EnemyMovePattern::EMove(int& nowMoveOrder, int& timeCnt, CollisionManager& c
 	}
 
 	++timeCnt;
-	return mp[nowMoveOrder]->skillId;
+	return mp[nowMoveOrder]->behaviorId;
 }
 
 //-----------------------------------------------------------------------------
@@ -74,9 +74,9 @@ void EnemyMovePattern::MoveReset(int& nowMoveOrder)
 
 //-----------------------------------------------------------------------------
 //ìÆçÏÇê›íËÇ∑ÇÈ
-void EnemyMovePattern::SetMoveAndTime(int moveNum, int skillId, int durationTime)
+void EnemyMovePattern::SetMoveAndTime(int moveNum, int behaviorId, int durationTime)
 {
-	mp.emplace_back(new MovePattern(skillId, durationTime));
+	mp.emplace_back(new MovePattern(behaviorId, durationTime));
 	switch (moveNum)
 	{
 	case 0:		//âΩÇ‡ÇµÇ»Ç¢

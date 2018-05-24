@@ -12,7 +12,7 @@ public:
 	struct MoveSetUpData	//敵の動作パターン生成に必要なデータ
 	{
 		int*				moveIdArr;			//動作番号を入れた配列のアドレス値
-		int*				skillIdArr;			//動作中に取得可能なスキル番号
+		int*				behaviorIdArr;		//動作中に取得可能な振る舞い番号
 		int*				durationTimeArr;	//動作の継続時間を入れた配列のアドレス値
 		K_Math::Box2D*		srcArr;				//アニメーション画像の最初の位置
 		K_Math::Vector2*	basisPosArr;		//描画の基準座標(0, 0で中心)
@@ -25,13 +25,13 @@ public:
 
 		MoveSetUpData(	int* miarr, int* siarr, int* dtarr, K_Math::Box2D* srcarr, K_Math::Vector2* basisposarr, int* shtarr,
 						float* spdarr, bool* irarr, int* tiarr, int pnum, int tmnum):
-			moveIdArr(miarr), skillIdArr(siarr), durationTimeArr(dtarr), srcArr(srcarr), basisPosArr(basisposarr), sheetArr(shtarr), 
+			moveIdArr(miarr), behaviorIdArr(siarr), durationTimeArr(dtarr), srcArr(srcarr), basisPosArr(basisposarr), sheetArr(shtarr),
 			spdArr(spdarr), isRoopArr(irarr), transitionIdArr(tiarr), patternNum(pnum), totalMoveNum(tmnum){}
 
 		~MoveSetUpData()
 		{
 			Memory::SafeDeleteArr(moveIdArr);
-			Memory::SafeDeleteArr(skillIdArr);
+			Memory::SafeDeleteArr(behaviorIdArr);
 			Memory::SafeDeleteArr(durationTimeArr);
 			Memory::SafeDeleteArr(srcArr);
 			Memory::SafeDeleteArr(sheetArr);
@@ -45,12 +45,12 @@ private:
 	struct MovePattern		//動作の種類、時間を内包したやつ
 	{
 		EnemyMove*	em;		//動作をこいつで行う
-		int skillId;		//動作中に取得可能なスキル番号
+		int behaviorId;		//動作中に取得可能なスキル番号
 		int moveTimeMax;	//動作終了までの時間
 
-		MovePattern(int sklid, int mtime) :
+		MovePattern(int beId, int mtime) :
 			em(nullptr),
-			skillId(sklid),
+			behaviorId(beId),
 			moveTimeMax(mtime) {}
 	};
 	std::vector<MovePattern*> mp;

@@ -56,7 +56,7 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	skillAndChip = new SkillAndCharaChip();
 	skillAndChip->pos = &gameObject.GetStatus().GetPos();
 	skillAndChip->textureName = &gameObject.GetImage().GetTextureName();
-	skillAndChip->skillId = &eController->GetSkillId();
+	skillAndChip->behaviorId = &eController->GetBehaviorId();
 	int i = 0;
 	for (; i < 5; ++i)
 	{

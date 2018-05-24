@@ -68,6 +68,9 @@
     <Filter Include="ソース ファイル\src\Object\Object3D">
       <UniqueIdentifier>{7316d41b-4e32-4aac-bf74-adcfdc346994}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\Loader">
+      <UniqueIdentifier>{0d3c5429-1030-4beb-879a-6a6385c9e2a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -162,6 +165,9 @@
     </ClCompile>
     <ClCompile Include="src\Object\Object3D\Object3D.cpp">
       <Filter>ソース ファイル\src\Object\Object3D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Loader\EnemyLoader.cpp">
+      <Filter>ソース ファイル\src\Loader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,6 +266,9 @@
     </ClInclude>
     <ClInclude Include="src\Object\Object3D\Object3D.h">
       <Filter>ソース ファイル\src\Object\Object3D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Loader\EnemyLoader.h">
+      <Filter>ソース ファイル\src\Loader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
