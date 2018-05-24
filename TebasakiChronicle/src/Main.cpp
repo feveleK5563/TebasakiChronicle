@@ -45,14 +45,10 @@ int main()
 	CST::CreateShader("data/shader/SimpleShader.vs", "data/shader/SimpleShader.ps");
 	CST::CreateShader("data/shader/VertexShader.vs", "data/shader/TextureSampler.ps"); //追加
 
-	//地形(仮)
-	//CC::CreateCollisionObject(CC::CreateBoxShape(1000.f, 50.f, 10.f), false, CollisionMask::Non, CollisionMask::Ground, K_Math::Vector3(0, -80, 0));
-
 	EnemyLoader eLoader;
-
 	//敵の種類を作成
 	EnemyTypeManager* etm = new EnemyTypeManager();
-	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/TestData2.txt"));
+	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/TestData.txt"));
 	//上記で作成した種類を基に敵を生成する
 	EnemyManager* emanager = new EnemyManager();
 	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(-10, 0, 0), Status::Direction::Left);
@@ -80,26 +76,26 @@ int main()
 
 		player->UpDate();
 		//カメラ追尾
-		CST::GetPerspectiveCamera()->SetTarget(player->object.GetPos().x(), player->object.GetPos().y(), player->object.GetPos().z());
+		CST::GetPerspectiveCamera()->SetTarget(player->object.GetPos().x, player->object.GetPos().y, player->object.GetPos().z);
 		CST::GetPerspectiveCamera()->SetPosition(330, K_Math::Vector3(0, 0, -1));
 
 		CST::FrameBufferBeginDraw(ScreenWidth, ScreenHeight, 0.f, 0.f, 1.f);
 		CST::GetPerspectiveCamera()->Draw();
 		CST::GetOrthoCamera()->Draw();
 
+		mapObj->SetDecisionParam(pos, rotation, scale);
+
 		emanager->RenderAllEnemy();
 		player->Render();
-
 
 		//*****************************
 		//FBXモデルの描画
 		CST::GetShaderClass(2)->UseShader();
 		//----------------------------
 		//地形判定付きオブジェクト
-		mapObj->SetDecisionParam(pos, rotation, scale);
 		mapObj->Render();
 
-		//CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
+		CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 		sc->SwapBuffer();
 	}
 

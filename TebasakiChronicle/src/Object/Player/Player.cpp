@@ -158,7 +158,7 @@ void	Player::ShotCameraGun()
 	//撮影ボタンを押すとカメラを前方に射出する
 	if (INPUT::IsPressButton(VpadIndex::Pad0,K_Input::VpadButton::L1))
 	{
-		if (object.GetMoveVec().x() != 0)
+		if (object.GetMoveVec().x != 0)
 		{
 			cameraGun.SetMoveSpeed(7.0f);
 		}
@@ -289,14 +289,14 @@ void	Player::Move()
 	default:
 
 		//上昇中もしくは足元に地面がない
-		if (object.GetMoveVec().y() > 0.0f ||
+		if (object.GetMoveVec().y > 0.0f ||
 			!cManager.CheckHitSubCollisionObejct(Foot))
 		{
 			object.GetMove().GravityOperation(cManager.CheckHitSubCollisionObejct(Foot));
 		}
 		else //地面と接している
 		{
-			object.GetMoveVec().y() = 0.0f;
+			object.GetMoveVec().y = 0.0f;
 		}
 
 		break;
