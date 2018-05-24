@@ -163,6 +163,7 @@ bool	CameraGun::CheckUserData()
 
 
 //ベクトルの設定
+//状態の設定
 void	CameraGun::SetCameraGun(bool isInjection)
 {
 	if (isInjection)
@@ -174,8 +175,15 @@ void	CameraGun::SetCameraGun(bool isInjection)
 	{
 		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
 		object.SetState(Status::State::Non);
+		object.GetMove().SetAddVec(5.0f);	//元に戻す
 		DataReset();
 	}
+}
+
+//カメラガンの移動速度の設定
+void	CameraGun::SetMoveSpeed(float moveSpeed)
+{
+	object.GetMove().SetAddVec(moveSpeed);
 }
 
 
@@ -235,4 +243,12 @@ void	CameraGun::DataReset()
 {
 	targetNum = -1;
 	targetData = nullptr;
+}
+
+
+//!@brief カメラガンが受け取ったスキルデータを渡す
+//!@return skillAndCharaChip スキルのデータ
+Enemy::SkillAndCharaChip& CameraGun::GetSkillAndCharaChip()
+{
+	return *targetData;
 }

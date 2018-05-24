@@ -47,8 +47,26 @@
     <Filter Include="ソース ファイル\src\BaseClass\Input">
       <UniqueIdentifier>{8be4abb2-3f7f-4a6c-8b5b-e772c2c4c27a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\src\Loader">
-      <UniqueIdentifier>{150e9a0f-9f8c-46c8-98ba-8b9f449b5cad}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\src\Object\Player\Skill">
+      <UniqueIdentifier>{2ee36627-ef3c-46d5-882f-20d0bbb63f91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Object\Player\Skill\SkillData">
+      <UniqueIdentifier>{2fa000ef-a07b-4811-830c-39411f4cc8b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Object\Player\Skill\SkillManager">
+      <UniqueIdentifier>{fb00e5a1-69f4-434f-bb9c-6b9bcbe0edda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Object\Player\Skill\SkillObject">
+      <UniqueIdentifier>{ebc84cb7-df8c-4650-9ad7-72ad07174bc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Object\Player\Skill\SkillType">
+      <UniqueIdentifier>{df787194-7b65-41dd-a125-f09e0abd28cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Object\Player\Skill\SkillType\SkillSword">
+      <UniqueIdentifier>{df45246d-28e7-4dc6-8e3e-28296598442b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Object\Object3D">
+      <UniqueIdentifier>{7316d41b-4e32-4aac-bf74-adcfdc346994}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -127,8 +145,23 @@
     <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollision.cpp">
       <Filter>ソース ファイル\src\Object\TemporaryCollision</Filter>
     </ClCompile>
-    <ClCompile Include="src\Loader\EnemyLoader.cpp">
-      <Filter>ソース ファイル\src\Loader</Filter>
+    <ClCompile Include="src\Object\Player\Skill\SkiiData.cpp">
+      <Filter>ソース ファイル\src\Object\Player\Skill\SkillData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Player\Skill\SkillManager.cpp">
+      <Filter>ソース ファイル\src\Object\Player\Skill\SkillManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Player\Skill\SkillObject.cpp">
+      <Filter>ソース ファイル\src\Object\Player\Skill\SkillObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Player\Skill\SkillType.cpp">
+      <Filter>ソース ファイル\src\Object\Player\Skill\SkillType</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Player\Skill\SkillSword\SkillSword.cpp">
+      <Filter>ソース ファイル\src\Object\Player\Skill\SkillType\SkillSword</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Object3D\Object3D.cpp">
+      <Filter>ソース ファイル\src\Object\Object3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -210,8 +243,23 @@
     <ClInclude Include="src\Helper.h">
       <Filter>ソース ファイル\src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Loader\EnemyLoader.h">
-      <Filter>ソース ファイル\src\Loader</Filter>
+    <ClInclude Include="src\Object\Player\Skill\SkillData.h">
+      <Filter>ソース ファイル\src\Object\Player\Skill\SkillData</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Player\Skill\SkillManager.h">
+      <Filter>ソース ファイル\src\Object\Player\Skill\SkillManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Player\Skill\SkillObject.h">
+      <Filter>ソース ファイル\src\Object\Player\Skill\SkillObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Player\Skill\SkillType.h">
+      <Filter>ソース ファイル\src\Object\Player\Skill\SkillType</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Player\Skill\SkillSword\SkillSword.h">
+      <Filter>ソース ファイル\src\Object\Player\Skill\SkillType\SkillSword</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Object3D\Object3D.h">
+      <Filter>ソース ファイル\src\Object\Object3D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

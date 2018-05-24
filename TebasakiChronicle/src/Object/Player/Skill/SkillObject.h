@@ -1,1 +1,53 @@
 #pragma once
+#include "../src/Object/GameObject.h"
+#include "../src/BaseClass/Collision/CollisionManager.h"
+
+#include "SkillType.h"
+#include <memory>
+
+class SkillType;
+//--------------------------------------------------------------
+//スキルオブジェクト
+//概要:スキル生成時、当たり判定やキャラチップを出現させる
+//製作者:日比野
+//--------------------------------------------------------------
+class SkillObject
+{
+public:
+
+	//!@brief SkillTypeから振る舞いを生成
+	//!@brief SkillType 振る舞いを受け取る
+	//!@brief obj ゲームオブジェクトの参照
+	SkillObject(std::shared_ptr<SkillType> skillType_, GameObject& obj,
+		const std::string& imageName,
+		const AnimationCharaChip& animCharaChip);
+
+	~SkillObject();
+
+public:
+	//!@brief 更新処理
+	void	UpDate();
+
+	//!@brief 描画処理
+	void	Render();
+
+	//!@brief 振る舞いをセットする
+	//!@param[in] skillType_ スキルのふるまい
+	void	SetSkillType(std::shared_ptr<SkillType> skillType_);
+
+	//!@brief 生存時間内かをチェック
+	//!@return 生存時間内ならtrue
+	bool	CheckSurvivalTime();
+
+private:
+	//!@brief 向きを返す
+	//!@return -1.0fなら左,1.0fなら右
+	float	GetDir();
+
+private:
+	std::shared_ptr<SkillType>	skillType;	//スキル動作
+	GameObject					object;		//ゲームオブジェクト
+	K_Physics::CollisionShape*	shape;		//ベースコリジョン
+	CollisionManager			cManager;	//コリジョン管理者
+	int							continueCnt;	//継続時間計測
+};

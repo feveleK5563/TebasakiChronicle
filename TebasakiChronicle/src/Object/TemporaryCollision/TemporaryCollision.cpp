@@ -40,9 +40,9 @@ TemporaryCollision::~TemporaryCollision()
 
 //-----------------------------------------------------------------------------
 //画像管理者を生成し、同時にキャラチップを設定する
-void TemporaryCollision::SetImageManagerAndCharaChip(	const std::string&		texName,
+void TemporaryCollision::SetImageManagerAndCharaChip(	const std::string&			texName,
 														K_Graphics::Texture*	texture,
-														const K_Math::Box2D&	src,
+														const K_Math::Box2D&			src,
 														int						sheet,
 														float					spd,
 														bool					isroop)

@@ -28,6 +28,8 @@ public:
 //関数群
 namespace CC
 {
+	//コリジョンを管理する物理クラスの参照を取得
+	K_Physics::BulletPhysics*	GetBulletPhysics();
 	//終了処理
 	void Delete();
 

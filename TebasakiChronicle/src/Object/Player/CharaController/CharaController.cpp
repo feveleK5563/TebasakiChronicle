@@ -48,5 +48,17 @@ void	CharaController::UpDate(Move& move)
 	{
 		move.GetMoveVec().x *= Friction;
 	}
-	INPUT::Run(VpadIndex::Pad0);				//入力処理を動かす
+}
+
+
+//------------------------------------------------------
+//移動の入力スティックがおされているかの判定
+bool	CharaController::IsLStickInput()
+{
+	float stickDepth = INPUT::GetStickPower(VpadIndex::Pad0, K_Input::VpadStick::L);
+	if (stickDepth == 0)
+	{
+		return false;
+	}
+	return true;
 }
