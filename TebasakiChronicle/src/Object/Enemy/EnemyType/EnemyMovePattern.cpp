@@ -42,6 +42,8 @@ int EnemyMovePattern::EMove(int& nowMoveOrder, int& timeCnt, CollisionManager& c
 	//timeCntがmoveTimeMaxを超えたら、次の動作に移行する
 	if (timeCnt >= mp[nowMoveOrder]->moveTimeMax)
 	{
+		//終了時の処理
+		mp[nowMoveOrder]->em->Finalize(colmanager, tempmanager, status, move);
 		timeCnt = 0;
 
 		++nowMoveOrder;
@@ -52,14 +54,13 @@ int EnemyMovePattern::EMove(int& nowMoveOrder, int& timeCnt, CollisionManager& c
 		}
 	}
 
-	if (timeCnt == 0)	//最初に行う動作
+	if (timeCnt == 0)	//最初に行う処理
 	{
-		mp[nowMoveOrder]->em->FirstMove(colmanager, tempmanager, status, move);
+		mp[nowMoveOrder]->em->FirstProcess(colmanager, tempmanager, status, move);
 	}
-	else				//通常の動作
-	{
-		mp[nowMoveOrder]->em->EMove(colmanager, tempmanager, status, move);
-	}
+	
+	// 動作
+	mp[nowMoveOrder]->em->Action(colmanager, tempmanager, status, move);
 
 	++timeCnt;
 	return mp[nowMoveOrder]->behaviorId;
@@ -80,19 +81,19 @@ void EnemyMovePattern::SetMoveAndTime(int moveNum, int behaviorId, int durationT
 	switch (moveNum)
 	{
 	case 0:		//何もしない
-		mp.back()->em = new EMove_NoMotion();
+		mp.back()->em = new Behavior_NoMotion();
 		break;
 
 	case 1:		//向いている方向に移動する
-		mp.back()->em = new EMove_Movement();
+		mp.back()->em = new Behavior_MovementToDirection();
 		break;
 
-	case 2:		//ジャンプする
-		mp.back()->em = new EMove_Jump();
+	case 2:		//地面でジャンプする
+		mp.back()->em = new Behavior_JumpAtGround();
 		break;
 
 	case 3:		//前方に攻撃する
-		mp.back()->em = new EMove_FrontAttack();
+		mp.back()->em = new Behavior_FrontAttack();
 		break;
 	}
 }

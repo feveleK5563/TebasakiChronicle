@@ -15,7 +15,6 @@ private:
 
 public:
 	//コンストラクタ
-	//コリジョンの形状情報をdeleteする
 	TemporaryCollision(	K_Physics::CollisionShape*	shape,				//コリジョンの形状
 						const CollisionMask&		mmask,				//サブコリジョンのぶつかる対象
 						const CollisionMask&		gmask,				//サブコリジョン自身を指す(無効の場合はNon)
@@ -24,16 +23,18 @@ public:
 						const Status::Direction&	dir,				//テクスチャの向き
 						const int					damage,				//対象に与えるダメージ量
 						const int					deletetime,			//自身を削除するまでの時間
+						const float					gravitySize,		//重力量(0で無効)
 						const bool					ishitground,		//地形に接触したら消滅するフラグ
 						const bool					doground );			//ベースコリジョンを地形として扱うフラグ
 
 	//デストラクタ
+	//コリジョンの形状情報をdeleteする
 	~TemporaryCollision();
 
 	//画像管理者を生成し、同時にキャラチップを設定する
-	void SetImageManagerAndCharaChip(	const std::string&			texName,
+	void SetImageManagerAndCharaChip(	const std::string&		texName,
 										K_Graphics::Texture*	texture,
-										const K_Math::Box2D&			src,
+										const K_Math::Box2D&	src,
 										int						sheet,
 										float					spd,
 										bool					isroop);

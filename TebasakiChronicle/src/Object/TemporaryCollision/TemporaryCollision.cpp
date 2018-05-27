@@ -10,6 +10,7 @@ TemporaryCollision::TemporaryCollision(	K_Physics::CollisionShape*	shape,
 										const Status::Direction&	dir,
 										const int					damage,
 										const int					deletetime,
+										const float					gravitySize,
 										const bool					ishitground,
 										const bool					doground):
 	cShape(shape),
@@ -28,6 +29,7 @@ TemporaryCollision::TemporaryCollision(	K_Physics::CollisionShape*	shape,
 		damage,
 		0);
 	gameObject.GetMove().GetMoveVec() = movevec;
+	gameObject.GetMove().SetGravity(gravitySize);
 
 	colmanager.SetSubCollisionUserData(0, &gameObject.GetState());
 }
@@ -62,6 +64,7 @@ bool TemporaryCollision::Update()
 	}
 
 	//ÉRÉäÉWÉáÉìÇÃìÆçÏ
+	gameObject.GetMove().GravityOperation(true);
 	colmanager.MoveBaseCollision(	gameObject.GetMove().GetMoveVec(),
 									gameObject.GetStatus().GetDirection(),
 									true);

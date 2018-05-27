@@ -1,6 +1,6 @@
 #pragma once
 #include <math.h>
-#include "EnemyMove.h"
+#include "CharacterBehavior.h"
 #include "EnemyMoveTransition.h"
 #include "../../../BaseClass/ImageManager/AnimationCharaChip.h"
 #include "../../../Helper.h"
@@ -44,7 +44,7 @@ public:
 private:
 	struct MovePattern		//動作の種類、時間を内包したやつ
 	{
-		EnemyMove*	em;		//動作をこいつで行う
+		CharacterBehavior*	em;		//動作をこいつで行う
 		int behaviorId;		//動作中に取得可能なスキル番号
 		int moveTimeMax;	//動作終了までの時間
 

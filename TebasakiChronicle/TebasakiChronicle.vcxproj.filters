@@ -112,9 +112,6 @@
     <ClCompile Include="src\Object\Player\CharaController\CharaController.cpp">
       <Filter>ソース ファイル\src\Object\Player\CharaController</Filter>
     </ClCompile>
-    <ClCompile Include="src\Object\Enemy\EnemyType\EnemyMove.cpp">
-      <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
-    </ClCompile>
     <ClCompile Include="src\Object\Enemy\EnemyType\EnemyMovePattern.cpp">
       <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
     </ClCompile>
@@ -169,6 +166,9 @@
     <ClCompile Include="src\Loader\EnemyLoader.cpp">
       <Filter>ソース ファイル\src\Loader</Filter>
     </ClCompile>
+    <ClCompile Include="src\Object\Enemy\EnemyType\CharacterBehavior.cpp">
+      <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BaseClass\Move.h">
@@ -209,9 +209,6 @@
     </ClInclude>
     <ClInclude Include="src\Object\Player\CharaController\CharaController.h">
       <Filter>ソース ファイル\src\Object\Player\CharaController</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Object\Enemy\EnemyType\EnemyMove.h">
-      <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
     </ClInclude>
     <ClInclude Include="src\Object\Enemy\EnemyType\EnemyMovePattern.h">
       <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
@@ -269,6 +266,9 @@
     </ClInclude>
     <ClInclude Include="src\Loader\EnemyLoader.h">
       <Filter>ソース ファイル\src\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Enemy\EnemyType\CharacterBehavior.h">
+      <Filter>ソース ファイル\src\Object\Enemy\EnemyType</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

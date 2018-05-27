@@ -95,7 +95,7 @@ int main()
 		//地形判定付きオブジェクト
 		mapObj->Render();
 
-		CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
+		//CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 		sc->SwapBuffer();
 	}
 

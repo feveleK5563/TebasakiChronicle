@@ -26,10 +26,11 @@ void TemporaryCollisionManager::CreateTemporaryCollision(
 	const Status::Direction&	dir,
 	const int					damage,
 	const int					deletetime,
+	const float					gravitySize,
 	const bool					ishitground,
 	const bool					doground)
 {
-	tempCollision.emplace_back(new TemporaryCollision(shape, mmask, gmask, setpos, movevec, dir, damage, deletetime, ishitground, doground));
+	tempCollision.emplace_back(new TemporaryCollision(shape, mmask, gmask, setpos, movevec, dir, damage, deletetime, gravitySize, ishitground, doground));
 }
 
 //-----------------------------------------------------------------------------
