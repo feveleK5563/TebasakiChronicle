@@ -44,14 +44,14 @@ public:
 private:
 	struct MovePattern		//動作の種類、時間を内包したやつ
 	{
-		CharacterBehavior*	em;		//動作をこいつで行う
+		CharacterBehavior	em;		//動作をこいつで行う
 		int behaviorId;		//動作中に取得可能なスキル番号
 		int moveTimeMax;	//動作終了までの時間
 
-		MovePattern(int beId, int mtime) :
-			em(nullptr),
+		MovePattern(int moveNum, int beId, int mtime) :
 			behaviorId(beId),
-			moveTimeMax(mtime) {}
+			moveTimeMax(mtime),
+			em(moveNum) {}
 	};
 	std::vector<MovePattern*> mp;
 	std::vector<AnimationCharaChip*> animChip;
@@ -65,16 +65,10 @@ public:
 	~EnemyMovePattern();
 
 	//動作を行い、現在取得可能なスキルの番号を返す
-	int EMove(int& nowMoveOrder, int& timeCnt, CollisionManager& colmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move, bool& endMovePattern);
+	int EMove(int& nowMoveOrder, TimeCount& timeCnt, CollisionManager& colmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move, bool& endMovePattern);
 
 	//動作順をリセットする
 	void MoveReset(int& nowMoveOrder);
-
-	//動作を設定する
-	void SetMoveAndTime(int moveNum, int skillId, int durationTime);
-
-	//動作パターン遷移条件を設定する
-	void SetTransition(int transitionNum);
 
 	//アニメーションのキャラチップを返す
 	const std::vector<AnimationCharaChip*>& GetNowAnimChip();

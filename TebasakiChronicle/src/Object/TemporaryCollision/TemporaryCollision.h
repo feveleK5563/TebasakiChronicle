@@ -1,5 +1,6 @@
 #pragma once
 #include "../../BaseClass/Collision/CollisionManager.h"
+#include "../../TimeCount.h"
 
 //一時的に生成されるコリジョン
 //(時間経過で消えたり、単独で動いたりする)
@@ -9,8 +10,7 @@ private:
 	K_Physics::CollisionShape*	cShape;			//コリジョンの形状
 	CollisionManager			colmanager;		//コリジョンデータの管理者
 	GameObject		gameObject;			//ステータス、移動や重力の動作、画像管理、SE、easingを内包したやつ
-	int				timeCnt;			//時間計測
-	int				deleteTime;			//消滅までの時間
+	TimeCount		timeCnt;			//時間計測
 	bool			isHitGround;		//これがtrueだと地形に接触したら消滅する
 
 public:

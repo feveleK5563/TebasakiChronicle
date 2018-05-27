@@ -3,6 +3,7 @@
 
 //コンストラクタ
 Enemy::Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction, const int indexNum) :
+	behaviorId(0),
 	nowMoveOrder(0),
 	nowPatternOrder(0),
 	beforeMoveOrder(0),
@@ -14,7 +15,6 @@ Enemy::Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Dire
 //デストラクタ
 Enemy::~Enemy()
 {
-	Memory::SafeDelete(eController);
 	Memory::SafeDelete(skillAndChip);
 }
 
@@ -22,7 +22,7 @@ Enemy::~Enemy()
 //敵情報を設定
 void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction, const int indexNum)
 {
-	eController = new EnemyController(cpyet->GetEnemyMoveSet());
+	ems = cpyet->GetEnemyMoveSet();
 	gameObject.GetStatus().SetStatusData(	Status::State::Active,
 											setPos,
 											K_Math::Vector3(0, 0, 0),
@@ -41,7 +41,7 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	//アニメーションと表示画像の設定
 	gameObject.SetImage(cpyet->GetTextureName(), cpyet->GetTexture(), false);
 	gameObject.GetImage().ChangeAnimationPattern(nowMoveOrder);
-	gameObject.GetImage().ChangeCharaChip(eController->GetNowCharaChip(nowPatternOrder));
+	gameObject.GetImage().ChangeCharaChip(ems->GetNowAnimChip(nowPatternOrder));
 
 	//コリジョンの設定
 	collisionManager.SetBaseCollisionData(cpyet->CreateAndGetBaseCollisionData(), setPos);	//ベースコリジョン
@@ -56,7 +56,7 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	skillAndChip = new SkillAndCharaChip();
 	skillAndChip->pos = &gameObject.GetStatus().GetPos();
 	skillAndChip->textureName = &gameObject.GetImage().GetTextureName();
-	skillAndChip->behaviorId = &eController->GetBehaviorId();
+	skillAndChip->behaviorId = &behaviorId;
 	int i = 0;
 	for (; i < 5; ++i)
 	{
@@ -79,7 +79,7 @@ bool Enemy::Update()
 	gameObject.GetMove().GravityOperation(collisionManager.GetConflictionObjectsTag(3).size() > 0);
 
 	//設定されている動作を行う
-	eController->EMove(nowMoveOrder, nowPatternOrder, collisionManager, tempCollisionManager, gameObject.GetStatus(), gameObject.GetMove());
+	ems->EMove(nowMoveOrder, nowPatternOrder, timeCnt, collisionManager, tempCollisionManager, gameObject.GetStatus(), gameObject.GetMove());
 
 	//アニメーションの更新
 	AnimationUpdate();
@@ -149,7 +149,7 @@ void Enemy::AnimationUpdate()
 	//現在の動作パターンと前のパターンが異なる場合キャラチップを変更する
 	if (beforePatternOrder != nowPatternOrder)
 	{
-		gameObject.GetImage().ChangeCharaChip(eController->GetNowCharaChip(nowPatternOrder));
+		gameObject.GetImage().ChangeCharaChip(ems->GetNowAnimChip(nowPatternOrder));
 	}
 	beforePatternOrder = nowPatternOrder;
 }

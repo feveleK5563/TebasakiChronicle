@@ -11,16 +11,19 @@ public:
 };
 
 //-----------------------------------------------------------------------------
-//動作パターン遷移を行うクラス
+//動作パターン遷移を管理クラス
 class EnemyMoveTransition
 {
 private:
 	EnemyMoveTransitionAbstract*	transition;
-	const bool						isTrue;	//これがfalseだと戻り値のbool型が反転する
+	const bool						isReturnTrue;	//これがfalseだと戻り値のbool型が反転する
 
 public:
-	EnemyMoveTransition(EnemyMoveTransitionAbstract* emta, int transitionNum);
+	EnemyMoveTransition(int transitionNum);
 	~EnemyMoveTransition();
+
+	//遷移条件を設定する
+	void SetTransition(int transitionNum);
 
 	//遷移条件をクリアしたらtrueを返す
 	bool IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern);
