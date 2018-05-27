@@ -76,4 +76,5 @@ private:
 	AnimationCharaChip*			animCharaChip;	//アニメーションキャラチップ
 	std::string					skillImageName;	//スキルの画像名
 	int							useNum;			//使用回数
+
 };

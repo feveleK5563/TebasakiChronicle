@@ -68,14 +68,14 @@ void	Player::Initliaze()
 
 	//こりじょんの設定-------------------------------
 	//ボックスの形の生成
-	shape = CC::CreateBoxShape(16, 24, 1);
-	shape2 = CC::CreateBoxShape(15, 1, 1);
+	shape = CC::CreateBoxShape(14, 22, 1);
+	shape2 = CC::CreateBoxShape(13, 1, 1);
 
 	//生成した[形]でコリジョンや剛体を作成
 	cManager.CreateBaseCollisionData(shape, object.GetPos(), object.GetAngle(), true);	//ベース
 	cManager.CreateSubCollisionData(shape, CollisionMask::EnemyCollision | CollisionMask::TakeDamagePlayer, CollisionMask::PlayerCollision, object.GetPos()); //被ダメ
-	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, -24, 0)); //足元
-	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, 24, 0)); //頭上
+	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, -22, 0)); //足元
+	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, 22, 0)); //頭上
 
 	//コリジョンに情報を持たせる
 	cManager.SetSubCollisionUserData(0, &object.GetStatus());
@@ -110,6 +110,7 @@ void	Player::UpDate()
 
 	//アニメーション-------------------
 	object.GetImage().Animation();
+
 }
 
 //-----------------------------------------------------------------
@@ -244,7 +245,7 @@ void	Player::Think()
 		if (cManager.CheckHitSubCollisionObejct(Head)) { nowMotion = Fall; }
 		ChangeSkillMotion(nowMotion, SkillAirUse);
 		if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::L1)) { nowMotion = CameraGunAirUse; }
-		if (cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Fall; std::cout << "足元当たり" << std::endl; }
+		if (cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Fall; }
 		break;
 	case Fall:	//落下中
 		if (cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Landing; }
@@ -283,7 +284,7 @@ void	Player::Think()
 	//モーションの更新
 	UpDateMotion(nowMotion);
 
-	std::cout << nowMotion << std::endl;
+	std::cout << object.GetMove().GetMoveVec().y << std::endl;
 }
 
 
@@ -296,14 +297,9 @@ void	Player::Move()
 	default:
 
 		//上昇中もしくは足元に地面がない
-		if (object.GetMoveVec().y > 0.0f ||
-			!cManager.CheckHitSubCollisionObejct(Foot))
+		if (object.GetMoveVec().y > 0.0f || !cManager.CheckHitSubCollisionObejct(Foot))
 		{
 			object.GetMove().GravityOperation(cManager.CheckHitSubCollisionObejct(Foot));
-		}
-		else //地面と接している
-		{
-			object.GetMoveVec().y = 0.0f;
 		}
 
 		break;
@@ -342,6 +338,10 @@ void	Player::Move()
 		}
 		break;
 	case Fall:		//落下中
+		if (motionCnt == 0)
+		{
+			object.GetMove().SetFallSpeed(0);
+		}
 		break;
 	case TakeOff:	//飛ぶ瞬間
 		break;

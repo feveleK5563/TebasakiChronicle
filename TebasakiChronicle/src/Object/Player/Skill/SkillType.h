@@ -1,7 +1,7 @@
 #pragma once
 #include "K_Math\MyMathFanctions.h"
 #include "SkillObject.h"
-
+#include "../src/Object/Enemy/EnemyType/CharacterBehavior.h"
 
 //----------------------------------------------------------
 //スキルの種類のインターフェイス
@@ -26,6 +26,7 @@ public:
 	int		GetMaxUseNum() const;
 
 protected:
+	CharacterBehavior	charaBehaivor;	//動作
 	int				continueTime;	//継続時間
 	float			appearDist;		//出現距離
 	int				maxUseNum;		//最大使用回数

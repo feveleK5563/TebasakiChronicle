@@ -71,6 +71,9 @@
     <Filter Include="ソース ファイル\src\Loader">
       <UniqueIdentifier>{0d3c5429-1030-4beb-879a-6a6385c9e2a8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\BaseClass\GUIObject">
+      <UniqueIdentifier>{7e07f8bf-90fc-4b54-80c4-6b0e8c78b5e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -168,6 +171,9 @@
     </ClCompile>
     <ClCompile Include="src\TimeCount.cpp">
       <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BaseClass\GUIObject\GUIObject.cpp">
+      <Filter>ソース ファイル\src\BaseClass\GUIObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -269,6 +275,9 @@
     </ClInclude>
     <ClInclude Include="src\TimeCount.h">
       <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BaseClass\GUIObject\GUIObject.h">
+      <Filter>ソース ファイル\src\BaseClass\GUIObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

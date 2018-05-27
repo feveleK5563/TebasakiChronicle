@@ -7,6 +7,7 @@
 //!@param[in] Œp‘±ŽžŠÔ
 SkillType::SkillType(const int& maxUseNum, const float& appearDist, const int& continueTime)
 	: maxUseNum(maxUseNum),appearDist(appearDist),continueTime(continueTime)
+	, charaBehaivor(0)
 {
 
 }

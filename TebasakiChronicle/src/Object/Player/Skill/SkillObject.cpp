@@ -22,16 +22,17 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 	
 	object.SetPos(K_Math::Vector3(object.GetPos().x + GetDir() * skillType->GetAppearDist(), object.GetPos().y, object.GetPos().z));
 
-	object.SetImage(imageName, nullptr, true);
-	object.GetImage().CreateCharaChip(animCharaChip.chip, animCharaChip.chipSheetNum, animCharaChip.animSpd, animCharaChip.isAnimRoop);
-
 	shape = CC::CreateBoxShape(16, 24, 1);
-	cManager.CreateBaseCollisionData(shape, object.GetPos(), object.GetAngle(), true);
-	cManager.CreateSubCollisionData(shape, CollisionMask::Non, CollisionMask::Non, K_Math::Vector3(0,0,0));
-	cManager.SetSubCollisionUserData(0, &object.GetStatus());
-
 	continueCnt = 0;	//計測時間カウント
 
+	//テンポラリコリジョン生成
+	tempColManager.CreateTemporaryCollision(shape, CollisionMask::Non, CollisionMask::Non,
+		object.GetPos(), object.GetMoveVec(), object.GetDirection(), 1, 
+		skillType->GetContinueTime(), object.GetMove().GetGravity(), false, false);
+
+	//アニメーションセット
+	tempColManager.SetAnimationCharaChip(imageName, CST::GetTexture(imageName),
+		animCharaChip.chip,animCharaChip.chipSheetNum, animCharaChip.animSpd, animCharaChip.isAnimRoop);
 }
 
 //-------------------------------------------------------------
@@ -39,7 +40,7 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 //-------------------------------------------------------------
 SkillObject::~SkillObject()
 {
-	CC::RemoveCollisionShape(&shape);
+	
 }
 
 
@@ -48,9 +49,9 @@ SkillObject::~SkillObject()
 //!@brief 更新処理
 void	SkillObject::UpDate()
 {
-	object.GetImage().Animation();
-	//位置同期
-	cManager.SetBaseCollisionObjectPosition(object.GetPos());
+	//コリジョン更新
+	tempColManager.Update();
+
 	//スキルの動作
 	skillType->UpDate();
 	
@@ -60,7 +61,8 @@ void	SkillObject::UpDate()
 //!@brief 描画処理
 void	SkillObject::Render()
 {
-	object.GetImage().ImageDraw3D(object.GetPos(), object.GetAngle(), object.GetScale(), object.GetDirection());
+	//コリジョン描画
+	tempColManager.Render();
 }
 
 

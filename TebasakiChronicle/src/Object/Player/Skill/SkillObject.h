@@ -1,7 +1,7 @@
 #pragma once
 #include "../src/Object/GameObject.h"
 #include "../src/BaseClass/Collision/CollisionManager.h"
-
+#include "../src/Object/TemporaryCollision/TemporaryCollisionManager.h"
 #include "SkillType.h"
 #include <memory>
 
@@ -45,9 +45,9 @@ private:
 	float	GetDir();
 
 private:
-	std::shared_ptr<SkillType>	skillType;	//スキル動作
-	GameObject					object;		//ゲームオブジェクト
-	K_Physics::CollisionShape*	shape;		//ベースコリジョン
-	CollisionManager			cManager;	//コリジョン管理者
+	std::shared_ptr<SkillType>	skillType;		//スキル動作
+	GameObject					object;			//ゲームオブジェクト
+	K_Physics::CollisionShape*	shape;			//ベースコリジョン
 	int							continueCnt;	//継続時間計測
+	TemporaryCollisionManager	tempColManager;	//テンポラリオブジェクト
 };

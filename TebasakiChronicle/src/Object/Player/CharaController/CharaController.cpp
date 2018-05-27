@@ -11,7 +11,7 @@
 //コンストラクタ
 //-------------------------------------------------
 CharaController::CharaController()
-	
+	: friction(0.0f),inputAngle(1.5f)
 {
 
 }
@@ -46,7 +46,7 @@ void	CharaController::UpDate(Move& move)
 	else
 	//傾きがない場合は、動かない(摩擦でゆっくり止まるようにする)
 	{
-		move.GetMoveVec().x *= Friction;
+		move.GetMoveVec().x *= friction;
 	}
 }
 
@@ -56,7 +56,16 @@ void	CharaController::UpDate(Move& move)
 bool	CharaController::IsLStickInput()
 {
 	float stickDepth = INPUT::GetStickPower(VpadIndex::Pad0, K_Input::VpadStick::L);
+	float stickAngle = INPUT::GetStickRotation(VpadIndex::Pad0, K_Input::VpadStick::L);
 	if (stickDepth == 0)
+	{
+		return false;
+	}
+	if (inputAngle < stickAngle && stickAngle < inputAngle + 0.1f)
+	{
+		return false;
+	}
+	if (-inputAngle - 0.1f < stickAngle && stickAngle < -inputAngle)
 	{
 		return false;
 	}
