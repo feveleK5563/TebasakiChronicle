@@ -21,63 +21,108 @@ void CharacterBehavior::SetBehavior(int moveNum)
 		behavior = new Behavior_NoMotion();
 		break;
 
-	case 1:		//向いている方向に移動する
+	case 1:		//向きを変更する
+		behavior = new Behavior_ChangeDirection();
+		break;
+
+	case 2:		//向いている方向に移動する
 		behavior = new Behavior_MovementToDirection();
 		break;
 
-	case 2:		//地面でジャンプする
-		behavior = new Behavior_JumpAtGround();
+	case 3:		//一回だけジャンプする
+		behavior = new Behavior_OnceJump();
 		break;
 
-	case 3:		//前方に攻撃する
+	case 4:		//前方に攻撃する
 		behavior = new Behavior_FrontAttack();
 		break;
 	}
 }
 //-----------------------------------------------
 //最初の処理
-void CharacterBehavior::Initialize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+void CharacterBehavior::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	timeCnt.ResetCntTime();
-	behavior->Initialize(cmanager, tempmanager, status, move);
+	behavior->Initialize(tempmanager, status, move);
 }
 //-----------------------------------------------
 //動作の実行
-void CharacterBehavior::Action(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+void CharacterBehavior::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	timeCnt.Run();
-	behavior->Action(cmanager, tempmanager, status, move, timeCnt);
+	behavior->Action(tempmanager, status, move, timeCnt);
 }
 //-----------------------------------------------
 //終了処理
-void CharacterBehavior::Finalize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+void CharacterBehavior::Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
-	behavior->Finalize(cmanager, tempmanager, status, move);
+	behavior->Finalize(tempmanager, status, move);
 }
 
 
-//-----------------------------------------------
-//0：何もしない
-void Behavior_NoMotion::Initialize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager,Status& status, Move& move)
-{
-	//何もしない
-}
-void Behavior_NoMotion::Action(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
-{
-	//何もしない
-}
-void Behavior_NoMotion::Finalize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
-{
-	//何もしない
-}
+/* テンプレ
 
 //-----------------------------------------------
-//1：向いている方向に移動する
-void Behavior_MovementToDirection::Initialize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+//
+void Behavior_::Initialize(TemporaryCollisionManager& tempmanager,Status& status, Move& move)
+{
+//何もしない
+}
+void Behavior_::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
+{
+//何もしない
+}
+void Behavior_::Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+{
+//何もしない
+}
+
+*/
+
+//-----------------------------------------------
+//何もしない
+void Behavior_NoMotion::Initialize(TemporaryCollisionManager& tempmanager,Status& status, Move& move)
 {
 	//何もしない
 }
-void Behavior_MovementToDirection::Action(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
+void Behavior_NoMotion::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
+{
+	//何もしない
+}
+void Behavior_NoMotion::Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+{
+	//何もしない
+}
+
+//---------------------------------------------- -
+//向きを変更する
+void Behavior_ChangeDirection::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+{
+	if (status.GetDirection() == Status::Direction::Right)
+	{
+		status.GetDirection() = Status::Direction::Left;
+	}
+	else
+	{
+		status.GetDirection() = Status::Direction::Right;
+	}
+}
+void Behavior_ChangeDirection::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
+{
+	//何もしない
+}
+void Behavior_ChangeDirection::Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+{
+	//何もしない
+}
+
+//-----------------------------------------------
+//向いている方向に移動する
+void Behavior_MovementToDirection::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+{
+	//何もしない
+}
+void Behavior_MovementToDirection::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
 {
 	if (status.GetDirection() == status.Right)
 	{
@@ -88,36 +133,33 @@ void Behavior_MovementToDirection::Action(CollisionManager& cmanager, TemporaryC
 		move.GetMoveVec().x -= move.GetAddVec();
 	}
 }
-void Behavior_MovementToDirection::Finalize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+void Behavior_MovementToDirection::Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	//何もしない
 }
 
 //-----------------------------------------------
-//2：地面でジャンプ
-void Behavior_JumpAtGround::Initialize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+//一回だけジャンプする
+void Behavior_OnceJump::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+{
+	move.JumpOperation();
+}
+void Behavior_OnceJump::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
 {
 	//何もしない
 }
-void Behavior_JumpAtGround::Action(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
-{
-	if (cmanager.CheckHitSubCollisionObejct(3))
-	{
-		move.JumpOperation();
-	}
-}
-void Behavior_JumpAtGround::Finalize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+void Behavior_OnceJump::Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	//何もしない
 }
 
 //-----------------------------------------------
-//3：前方に攻撃する
+//前方に攻撃する
 void Behavior_FrontAttack::CreateAttackCollision()
 {
 	//何もしない
 }
-void Behavior_FrontAttack::Initialize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+void Behavior_FrontAttack::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	K_Math::Vector3 relative(16, 0, 0);
 	if (status.GetDirection() == Status::Direction::Left)
@@ -137,11 +179,11 @@ void Behavior_FrontAttack::Initialize(CollisionManager& cmanager, TemporaryColli
 		false,
 		false);
 }
-void Behavior_FrontAttack::Action(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
+void Behavior_FrontAttack::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
 {
 	//何もしない
 }
-void Behavior_FrontAttack::Finalize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+void Behavior_FrontAttack::Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	//何もしない
 }

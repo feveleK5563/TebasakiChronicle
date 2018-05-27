@@ -3,7 +3,6 @@
 #include "SystemClass.h"
 #include "../../../BaseClass/Status/Status.h"
 #include "../../../BaseClass/Move.h"
-#include "../../../BaseClass/Collision/CollisionManager.h"
 #include "../../TemporaryCollision/TemporaryCollisionManager.h"
 #include "../../../TimeCount.h"
 
@@ -13,9 +12,9 @@ class CharacterBehaviorAbstract
 {
 public:
 	virtual ~CharacterBehaviorAbstract();
-	virtual void Initialize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move) = 0;
-	virtual void Action(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt) = 0;
-	virtual void Finalize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move) = 0;
+	virtual void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move) = 0;
+	virtual void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt) = 0;
+	virtual void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move) = 0;
 };
 
 //-----------------------------------------------------------------------------
@@ -33,53 +32,77 @@ public:
 	//動作を設定する
 	void SetBehavior(int moveNum);
 
-	void Initialize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Finalize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
 };
 
 
+/* テンプレ
+
 //-----------------------------------------------
-//0：何もしない
+//
+class Behavior_ : public CharacterBehaviorAbstract
+{
+public:
+void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
+void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+};
+
+*/
+
+//-----------------------------------------------
+//何もしない
 class Behavior_NoMotion : public CharacterBehaviorAbstract
 {
 public:
-	void Initialize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
+	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
 };
 
 //-----------------------------------------------
-//1：向いている方向に移動する
+//向きを変更する
+class Behavior_ChangeDirection : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
+	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+};
+
+//-----------------------------------------------
+//向いている方向に移動する
 class Behavior_MovementToDirection : public CharacterBehaviorAbstract
 {
 public:
-	void Initialize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
+	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
 };
 
 //-----------------------------------------------
-//2：地面でジャンプ
-class Behavior_JumpAtGround : public CharacterBehaviorAbstract
+//一回だけジャンプする
+class Behavior_OnceJump : public CharacterBehaviorAbstract
 {
 public:
-	void Initialize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
+	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
 };
 
 //-----------------------------------------------
-//3：前方に攻撃する
+//前方に攻撃する
 class Behavior_FrontAttack : public CharacterBehaviorAbstract
 {
 private:
 	void CreateAttackCollision();
 
 public:
-	void Initialize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(CollisionManager& cmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
+	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
 };
 
 //-----------------------------------------------
