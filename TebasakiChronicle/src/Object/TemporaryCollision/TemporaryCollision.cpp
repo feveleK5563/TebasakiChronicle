@@ -10,10 +10,10 @@ TemporaryCollision::TemporaryCollision(	K_Physics::CollisionShape*	shape,
 										const Status::Direction&	dir,
 										const int					damage,
 										const int					deletetime,
+										const float					gravitySize,
 										const bool					ishitground,
 										const bool					doground):
 	cShape(shape),
-	deleteTime(deletetime),
 	isHitGround(ishitground)
 {
 	colmanager.CreateGroundCollisionData(shape, setpos, K_Math::Vector3(0, 0, 0), doground);
@@ -28,7 +28,9 @@ TemporaryCollision::TemporaryCollision(	K_Physics::CollisionShape*	shape,
 		damage,
 		0);
 	gameObject.GetMove().GetMoveVec() = movevec;
+	gameObject.GetMove().SetGravity(gravitySize);
 
+	timeCnt.SetEndTime(deletetime);
 	colmanager.SetSubCollisionUserData(0, &gameObject.GetState());
 }
 
@@ -40,9 +42,9 @@ TemporaryCollision::~TemporaryCollision()
 
 //-----------------------------------------------------------------------------
 //画像管理者を生成し、同時にキャラチップを設定する
-void TemporaryCollision::SetImageManagerAndCharaChip(	const std::string&			texName,
+void TemporaryCollision::SetImageManagerAndCharaChip(	const std::string&		texName,
 														K_Graphics::Texture*	texture,
-														const K_Math::Box2D&			src,
+														const K_Math::Box2D&	src,
 														int						sheet,
 														float					spd,
 														bool					isroop)
@@ -62,6 +64,7 @@ bool TemporaryCollision::Update()
 	}
 
 	//コリジョンの動作
+	gameObject.GetMove().GravityOperation(true);
 	colmanager.MoveBaseCollision(	gameObject.GetMove().GetMoveVec(),
 									gameObject.GetStatus().GetDirection(),
 									true);
@@ -81,12 +84,12 @@ bool TemporaryCollision::Update()
 bool TemporaryCollision::Extinction()
 {
 	if ((gameObject.GetStatus().GetState() != Status::State::Active) ||		//外部によってStateがActive以外にされていたら消滅
-		(timeCnt >= deleteTime) ||											//時間経過で消滅
+		timeCnt.IsTimeEnd() ||												//時間経過で消滅
 		(isHitGround == true && colmanager.CheckHitBaseCollisionObject()))	//地形と接触して消える場合の判定
 	{
 		return true;
 	}
-	++timeCnt;
+	timeCnt.Run();
 	
 	return false;
 }

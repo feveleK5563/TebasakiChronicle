@@ -30,9 +30,8 @@
     <ClCompile Include="src\Loader\EnemyLoader.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Object\Enemy\Enemy.cpp" />
-    <ClCompile Include="src\Object\Enemy\EnemyController.cpp" />
     <ClCompile Include="src\Object\Enemy\EnemyManager.cpp" />
-    <ClCompile Include="src\Object\Enemy\EnemyType\EnemyMove.cpp" />
+    <ClCompile Include="src\Object\Enemy\EnemyType\CharacterBehavior.cpp" />
     <ClCompile Include="src\Object\Enemy\EnemyType\EnemyMovePattern.cpp" />
     <ClCompile Include="src\Object\Enemy\EnemyType\EnemyMoveSet.cpp" />
     <ClCompile Include="src\Object\Enemy\EnemyType\EnemyMoveTransition.cpp" />
@@ -51,6 +50,7 @@
     <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollision.cpp" />
     <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollisionManager.cpp" />
     <ClCompile Include="src\Scene\Scene.cpp" />
+    <ClCompile Include="src\TimeCount.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BaseClass\Collision\CollisionManager.h" />
@@ -65,9 +65,8 @@
     <ClInclude Include="src\Helper.h" />
     <ClInclude Include="src\Loader\EnemyLoader.h" />
     <ClInclude Include="src\Object\Enemy\Enemy.h" />
-    <ClInclude Include="src\Object\Enemy\EnemyController.h" />
     <ClInclude Include="src\Object\Enemy\EnemyManager.h" />
-    <ClInclude Include="src\Object\Enemy\EnemyType\EnemyMove.h" />
+    <ClInclude Include="src\Object\Enemy\EnemyType\CharacterBehavior.h" />
     <ClInclude Include="src\Object\Enemy\EnemyType\EnemyMovePattern.h" />
     <ClInclude Include="src\Object\Enemy\EnemyType\EnemyMoveSet.h" />
     <ClInclude Include="src\Object\Enemy\EnemyType\EnemyMoveTransition.h" />
@@ -86,6 +85,7 @@
     <ClInclude Include="src\Object\TemporaryCollision\TemporaryCollision.h" />
     <ClInclude Include="src\Object\TemporaryCollision\TemporaryCollisionManager.h" />
     <ClInclude Include="src\Scene\Scene.h" />
+    <ClInclude Include="src\TimeCount.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

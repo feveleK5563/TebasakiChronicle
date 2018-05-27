@@ -1,12 +1,14 @@
 #pragma once
 #include "EnemyType/EnemyType.h"
-#include "EnemyController.h"
 #include "../GameObject.h"
 
 class Enemy
 {
 private:
-	EnemyController*	eController;		//動作管理
+	EnemyMoveSet*	ems;			//動作(delete禁止)
+	TimeCount		timeCnt;		//時間計測
+	int				behaviorId;		//現在の敵から読み取れる動作番号
+
 	int					nowMoveOrder;		//現在の動作順番
 	int					nowPatternOrder;	//現在の動作パターン番号
 	int					beforeMoveOrder;	//前の動作順番

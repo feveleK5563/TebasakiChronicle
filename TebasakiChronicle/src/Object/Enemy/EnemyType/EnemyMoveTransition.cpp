@@ -2,21 +2,40 @@
 
 EnemyMoveTransitionAbstract::~EnemyMoveTransitionAbstract(){}
 
-//コンストラクタ
-EnemyMoveTransition::EnemyMoveTransition(EnemyMoveTransitionAbstract* emta, int transitionNum) :
-	transition(emta),
-	isTrue(transitionNum >= 0) {}
-//デストラクタ
+EnemyMoveTransition::EnemyMoveTransition(int transitionNum) :
+	isReturnTrue(transitionNum >= 0)
+{
+	SetTransition(transitionNum);
+}
 EnemyMoveTransition::~EnemyMoveTransition()
 {
 	delete transition;
 }
 
+//-----------------------------------------------------------------------------
+//動作パターン遷移条件を設定する
+void EnemyMoveTransition::SetTransition(int transitionNum)
+{
+	switch (abs(transitionNum))
+	{
+	case 0:	//遷移しない
+		transition = new ETransition_NotTransition();
+		break;
+
+	case 1: //一連の動作が終了したとき
+		transition = new ETransition_EndMovePattern();
+		break;
+
+	case 2: //視界内にプレイヤーが入っているとき
+		transition = new ETransition_PlayerIntoVisibility();
+		break;
+	}
+}
 //-----------------------------------------------
 //遷移条件をクリアしたらtrueを返す
 bool EnemyMoveTransition::IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern)
 {
-	return transition->IsTransition(cm, status, endMovePattern) == isTrue;
+	return transition->IsTransition(cm, status, endMovePattern) == isReturnTrue;
 }
 
 //-----------------------------------------------------------------------------

@@ -14,7 +14,8 @@ Move::Move() :
 	addVec(0.0f),
 	jumpPower(0.0f),
 	fallSpeed(0.0f),
-	gravity(-0.5f)
+	defaultGravity(-0.5f),
+	gravity(defaultGravity)
 {
 
 }
@@ -23,6 +24,7 @@ Move::Move(const K_Math::Vector3& vec, float add, float jumpPow, float fallSpeed
 	addVec(add),
 	jumpPower(jumpPow),
 	fallSpeed(fallSpeed),
+	defaultGravity(-0.5f),
 	gravity(gravity)
 {
 
@@ -62,6 +64,12 @@ void	Move::SetFallSpeed(float fallSpeed)
 void	Move::SetGravity(float gravity)
 {
 	this->gravity = gravity;
+}
+
+//重力加速度をデフォルトの値に設定
+void	Move::SetDefaultGravity()
+{
+	this->gravity = this->defaultGravity;
 }
 
 //データの設定

@@ -18,6 +18,7 @@ public:
 	void	SetJumpPow(float jumpPow);
 	void	SetFallSpeed(float fallSpeed);
 	void	SetGravity(float gravity);
+	void	SetDefaultGravity();
 
 	void	SetMoveDate(
 		const float& addVec, const float& jumpPow,
@@ -39,5 +40,6 @@ private:
 	float				addVec;			//加算移動量(キャラクターの移動時に加算する値)
 	float				jumpPower;		//ジャンプ力
 	float				fallSpeed;		//落下速度
+	float				defaultGravity;	//デフォルトの重力加速度
 	float				gravity;		//重力加速度
 };

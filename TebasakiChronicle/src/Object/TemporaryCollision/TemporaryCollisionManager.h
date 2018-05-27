@@ -21,6 +21,7 @@ public:
 									const Status::Direction&	dir,			//テクスチャの向き
 									const int					damage,			//対象に与えるダメージ量
 									const int					deletetime,		//自身を削除するまでの時間
+									const float					gravitySize,	//重力量(0で無効)
 									const bool					ishitground,	//地形に接触したら消滅するフラグ
 									const bool					doground);		//ベースコリジョンを地形として扱うフラグ
 
