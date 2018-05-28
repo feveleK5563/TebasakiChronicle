@@ -35,14 +35,14 @@ EnemyMovePattern::~EnemyMovePattern()
 
 //-----------------------------------------------------------------------------
 //動作を行い、現在取得可能なスキルの番号を返す
-int EnemyMovePattern::EMove(int& nowMoveOrder, TimeCount& timeCnt, CollisionManager& colmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move, bool& endMovePattern)
+int EnemyMovePattern::EMove(int& nowMoveOrder, TimeCount& timeCnt, TemporaryCollisionManager& tempmanager, Status& status, Move& move, bool& endMovePattern)
 {
 	endMovePattern = false;
 	//timeCntがmoveTimeMaxを超えたら、次の動作に移行する
 	if (timeCnt.IsTimeEnd())
 	{
 		//終了時の処理
-		mp[nowMoveOrder]->em.Finalize(colmanager, tempmanager, status, move);
+		mp[nowMoveOrder]->em.Finalize(tempmanager, status, move);
 		timeCnt.ResetCntTime();
 
 		++nowMoveOrder;
@@ -56,11 +56,11 @@ int EnemyMovePattern::EMove(int& nowMoveOrder, TimeCount& timeCnt, CollisionMana
 	if (timeCnt.GetNowCntTime() == 0)	//最初に行う処理
 	{
 		timeCnt.SetEndTime(mp[nowMoveOrder]->moveTimeMax);
-		mp[nowMoveOrder]->em.Initialize(colmanager, tempmanager, status, move);
+		mp[nowMoveOrder]->em.Initialize(tempmanager, status, move);
 	}
 	
 	// 動作
-	mp[nowMoveOrder]->em.Action(colmanager, tempmanager, status, move);
+	mp[nowMoveOrder]->em.Action(tempmanager, status, move);
 
 	timeCnt.Run();
 	return mp[nowMoveOrder]->behaviorId;
