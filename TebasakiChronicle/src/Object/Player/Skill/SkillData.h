@@ -6,6 +6,8 @@
 #include "SkillSword\SkillSword.h"
 
 #include <memory>
+#include "../src/BaseClass/GUIObject/GUIObject.h"
+
 
 class SkillType;
 //------------------------------------------------------------
@@ -70,6 +72,15 @@ public:
 	//!@brief スキルIDからスキルの種類を決める
 	void	CreateSkillType();
 
+
+	//!@brief スキルのGUIオブジェクトの生成
+	void	CreateGUIObject();
+	//!@brief GUIオブジェクトの位置の移動
+	void	MoveGUIObjPos();
+	//!@brief スキルUIを描画
+	void	RenderUI();
+	//!@brief 押されたボタン番号を取得
+	void	SetPressBtnNum(int num);
 private:
 	int							skillID;		//スキルID
 	std::shared_ptr<SkillType>	skillType;		//スキルの種類
@@ -77,4 +88,6 @@ private:
 	std::string					skillImageName;	//スキルの画像名
 	int							useNum;			//使用回数
 
+	GUIObject*					guiObj;			//スキルのUI
+	int							pressBntNum;	//押されたボタン番号
 };

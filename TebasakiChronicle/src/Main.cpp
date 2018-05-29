@@ -78,7 +78,7 @@ int main()
 		player->UpDate();
 		//ƒJƒƒ‰’Ç”ö
 		CST::GetPerspectiveCamera()->SetTarget(player->object.GetPos().x, player->object.GetPos().y, player->object.GetPos().z);
-		CST::GetPerspectiveCamera()->SetPosition(130, K_Math::Vector3(0, 0, -1));	//330
+		CST::GetPerspectiveCamera()->SetPosition(330, K_Math::Vector3(0, 0, -1));	//330
 
 		CST::FrameBufferBeginDraw(ScreenWidth, ScreenHeight, 0.f, 0.f, 1.f);
 		CST::GetPerspectiveCamera()->Draw();

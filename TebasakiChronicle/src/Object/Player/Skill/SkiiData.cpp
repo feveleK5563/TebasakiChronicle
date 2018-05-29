@@ -8,6 +8,7 @@ SkillData::SkillData()
 {
 	skillID = -1;
 	Clear();
+	guiObj = nullptr;
 }
 
 //----------------------------------------------------------------
@@ -102,7 +103,14 @@ void	SkillData::Clear()
 	animCharaChip = nullptr;	//アニメーションキャラチップ
 	skillImageName = "";		//スキルの画像名
 	useNum = 0;					//使用回数を0
+	pressBntNum = -1;
 
+	if (guiObj != nullptr)
+	{
+		delete guiObj;
+		guiObj = nullptr;
+		std::cout << "GUIオブジェクトを削除" << std::endl;
+	}
 }
 
 
@@ -157,4 +165,59 @@ void	SkillData::CreateSkillType()
 	default:
 		skillType = nullptr;
 	}
+
+	/*K_Math::Vector3	guiPos;
+	switch (pressBntNum) {
+	case 0: guiPos = K_Math::Vector3(100, 60, 10);	break;
+	case 1:	guiPos = K_Math::Vector3(70, 30, 10);	break;
+	case 2:	guiPos = K_Math::Vector3(130,30, 10);	break;
+	case 3:	guiPos = K_Math::Vector3(100, 0, 10);	break;
+	}
+	std::cout << "GUIオブジェクトを生成" << std::endl;
+	guiObj = new GUIObject("Icon",guiPos,K_Math::Box2D(0,0,32,32));*/
+}
+
+//!@brief スキルのGUIオブジェクトの生成
+void	SkillData::CreateGUIObject()
+{
+	K_Math::Vector3	guiPos;
+	switch (pressBntNum) {
+	case 0: guiPos = K_Math::Vector3(100, 60, 10);	break;
+	case 1:	guiPos = K_Math::Vector3(70, 30, 10);	break;
+	case 2:	guiPos = K_Math::Vector3(130, 30, 10);	break;
+	case 3:	guiPos = K_Math::Vector3(100, 0, 10);	break;
+	case 4: guiPos = K_Math::Vector3(100, 30, 10);	break;
+	}
+	std::cout << "GUIオブジェクトを生成" << std::endl;
+	guiObj = new GUIObject("Icon", guiPos, K_Math::Box2D(0, 0, 32, 32));
+}
+
+//!@brief GUIオブジェクトの位置の移動
+void	SkillData::MoveGUIObjPos()
+{
+	K_Math::Vector3	guiPos;
+	switch (pressBntNum) {
+	case 0: guiPos = K_Math::Vector3(100, 60, 10);	break;
+	case 1:	guiPos = K_Math::Vector3(70, 30, 10);	break;
+	case 2:	guiPos = K_Math::Vector3(130, 30, 10);	break;
+	case 3:	guiPos = K_Math::Vector3(100, 0, 10);	break;
+	case 4: guiPos = K_Math::Vector3(100, 30, 10);	break;
+	}
+	std::cout << "GUIオブジェクトを生成" << std::endl;
+	guiObj = new GUIObject("Icon", guiPos, K_Math::Box2D(0, 0, 32, 32));
+}
+
+//!@brief スキルUIを描画
+void	SkillData::RenderUI()
+{
+	if (guiObj == nullptr) { return; }
+	guiObj->UpDate();
+	guiObj->Render();
+}
+
+
+//!@brief 押されたボタン番号を取得
+void	SkillData::SetPressBtnNum(int num)
+{
+	pressBntNum = num;
 }
