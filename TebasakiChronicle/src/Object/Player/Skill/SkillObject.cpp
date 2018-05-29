@@ -16,7 +16,7 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 		K_Math::Vector3(0, 0, 0),
 		K_Math::Vector3(1, 1, 1),
 		obj.GetDirection(),
-		1,
+		skillType->GetAttackPoint(),
 		0
 	);
 	
@@ -27,12 +27,16 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 
 	//テンポラリコリジョン生成
 	tempColManager.CreateTemporaryCollision(shape, CollisionMask::Non, CollisionMask::Non,
-		object.GetPos(), object.GetMoveVec(), object.GetDirection(), 1, 
+		object.GetPos(), 
+		object.GetMoveVec(), object.GetDirection(), object.GetAttackPoint(),
 		skillType->GetContinueTime(), object.GetMove().GetGravity(), false, false);
 
 	//アニメーションセット
 	tempColManager.SetAnimationCharaChip(imageName, CST::GetTexture(imageName),
 		animCharaChip.chip,animCharaChip.chipSheetNum, animCharaChip.animSpd, animCharaChip.isAnimRoop);
+
+	//スキルの動作の初期化
+	skillType->BehaivorInit(tempColManager, object.GetStatus(), object.GetMove());
 }
 
 //-------------------------------------------------------------
@@ -40,7 +44,8 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 //-------------------------------------------------------------
 SkillObject::~SkillObject()
 {
-	
+	//スキルの動作の終了
+	skillType->BehaivorFinal(tempColManager, object.GetStatus(), object.GetMove());
 }
 
 
@@ -53,7 +58,7 @@ void	SkillObject::UpDate()
 	tempColManager.Update();
 
 	//スキルの動作
-	skillType->UpDate();
+	skillType->Behaivor(tempColManager, object.GetStatus(), object.GetMove());
 	
 	continueCnt++;
 }

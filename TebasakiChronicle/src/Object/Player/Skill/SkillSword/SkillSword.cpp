@@ -2,8 +2,8 @@
 
 
 //コンストラクタ
-SkillSword::SkillSword(const int& maxUseNum, const float& dist, const int& continueTime)
-	: SkillType(maxUseNum,dist,continueTime)
+SkillSword::SkillSword(const int& moveID,const int& maxUseNum, const float& dist, const int& continueTime,const int& attackPoint)
+	: SkillType(moveID,maxUseNum,dist,continueTime,attackPoint)
 {
 	
 }

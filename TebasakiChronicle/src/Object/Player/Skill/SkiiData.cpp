@@ -140,11 +140,19 @@ void	SkillData::CreateSkillType()
 {
 	switch (skillID) {
 	case 0:
-		skillType = std::shared_ptr<SkillType>(new SkillSword(10, 30.0f, 120));
+		skillType = std::shared_ptr<SkillType>(new SkillSword(0,10, 50.0f, 120,1));
 		break;
 	case 1:
+		skillType = std::shared_ptr<SkillType>(new SkillSword(1, 5, 30.0f, 60, 1));
 		break;
 	case 2:
+		skillType = std::shared_ptr<SkillType>(new SkillSword(2, 5, 30.0f, 60, 1));
+		break;
+	case 3:
+		skillType = std::shared_ptr<SkillType>(new SkillSword(3, 5, 30.0f, 60, 1));
+		break;
+	case 4:
+		skillType = std::shared_ptr<SkillType>(new SkillSword(4, 7, 30.0f, 60, 1));
 		break;
 	default:
 		skillType = nullptr;

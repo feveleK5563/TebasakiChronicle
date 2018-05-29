@@ -266,25 +266,36 @@ void	Player::Think()
 		break;
 	case SkillUse:		//スキル使用中
 	case SkillMoveUse:	//移動中にスキル使用
-	case SkillAirUse:	//移動中にスキル使用
 		if (motionCnt > maxFrame / 6)
 		{
 			nowMotion = Idle;
 		}
 		break;
+	case SkillAirUse:	//空中にスキル使用
+		if (motionCnt > maxFrame / 6)
+		{
+			nowMotion = Idle;
+		}
+		if (cManager.CheckHitSubCollisionObejct(Head)) { nowMotion = Fall; }
+		break;
 	case CameraGunUse:		//カメラガン構え
 	case CameraGunMoveUse:	//カメラガン移動中構え
+		if (motionCnt > maxFrame / 6)
+		{
+			nowMotion = Idle;
+		}
+		break;
 	case CameraGunAirUse:	//カメラガン空中構え
 		if (motionCnt > maxFrame / 6)
 		{
 			nowMotion = Idle;
 		}
+		if (cManager.CheckHitSubCollisionObejct(Head)) { nowMotion = Fall; }
 		break;
 	}
 	//モーションの更新
 	UpDateMotion(nowMotion);
 
-	std::cout << object.GetMove().GetMoveVec().y << std::endl;
 }
 
 

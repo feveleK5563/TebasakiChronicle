@@ -78,7 +78,7 @@ int main()
 		player->UpDate();
 		//カメラ追尾
 		CST::GetPerspectiveCamera()->SetTarget(player->object.GetPos().x, player->object.GetPos().y, player->object.GetPos().z);
-		CST::GetPerspectiveCamera()->SetPosition(330, K_Math::Vector3(0, 0, -1));
+		CST::GetPerspectiveCamera()->SetPosition(130, K_Math::Vector3(0, 0, -1));	//330
 
 		CST::FrameBufferBeginDraw(ScreenWidth, ScreenHeight, 0.f, 0.f, 1.f);
 		CST::GetPerspectiveCamera()->Draw();
@@ -86,6 +86,7 @@ int main()
 
 		mapObj->SetDecisionParam(pos, rotation, scale);
 
+		
 		emanager->RenderAllEnemy();
 		player->Render();
 
@@ -96,7 +97,9 @@ int main()
 		//地形判定付きオブジェクト
 		mapObj->Render();
 
+		CST::GetShaderClass(1)->UseShader();
 		CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
+	
 		sc->SwapBuffer();
 	}
 
@@ -105,7 +108,7 @@ int main()
 	delete emanager;
 	delete player;
 	
-	delete mapObj;
+	//delete mapObj;
 
 	CC::Delete();
 }
