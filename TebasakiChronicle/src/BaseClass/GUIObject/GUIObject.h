@@ -29,9 +29,13 @@ public:
 	//!@param[in] pos_ 移動させる位置
 	void	SetPos(const K_Math::Vector3& pos_);
 
+	//!@brief オフセットフラグ設定
+	//!@param[in] isOffSet 位置をオフセットさせるかのフラグ(true:オフセットさせる)
+	void	SetIsOffSetFlag(bool isOffSet);
 private:
 	K_Graphics::Texture*	texture;
 	GameObject		object;		//オブジェクト
 	std::string		imageName;	//画像名
 	K_Math::Box2D	srcBox;		//画像元のサイズ
+	bool			isPosOffSet;//位置をカメラに合わせてオフセットするかのフラグ
 };
