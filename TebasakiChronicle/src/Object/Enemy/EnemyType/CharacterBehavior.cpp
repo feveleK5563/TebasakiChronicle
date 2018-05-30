@@ -74,14 +74,12 @@ void CharacterBehavior::SetBehavior(int moveNum)
 //最初の処理
 void CharacterBehavior::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
-	timeCnt.ResetCntTime();
 	behavior->Initialize(tempmanager, status, move);
 }
 //-----------------------------------------------
 //動作の実行
-void CharacterBehavior::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+void CharacterBehavior::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
 {
-	timeCnt.Run();
 	behavior->Action(tempmanager, status, move, timeCnt);
 }
 //-----------------------------------------------
@@ -126,7 +124,7 @@ void Behavior_NoMotion::Finalize(TemporaryCollisionManager& tempmanager, Status&
 	//何もしない
 }
 
-//---------------------------------------------- -
+//-----------------------------------------------
 //向きを変更する
 void Behavior_ChangeDirection::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
@@ -224,7 +222,7 @@ void Behavior_FrontAttack::Finalize(TemporaryCollisionManager& tempmanager, Stat
 //重力の有無を切り替える
 void Behavior_SwitchingGravity::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
-	if (move.GetGravity() > 0)
+	if (move.GetGravity() < 0)
 	{
 		move.SetGravity(0);
 	}
@@ -232,6 +230,7 @@ void Behavior_SwitchingGravity::Initialize(TemporaryCollisionManager& tempmanage
 	{
 		move.SetDefaultGravity();
 	}
+	move.SetFallSpeed(0);
 }
 void Behavior_SwitchingGravity::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
 {
@@ -258,10 +257,11 @@ void Behavior_DisableGravityAndFloat::Finalize(TemporaryCollisionManager& tempma
 }
 
 //-----------------------------------------------
-//重力を一時的に二倍にする
+//急速に落下する
 void Behavior_ToDoubleGravity::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
-	move.SetGravity(move.GetGravity() * 2.f);
+	move.SetDefaultGravity();
+	move.SetGravity(move.GetGravity() * 1.5f);
 }
 void Behavior_ToDoubleGravity::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
 {
@@ -276,6 +276,7 @@ void Behavior_ToDoubleGravity::Finalize(TemporaryCollisionManager& tempmanager, 
 //重力を一時的に半分にする
 void Behavior_ToHarfGravity::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
+	move.SetDefaultGravity();
 	move.SetGravity(move.GetGravity() / 2.f);
 }
 void Behavior_ToHarfGravity::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
@@ -330,8 +331,12 @@ void Behavior_AirMovementToDirection::Finalize(TemporaryCollisionManager& tempma
 void Behavior_ShotBulletFromMiddle::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	K_Math::Vector3 relative(16, 0, 0);
+	K_Math::Vector3 moveVec(10, 0, 0);
 	if (status.GetDirection() == Status::Direction::Left)
+	{
 		relative.x *= -1;
+		moveVec.x *= -1;
+	}
 
 	//攻撃用コリジョンを作成
 	tempmanager.CreateTemporaryCollision(
@@ -339,7 +344,7 @@ void Behavior_ShotBulletFromMiddle::Initialize(TemporaryCollisionManager& tempma
 		CollisionMask::Non,
 		CollisionMask::TakeDamagePlayer,
 		status.GetPos() + relative,
-		K_Math::Vector3(10, 0, 0),
+		moveVec,
 		status.GetDirection(),
 		status.GetAttackPoint(),
 		60,
@@ -360,9 +365,13 @@ void Behavior_ShotBulletFromMiddle::Finalize(TemporaryCollisionManager& tempmana
 //重力アリの爆弾を投げる
 void Behavior_ThrowBomb::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
-	K_Math::Vector3 relative(16, 0, 0);
+	K_Math::Vector3 relative(16, 16, 0);
+	K_Math::Vector3 moveVec(10, 10, 0);
 	if (status.GetDirection() == Status::Direction::Left)
+	{
 		relative.x *= -1;
+		moveVec.x *= -1;
+	}
 
 	//攻撃用コリジョンを作成
 	tempmanager.CreateTemporaryCollision(
@@ -370,7 +379,7 @@ void Behavior_ThrowBomb::Initialize(TemporaryCollisionManager& tempmanager, Stat
 		CollisionMask::Non,
 		CollisionMask::TakeDamagePlayer,
 		status.GetPos() + relative,
-		K_Math::Vector3(10, 10, 0),
+		moveVec,
 		status.GetDirection(),
 		status.GetAttackPoint(),
 		180,
