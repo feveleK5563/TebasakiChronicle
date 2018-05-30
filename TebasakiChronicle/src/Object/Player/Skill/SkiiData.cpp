@@ -16,7 +16,11 @@ SkillData::SkillData()
 //----------------------------------------------------------------
 SkillData::~SkillData()
 {
-
+	if (guiObj != nullptr)
+	{
+		delete guiObj;
+		guiObj = nullptr;
+	}
 }
 
 
@@ -151,16 +155,16 @@ void	SkillData::CreateSkillType()
 		skillType = std::shared_ptr<SkillType>(new SkillSword(0,10, 50.0f, 120,1));
 		break;
 	case 1:
-		skillType = std::shared_ptr<SkillType>(new SkillSword(1, 5, 30.0f, 60, 1));
+		///skillType = std::shared_ptr<SkillType>(new SkillSword(1, 5, 30.0f, 60, 1));
 		break;
 	case 2:
-		skillType = std::shared_ptr<SkillType>(new SkillSword(2, 5, 30.0f, 60, 1));
+		//skillType = std::shared_ptr<SkillType>(new SkillSword(2, 5, 30.0f, 60, 1));
 		break;
 	case 3:
-		skillType = std::shared_ptr<SkillType>(new SkillSword(3, 5, 30.0f, 60, 1));
+		//skillType = std::shared_ptr<SkillType>(new SkillSword(3, 5, 30.0f, 60, 1));
 		break;
 	case 4:
-		skillType = std::shared_ptr<SkillType>(new SkillSword(4, 7, 30.0f, 60, 1));
+		//skillType = std::shared_ptr<SkillType>(new SkillSword(4, 7, 30.0f, 60, 1));
 		break;
 	default:
 		skillType = nullptr;
@@ -172,11 +176,11 @@ void	SkillData::CreateGUIObject()
 {
 	K_Math::Vector3	guiPos;
 	switch (pressBntNum) {
-	case 0: guiPos = K_Math::Vector3(200, -100, -10);	break;
-	case 1:	guiPos = K_Math::Vector3(170, -130, -10);	break;
-	case 2:	guiPos = K_Math::Vector3(230, -130, -10);	break;
-	case 3:	guiPos = K_Math::Vector3(200, -160, -10);	break;
-	case 4: guiPos = K_Math::Vector3(200, -130, -10);	break;
+	case 0: guiPos = K_Math::Vector3(10, 50, 0);	break;
+	case 1:	guiPos = K_Math::Vector3(10, 50, 0);	break;
+	case 2:	guiPos = K_Math::Vector3(10, 50, 0);	break;
+	case 3:	guiPos = K_Math::Vector3(10, 50, 0);	break;
+	case 4: guiPos = K_Math::Vector3(10, 50, 0);	break;
 	}
 	std::cout << "GUIオブジェクトを生成" << std::endl;
 	guiObj = new GUIObject("target", guiPos, K_Math::Box2D(0, 0, 32, 32));
@@ -187,11 +191,11 @@ void	SkillData::MoveGUIObjPos()
 {
 	K_Math::Vector3	guiPos;
 	switch (pressBntNum) {
-	case 0: guiPos = K_Math::Vector3(200, -100, -10);	break;
-	case 1:	guiPos = K_Math::Vector3(170, -130, -10);	break;
-	case 2:	guiPos = K_Math::Vector3(230, -130, -10);	break;
-	case 3:	guiPos = K_Math::Vector3(200, -160, -10);	break;
-	case 4: guiPos = K_Math::Vector3(200, -130, -10);	break;
+	case 0: guiPos = K_Math::Vector3(10, 50, 0);	break;
+	case 1:	guiPos = K_Math::Vector3(10, 50, 0);	break;
+	case 2:	guiPos = K_Math::Vector3(10, 50, 0);	break;
+	case 3:	guiPos = K_Math::Vector3(10, 50, 0);	break;
+	case 4: guiPos = K_Math::Vector3(10, 50, 0);	break;
 	}
 	std::cout << "GUIオブジェクトを生成" << std::endl;
 	guiObj = new GUIObject("target", guiPos, K_Math::Box2D(0, 0, 32, 32));

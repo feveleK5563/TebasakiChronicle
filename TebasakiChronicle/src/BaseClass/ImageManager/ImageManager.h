@@ -48,4 +48,11 @@ public:
 						const K_Math::Vector3&	angle,
 						const K_Math::Vector3&	scale,
 						int						direction);
+
+	//----------------------------------------------
+	//•`‰æ(2D)
+	void ImageDraw2D(	const K_Math::Vector3&	posc,
+						const K_Math::Vector3&	angle,
+						const K_Math::Vector3&	scale,
+						int						direction);
 };

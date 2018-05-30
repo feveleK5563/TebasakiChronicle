@@ -21,7 +21,7 @@ GUIObject::GUIObject(const std::string& imageName_,
 	object.SetImage(imageName, texture, true);
 	object.GetImage().CreateCharaChip(srcBox, 1, 1, false);
 
-	isPosOffSet = true;
+
 }
 
 //デストラクタ
@@ -37,19 +37,12 @@ GUIObject::~GUIObject()
 void	GUIObject::UpDate()
 {
 	object.GetImage().Animation();
-	
-	//オフセットしないなら、移動は行わない
-	if (!isPosOffSet) { return; }
-	object.SetPos(K_Math::Vector3(
-		CST::GetPerspectiveCamera()->GetTerget().x + object.GetMoveVec().x, 
-		CST::GetPerspectiveCamera()->GetTerget().y + object.GetMoveVec().y,
-		CST::GetPerspectiveCamera()->GetTerget().z + object.GetMoveVec().z));
 }
 
 //描画処理
 void	GUIObject::Render()
 {
-	object.GetImage().ImageDraw3D(object.GetPos(), object.GetAngle(), object.GetScale(), 0);
+	object.GetImage().ImageDraw2D(object.GetPos(), object.GetAngle(), object.GetScale(), 0);
 }
 
 
@@ -57,12 +50,6 @@ void	GUIObject::Render()
 //!@param[in] pos_ 移動させる位置
 void	GUIObject::SetPos(const K_Math::Vector3& pos_)
 {
-	object.SetPos(pos_);
+
 }
 
-//!@brief オフセットフラグ設定
-//!@param[in] isOffSet 位置をオフセットさせるかのフラグ(true:オフセットさせる)
-void	GUIObject::SetIsOffSetFlag(bool isOffSet)
-{
-	isPosOffSet = isOffSet;
-}

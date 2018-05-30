@@ -21,10 +21,22 @@ Object3D::Object3D(const std::string& filePath_, const std::string& texFilePath_
 //!@brief デストラクタ
 Object3D::~Object3D()
 {
-	if (model != nullptr)
+	if (decisionObj != nullptr)
 	{
-		delete model;
-		model = nullptr;
+		delete decisionObj;
+		decisionObj = nullptr;
+	}
+
+	if (object != nullptr)
+	{
+		delete object;
+		object = nullptr;
+	}
+
+	if (texList != nullptr)
+	{
+		delete texList;
+		texList = nullptr;
 	}
 }
 
@@ -52,7 +64,7 @@ void	Object3D::SetDecisionParam(const K_Math::Vector3& decisionPos_,
 	const K_Math::Vector3& decisionRotation_,
 	const K_Math::Vector3& decisionScale_)
 {
-	decisionScale = decisionPos_;
+	decisionPos = decisionPos_;
 	decisionRotation = decisionRotation_;
 	decisionScale = decisionScale_;
 	decisionObj->GetRigidBody()->SetCollisionPosition(decisionPos);

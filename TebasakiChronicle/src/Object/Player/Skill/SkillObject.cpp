@@ -26,7 +26,7 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 	continueCnt = 0;	//計測時間カウント
 
 	//テンポラリコリジョン生成
-	tempColManager.CreateTemporaryCollision(shape, CollisionMask::Non, CollisionMask::Non,
+	tempColManager.CreateTemporaryCollision(shape, CollisionMask::Non, CollisionMask::PlayerCollision ,
 		object.GetPos(), 
 		object.GetMoveVec(), object.GetDirection(), object.GetAttackPoint(),
 		skillType->GetContinueTime(), object.GetMove().GetGravity(), false, false);

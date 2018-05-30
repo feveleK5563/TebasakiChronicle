@@ -14,9 +14,9 @@ public:
 	//!@param[in] imageName_ 画像名
 	//!@param[in] pos_	位置
 	//!@param[in] srcBox_ 画像元のサイズ
-	GUIObject(	const std::string& imageName_,
-				const K_Math::Vector3& pos_,
-				const K_Math::Box2D& srcBox_);
+	GUIObject(const std::string& imageName_,
+		const K_Math::Vector3& pos_,
+		const K_Math::Box2D& srcBox_);
 
 	//!@brief デストラクタ
 	~GUIObject();
@@ -29,13 +29,10 @@ public:
 	//!@param[in] pos_ 移動させる位置
 	void	SetPos(const K_Math::Vector3& pos_);
 
-	//!@brief オフセットフラグ設定
-	//!@param[in] isOffSet 位置をオフセットさせるかのフラグ(true:オフセットさせる)
-	void	SetIsOffSetFlag(bool isOffSet);
 private:
 	K_Graphics::Texture*	texture;
 	GameObject		object;		//オブジェクト
 	std::string		imageName;	//画像名
 	K_Math::Box2D	srcBox;		//画像元のサイズ
-	bool			isPosOffSet;//位置をカメラに合わせてオフセットするかのフラグ
+
 };

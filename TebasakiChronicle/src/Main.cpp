@@ -45,6 +45,7 @@ int main()
 	CST::CreateShader("data/shader/SimpleShader.vs", "data/shader/SimpleShader.ps");
 	CST::CreateShader("data/shader/VertexShader.vs", "data/shader/TextureSampler.ps"); //追加
 
+	
 	EnemyLoader eLoader;
 	//敵の種類を作成
 	EnemyTypeManager* etm = new EnemyTypeManager();
@@ -64,7 +65,6 @@ int main()
 	//オブジェクト
 	Object3D*	mapObj = new Object3D("./data/model/testMap2d.fbx", "./data/image/player.tga",
 										pos,rotation,scale);
-
 
 	//******************************************************************
 	
@@ -107,8 +107,7 @@ int main()
 	delete etm;
 	delete emanager;
 	delete player;
+	delete mapObj;
 	
-	//delete mapObj;
-
 	CC::Delete();
 }
