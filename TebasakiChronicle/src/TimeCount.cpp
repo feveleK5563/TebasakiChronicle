@@ -22,7 +22,6 @@ void TimeCount::Run()
 	if (cntTime >= endTime)
 	{
 		isTimeEnd = true;
-		return;
 	}
 
 	++cntTime;

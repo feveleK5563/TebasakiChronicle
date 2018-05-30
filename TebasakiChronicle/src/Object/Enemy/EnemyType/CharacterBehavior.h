@@ -5,6 +5,7 @@
 #include "../../../BaseClass/Move.h"
 #include "../../TemporaryCollision/TemporaryCollisionManager.h"
 #include "../../../TimeCount.h"
+#include "../../../Helper.h"
 
 //-----------------------------------------------------------------------------
 //動作の抽象クラス
@@ -38,7 +39,7 @@ public:
 };
 
 
-/* テンプレ
+/* 動作追加のためのテンプレ
 
 //-----------------------------------------------
 //
@@ -83,7 +84,7 @@ public:
 };
 
 //-----------------------------------------------
-//一回だけジャンプする
+//無条件に一回だけジャンプする
 class Behavior_OnceJump : public CharacterBehaviorAbstract
 {
 public:
@@ -106,4 +107,81 @@ public:
 };
 
 //-----------------------------------------------
-//4：
+//重力の有無を切り替える
+class Behavior_SwitchingGravity : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
+	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+};
+
+//-----------------------------------------------
+//重力を無効にして浮く
+class Behavior_DisableGravityAndFloat : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
+	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+};
+
+//-----------------------------------------------
+//重力を一時的に二倍にする
+class Behavior_ToDoubleGravity : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
+	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+};
+
+//-----------------------------------------------
+//重力を一時的に半分にする
+class Behavior_ToHarfGravity : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
+	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+};
+
+//-----------------------------------------------
+//空中で上下に揺れる
+class Behavior_AirIdle : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
+	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+};
+
+//-----------------------------------------------
+//空中で上下に揺れながら向いている方向に移動する
+class Behavior_AirMovementToDirection : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
+	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+};
+
+//-----------------------------------------------
+//Y座標の真ん中から前方に弾を発射する
+class Behavior_ShotBulletFromMiddle : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
+	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+};
+
+//-----------------------------------------------
+//重力アリの爆弾を投げる
+class Behavior_ThrowBomb : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
+	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+};

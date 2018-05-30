@@ -52,7 +52,7 @@ int main()
 	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/TestData.txt"));
 	//上記で作成した種類を基に敵を生成する
 	EnemyManager* emanager = new EnemyManager();
-	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(-10, 0, 0), Status::Direction::Left);
+	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(-10, 20, 0), Status::Direction::Left);
 
 	//プレイヤー
 	Player* player = new Player();
