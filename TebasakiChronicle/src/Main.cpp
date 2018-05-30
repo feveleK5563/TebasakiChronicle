@@ -48,23 +48,22 @@ int main()
 	EnemyLoader eLoader;
 	//敵の種類を作成
 	EnemyTypeManager* etm = new EnemyTypeManager();
-	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataB1.txt"));
+	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataA2.txt"));
 	//上記で作成した種類を基に敵を生成する
 	EnemyManager* emanager = new EnemyManager();
-	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(-10, 10, 0), Status::Direction::Right);
+	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(-10, 10, 0), Status::Direction::Left);
 
 	//プレイヤー
-	Player* player = new Player();
-	player->Initliaze();
+	//Player* player = new Player();
+	//player->Initliaze();
 	
 	//地形判定付きオブジェクト
 	//オブジェクト
-	Object3D*	mapObj = new Object3D("./data/model/testMap2d.fbx", "./data/image/player.tga");
+	//K_Math::Vector3 scale = { 10,40,40 };
+	//K_Math::Vector3 rotation = { K_Math::DegToRad(0),K_Math::DegToRad(90),K_Math::DegToRad(0) };
+	//K_Math::Vector3 pos = { -120.0f,-50.0f,0.f };
+	//Object3D*	mapObj = new Object3D("./data/model/testMap2d.fbx", "./data/image/player.tga", pos, rotation, scale);
 
-	
-	K_Math::Vector3 scale = { 10,50,40 };
-	K_Math::Vector3 rotation = { K_Math::DegToRad(-90),0,K_Math::DegToRad(-90) };
-	K_Math::Vector3 pos = { -120.0f,-50.0f,0.f };
 	//******************************************************************
 	
 	while (sc->IsSystemEnd() == false)
@@ -74,26 +73,26 @@ int main()
 
 		emanager->UpdateAllEnemy();
 
-		player->UpDate();
+		//player->UpDate();
 		//カメラ追尾
-		CST::GetPerspectiveCamera()->SetTarget(player->object.GetPos().x, player->object.GetPos().y, player->object.GetPos().z);
+		//CST::GetPerspectiveCamera()->SetTarget(player->object.GetPos().x, player->object.GetPos().y, player->object.GetPos().z);
 		CST::GetPerspectiveCamera()->SetPosition(200, K_Math::Vector3(0, 0, -1));
 
 		CST::FrameBufferBeginDraw(ScreenWidth, ScreenHeight, 0.f, 0.f, 1.f);
 		CST::GetPerspectiveCamera()->Draw();
 		CST::GetOrthoCamera()->Draw();
 
-		mapObj->SetDecisionParam(pos, rotation, scale);
+		//mapObj->SetDecisionParam(pos, rotation, scale);
 
 		emanager->RenderAllEnemy();
-		player->Render();
+		//player->Render();
 
 		//*****************************
 		//FBXモデルの描画
 		CST::GetShaderClass(2)->UseShader();
 		//----------------------------
 		//地形判定付きオブジェクト
-		mapObj->Render();
+		//mapObj->Render();
 
 		CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 		sc->SwapBuffer();
@@ -102,9 +101,9 @@ int main()
 	delete sc;
 	delete etm;
 	delete emanager;
-	delete player;
+	//delete player;
 	
-	delete mapObj;
+	//delete mapObj;
 
 	CC::Delete();
 }

@@ -104,6 +104,16 @@ void EnemyLoader::LoadEnemyMoveData(std::ifstream& ifs, EnemyTypeManager::EnemyD
 			transitionIdArr,
 			patternNum,
 			totalMoveNum));
+
+		/*delete[] moveIdArr;
+		delete[] behaviorIdArr;
+		delete[] durationTimeArr;
+		delete[] srcArr;
+		delete[] basisPosArr;
+		delete[] sheetArr;
+		delete[] spdArr;
+		delete[] irArr;
+		delete[] transitionIdArr;*/
 	}
 }
 

@@ -191,20 +191,20 @@ void Behavior_FrontAttack::CreateAttackCollision()
 }
 void Behavior_FrontAttack::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
-	K_Math::Vector3 relative(16, 0, 0);
+	K_Math::Vector3 relative(30, 0, 0);
 	if (status.GetDirection() == Status::Direction::Left)
 		relative.x *= -1;
 
 	//çUåÇópÉRÉäÉWÉáÉìÇçÏê¨
 	tempmanager.CreateTemporaryCollision(
-		CC::CreateBoxShape(14.f, 20.f, 10.f),
+		CC::CreateBoxShape(17.f, 20.f, 10.f),
 		CollisionMask::Non,
 		CollisionMask::TakeDamagePlayer,
 		status.GetPos() + relative,
 		K_Math::Vector3(0, 0, 0),
 		status.GetDirection(),
 		status.GetAttackPoint(),
-		60,
+		10,
 		0,
 		false,
 		false);
@@ -261,7 +261,7 @@ void Behavior_DisableGravityAndFloat::Finalize(TemporaryCollisionManager& tempma
 void Behavior_ToDoubleGravity::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	move.SetDefaultGravity();
-	move.SetGravity(move.GetGravity() * 1.5f);
+	move.SetGravity(move.GetGravity() * 2.f);
 }
 void Behavior_ToDoubleGravity::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
 {
@@ -331,7 +331,7 @@ void Behavior_AirMovementToDirection::Finalize(TemporaryCollisionManager& tempma
 void Behavior_ShotBulletFromMiddle::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	K_Math::Vector3 relative(16, 0, 0);
-	K_Math::Vector3 moveVec(10, 0, 0);
+	K_Math::Vector3 moveVec(6, 0, 0);
 	if (status.GetDirection() == Status::Direction::Left)
 	{
 		relative.x *= -1;
@@ -349,7 +349,7 @@ void Behavior_ShotBulletFromMiddle::Initialize(TemporaryCollisionManager& tempma
 		status.GetAttackPoint(),
 		60,
 		0,
-		false,
+		true,
 		false);
 }
 void Behavior_ShotBulletFromMiddle::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
