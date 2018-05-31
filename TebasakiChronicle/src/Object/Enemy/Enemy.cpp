@@ -85,7 +85,7 @@ bool Enemy::Update()
 	AnimationUpdate();
 
 	//コリジョンを動かす
-	collisionManager.MoveBaseCollision(gameObject.GetMove().GetMoveVec(), gameObject.GetStatus().GetDirection(), false);
+	collisionManager.MoveBaseCollision(gameObject.GetMove().GetMoveVec(), gameObject.GetStatus().GetDirection(), true);
 	gameObject.GetPos() = collisionManager.GetBaseCollisionObjectPosition();
 	tempCollisionManager.Update();
 	//タグ情報を更新

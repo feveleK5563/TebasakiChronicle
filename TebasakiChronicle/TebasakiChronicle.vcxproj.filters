@@ -71,6 +71,9 @@
     <Filter Include="ソース ファイル\src\Loader">
       <UniqueIdentifier>{0d3c5429-1030-4beb-879a-6a6385c9e2a8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\Effect">
+      <UniqueIdentifier>{d4f9ea08-d3ae-4ae7-8690-4f356764a647}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -168,6 +171,9 @@
     </ClCompile>
     <ClCompile Include="src\TimeCount.cpp">
       <Filter>ソース ファイル\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Effect\Effect.cpp">
+      <Filter>ソース ファイル\src\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -269,6 +275,9 @@
     </ClInclude>
     <ClInclude Include="src\TimeCount.h">
       <Filter>ソース ファイル\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Effect\Effect.h">
+      <Filter>ソース ファイル\src\Effect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

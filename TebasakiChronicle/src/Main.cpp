@@ -48,7 +48,7 @@ int main()
 	EnemyLoader eLoader;
 	//“G‚ÌŽí—Þ‚ðì¬
 	EnemyTypeManager* etm = new EnemyTypeManager();
-	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataA2.txt"));
+	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataA1.txt"));
 	//ã‹L‚Åì¬‚µ‚½Ží—Þ‚ðŠî‚É“G‚ð¶¬‚·‚é
 	EnemyManager* emanager = new EnemyManager();
 	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(-10, 10, 0), Status::Direction::Left);
