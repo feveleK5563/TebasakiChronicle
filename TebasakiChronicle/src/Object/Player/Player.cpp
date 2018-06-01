@@ -118,6 +118,7 @@ void	Player::UpDate()
 	{
 		invicibleCnt--;
 	}
+
 }
 
 //-----------------------------------------------------------------
@@ -156,6 +157,7 @@ void	Player::ReciveDamage()
 		int index = data[0]->tagIndex;
 		enemyData = (Status*)data[0]->userData;
 		object.GetStatus().GetLife() -= enemyData->GetAttackPoint();
+		KnockBack(enemyData->GetPos());
 	}
 }
 
@@ -349,13 +351,21 @@ void	Player::Move()
 	//重力加速
 	switch (motion) {
 	default:
-
+		if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
+		{
+			K_Math::Vector3 pos(30, 30, 0);
+			KnockBack(pos);
+			std::cout << "ノックバック" << std::endl;
+		}
+	
 		//上昇中もしくは足元に地面がない
-		if (object.GetMoveVec().y > 0.0f || !cManager.CheckHitSubCollisionObejct(Foot))
+		//if (object.GetMoveVec().y > 0.0f || !cManager.CheckHitSubCollisionObejct(Foot))
 		{
 			object.GetMove().GravityOperation(cManager.CheckHitSubCollisionObejct(Foot));
 		}
 
+		std::cout << "MoveVec" << object.GetMoveVec().x << std::endl;
+		
 		break;
 		//重力を無効にするモーション(今はなし)
 	case Non:
@@ -533,5 +543,20 @@ void	Player::ChangeDamageMotion(Motion& motion)
 	if (invicibleCnt <= 0)
 	{
 		if (cManager.CheckHitSubCollisionObejct(CollisionKind::Base)) { motion = DamageRecive; }
+	}
+}
+
+
+//!@brief ノックバック処理
+//!@param[in] 相手の座標
+void	Player::KnockBack(const K_Math::Vector3& pos_)
+{
+	if (object.GetPos().x > pos_.x)
+	{
+		object.SetMoveVec(K_Math::Vector3(+24, -19, 0));
+	}
+	else
+	{
+		object.SetMoveVec(K_Math::Vector3(-24, -19, 0));
 	}
 }

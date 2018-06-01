@@ -45,7 +45,7 @@ int main()
 	CST::CreateShader("data/shader/SimpleShader.vs", "data/shader/SimpleShader.ps");
 	CST::CreateShader("data/shader/VertexShader.vs", "data/shader/TextureSampler.ps"); //追加
 
-	
+	/*
 	EnemyLoader eLoader;
 	//敵の種類を作成
 	EnemyTypeManager* etm = new EnemyTypeManager();
@@ -53,7 +53,7 @@ int main()
 	//上記で作成した種類を基に敵を生成する
 	EnemyManager* emanager = new EnemyManager();
 	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(-10, 20, 0), Status::Direction::Left);
-
+	*/
 	//プレイヤー
 	Player* player = new Player();
 	player->Initliaze();
@@ -73,7 +73,7 @@ int main()
 		sc->ProcessSystem();
 		CC::Run();
 
-		emanager->UpdateAllEnemy();
+	//	emanager->UpdateAllEnemy();
 
 		player->UpDate();
 		//カメラ追尾
@@ -87,7 +87,7 @@ int main()
 		mapObj->SetDecisionParam(pos, rotation, scale);
 
 		
-		emanager->RenderAllEnemy();
+		//emanager->RenderAllEnemy();
 		player->Render();
 
 		//*****************************
@@ -104,8 +104,8 @@ int main()
 	}
 
 	delete sc;
-	delete etm;
-	delete emanager;
+	//delete etm;
+	//delete emanager;
 	delete player;
 	delete mapObj;
 	

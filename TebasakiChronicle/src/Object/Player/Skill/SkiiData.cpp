@@ -176,11 +176,11 @@ void	SkillData::CreateGUIObject()
 {
 	K_Math::Vector3	guiPos;
 	switch (pressBntNum) {
-	case 0: guiPos = K_Math::Vector3(10, 50, 0);	break;
-	case 1:	guiPos = K_Math::Vector3(10, 50, 0);	break;
-	case 2:	guiPos = K_Math::Vector3(10, 50, 0);	break;
-	case 3:	guiPos = K_Math::Vector3(10, 50, 0);	break;
-	case 4: guiPos = K_Math::Vector3(10, 50, 0);	break;
+	case 0: guiPos = K_Math::Vector3(1000, 500, 0);	break;
+	case 1:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
+	case 2:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
+	case 3:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
+	case 4: guiPos = K_Math::Vector3(1000, 500, 0);	break;
 	}
 	std::cout << "GUIオブジェクトを生成" << std::endl;
 	guiObj = new GUIObject("target", guiPos, K_Math::Box2D(0, 0, 32, 32));

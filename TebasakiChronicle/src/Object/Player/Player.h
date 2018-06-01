@@ -77,6 +77,10 @@ private:
 	//!@brief ダメージモーションへチェンジ
 	void	ChangeDamageMotion(Motion& motion);
 
+	//!@brief ノックバック処理
+	//!@param[in] 相手の座標
+	void	KnockBack(const K_Math::Vector3& pos_);
+
 public:
 	GameObject		object;			//ゲームオブジェクト
 	Status* enemyData;
