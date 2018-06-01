@@ -73,7 +73,7 @@ int main()
 		sc->ProcessSystem();
 		CC::Run();
 
-		//emanager->UpdateAllEnemy();
+		emanager->UpdateAllEnemy();
 
 		player->UpDate();
 		//ƒJƒƒ‰’Ç”ö
@@ -86,7 +86,7 @@ int main()
 
 		mapObj->SetDecisionParam(pos, rotation, scale);
 
-		//emanager->RenderAllEnemy();
+		emanager->RenderAllEnemy();
 		player->Render();
 
 		//*****************************
@@ -103,8 +103,8 @@ int main()
 	}
 
 	delete sc;
-	//delete etm;
-	//delete emanager;
+	delete etm;
+	delete emanager;
 	delete player;
 	delete mapObj;
 	
