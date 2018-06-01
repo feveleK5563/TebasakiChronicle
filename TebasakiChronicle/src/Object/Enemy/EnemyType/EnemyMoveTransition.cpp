@@ -22,24 +22,12 @@ void EnemyMoveTransition::SetTransition(int transitionNum)
 		transition = new ETransition_NotTransition();
 		break;
 
-	case 1:	//一連の動作が終了したとき
+	case 1: //一連の動作が終了したとき
 		transition = new ETransition_EndMovePattern();
 		break;
 
-	case 2:	//視界内にプレイヤーが入っているとき
+	case 2: //視界内にプレイヤーが入っているとき
 		transition = new ETransition_PlayerIntoVisibility();
-		break;
-
-	case 3:	//攻撃遷移用コリジョンにプレイヤーが入っているとき
-		transition = new ETransition_PlayerIntoAttackArea();
-		break;
-
-	case 4:	//足元が地形と接触しているとき
-		transition = new ETransition_HitFoot();
-		break;
-
-	case 5: //視界内のプレイヤーが向いている方向にいるとき
-		transition = new ETransition_IntoVisibilityAndMatchDirection();
 		break;
 	}
 }
@@ -51,14 +39,14 @@ bool EnemyMoveTransition::IsTransition(CollisionManager& cm, Status& status, con
 }
 
 //-----------------------------------------------------------------------------
-//遷移しない
+//0：遷移しない
 bool ETransition_NotTransition::IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern)
 {
 	return false;
 }
 
 //-----------------------------------------------------------------------------
-//一連の動作が終了したとき
+//1：一連の動作が終了したとき
 bool ETransition_EndMovePattern::IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern)
 {
 	if (endMovePattern == true)
@@ -68,47 +56,11 @@ bool ETransition_EndMovePattern::IsTransition(CollisionManager& cm, Status& stat
 }
 
 //-----------------------------------------------------------------------------
-//視界内にプレイヤーが入っているとき
+//2：視界内にプレイヤーが入っているとき
 bool ETransition_PlayerIntoVisibility::IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern)
 {
-	if (cm.CheckHitSubCollisionObejct(EnemyCollisionName::Visibility))
+	if (cm.CheckHitSubCollisionObejct(1))
 		return true;
 
-	return false;
-}
-
-//-----------------------------------------------------------------------------
-//視界内にプレイヤーが入っているとき
-bool ETransition_PlayerIntoAttackArea::IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern)
-{
-	if (cm.CheckHitSubCollisionObejct(EnemyCollisionName::AttackArea))
-		return true;
-
-	return false;
-}
-
-//-----------------------------------------------
-//足元が地形と接触しているとき
-bool ETransition_HitFoot::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern)
-{
-	if (cm.CheckHitSubCollisionObejct(EnemyCollisionName::CheckFoot))
-		return true;
-	
-	return false;
-}
-
-//-----------------------------------------------
-//視界内のプレイヤーが向いている方向にいるとき
-bool ETransition_IntoVisibilityAndMatchDirection::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern)
-{
-	auto pdata = cm.GetConflictionObjectsTag(EnemyCollisionName::Visibility);
-	if (pdata.size() <= 0)
-		return false;
-
-	if ((((Status*)pdata[0])->GetPos().x < status.GetPos().x && status.GetDirection() == Status::Direction::Left) ||
-		(((Status*)pdata[0])->GetPos().x > status.GetPos().x && status.GetDirection() == Status::Direction::Right))
-	{
-		return true;
-	}
 	return false;
 }

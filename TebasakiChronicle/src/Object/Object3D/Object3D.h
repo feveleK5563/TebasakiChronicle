@@ -19,7 +19,7 @@ public:
 	//!@param[in] rotation_ 向き
 	//!@param[in] scale_ 大きさ
 	Object3D(const std::string& filePath, const std::string& texFilePath,
-		const K_Math::Vector3& pos_, const K_Math::Vector3& rotation_, const K_Math::Vector3& scale_);
+		const K_Math::Vector3& pos_,const K_Math::Vector3& rotation_,const K_Math::Vector3& scale_);
 	//!@brief デストラクタ
 	~Object3D();
 

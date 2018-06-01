@@ -71,8 +71,8 @@
     <Filter Include="ソース ファイル\src\Loader">
       <UniqueIdentifier>{0d3c5429-1030-4beb-879a-6a6385c9e2a8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\src\Effect">
-      <UniqueIdentifier>{d4f9ea08-d3ae-4ae7-8690-4f356764a647}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\src\BaseClass\GUIObject">
+      <UniqueIdentifier>{7e07f8bf-90fc-4b54-80c4-6b0e8c78b5e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -172,8 +172,8 @@
     <ClCompile Include="src\TimeCount.cpp">
       <Filter>ソース ファイル\src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Effect\Effect.cpp">
-      <Filter>ソース ファイル\src\Effect</Filter>
+    <ClCompile Include="src\BaseClass\GUIObject\GUIObject.cpp">
+      <Filter>ソース ファイル\src\BaseClass\GUIObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -276,8 +276,8 @@
     <ClInclude Include="src\TimeCount.h">
       <Filter>ソース ファイル\src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Effect\Effect.h">
-      <Filter>ソース ファイル\src\Effect</Filter>
+    <ClInclude Include="src\BaseClass\GUIObject\GUIObject.h">
+      <Filter>ソース ファイル\src\BaseClass\GUIObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

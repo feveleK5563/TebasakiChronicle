@@ -32,7 +32,7 @@ public:
 //条件が重複する場合、パターン番号の若いほうが優先される
 
 //-----------------------------------------------
-//遷移しない
+//0：遷移しない
 class ETransition_NotTransition : public EnemyMoveTransitionAbstract
 {
 public:
@@ -40,7 +40,7 @@ public:
 };
 
 //-----------------------------------------------
-//一連の動作が終了したとき
+//1：一連の動作が終了したとき
 class ETransition_EndMovePattern : public EnemyMoveTransitionAbstract
 {
 public:
@@ -48,32 +48,8 @@ public:
 };
 
 //-----------------------------------------------
-//視界内にプレイヤーが入っているとき
+//2：視界内にプレイヤーが入っているとき
 class ETransition_PlayerIntoVisibility : public EnemyMoveTransitionAbstract
-{
-public:
-	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern);
-};
-
-//-----------------------------------------------
-//攻撃遷移用コリジョン内にプレイヤーが入っているとき
-class ETransition_PlayerIntoAttackArea : public EnemyMoveTransitionAbstract
-{
-public:
-	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern);
-};
-
-//-----------------------------------------------
-//足元が地形と接触しているとき
-class ETransition_HitFoot : public EnemyMoveTransitionAbstract
-{
-public:
-	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern);
-};
-
-//-----------------------------------------------
-//視界内のプレイヤーが向いている方向にいるとき
-class ETransition_IntoVisibilityAndMatchDirection : public EnemyMoveTransitionAbstract
 {
 public:
 	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern);

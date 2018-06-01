@@ -1,5 +1,4 @@
 #pragma once
-#include "../../BaseClass/Collision/CollisionCreator.h"
 #include "EnemyType/EnemyType.h"
 #include "../GameObject.h"
 
@@ -10,14 +9,25 @@ private:
 	TimeCount		timeCnt;		//時間計測
 	int				behaviorId;		//現在の敵から読み取れる動作番号
 
-	int			nowMoveOrder;		//現在の動作順番
-	int			nowPatternOrder;	//現在の動作パターン番号
-	int			beforeMoveOrder;	//前の動作順番
-	int			beforePatternOrder;	//前の動作パターン番号
+	int					nowMoveOrder;		//現在の動作順番
+	int					nowPatternOrder;	//現在の動作パターン番号
+	int					beforeMoveOrder;	//前の動作順番
+	int					beforePatternOrder;	//前の動作パターン番号
 
 	CollisionManager			collisionManager;		//コリジョンの管理
 	TemporaryCollisionManager	tempCollisionManager;	//一時的に生成するコリジョンクラス
 	GameObject					gameObject;				//ゲームオブジェクト
+
+	//敵に割り当てられているサブコリジョンの名前一覧
+	enum EnemyCollisionName
+	{
+		RecieveDamage,
+		Fieldofview,
+		AttackArea,
+		CheckFoot,
+		CheckHead,
+		RecieveCameraGan,
+	};
 
 public:
 	//スキル番号と現在のテクスチャ名、キャラチップ番号を格納

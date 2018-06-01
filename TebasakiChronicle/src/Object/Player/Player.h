@@ -94,6 +94,8 @@ private:
 	float			minJumpForce;	//最低限のジャンプ
 	int				invicibleCnt;	//無敵時間カウント
 	int				maxInvicibleTime;//最大無敵時間
+	int				maxLife;		//最大体力
+	int				minLife;		//最小体力
 public:
 	K_Physics::CollisionShape*	shape;		//ベースコリジョンの形状
 	K_Physics::CollisionShape*	shape2;		//足元と頭上用コリジョンの形状

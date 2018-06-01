@@ -60,7 +60,7 @@ void	Player::Initliaze()
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 96, 32, 48), 4, 4, false);	//CameraGunUse //キャラチップの変更有
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 96, 32, 48), 4, 4, false);	//CameraGunMoveUse //キャラチップの変更有
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 96, 32, 48), 4, 4, false);	//CameraGunAirUse //キャラチップの変更有
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 144, 32, 48), 4, 4, false);	//ReciveDamage	//キャラチップの変更有
+	object.GetImage().CreateCharaChip(K_Math::Box2D(416, 0, 32, 48), 3, 4, false);	//ReciveDamage	//キャラチップの変更有
 
 	//Moveの重力の設定
 	object.GetMove().SetAddVec(4.f);
@@ -87,7 +87,6 @@ void	Player::Initliaze()
 //更新
 void	Player::UpDate()
 {
-	object.GetMove().GetMoveVec() = K_Math::Vector3(0, 0, 0);
 	motionCnt++;
 
 	ChangeDir();			//入力に応じて向きを変える
@@ -110,6 +109,7 @@ void	Player::UpDate()
 
 	//位置同期処理---------------------
 	object.SetPos(cManager.GetBaseCollisionObjectPosition());
+	cManager.SetBaseCollisionObjectPosition(object.GetPos());
 
 	//アニメーション-------------------
 	object.GetImage().Animation();
@@ -118,7 +118,6 @@ void	Player::UpDate()
 	{
 		invicibleCnt--;
 	}
-
 }
 
 //-----------------------------------------------------------------
@@ -333,10 +332,14 @@ void	Player::Think()
 		if (cManager.CheckHitSubCollisionObejct(Head)) { nowMotion = Fall; }
 		break;
 	case DamageRecive:		//ダメージ受ける
-		if (motionCnt > maxFrame / 6)
+		if (motionCnt > maxFrame / 6 && cManager.CheckHitSubCollisionObejct(Foot))
 		{
+			//本来はここでパラメータをいじらない
+			object.SetMoveVec(K_Math::Vector3(0,0,0));
+			object.GetMove().SetFallSpeed(0.0f);
 			nowMotion = Idle;
 		}
+		break;
 	}
 	//モーションの更新
 	UpDateMotion(nowMotion);
@@ -351,20 +354,14 @@ void	Player::Move()
 	//重力加速
 	switch (motion) {
 	default:
-		if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
-		{
-			K_Math::Vector3 pos(30, 30, 0);
-			KnockBack(pos);
-			std::cout << "ノックバック" << std::endl;
-		}
-	
+		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
+		controller.UpDate(object.GetMove());
+		
 		//上昇中もしくは足元に地面がない
-		//if (object.GetMoveVec().y > 0.0f || !cManager.CheckHitSubCollisionObejct(Foot))
+		if (object.GetMoveVec().y > 0.0f || !cManager.CheckHitSubCollisionObejct(Foot))
 		{
 			object.GetMove().GravityOperation(cManager.CheckHitSubCollisionObejct(Foot));
 		}
-
-		std::cout << "MoveVec" << object.GetMoveVec().x << std::endl;
 		
 		break;
 		//重力を無効にするモーション(今はなし)
@@ -374,7 +371,7 @@ void	Player::Move()
 	//移動 & カメラガンをSkillUse中は使用しない
 	switch (motion) {
 	default:
-		controller.UpDate(object.GetMove());
+	
 		break;
 		//移動操作を無視するモーション
 	case SkillUse:
@@ -427,9 +424,15 @@ void	Player::Move()
 		//点滅するフラグをOnにする
 		if (motionCnt == 0)
 		{
-			ReciveDamage();
+			object.GetMove().SetFallSpeed(0.0f);
+			//ReciveDamage();
+			K_Math::Vector3 pos(30, 30, 0);
+			KnockBack(pos);
 			invicibleCnt = maxInvicibleTime;
+			
 		}
+		object.GetMove().Horizontal();
+		object.GetMove().Vertical();
 		break;
 	}
 }
@@ -551,12 +554,13 @@ void	Player::ChangeDamageMotion(Motion& motion)
 //!@param[in] 相手の座標
 void	Player::KnockBack(const K_Math::Vector3& pos_)
 {
+	object.GetMove().SetVertical(6.0f);
 	if (object.GetPos().x > pos_.x)
 	{
-		object.SetMoveVec(K_Math::Vector3(+24, -19, 0));
+		object.GetMove().SetHorizontal(+3.0f);
 	}
 	else
 	{
-		object.SetMoveVec(K_Math::Vector3(-24, -19, 0));
+		object.GetMove().SetHorizontal(-3.0f);
 	}
 }
