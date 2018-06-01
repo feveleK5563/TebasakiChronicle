@@ -102,7 +102,7 @@ bool Enemy::RecieveCollisionOperation()
 	std::vector<K_Physics::CollisionTag*> tag;
 
 	//ダメージを受ける
-	tag = collisionManager.GetConflictionObjectsTag(Enemy::EnemyCollisionName::RecieveDamage);
+	tag = collisionManager.GetConflictionObjectsTag(EnemyCollisionName::RecieveDamage);
 	for (auto it : tag)
 	{
 		if (((Status*)it->userData)->GetState() == Status::State::Active)
@@ -113,7 +113,7 @@ bool Enemy::RecieveCollisionOperation()
 	int hp = gameObject.GetStatus().GetLife();
 
 	//カメラを受ける
-	tag = collisionManager.GetConflictionObjectsTag(Enemy::EnemyCollisionName::RecieveCameraGan);
+	tag = collisionManager.GetConflictionObjectsTag(EnemyCollisionName::RecieveCameraGan);
 	for (auto it : tag)
 	{
 		if (((Status*)it->userData)->GetState() == Status::State::Active)
