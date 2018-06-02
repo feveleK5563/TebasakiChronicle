@@ -346,6 +346,9 @@ void Behavior_ShotBulletFromMiddle::Initialize(TemporaryCollisionManager& tempma
 		0,
 		false,
 		false);
+
+	//(仮)爆発エフェクトの発生
+	Effect::CreateEffect(Effect1, status.GetPos() + K_Math::Vector3(0, 0, -1));
 }
 void Behavior_ShotBulletFromMiddle::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
 {

@@ -95,24 +95,24 @@ namespace CST
 	/*テクスチャ関連*/
 
 	//-------------------------------------------------------------------
-	//テクスチャリストのアドレス値を得る
-	K_Graphics::Texture* LoadAndGetTexture(std::string imageName, std::string fileName)
+	//テクスチャを作成し、そのアドレス値を得る
+	K_Graphics::Texture* LoadAndGetTexture(std::string textureName, std::string filePath)
 	{
-		cstl->tList.LoadTexture(imageName, fileName);
+		cstl->tList.LoadTexture(textureName, filePath);
 
-		return cstl->tList.GetTexture(imageName);
+		return cstl->tList.GetTexture(textureName);
 	}
 	//-------------------------------------------------------------------
 	//テクスチャのアドレス値を得る
-	K_Graphics::Texture* GetTexture(std::string imageName)
+	K_Graphics::Texture* GetTexture(std::string textureName)
 	{
-		return cstl->tList.GetTexture(imageName);
+		return cstl->tList.GetTexture(textureName);
 	}
 	//-------------------------------------------------------------------
 	//テクスチャを解放する
-	void DeleteTexture(std::string imageName)
+	void DeleteTexture(std::string textureName)
 	{
-		cstl->tList.DeleteTexture(imageName);
+		cstl->tList.DeleteTexture(textureName);
 	}
 
 	/*フレームバッファ関連*/

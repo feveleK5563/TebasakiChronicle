@@ -47,12 +47,12 @@ namespace CST
 	//シェーダーのアドレス値を得る
 	K_Graphics::ShaderClass* GetShaderClass(int shaderNum = 0);
 
-	//テクスチャを作成してそのアドレス値を得る
-	K_Graphics::Texture* LoadAndGetTexture(std::string imageName, std::string fileName);
+	//テクスチャを作成し、そのアドレス値を得る
+	K_Graphics::Texture* LoadAndGetTexture(std::string textureName, std::string filePath);
 	//テクスチャのアドレス値を得る
-	K_Graphics::Texture* GetTexture(std::string imageName);
+	K_Graphics::Texture* GetTexture(std::string textureName);
 	//テクスチャを解放する
-	void DeleteTexture(std::string imageName);
+	void DeleteTexture(std::string textureName);
 
 	//フレームバッファリストを作成
 	void CreateFrameBuffer();

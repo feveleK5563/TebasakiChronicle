@@ -18,9 +18,10 @@ EffectManager::~EffectManager()
 	}
 }
 
-//エフェクトのデータを作成し、格納する
+//エフェクトのデータを格納する
 void EffectManager::CreateEffectData(EffectName effectName, K_Graphics::Texture* tex, AnimationCharaChip* anim, int endTime)
 {
+	effectData[effectName] = new EffectData();
 	effectData[effectName]->texture = tex;
 	effectData[effectName]->animChip = anim;
 	effectData[effectName]->endTime = endTime;
@@ -29,8 +30,8 @@ void EffectManager::CreateEffectData(EffectName effectName, K_Graphics::Texture*
 //指定座標に指定したエフェクトを生成する
 void EffectManager::CreateEffect(EffectName effectName, const K_Math::Vector3& setPos)
 {
-	effectObj.emplace_back();
-	effectObj.back()->imageManager = new ImageManager(effectData[effectName]->texture, false);
+	effectObj.emplace_back(new EffectObject());
+	effectObj.back()->imageManager = new ImageManager(effectData[effectName]->texture, true);
 	effectObj.back()->imageManager->CreateCharaChip(effectData[effectName]->animChip->chip, effectData[effectName]->animChip->chipSheetNum, effectData[effectName]->animChip->animSpd, effectData[effectName]->animChip->isAnimRoop);
 	effectObj.back()->pos = setPos;
 	effectObj.back()->timeCnt.SetEndTime(effectData[effectName]->endTime);
@@ -77,5 +78,27 @@ EffectManager* effectManager = EffectManager::GetInstance();
 //外部で呼ぶ関数
 namespace Effect
 {
+	//エフェクトのデータを作成し、格納する
+	void CreateEffectData(EffectName effectName, K_Graphics::Texture* tex, AnimationCharaChip* anim)
+	{
+		effectManager->CreateEffectData(effectName, tex, anim, int(anim->chipSheetNum * anim->animSpd));
+	}
 
+	//指定座標に指定したエフェクトを生成する
+	void CreateEffect(EffectName effectName, const K_Math::Vector3& setPos)
+	{
+		effectManager->CreateEffect(effectName, setPos);
+	}
+
+	//エフェクトの更新処理
+	void Run()
+	{
+		effectManager->Run();
+	}
+
+	//エフェクトの描画処理
+	void Render()
+	{
+		effectManager->Render();
+	}
 }

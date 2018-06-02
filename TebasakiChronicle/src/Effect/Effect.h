@@ -5,15 +5,14 @@
 #include "../CSTList.h"
 #include "../Helper.h"
 
-class EffectManager
+enum EffectName
 {
-public:
-	enum EffectName
-	{
-		Effect1,
-		Effect2,
-	};
-	
+	Effect1,
+	Effect2,
+};
+
+class EffectManager
+{	
 private:
 	//エフェクト発生に必要なデータ
 	struct EffectData
@@ -37,7 +36,7 @@ private:
 	~EffectManager();
 
 public:
-	//エフェクトのデータを作成し、格納する
+	//エフェクトのデータを格納する
 	void CreateEffectData(EffectName effectName, K_Graphics::Texture* tex, AnimationCharaChip* anim, int endTime);
 	//指定座標に指定したエフェクトを生成する
 	void CreateEffect(EffectName effectName, const K_Math::Vector3& setPos);
@@ -54,5 +53,15 @@ public:
 
 namespace Effect
 {
+	//エフェクトのデータを格納する
+	void CreateEffectData(EffectName effectName, K_Graphics::Texture* tex, AnimationCharaChip* anim);
 
+	//指定座標に指定したエフェクトを生成する
+	void CreateEffect(EffectName effectName, const K_Math::Vector3& setPos);
+
+	//エフェクトの更新処理
+	void Run();
+
+	//エフェクトの描画処理
+	void Render();
 }
