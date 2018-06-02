@@ -132,8 +132,8 @@ void ImageManager::ImageDraw2D(	const K_Math::Vector3&	pos,
 	spobj->controlPoint += charaChip[nowAnimNum]->basisRenderPos;		//’†S‚©‚ç•`‰æŠî€ˆÊ’u‚ð‚¸‚ç‚·
 
 	K_Math::Box2D draw = src;
-	draw.x = pos.x;
-	draw.y = pos.y;
+	draw.x = (int)pos.x;
+	draw.y = (int)pos.y;
 
 	CST::GetShaderClass(0)->UseShader();
 	spobj->Draw2D(

@@ -49,7 +49,7 @@ int main()
 	EnemyLoader eLoader;
 	//“G‚Ìí—Ş‚ğì¬
 	EnemyTypeManager* etm = new EnemyTypeManager();
-	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/TestData.txt"));
+	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataA1.txt"));
 	//ã‹L‚Åì¬‚µ‚½í—Ş‚ğŠî‚É“G‚ğ¶¬‚·‚é
 	EnemyManager* emanager = new EnemyManager();
 	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(-10, 20, 0), Status::Direction::Left);
@@ -73,7 +73,7 @@ int main()
 		sc->ProcessSystem();
 		CC::Run();
 
-		//emanager->UpdateAllEnemy();
+		emanager->UpdateAllEnemy();
 
 		player->UpDate();
 		//ƒJƒƒ‰’Ç”ö
@@ -86,7 +86,7 @@ int main()
 
 		mapObj->SetDecisionParam(pos, rotation, scale);
 
-		//emanager->RenderAllEnemy();
+		emanager->RenderAllEnemy();
 		player->Render();
 
 		//*****************************
