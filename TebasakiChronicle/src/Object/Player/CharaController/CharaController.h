@@ -19,8 +19,8 @@ public:
 	//スティック入力があったかを返す
 	bool	IsLStickInput();
 private:
-	//定数-------------------
-	float Friction = 0.f;
+	float friction;
+	float inputAngle;
 };
 
 

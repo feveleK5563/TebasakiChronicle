@@ -110,3 +110,36 @@ void ImageManager::ImageDraw3D(	const K_Math::Vector3&	pos,
 		anglec,
 		scale);
 }
+
+//-----------------------------------------------------------------------------
+//描画(2D)
+void ImageManager::ImageDraw2D(	const K_Math::Vector3&	pos,
+								const K_Math::Vector3&	angle,
+								const K_Math::Vector3&	scale,
+								int						direction)
+{
+	//テクスチャの読み込み位置の調整
+	K_Math::Box2D src = charaChip[nowAnimNum]->chip;
+	if (charaChip[nowAnimNum]->chipSheetNum >= 0)
+	{
+		src.x += src.w * (int(animCnt) % charaChip[nowAnimNum]->chipSheetNum);
+	}
+	else
+	{
+		src.x -= src.w * (int(animCnt) % charaChip[nowAnimNum]->chipSheetNum);
+	}
+	spobj->controlPoint = K_Math::Vector2(src.w / 2.f, src.h / 2.f);	//描画基準位置をテクスチャの中心に設定(デフォルト)
+	spobj->controlPoint += charaChip[nowAnimNum]->basisRenderPos;		//中心から描画基準位置をずらす
+
+	K_Math::Box2D draw = src;
+	draw.x = pos.x;
+	draw.y = pos.y;
+
+	CST::GetShaderClass(0)->UseShader();
+	spobj->Draw2D(
+		CST::GetOrthoCamera(),
+		CST::GetShaderClass(0),
+		src,
+		draw,
+		angle.z);
+}

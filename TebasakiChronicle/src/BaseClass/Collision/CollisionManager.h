@@ -15,17 +15,6 @@ enum CollisionMask
 	EnemyCamCollision	= 1 << 6,
 };
 
-//敵に割り当てられているサブコリジョンの名前一覧
-enum EnemyCollisionName
-{
-	RecieveDamage,
-	Visibility,
-	AttackArea,
-	CheckFoot,
-	CheckHead,
-	RecieveCameraGan,
-};
-
 //コリジョンデータ管理くん
 //コリジョンの形状情報は格納しないので各自で管理すること
 class CollisionManager

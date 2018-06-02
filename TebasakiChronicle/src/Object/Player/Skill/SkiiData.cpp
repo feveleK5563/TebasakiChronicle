@@ -8,6 +8,7 @@ SkillData::SkillData()
 {
 	skillID = -1;
 	Clear();
+	guiObj = nullptr;
 }
 
 //----------------------------------------------------------------
@@ -15,7 +16,11 @@ SkillData::SkillData()
 //----------------------------------------------------------------
 SkillData::~SkillData()
 {
-
+	if (guiObj != nullptr)
+	{
+		delete guiObj;
+		guiObj = nullptr;
+	}
 }
 
 
@@ -102,7 +107,14 @@ void	SkillData::Clear()
 	animCharaChip = nullptr;	//アニメーションキャラチップ
 	skillImageName = "";		//スキルの画像名
 	useNum = 0;					//使用回数を0
+	pressBntNum = -1;
 
+	if (guiObj != nullptr)
+	{
+		delete guiObj;
+		guiObj = nullptr;
+		std::cout << "GUIオブジェクトを削除" << std::endl;
+	}
 }
 
 
@@ -140,13 +152,66 @@ void	SkillData::CreateSkillType()
 {
 	switch (skillID) {
 	case 0:
-		skillType = std::shared_ptr<SkillType>(new SkillSword(10, 30.0f, 120));
+		skillType = std::shared_ptr<SkillType>(new SkillSword(0,10, 50.0f, 120,1));
 		break;
 	case 1:
+		///skillType = std::shared_ptr<SkillType>(new SkillSword(1, 5, 30.0f, 60, 1));
 		break;
 	case 2:
+		//skillType = std::shared_ptr<SkillType>(new SkillSword(2, 5, 30.0f, 60, 1));
+		break;
+	case 3:
+		//skillType = std::shared_ptr<SkillType>(new SkillSword(3, 5, 30.0f, 60, 1));
+		break;
+	case 4:
+		//skillType = std::shared_ptr<SkillType>(new SkillSword(4, 7, 30.0f, 60, 1));
 		break;
 	default:
 		skillType = nullptr;
 	}
+}
+
+//!@brief スキルのGUIオブジェクトの生成
+void	SkillData::CreateGUIObject()
+{
+	K_Math::Vector3	guiPos;
+	switch (pressBntNum) {
+	case 0: guiPos = K_Math::Vector3(1000, 500, 0);	break;
+	case 1:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
+	case 2:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
+	case 3:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
+	case 4: guiPos = K_Math::Vector3(1000, 500, 0);	break;
+	}
+	std::cout << "GUIオブジェクトを生成" << std::endl;
+	guiObj = new GUIObject("target", guiPos, K_Math::Box2D(0, 0, 32, 32));
+}
+
+//!@brief GUIオブジェクトの位置の移動
+void	SkillData::MoveGUIObjPos()
+{
+	K_Math::Vector3	guiPos;
+	switch (pressBntNum) {
+	case 0: guiPos = K_Math::Vector3(10, 50, 0);	break;
+	case 1:	guiPos = K_Math::Vector3(10, 50, 0);	break;
+	case 2:	guiPos = K_Math::Vector3(10, 50, 0);	break;
+	case 3:	guiPos = K_Math::Vector3(10, 50, 0);	break;
+	case 4: guiPos = K_Math::Vector3(10, 50, 0);	break;
+	}
+	std::cout << "GUIオブジェクトを生成" << std::endl;
+	guiObj = new GUIObject("target", guiPos, K_Math::Box2D(0, 0, 32, 32));
+}
+
+//!@brief スキルUIを描画
+void	SkillData::RenderUI()
+{
+	if (guiObj == nullptr) { return; }
+	guiObj->UpDate();
+	guiObj->Render();
+}
+
+
+//!@brief 押されたボタン番号を取得
+void	SkillData::SetPressBtnNum(int num)
+{
+	pressBntNum = num;
 }

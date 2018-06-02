@@ -6,10 +6,10 @@
 //!@param[in] texName テクスチャのパス
 Object3D::Object3D(const std::string& filePath_, const std::string& texFilePath_,
 	const K_Math::Vector3& pos_, const K_Math::Vector3& rotation_, const K_Math::Vector3& scale_)
-	: modelData(nullptr), model(nullptr), object(nullptr), decisionObj(nullptr),
-	texList(new K_Graphics::TextureList()),
-	decisionPos(pos_), decisionRotation(rotation_), decisionScale(scale_),
-	filePath(filePath_), texFilePath(texFilePath_)
+	:	modelData(nullptr), model(nullptr), object(nullptr), decisionObj(nullptr),
+		texList(new K_Graphics::TextureList()),
+		decisionPos(pos_), decisionRotation(rotation_), decisionScale(scale_), 
+		filePath(filePath_), texFilePath(texFilePath_)
 {
 	Load(filePath, texFilePath);
 	CreateMeshModel();
@@ -21,10 +21,22 @@ Object3D::Object3D(const std::string& filePath_, const std::string& texFilePath_
 //!@brief デストラクタ
 Object3D::~Object3D()
 {
-	if (model != nullptr)
+	if (decisionObj != nullptr)
 	{
-		delete model;
-		model = nullptr;
+		delete decisionObj;
+		decisionObj = nullptr;
+	}
+
+	if (object != nullptr)
+	{
+		delete object;
+		object = nullptr;
+	}
+
+	if (texList != nullptr)
+	{
+		delete texList;
+		texList = nullptr;
 	}
 }
 

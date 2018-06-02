@@ -1,5 +1,6 @@
 #include "Move.h"
 
+#include <iostream>
 //------------------------------------------------------
 //概要:Moveクラスの処理内容
 //製作者:日比野
@@ -17,7 +18,10 @@ Move::Move() :
 	defaultGravity(-0.5f),
 	gravity(defaultGravity)
 {
-
+	verticalPower = 7.5f;
+	horizontalPower = 7.0f;
+	verticalSpeed = 0;
+	horizontalSpeed = 0;
 }
 Move::Move(const K_Math::Vector3& vec, float add, float jumpPow, float fallSpeed, float gravity) :
 	moveVec(vec),
@@ -27,7 +31,10 @@ Move::Move(const K_Math::Vector3& vec, float add, float jumpPow, float fallSpeed
 	defaultGravity(-0.5f),
 	gravity(gravity)
 {
-
+	verticalPower = 7.5f;
+	horizontalPower = 7.0f;
+	verticalSpeed = 0;
+	horizontalSpeed = 0;
 }
 
 //------------------------------------------------------
@@ -83,7 +90,14 @@ void	Move::SetMoveDate(	const float& addVec, const float& jumpPow,
 	this->gravity = gravity;
 }
 
-
+void	Move::SetHorizontal(float horizontal)
+{
+	horizontalPower = horizontal;
+}
+void	Move::SetVertical(float vertical)
+{
+	verticalPower = vertical;
+}
 //------------------------------------------------------
 //取得処理
 //------------------------------------------------------
@@ -130,7 +144,7 @@ void	Move::GravityOperation(bool annulGravity)
 		fallSpeed = 0;
 		return;
 	}
-
+	
 	moveVec.y += fallSpeed;
 	fallSpeed += gravity;
 }
@@ -142,4 +156,18 @@ void	Move::JumpOperation()
 
 	//ジャンプの設定と同時にキャラクターを少し動かす
 	moveVec.y += fallSpeed;
+}
+
+//水平移動
+void	Move::Horizontal()
+{
+	horizontalSpeed = horizontalPower;
+	moveVec.x += horizontalSpeed;
+}
+
+//垂直移動
+void	Move::Vertical()
+{
+	verticalSpeed = verticalPower;
+	moveVec.y += verticalSpeed;
 }

@@ -3,6 +3,7 @@
 #include "../src/Object/Player/CharaController/CharaController.h"
 #include "../src/Object/Player/Skill/SkillManager.h"
 
+
 //--------------------------------------------------------------------
 //プレイヤー
 //概要:プレイヤー専用
@@ -28,6 +29,7 @@ public:
 		CameraGunUse,		//カメラガン停止中に構え
 		CameraGunMoveUse,	//カメラガン移動中に構え
 		CameraGunAirUse,	//カメラガン空中で構え
+		DamageRecive,		//ダメージ受ける
 	};
 
 	//コリジョンの種類
@@ -47,8 +49,9 @@ public:
 	void	Render();		//描画
 
 	//ダメージを与える
-	int		GiveDamege();
-
+	int		GiveDamage();
+	//ダメージの受ける処理
+	void	ReciveDamage();
 private:
 	void	ChangeDir();		//入力に応じて向きを変える
 	void	ShotCameraGun();	//カメラガンを飛ばす
@@ -71,8 +74,16 @@ private:
 	//!@brief スキルの状態へ
 	void	ChangeSkillMotion(Motion& nowMotion,const Motion& nextMotion);
 
+	//!@brief ダメージモーションへチェンジ
+	void	ChangeDamageMotion(Motion& motion);
+
+	//!@brief ノックバック処理
+	//!@param[in] 相手の座標
+	void	KnockBack(const K_Math::Vector3& pos_);
+
 public:
 	GameObject		object;			//ゲームオブジェクト
+	Status* enemyData;
 private:
 	Motion			motion;			//モーション
 	int				motionCnt;		//モーションのカウント
@@ -81,6 +92,10 @@ private:
 	SkillManager	skillManager;	//スキル
 	int				maxFrame;		//最大のフレーム数
 	float			minJumpForce;	//最低限のジャンプ
+	int				invicibleCnt;	//無敵時間カウント
+	int				maxInvicibleTime;//最大無敵時間
+	int				maxLife;		//最大体力
+	int				minLife;		//最小体力
 public:
 	K_Physics::CollisionShape*	shape;		//ベースコリジョンの形状
 	K_Physics::CollisionShape*	shape2;		//足元と頭上用コリジョンの形状

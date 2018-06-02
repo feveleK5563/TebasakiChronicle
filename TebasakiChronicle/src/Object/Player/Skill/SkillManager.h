@@ -4,6 +4,7 @@
 #include "SkillObject.h"
 #include "../src/Object/Enemy/Enemy.h"
 
+
 //----------------------------------------------------------------
 //スキルを管理する
 //概要:スキルを管理する、プレイヤーがもつSkillの箱のようなもの
@@ -81,4 +82,5 @@ private:
 	std::vector<SkillObject*>		skillObj;	//スキルオブジェクト
 	bool						registFlag;		//登録フラグ
 	bool						createSkillFlag;//使用中フラグ
+
 };

@@ -19,6 +19,8 @@ public:
 	void	SetFallSpeed(float fallSpeed);
 	void	SetGravity(float gravity);
 	void	SetDefaultGravity();
+	void	SetHorizontal(float horizontal);
+	void	SetVertical(float vertical);
 
 	void	SetMoveDate(
 		const float& addVec, const float& jumpPow,
@@ -34,6 +36,8 @@ public:
 	//動作
 	void	GravityOperation(bool annulGravity);	//重力動作
 	void	JumpOperation();						//ジャンプ動作
+	void	Horizontal();		//水平移動
+	void	Vertical();			//垂直移動
 
 private:
 	K_Math::Vector3		moveVec;		//移動量
@@ -42,4 +46,8 @@ private:
 	float				fallSpeed;		//落下速度
 	float				defaultGravity;	//デフォルトの重力加速度
 	float				gravity;		//重力加速度
+	float				verticalPower;	//垂直の力
+	float				horizontalPower;//水平の力
+	float				verticalSpeed;	//垂直のスピード
+	float				horizontalSpeed;//水平のスピード
 };

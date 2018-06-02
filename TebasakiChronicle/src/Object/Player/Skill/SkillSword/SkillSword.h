@@ -10,10 +10,12 @@ class SkillSword : public SkillType
 {
 public:
 	//!@brief コンストラクタ
+	//!@param[in] 動作ID
 	//!@param[in] 最大使用回数
 	//!@param[in] 出現距離
 	//!@param[in] 継続時間
-	SkillSword(const int& maxUseNum, const float& dist ,const int& continueTime_);
+	//!@param[in] 攻撃力
+	SkillSword(const int& moveID,const int& maxUseNum, const float& dist ,const int& continueTime_,const int& attackPoint);
 
 	~SkillSword();
 
@@ -22,3 +24,5 @@ public:
 
 private:
 };
+
+

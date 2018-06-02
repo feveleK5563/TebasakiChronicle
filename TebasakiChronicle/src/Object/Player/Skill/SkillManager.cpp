@@ -69,6 +69,8 @@ void	SkillManager::RegistSkill(const int& num)
 		skillDatas[num].SetSkillType(skillDatas[skillNum - 1].GetSkillType());
 		skillDatas[num].SetSkillImageName(skillDatas[skillNum - 1].GetSkillImageName());
 		skillDatas[num].SetAnimCharaChip(&skillDatas[skillNum - 1].GetAnimCharaChip());
+		skillDatas[num].SetPressBtnNum(num);
+		skillDatas[num].MoveGUIObjPos();
 		skillDatas[skillNum - 1].Clear();
 			
 	}
@@ -80,6 +82,8 @@ void	SkillManager::RegistSkill(const int& num)
 		skillDatas[num].SetSkillType(skillDatas[skillNum - 1].GetSkillType());
 		skillDatas[num].SetSkillImageName(skillDatas[skillNum - 1].GetSkillImageName());
 		skillDatas[num].SetAnimCharaChip(&skillDatas[skillNum - 1].GetAnimCharaChip());
+		skillDatas[num].SetPressBtnNum(num);
+		skillDatas[num].MoveGUIObjPos();
 		skillDatas[skillNum - 1].Clear();
 	}
 }
@@ -100,7 +104,8 @@ bool	SkillManager::ReceiveSkillAndCharaChip(const Enemy::SkillAndCharaChip& skil
 	skillDatas[skillNum - 1].SetSkillID(*skill.behaviorId);
 	skillDatas[skillNum - 1].SetSkillImageName(*skill.textureName);
 	skillDatas[skillNum - 1].SetAnimCharaChip(skill.nowCharaChip);
-
+	skillDatas[skillNum - 1].SetPressBtnNum(skillNum - 1);
+	skillDatas[skillNum - 1].CreateGUIObject();
 	return true;
 }
 
@@ -137,6 +142,11 @@ void	SkillManager::Render()
 		{
 			(*it)->Render();
 		}
+	}
+	//スキルUIの描画
+	for (int i = 0; i < 5; ++i)
+	{
+		skillDatas[i].RenderUI();
 	}
 }
 
@@ -219,6 +229,8 @@ void	SkillManager::UseSkillData(const int& btnNum, GameObject& obj)
 			skillDatas[btnNum].CountUseNum();	//数をカウント
 
 			std::cout << skillDatas[btnNum].GetNowUseNum() << std::endl;
+			//スキルがなくなるため消す
+			if (!skillDatas[btnNum].CheckUseNum()) { skillDatas[btnNum].Clear(); }
 		}
 	}
 	else
