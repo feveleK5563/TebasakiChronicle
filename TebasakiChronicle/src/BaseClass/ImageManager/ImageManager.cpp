@@ -1,8 +1,7 @@
 #include "ImageManager.h"
 
 //コンストラクタ(キャラチップを作成する)
-ImageManager::ImageManager(const std::string& texName, K_Graphics::Texture* tex, bool isde) :
-	textureName(texName),
+ImageManager::ImageManager(K_Graphics::Texture* tex, bool isde) :
 	spobj(new K_Graphics::SpriteObject(tex)),
 	animCnt(0.f),
 	nowAnimNum(0),
@@ -20,12 +19,6 @@ ImageManager::~ImageManager()
 	}
 }
 
-//-----------------------------------------------------------------------------
-//テクスチャ名の取得
-std::string& ImageManager::GetTextureName()
-{
-	return textureName;
-}
 //-----------------------------------------------------------------------------
 //指定した番号のキャラチップを取得
 AnimationCharaChip* ImageManager::GetNowAnimationCharaChip()

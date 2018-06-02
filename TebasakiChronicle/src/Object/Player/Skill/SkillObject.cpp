@@ -22,7 +22,7 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 	
 	object.SetPos(K_Math::Vector3(object.GetPos().x + GetDir() * skillType->GetAppearDist(), object.GetPos().y, object.GetPos().z));
 
-	object.SetImage(imageName, CST::GetTexture(imageName), true);
+	object.SetImage(CST::GetTexture(imageName), true);
 	object.GetImage().CreateCharaChip(animCharaChip.chip, animCharaChip.chipSheetNum, animCharaChip.animSpd, animCharaChip.isAnimRoop);
 
 	shape = CC::CreateBoxShape(16, 24, 1);

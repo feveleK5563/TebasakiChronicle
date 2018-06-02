@@ -6,7 +6,6 @@ class ImageManager
 {
 private:
 	const bool	isDelete;
-	std::string							textureName;
 	K_Graphics::SpriteObject*			spobj;
 	std::vector<AnimationCharaChip*>	charaChip;
 	int									nowAnimNum;
@@ -15,13 +14,11 @@ private:
 public:
 	//コンストラクタ
 	//キャラチップをImageManager内で作成しない場合は第二引数にfalseを指定
-	ImageManager(const std::string& texName, K_Graphics::Texture* tex, bool isde = true);
+	ImageManager(K_Graphics::Texture* tex, bool isde);
 
 	//デストラクタ
 	~ImageManager();
 
-	//テクスチャ名の取得
-	std::string& GetTextureName();
 	//現在のキャラチップを取得
 	AnimationCharaChip* GetNowAnimationCharaChip();
 

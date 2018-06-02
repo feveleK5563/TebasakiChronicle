@@ -19,7 +19,7 @@ public:
 	//İ’èˆ—
 	void	SetStatus();
 	void	SetMove(const Move* move);
-	void	SetImage(const std::string& texName, K_Graphics::Texture* tex, bool isde = true);
+	void	SetImage(K_Graphics::Texture* tex, bool isde = true);
 	void	SetSound();
 	void	SetEasing();
 

@@ -39,7 +39,7 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	gameObject.GetMove().SetJumpPow(cpyet->GetJumpPower());
 
 	//アニメーションと表示画像の設定
-	gameObject.SetImage(cpyet->GetTextureName(), cpyet->GetTexture(), false);
+	gameObject.SetImage(cpyet->GetTexture(), false);
 	gameObject.GetImage().ChangeAnimationPattern(nowMoveOrder);
 	gameObject.GetImage().ChangeCharaChip(ems->GetNowAnimChip(nowPatternOrder));
 
@@ -55,7 +55,7 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	//タグの設定
 	skillAndChip = new SkillAndCharaChip();
 	skillAndChip->pos = &gameObject.GetStatus().GetPos();
-	skillAndChip->textureName = &gameObject.GetImage().GetTextureName();
+	skillAndChip->textureName = &cpyet->GetTextureName();
 	skillAndChip->behaviorId = &behaviorId;
 	int i = 0;
 	for (; i < 5; ++i)

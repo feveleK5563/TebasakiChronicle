@@ -43,12 +43,12 @@ void	GameObject::SetMove(const Move* move)
 }
 
 //‰æ‘œŠÇ—Ò‚Ì¶¬
-void	GameObject::SetImage(const std::string& texName, K_Graphics::Texture* tex, bool isde)
+void	GameObject::SetImage(K_Graphics::Texture* tex, bool isde)
 {
 	if (image != nullptr)
 		return;
 
-	image = new ImageManager(texName, tex, isde);
+	image = new ImageManager(tex, isde);
 }
 
 //ƒTƒEƒ“ƒh‚Ìİ’è
