@@ -36,14 +36,13 @@ void TemporaryCollisionManager::CreateTemporaryCollision(
 //-----------------------------------------------------------------------------
 //生成したコリジョンにテクスチャを設定する
 void TemporaryCollisionManager::SetAnimationCharaChip(
-	const std::string&			texName,
 	K_Graphics::Texture*		texture,
 	const K_Math::Box2D&		src,
 	int							sheet,
 	float						spd,
 	bool						isroop)
 {
-	tempCollision.back()->SetImageManagerAndCharaChip(texName, texture, src, sheet, spd, isroop);
+	tempCollision.back()->SetImageManagerAndCharaChip(texture, src, sheet, spd, isroop);
 }
 
 //-----------------------------------------------------------------------------

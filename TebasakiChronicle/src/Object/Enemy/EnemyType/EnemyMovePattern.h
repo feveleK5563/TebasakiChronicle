@@ -34,6 +34,7 @@ public:
 			Memory::SafeDeleteArr(behaviorIdArr);
 			Memory::SafeDeleteArr(durationTimeArr);
 			Memory::SafeDeleteArr(srcArr);
+			Memory::SafeDeleteArr(basisPosArr);
 			Memory::SafeDeleteArr(sheetArr);
 			Memory::SafeDeleteArr(spdArr);
 			Memory::SafeDeleteArr(isRoopArr);

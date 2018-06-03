@@ -37,7 +37,7 @@ void	CameraGun::Initailize()
 
 	//動きの初期化
 	//動きはデフォルトで生成させる
-	object.SetImage("target", CST::LoadAndGetTexture("target", "data/image/target.png"), true);
+	object.SetImage(CST::LoadAndGetTexture("target", "data/image/target.png"), true);
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 0, 32, 32), 1, 1, false);
 
 	//ボックスの形の生成

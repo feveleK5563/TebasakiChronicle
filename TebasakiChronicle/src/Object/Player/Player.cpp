@@ -45,7 +45,7 @@ void	Player::Initliaze()
 	maxInvicibleTime = 300;	//300フレーム無敵時間
 
 	//画像の生成
-	object.SetImage("Player", CST::LoadAndGetTexture("Player", "data/image/resource2.png"), true);
+	object.SetImage(CST::LoadAndGetTexture("Player", "data/image/resource2.png"), true);
 	//Motionの状態の順番でなければアニメーションが対応しない
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 0, 32, 48), 6, 6, true);		//Idle
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 48, 32, 48), 10, 8, true);	//Walk

@@ -3,6 +3,7 @@
 #include "MeshModel.h"
 #include "SystemClass.h"
 
+#include "Effect/Effect.h"
 #include "Loader/EnemyLoader.h"
 #include "BaseClass/ImageManager/ImageManager.h"
 #include "Object/Enemy/EnemyType/EnemyTypeManager.h"
@@ -45,11 +46,15 @@ int main()
 	CST::CreateShader("data/shader/SimpleShader.vs", "data/shader/SimpleShader.ps");
 	CST::CreateShader("data/shader/VertexShader.vs", "data/shader/TextureSampler.ps"); //追加
 
-	
+	//エフェクト
+	Effect::CreateEffectData(	Effect1,
+								CST::LoadAndGetTexture("testEffect", "data/image/testEffect.png"),
+								new AnimationCharaChip(K_Math::Box2D(0, 0, 32, 32), 8, 10, false));
+
 	EnemyLoader eLoader;
 	//敵の種類を作成
 	EnemyTypeManager* etm = new EnemyTypeManager();
-	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/TestData.txt"));
+	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataA1.txt"));
 	//上記で作成した種類を基に敵を生成する
 	EnemyManager* emanager = new EnemyManager();
 	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(-10, 20, 0), Status::Direction::Left);
@@ -76,6 +81,9 @@ int main()
 		emanager->UpdateAllEnemy();
 
 		player->UpDate();
+
+		Effect::Run();
+
 		//カメラ追尾
 		CST::GetPerspectiveCamera()->SetTarget(player->object.GetPos().x, player->object.GetPos().y, player->object.GetPos().z);
 		CST::GetPerspectiveCamera()->SetPosition(330, K_Math::Vector3(0, 0, -1));	//330
@@ -89,6 +97,8 @@ int main()
 		emanager->RenderAllEnemy();
 		player->Render();
 
+		Effect::Render();
+
 		//*****************************
 		//FBXモデルの描画
 		CST::GetShaderClass(2)->UseShader();
@@ -97,6 +107,7 @@ int main()
 		mapObj->Render();
 
 		CST::GetShaderClass(1)->UseShader();
+
 		CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 	
 		sc->SwapBuffer();

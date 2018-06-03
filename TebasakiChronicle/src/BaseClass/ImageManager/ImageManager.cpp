@@ -1,8 +1,7 @@
 #include "ImageManager.h"
 
 //コンストラクタ(キャラチップを作成する)
-ImageManager::ImageManager(const std::string& texName, K_Graphics::Texture* tex, bool isde) :
-	textureName(texName),
+ImageManager::ImageManager(K_Graphics::Texture* tex, bool isde) :
 	spobj(new K_Graphics::SpriteObject(tex)),
 	animCnt(0.f),
 	nowAnimNum(0),
@@ -20,12 +19,6 @@ ImageManager::~ImageManager()
 	}
 }
 
-//-----------------------------------------------------------------------------
-//テクスチャ名の取得
-std::string& ImageManager::GetTextureName()
-{
-	return textureName;
-}
 //-----------------------------------------------------------------------------
 //指定した番号のキャラチップを取得
 AnimationCharaChip* ImageManager::GetNowAnimationCharaChip()
@@ -139,8 +132,8 @@ void ImageManager::ImageDraw2D(	const K_Math::Vector3&	pos,
 	spobj->controlPoint += charaChip[nowAnimNum]->basisRenderPos;		//中心から描画基準位置をずらす
 
 	K_Math::Box2D draw = src;
-	draw.x = pos.x;
-	draw.y = pos.y;
+	draw.x = (int)pos.x;
+	draw.y = (int)pos.y;
 
 	CST::GetShaderClass(0)->UseShader();
 	spobj->Draw2D(

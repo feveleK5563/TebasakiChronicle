@@ -34,10 +34,10 @@ public:
 	//これをカメラ受け用コリジョンのタグに指定する
 	struct SkillAndCharaChip
 	{
-		K_Math::Vector3*	pos;
-		std::string*		textureName;
-		int*				behaviorId;
-		AnimationCharaChip* nowCharaChip;
+		K_Math::Vector3*		pos;
+		const std::string*		textureName;
+		int*					behaviorId;
+		AnimationCharaChip*		nowCharaChip;
 	};
 	SkillAndCharaChip* skillAndChip;
 

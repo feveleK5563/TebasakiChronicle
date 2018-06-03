@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "SystemClass.h"
+#include "../../../Effect/Effect.h"
 #include "../../../BaseClass/Status/Status.h"
 #include "../../../BaseClass/Move.h"
 #include "../../TemporaryCollision/TemporaryCollisionManager.h"

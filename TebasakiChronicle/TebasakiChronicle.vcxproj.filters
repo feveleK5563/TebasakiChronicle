@@ -74,6 +74,9 @@
     <Filter Include="ソース ファイル\src\BaseClass\GUIObject">
       <UniqueIdentifier>{7e07f8bf-90fc-4b54-80c4-6b0e8c78b5e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\Effect">
+      <UniqueIdentifier>{d37e3239-8faf-4004-973c-8674881732b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -174,6 +177,9 @@
     </ClCompile>
     <ClCompile Include="src\BaseClass\GUIObject\GUIObject.cpp">
       <Filter>ソース ファイル\src\BaseClass\GUIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Effect\Effect.cpp">
+      <Filter>ソース ファイル\src\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,6 +284,9 @@
     </ClInclude>
     <ClInclude Include="src\BaseClass\GUIObject\GUIObject.h">
       <Filter>ソース ファイル\src\BaseClass\GUIObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Effect\Effect.h">
+      <Filter>ソース ファイル\src\Effect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

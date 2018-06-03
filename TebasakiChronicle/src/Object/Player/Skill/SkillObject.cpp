@@ -32,7 +32,7 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 		skillType->GetContinueTime(), object.GetMove().GetGravity(), false, false);
 
 	//アニメーションセット
-	tempColManager.SetAnimationCharaChip(imageName, CST::GetTexture(imageName),
+	tempColManager.SetAnimationCharaChip(CST::GetTexture(imageName),
 		animCharaChip.chip,animCharaChip.chipSheetNum, animCharaChip.animSpd, animCharaChip.isAnimRoop);
 
 	//スキルの動作の初期化

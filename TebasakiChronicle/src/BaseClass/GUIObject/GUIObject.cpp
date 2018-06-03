@@ -18,7 +18,7 @@ GUIObject::GUIObject(const std::string& imageName_,
 	texture = new K_Graphics::Texture();
 	texture->Initialize();
 	texture->LoadImage("./data/image/" + imageName + ".png");
-	object.SetImage(imageName, texture, true);
+	object.SetImage(texture, true);
 	object.GetImage().CreateCharaChip(srcBox, 1, 1, false);
 
 
