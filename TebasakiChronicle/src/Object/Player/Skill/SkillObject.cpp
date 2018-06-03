@@ -22,6 +22,7 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 	
 	object.SetPos(K_Math::Vector3(object.GetPos().x + GetDir() * skillType->GetAppearDist(), object.GetPos().y, object.GetPos().z));
 
+
 	shape = CC::CreateBoxShape(16, 24, 1);
 	continueCnt = 0;	//計測時間カウント
 
@@ -59,8 +60,12 @@ void	SkillObject::UpDate()
 
 	//スキルの動作
 	skillType->Behaivor(tempColManager, object.GetStatus(), object.GetMove());
-	
+	skillType->UpDate(object);
+
+	std::cout << "skillObj" << object.GetMove().GetMoveVec().y << std::endl;
+
 	continueCnt++;
+
 }
 
 //!@brief 描画処理
@@ -99,4 +104,25 @@ float	SkillObject::GetDir()
 		return -1.0f;
 	}
 	return 1.0f;
+}
+
+
+
+//!@brief	プレイヤーを移動させるための更新
+//!@param[in] object プレイヤーのObject
+void	SkillObject::PlayerUpDate(GameObject& object)
+{
+	//コリジョン更新
+	tempColManager.Update();
+
+	//スキルの動作
+	skillType->Behaivor(tempColManager, object.GetStatus(), object.GetMove());
+
+	if (!karihandan)
+	{
+		skillType->UpDate(object);
+		karihandan = true;
+	}
+
+	continueCnt++;
 }

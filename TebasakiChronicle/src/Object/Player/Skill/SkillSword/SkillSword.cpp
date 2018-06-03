@@ -15,7 +15,7 @@ SkillSword::~SkillSword()
 }
 
 //çXêV
-void	SkillSword::UpDate()
+void	SkillSword::UpDate(GameObject& object)
 {
 	
 }

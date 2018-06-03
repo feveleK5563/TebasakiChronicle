@@ -39,17 +39,36 @@ void	GUIObject::UpDate()
 	object.GetImage().Animation();
 }
 
-//•`‰æˆ—
+//!@brief	2D‹óŠÔ‚É•`‰æ‚·‚é
 void	GUIObject::Render()
 {
 	object.GetImage().ImageDraw2D(object.GetPos(), object.GetAngle(), object.GetScale(), 0);
 }
 
 
+//!@brief	3D‹óŠÔ‚É•`‰æ‚·‚é
+void	GUIObject::Render3D()
+{
+	object.GetImage().ImageDraw3D(object.GetPos(), object.GetAngle(), object.GetScale(), object.GetDirection());
+}
+
 //!@brief ˆÊ’u‚ÌˆÚ“®ˆ—
 //!@param[in] pos_ ˆÚ“®‚³‚¹‚éˆÊ’u
 void	GUIObject::SetPos(const K_Math::Vector3& pos_)
 {
-
+	object.SetPos(pos_);
 }
 
+//!@brief	ˆÊ’u‚ÌˆÚ“®
+//!@param[in] moveVec ˆÚ“®—Ê
+void	GUIObject::AddVec(const K_Math::Vector3& moveVec)
+{
+	object.SetPos(object.GetPos() + moveVec);
+}
+
+//!@brief	‘å‚«‚³‚Ìİ’è
+//!@param[in]	scale ‘å‚«‚³
+void	GUIObject::SetScale(const K_Math::Vector3& scale)
+{
+	object.SetScale(scale);
+}

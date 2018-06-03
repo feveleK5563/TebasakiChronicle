@@ -102,7 +102,8 @@ void	Player::UpDate()
 
 	//スキルの使用---------------------
 	RegistSkill();
-	skillManager.UpDate();
+	//skillManager.UpDate();
+	skillManager.SkillUpDate(object);
 
 	//当たり判定動作-------------------
 	cManager.MoveBaseCollision(object.GetMoveVec(), object.GetDirection(), false);
@@ -118,6 +119,7 @@ void	Player::UpDate()
 	{
 		invicibleCnt--;
 	}
+	std::cout << "player" << object.GetMove().GetFallSpeed() << std::endl;
 }
 
 //-----------------------------------------------------------------
@@ -362,7 +364,7 @@ void	Player::Move()
 		{
 			object.GetMove().GravityOperation(cManager.CheckHitSubCollisionObejct(Foot));
 		}
-		
+
 		break;
 		//重力を無効にするモーション(今はなし)
 	case Non:
@@ -407,6 +409,10 @@ void	Player::Move()
 	case TakeOff:	//飛ぶ瞬間
 		break;
 	case Landing:	//着地
+		if (motionCnt == 0)
+		{
+			object.GetMove().SetFallSpeed(0);
+		}
 		break;
 	case SkillUse:		//スキル使用中
 	case SkillMoveUse:	//移動中のスキル使用
@@ -425,11 +431,8 @@ void	Player::Move()
 		if (motionCnt == 0)
 		{
 			object.GetMove().SetFallSpeed(0.0f);
-			//ReciveDamage();
-			K_Math::Vector3 pos(30, 30, 0);
-			KnockBack(pos);
+			ReciveDamage();
 			invicibleCnt = maxInvicibleTime;
-			
 		}
 		object.GetMove().Horizontal();
 		object.GetMove().Vertical();

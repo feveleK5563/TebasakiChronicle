@@ -22,12 +22,22 @@ public:
 	~GUIObject();
 	//!@brief 更新処理
 	void	UpDate();
-	//!@brief 描画処理
+	//!@brief 2D空間に描画する
 	void	Render();
+	//!@brief	3D空間に描画する
+	void	Render3D();
 
-	//!@brief 位置の移動処理
+	//!@brief 位置の設定
 	//!@param[in] pos_ 移動させる位置
 	void	SetPos(const K_Math::Vector3& pos_);
+
+	//!@brief	位置の移動
+	//!@param[in] moveVec 移動量
+	void	AddVec(const K_Math::Vector3& moveVec);
+
+	//!@brief	大きさの設定
+	//!@param[in]	scale 大きさ
+	void	SetScale(const K_Math::Vector3& scale);
 
 private:
 	K_Graphics::Texture*	texture;

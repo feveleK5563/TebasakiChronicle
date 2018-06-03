@@ -33,6 +33,10 @@ public:
 	float	GetFallSpeed();
 	float	GetGravity();
 
+
+	//!@brief	落下速度の制御
+	void	ControlFallSpeed();
+
 	//動作
 	void	GravityOperation(bool annulGravity);	//重力動作
 	void	JumpOperation();						//ジャンプ動作
@@ -50,4 +54,8 @@ private:
 	float				horizontalPower;//水平の力
 	float				verticalSpeed;	//垂直のスピード
 	float				horizontalSpeed;//水平のスピード
+
+	float				maxFallSpeed;		//最大落下速度
+	float				maxverticalSpeed;	//最大垂直スピード
+	float				maxhorizontalSpeed;	//最大水平スピード
 };

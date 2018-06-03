@@ -26,7 +26,7 @@ SkillType::~SkillType()
 //-----------------------------------------------------------
 //çXêVèàóù
 //-----------------------------------------------------------
-void	SkillType::UpDate()
+void	SkillType::UpDate(GameObject& object)
 {
 	
 }

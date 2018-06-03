@@ -39,6 +39,11 @@ public:
 	//!@return 生存時間内ならtrue
 	bool	CheckSurvivalTime();
 
+
+	//!@brief	プレイヤーを移動させるための更新
+	//!@param[in] object プレイヤーのObject
+	void	PlayerUpDate(GameObject& object);
+
 private:
 	//!@brief 向きを返す
 	//!@return -1.0fなら左,1.0fなら右
@@ -50,4 +55,7 @@ private:
 	K_Physics::CollisionShape*	shape;			//ベースコリジョン
 	int							continueCnt;	//継続時間計測
 	TemporaryCollisionManager	tempColManager;	//テンポラリオブジェクト
+
+
+	bool	karihandan = false;
 };
