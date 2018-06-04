@@ -3,8 +3,8 @@
 #include "K_Graphics/ImageLoader.h"
 #include "../src/BaseClass/ImageManager/AnimationCharaChip.h"
 #include "SkillType.h"
-#include "SkillSword\SkillSword.h"
-
+#include "SkillSword/SkillSword.h"
+#include "SkillJump/SkillJump.h"
 #include <memory>
 #include "../src/BaseClass/GUIObject/GUIObject.h"
 
@@ -81,6 +81,9 @@ public:
 	void	RenderUI();
 	//!@brief 押されたボタン番号を取得
 	void	SetPressBtnNum(int num);
+	//!@brief スキルIDからデータを決める
+	void	DecideSkillData();
+
 private:
 	int							skillID;		//スキルID
 	std::shared_ptr<SkillType>	skillType;		//スキルの種類
@@ -90,4 +93,5 @@ private:
 
 	GUIObject*					guiObj;			//スキルのUI
 	int							pressBntNum;	//押されたボタン番号
+	std::string					skillIconImage;	//スキルIcon画像名
 };

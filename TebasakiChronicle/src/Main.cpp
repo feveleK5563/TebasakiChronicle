@@ -13,6 +13,7 @@
 #include "MapPolygon.h"
 
 #include "../src/Object/Object3D/Object3D.h"
+#include "../src/BaseClass/GUIObject/GUIObject.h"
 
 int main()
 {
@@ -49,7 +50,7 @@ int main()
 	//ƒGƒtƒFƒNƒg
 	Effect::CreateEffectData(	Effect1,
 								CST::LoadAndGetTexture("testEffect", "data/image/testEffect.png"),
-								new AnimationCharaChip(K_Math::Box2D(0, 0, 32, 32), 8, 3, false));
+								new AnimationCharaChip(K_Math::Box2D(0, 0, 32, 32), 8, 10, false));
 
 	EnemyLoader eLoader;
 	//“G‚ÌŽí—Þ‚ðì¬
@@ -70,6 +71,10 @@ int main()
 	//ƒIƒuƒWƒFƒNƒg
 	Object3D*	mapObj = new Object3D("./data/model/testMap2d.fbx", "./data/image/player.tga",
 										pos,rotation,scale);
+
+	//”wŒi‰æ‘œ
+	GUIObject*	back = new GUIObject("back", K_Math::Vector3(0, 50, 0), K_Math::Box2D(0, 0, 1920, 720));
+	back->SetScale(K_Math::Vector3(2, 2, 1));
 
 	//******************************************************************
 	
@@ -93,6 +98,9 @@ int main()
 		CST::GetOrthoCamera()->Draw();
 
 		mapObj->SetDecisionParam(pos, rotation, scale);
+		
+		//”wŒi‚ÌXV
+		back->UpDate();
 
 		emanager->RenderAllEnemy();
 		player->Render();
@@ -108,7 +116,11 @@ int main()
 
 		CST::GetShaderClass(1)->UseShader();
 
-		//CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
+		//”wŒi‚Ì•`‰æ
+		back->Render3D();
+
+
+		CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 	
 		sc->SwapBuffer();
 	}
@@ -118,6 +130,7 @@ int main()
 	delete emanager;
 	delete player;
 	delete mapObj;
-	
+	delete back;
+
 	CC::Delete();
 }

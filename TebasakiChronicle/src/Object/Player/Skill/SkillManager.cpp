@@ -241,3 +241,32 @@ void	SkillManager::UseSkillData(const int& btnNum, GameObject& obj)
 		}
 	}
 }
+
+
+
+
+
+
+
+
+//‰¼‚ÌƒXƒLƒ‹“®ì
+void	SkillManager::SkillUpDate(GameObject& object)
+{
+	for (auto it = skillObj.begin(); it != skillObj.end();)
+	{
+		if ((*it) != nullptr)
+		{
+			if ((*it)->CheckSurvivalTime())
+			{
+				(*it)->PlayerUpDate(object);
+				++it;
+			}
+			else
+			{
+				delete (*it);
+				(*it) = nullptr;
+				it = skillObj.erase(it);
+			}
+		}
+	}
+}

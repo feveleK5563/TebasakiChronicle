@@ -22,6 +22,10 @@ Move::Move() :
 	horizontalPower = 7.0f;
 	verticalSpeed = 0;
 	horizontalSpeed = 0;
+
+	maxFallSpeed = -15.0f;
+	maxverticalSpeed = 15.0f;
+	maxhorizontalSpeed = 15.0f;
 }
 Move::Move(const K_Math::Vector3& vec, float add, float jumpPow, float fallSpeed, float gravity) :
 	moveVec(vec),
@@ -35,6 +39,10 @@ Move::Move(const K_Math::Vector3& vec, float add, float jumpPow, float fallSpeed
 	horizontalPower = 7.0f;
 	verticalSpeed = 0;
 	horizontalSpeed = 0;
+
+	maxFallSpeed = -15.0f;
+	maxverticalSpeed = 15.0f;
+	maxhorizontalSpeed = 15.0f;
 }
 
 //------------------------------------------------------
@@ -131,6 +139,15 @@ float	Move::GetGravity()
 	return gravity;
 }
 
+//!@brief	óéâ∫ë¨ìxÇÃêßå‰
+void	Move::ControlFallSpeed()
+{
+	if (fallSpeed <= maxFallSpeed)
+	{
+		fallSpeed = maxFallSpeed;
+	}
+}
+
 
 //------------------------------------------------------
 //ìÆçÏ
@@ -147,6 +164,8 @@ void	Move::GravityOperation(bool annulGravity)
 	
 	moveVec.y += fallSpeed;
 	fallSpeed += gravity;
+
+	ControlFallSpeed();
 }
 
 //ÉWÉÉÉìÉvìÆçÏ

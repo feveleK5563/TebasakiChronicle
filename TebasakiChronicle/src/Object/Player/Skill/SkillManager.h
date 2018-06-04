@@ -76,6 +76,8 @@ public:
 	//!@param[in] obj ゲームオブジェクト
 	void	UseSkillData(const int& btnNum, GameObject& obj);
 
+	//仮のスキル動作
+	void	SkillUpDate(GameObject& object);
 private:
 	static const int			skillNum = 5;	//スキル数
 	std::array<SkillData, skillNum>	skillDatas;	//スキルデータ

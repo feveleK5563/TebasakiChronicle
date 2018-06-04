@@ -152,7 +152,8 @@ void	SkillData::CreateSkillType()
 {
 	switch (skillID) {
 	case 0:
-		skillType = std::shared_ptr<SkillType>(new SkillSword(0,10, 50.0f, 120,1));
+		//skillType = std::shared_ptr<SkillType>(new SkillSword(0,10, 50.0f, 120,1));
+		skillType = std::shared_ptr<SkillType>(new SkillJump(0, 8, 0.0f, 60, 0));
 		break;
 	case 1:
 		///skillType = std::shared_ptr<SkillType>(new SkillSword(1, 5, 30.0f, 60, 1));
@@ -182,8 +183,9 @@ void	SkillData::CreateGUIObject()
 	case 3:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
 	case 4: guiPos = K_Math::Vector3(1000, 500, 0);	break;
 	}
+	DecideSkillData();
 	std::cout << "GUIオブジェクトを生成" << std::endl;
-	guiObj = new GUIObject("target", guiPos, K_Math::Box2D(0, 0, 32, 32));
+	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 32, 32));
 }
 
 //!@brief GUIオブジェクトの位置の移動
@@ -191,14 +193,15 @@ void	SkillData::MoveGUIObjPos()
 {
 	K_Math::Vector3	guiPos;
 	switch (pressBntNum) {
-	case 0: guiPos = K_Math::Vector3(10, 50, 0);	break;
-	case 1:	guiPos = K_Math::Vector3(10, 50, 0);	break;
-	case 2:	guiPos = K_Math::Vector3(10, 50, 0);	break;
-	case 3:	guiPos = K_Math::Vector3(10, 50, 0);	break;
-	case 4: guiPos = K_Math::Vector3(10, 50, 0);	break;
+	case 0: guiPos = K_Math::Vector3(1000, 532, 0);	break;
+	case 1:	guiPos = K_Math::Vector3(968, 500, 0);	break;
+	case 2:	guiPos = K_Math::Vector3(1032, 500, 0);	break;
+	case 3:	guiPos = K_Math::Vector3(1000, 468, 0);	break;
+	case 4: guiPos = K_Math::Vector3(1000, 500, 0);	break;
 	}
+	DecideSkillData();
 	std::cout << "GUIオブジェクトを生成" << std::endl;
-	guiObj = new GUIObject("target", guiPos, K_Math::Box2D(0, 0, 32, 32));
+	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 32, 32));
 }
 
 //!@brief スキルUIを描画
@@ -214,4 +217,27 @@ void	SkillData::RenderUI()
 void	SkillData::SetPressBtnNum(int num)
 {
 	pressBntNum = num;
+}
+
+
+//!@brief スキルIDからデータを決める
+void	SkillData::DecideSkillData()
+{
+	switch (skillID) {
+	case 0:
+		skillIconImage = "target";
+		break;
+	case 1:
+		skillIconImage = "target";
+		break;
+	case 2:
+		skillIconImage = "target";
+		break;
+	case 3:
+		skillIconImage = "target";
+		break;
+	case 4:
+		skillIconImage = "target";
+		break;
+	}
 }

@@ -20,7 +20,7 @@ public:
 	SkillType(const int& moveID,const int& maxUseNum,const float& appearDist,const int& continueTime,const int& attackPoint);
 	virtual ~SkillType();
 
-	virtual void	UpDate() = 0;
+	virtual void	UpDate(GameObject& object) = 0;
 	
 public:
 	int		GetContinueTime() const;
