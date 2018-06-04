@@ -49,7 +49,7 @@ int main()
 	//エフェクト
 	Effect::CreateEffectData(	Effect1,
 								CST::LoadAndGetTexture("testEffect", "data/image/testEffect.png"),
-								new AnimationCharaChip(K_Math::Box2D(0, 0, 32, 32), 8, 10, false));
+								new AnimationCharaChip(K_Math::Box2D(0, 0, 32, 32), 8, 3, false));
 
 	EnemyLoader eLoader;
 	//敵の種類を作成
@@ -108,7 +108,7 @@ int main()
 
 		CST::GetShaderClass(1)->UseShader();
 
-		CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
+		//CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 	
 		sc->SwapBuffer();
 	}
