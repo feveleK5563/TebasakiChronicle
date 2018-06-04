@@ -81,4 +81,6 @@ public:
 	K_Physics::CollisionData* CreateAndGetCheckFootCollisionData();
 	//頭上用コリジョンの生成と取得
 	K_Physics::CollisionData* CreateAndGetCheckHeadCollisionData();
+	//カメラマン受け用コリジョンの生成と取得
+	K_Physics::CollisionData* CreateAndGetCameraManCheckCollisionData();
 };

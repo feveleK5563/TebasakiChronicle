@@ -13,10 +13,11 @@ enum CollisionMask
 	TakeDamageEnemy		= 1 << 4,
 	CameraGunCollision	= 1 << 5,
 	EnemyCamCollision	= 1 << 6,
+	CameraManCollision	= 1 << 7,
 };
 
-//コリジョンデータ管理くん
-//コリジョンの形状情報は格納しないので各自で管理すること
+//各種キャラクター用コリジョンデータ管理くん
+//コリジョンの形状情報は格納しないので各自で管理したりすること
 class CollisionManager
 {
 private:
@@ -33,9 +34,6 @@ private:
 			relativePos(rp){}
 	};
 	std::vector<Sub*> subCollision;
-
-	//ベースコリジョンの座標を基にサブコリジョンの位置を設定する
-	void SetSubCollisionPos(int angle);
 
 public:
 	CollisionManager();
@@ -74,6 +72,9 @@ public:
 	//ベースコリジョンを動かし、付随してサブの座標を設定する
 	//第三引数をtrueで軽量な処理(めり込み判定を行う場合はfalse推奨)
 	void MoveBaseCollision(K_Math::Vector3& moveVec, int direction, bool isLightness);
+
+	//ベースコリジョンの座標を基にサブコリジョンの位置を設定する
+	void SetSubCollisionPos(int angle);
 
 	//指定したサブコリジョンの受け取ったタグを返す
 	std::vector<K_Physics::CollisionTag*>& GetConflictionObjectsTag(int subNum);

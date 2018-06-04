@@ -80,6 +80,9 @@
     <Filter Include="ソース ファイル\src\Object\Player\Skill\SkillType\SkillJump">
       <UniqueIdentifier>{e494c13d-82fc-4971-805c-8c3fdfb9ae72}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\Object\CameraMan">
+      <UniqueIdentifier>{c7f6863a-4cee-4add-8e46-b85f20b661f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -186,6 +189,9 @@
     </ClCompile>
     <ClCompile Include="src\Object\Player\Skill\SkillJump\SkillJump.cpp">
       <Filter>ソース ファイル\src\Object\Player\Skill\SkillType\SkillJump</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\CameraMan\CameraMan.cpp">
+      <Filter>ソース ファイル\src\Object\CameraMan</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -296,6 +302,9 @@
     </ClInclude>
     <ClInclude Include="src\Object\Player\Skill\SkillJump\SkillJump.h">
       <Filter>ソース ファイル\src\Object\Player\Skill\SkillType\SkillJump</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\CameraMan\CameraMan.h">
+      <Filter>ソース ファイル\src\Object\CameraMan</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

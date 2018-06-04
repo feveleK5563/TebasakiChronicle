@@ -9,6 +9,9 @@ private:
 	TimeCount		timeCnt;		//時間計測
 	int				behaviorId;		//現在の敵から読み取れる動作番号
 
+	int				maxLife;		//体力上限
+	bool			isUseGravity;	//重力を使用するか否か
+
 	int					nowMoveOrder;		//現在の動作順番
 	int					nowPatternOrder;	//現在の動作パターン番号
 	int					beforeMoveOrder;	//前の動作順番
@@ -26,7 +29,7 @@ private:
 		AttackArea,
 		CheckFoot,
 		CheckHead,
-		RecieveCameraGan,
+		RecieveCameraGun,
 	};
 
 public:

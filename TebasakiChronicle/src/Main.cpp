@@ -15,6 +15,8 @@
 #include "../src/Object/Object3D/Object3D.h"
 #include "../src/BaseClass/GUIObject/GUIObject.h"
 
+#include "Object/CameraMan/CameraMan.h"
+
 int main()
 {
 	//スクリーン
@@ -45,12 +47,12 @@ int main()
 	//シェーダーリスト
 	CST::CreateShader("data/shader/SpriteShader.vs", "data/shader/SpriteShader.ps");
 	CST::CreateShader("data/shader/SimpleShader.vs", "data/shader/SimpleShader.ps");
-	CST::CreateShader("data/shader/VertexShader.vs", "data/shader/TextureSampler.ps"); //追加
+	CST::CreateShader("data/shader/VertexShader.vs", "data/shader/TextureSampler.ps");
 
 	//エフェクト
 	Effect::CreateEffectData(	Effect1,
 								CST::LoadAndGetTexture("testEffect", "data/image/testEffect.png"),
-								new AnimationCharaChip(K_Math::Box2D(0, 0, 32, 32), 8, 10, false));
+								new AnimationCharaChip(K_Math::Box2D(0, 0, 32, 32), 8, 5, false));
 
 	EnemyLoader eLoader;
 	//敵の種類を作成
@@ -76,6 +78,9 @@ int main()
 	GUIObject*	back = new GUIObject("back", K_Math::Vector3(0, 50, 0), K_Math::Box2D(0, 0, 1920, 720));
 	back->SetScale(K_Math::Vector3(2, 2, 1));
 
+	//カメラマン
+	CameraMan* cameraMan = new CameraMan(ScreenWidth, ScreenHeight, 330, player->object.GetPos());
+
 	//******************************************************************
 	
 	while (sc->IsSystemEnd() == false)
@@ -90,8 +95,9 @@ int main()
 		Effect::Run();
 
 		//カメラ追尾
-		CST::GetPerspectiveCamera()->SetTarget(player->object.GetPos().x, player->object.GetPos().y, player->object.GetPos().z);
-		CST::GetPerspectiveCamera()->SetPosition(330, K_Math::Vector3(0, 0, -1));	//330
+		cameraMan->Run();
+		//CST::GetPerspectiveCamera()->SetTarget(player->object.GetPos().x, player->object.GetPos().y, player->object.GetPos().z);
+		//CST::GetPerspectiveCamera()->SetPosition(330, K_Math::Vector3(0, 0, -1));
 
 		CST::FrameBufferBeginDraw(ScreenWidth, ScreenHeight, 0.f, 0.f, 1.f);
 		CST::GetPerspectiveCamera()->Draw();
@@ -131,6 +137,7 @@ int main()
 	delete player;
 	delete mapObj;
 	delete back;
+	delete cameraMan;
 
 	CC::Delete();
 }

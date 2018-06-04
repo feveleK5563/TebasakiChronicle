@@ -35,6 +35,9 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 		gameObject.GetMove().SetGravity(0.f);
 	}
 
+	maxLife = cpyet->GetMaxLife();
+	isUseGravity = cpyet->GetIsUseGravity();
+
 	gameObject.GetMove().SetAddVec(cpyet->GetMoveSpeed());
 	gameObject.GetMove().SetJumpPow(cpyet->GetJumpPower());
 
@@ -51,6 +54,7 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	collisionManager.SetSubCollisionData(cpyet->CreateAndGetCheckFootCollisionData());		//3 足元判定用コリジョン
 	collisionManager.SetSubCollisionData(cpyet->CreateAndGetCheckHeadCollisionData());		//4 頭上判定用コリジョン
 	collisionManager.SetSubCollisionData(cpyet->CreateAndGetRecieveCameraCollisionData());	//5 被カメラガン用コリジョン
+	collisionManager.SetSubCollisionData(cpyet->CreateAndGetCameraManCheckCollisionData());	//6 カメラマン受け用コリジョン
 
 	//タグの設定
 	skillAndChip = new SkillAndCharaChip();
@@ -113,7 +117,7 @@ bool Enemy::RecieveCollisionOperation()
 	int hp = gameObject.GetStatus().GetLife();
 
 	//カメラを受ける
-	tag = collisionManager.GetConflictionObjectsTag(Enemy::EnemyCollisionName::RecieveCameraGan);
+	tag = collisionManager.GetConflictionObjectsTag(Enemy::EnemyCollisionName::RecieveCameraGun);
 	for (auto it : tag)
 	{
 		if (((Status*)it->userData)->GetState() == Status::State::Active)

@@ -560,10 +560,10 @@ void	Player::KnockBack(const K_Math::Vector3& pos_)
 	object.GetMove().SetVertical(6.0f);
 	if (object.GetPos().x > pos_.x)
 	{
-		object.GetMove().SetHorizontal(+3.0f);
+		object.GetMove().SetHorizontal(-3.0f);
 	}
 	else
 	{
-		object.GetMove().SetHorizontal(-3.0f);
+		object.GetMove().SetHorizontal(+3.0f);
 	}
 }

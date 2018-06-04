@@ -110,3 +110,9 @@ K_Physics::CollisionData* EnemyType::CreateAndGetCheckHeadCollisionData()
 {
 	return CC::CreateCollisionObject(collisionData.checkShape, true, CollisionMask::Ground, CollisionMask::Non, collisionData.checkHeadPos);
 }
+//-----------------------------------------------------------------------------
+//カメラマン受け用コリジョンの生成と取得
+K_Physics::CollisionData* EnemyType::CreateAndGetCameraManCheckCollisionData()
+{
+	return CC::CreateCollisionObject(collisionData.baseShape, true, CollisionMask::CameraManCollision, CollisionMask::Non, K_Math::Vector3(0, 0, 0));
+}
