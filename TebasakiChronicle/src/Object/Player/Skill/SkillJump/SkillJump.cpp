@@ -11,7 +11,7 @@ SkillJump::SkillJump(const int& moveID,const int& maxUseNum, const float& dist, 
 //デストラクタ
 SkillJump::~SkillJump()
 {
-	
+
 }
 
 //更新

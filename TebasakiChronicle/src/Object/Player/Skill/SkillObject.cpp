@@ -25,6 +25,8 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 
 	shape = CC::CreateBoxShape(16, 24, 1);
 	continueCnt = 0;	//計測時間カウント
+	oneFlag = true;		//1回のみ更新するかのフラグ
+	upDateFlag = true;	//更新するかのフラグ
 
 	//テンポラリコリジョン生成
 	tempColManager.CreateTemporaryCollision(shape, CollisionMask::Non, CollisionMask::PlayerCollision ,
@@ -118,11 +120,28 @@ void	SkillObject::PlayerUpDate(GameObject& object)
 	//スキルの動作
 	skillType->Behaivor(tempColManager, object.GetStatus(), object.GetMove());
 
-	if (!karihandan)
+	if (OneProcess())
 	{
 		skillType->UpDate(object);
-		karihandan = true;
+		if (oneFlag)
+		{
+			upDateFlag = false;
+		}
 	}
-
 	continueCnt++;
+}
+
+//!@brief	1回処理を行うか指定
+//!@param[in] oneFlag	1回の処理するかフラグ
+//!@return	1回なら true それ以外なら false
+bool	SkillObject::OneProcess()
+{
+	return upDateFlag;
+}
+
+//!@brief	1回だけ更新させるフラグのセット
+//!@param[in] oneFlag	1回だけ更新するなら true
+void	SkillObject::SetOneUpdateFlag(bool oneFlag_)
+{
+	oneFlag = oneFlag_;
 }

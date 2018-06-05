@@ -81,6 +81,9 @@ private:
 	//!@param[in] 相手の座標
 	void	KnockBack(const K_Math::Vector3& pos_);
 
+	//!@brief	点滅処理
+	bool	Flashing();
+
 public:
 	GameObject		object;			//ゲームオブジェクト
 	Status* enemyData;

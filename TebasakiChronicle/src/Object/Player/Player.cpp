@@ -43,6 +43,8 @@ void	Player::Initliaze()
 	minJumpForce = 1.5f;
 	invicibleCnt = 0;
 	maxInvicibleTime = 300;	//300フレーム無敵時間
+	minLife = 0;			//最小ライフ
+	maxLife = 10;			//最大ライフ
 
 	//画像の生成
 	object.SetImage(CST::LoadAndGetTexture("Player", "data/image/resource2.png"), true);
@@ -119,7 +121,6 @@ void	Player::UpDate()
 	{
 		invicibleCnt--;
 	}
-	std::cout << "player" << object.GetMove().GetFallSpeed() << std::endl;
 }
 
 //-----------------------------------------------------------------
@@ -132,14 +133,10 @@ void	Player::Render()
 	//スキルの描画----------------------------
 	skillManager.Render();
 
-	if (invicibleCnt > 0)
+	if (Flashing())
 	{
-		if ((invicibleCnt / 4) % 2 == 0)
-		{
-			return;
-		}
+		object.GetImage().ImageDraw3D(object.GetPos(), object.GetAngle(), object.GetScale(), object.GetDirection());
 	}
-	object.GetImage().ImageDraw3D(object.GetPos(), object.GetAngle(), object.GetScale(), object.GetDirection());
 }
 
 //ダメージを与える
@@ -357,7 +354,6 @@ void	Player::Move()
 	switch (motion) {
 	default:
 		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
-		controller.UpDate(object.GetMove());
 		
 		//上昇中もしくは足元に地面がない
 		if (object.GetMoveVec().y > 0.0f || !cManager.CheckHitSubCollisionObejct(Foot))
@@ -370,14 +366,15 @@ void	Player::Move()
 	case Non:
 		break;
 	}
-	//移動 & カメラガンをSkillUse中は使用しない
+
+	//移動コントローラー
 	switch (motion) {
 	default:
-	
+		controller.UpDate(object.GetMove());
 		break;
-		//移動操作を無視するモーション
-	case SkillUse:
-		//**********スキル使用中は移動をさせるかは未定**********
+		//コントローラーで移動を無効にする
+	case Non:
+	case DamageRecive:	//ダメージ受けてる際は反応しない
 		break;
 	}
 
@@ -566,4 +563,18 @@ void	Player::KnockBack(const K_Math::Vector3& pos_)
 	{
 		object.GetMove().SetHorizontal(-3.0f);
 	}
+}
+
+
+//!@brief	点滅処理
+bool	Player::Flashing()
+{
+	if (invicibleCnt > 0)
+	{
+		if ((invicibleCnt / 4) % 2 == 0)
+		{
+			return false;
+		}
+	}
+	return true;
 }

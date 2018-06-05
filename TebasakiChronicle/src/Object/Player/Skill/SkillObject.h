@@ -44,10 +44,18 @@ public:
 	//!@param[in] object プレイヤーのObject
 	void	PlayerUpDate(GameObject& object);
 
+	//!@brief	1回だけ更新させるフラグのセット
+	//!@param[in] oneFlag_	1回だけ更新するなら true
+	void	SetOneUpdateFlag(bool oneFlag_);
+
 private:
 	//!@brief 向きを返す
 	//!@return -1.0fなら左,1.0fなら右
 	float	GetDir();
+
+	//!@brief	更新し続けるか
+	//!@return	更新するなら true しないなら false
+	bool	OneProcess();
 
 private:
 	std::shared_ptr<SkillType>	skillType;		//スキル動作
@@ -57,5 +65,6 @@ private:
 	TemporaryCollisionManager	tempColManager;	//テンポラリオブジェクト
 
 
-	bool	karihandan = false;
+	bool	oneFlag;
+	bool	upDateFlag;			//更新するかのフラグ
 };

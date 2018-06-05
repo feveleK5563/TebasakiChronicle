@@ -73,9 +73,17 @@ int main()
 										pos,rotation,scale);
 
 	//”wŒi‰æ‘œ
-	GUIObject*	back = new GUIObject("back", K_Math::Vector3(0, 50, 0), K_Math::Box2D(0, 0, 1920, 720));
+	GUIObject*	back = new GUIObject("back", K_Math::Vector3(0, 50, 10), K_Math::Box2D(0, 0, 1920, 720));
 	back->SetScale(K_Math::Vector3(2, 2, 1));
 
+	//‰æ–Ê‚ÌUI
+	GUIObject*	screenGui = new GUIObject(
+		"ui", 
+		K_Math::Vector3(ScreenWidth/2, ScreenHeight/2, 0), 
+		K_Math::Box2D(0, 0, ScreenWidth, ScreenHeight)
+	);
+
+	
 	//******************************************************************
 	
 	while (sc->IsSystemEnd() == false)
@@ -99,11 +107,14 @@ int main()
 
 		mapObj->SetDecisionParam(pos, rotation, scale);
 		
+		
 		//”wŒi‚ÌXV
 		back->UpDate();
+		//‰æ–ÊUI‚ÌXV
+		screenGui->UpDate();
+
 
 		emanager->RenderAllEnemy();
-		player->Render();
 
 		Effect::Render();
 
@@ -116,9 +127,15 @@ int main()
 
 		CST::GetShaderClass(1)->UseShader();
 
+
 		//”wŒi‚Ì•`‰æ
 		back->Render3D();
+		
+		//‰æ–ÊUI‚Ì•`‰æ
+		screenGui->Render();
 
+		//ƒvƒŒƒC‚â[
+		player->Render();
 
 		CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 	
@@ -131,6 +148,7 @@ int main()
 	delete player;
 	delete mapObj;
 	delete back;
+	delete screenGui;
 
 	CC::Delete();
 }

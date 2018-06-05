@@ -113,7 +113,6 @@ void	SkillData::Clear()
 	{
 		delete guiObj;
 		guiObj = nullptr;
-		std::cout << "GUIオブジェクトを削除" << std::endl;
 	}
 }
 
@@ -181,27 +180,27 @@ void	SkillData::CreateGUIObject()
 	case 1:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
 	case 2:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
 	case 3:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
-	case 4: guiPos = K_Math::Vector3(1000, 500, 0);	break;
+	case 4: guiPos = K_Math::Vector3(1176, 614, 0);	break;
 	}
 	DecideSkillData();
-	std::cout << "GUIオブジェクトを生成" << std::endl;
-	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 32, 32));
+	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 64, 64));
 }
 
 //!@brief GUIオブジェクトの位置の移動
 void	SkillData::MoveGUIObjPos()
 {
-	K_Math::Vector3	guiPos;
-	switch (pressBntNum) {
-	case 0: guiPos = K_Math::Vector3(1000, 532, 0);	break;
-	case 1:	guiPos = K_Math::Vector3(968, 500, 0);	break;
-	case 2:	guiPos = K_Math::Vector3(1032, 500, 0);	break;
-	case 3:	guiPos = K_Math::Vector3(1000, 468, 0);	break;
-	case 4: guiPos = K_Math::Vector3(1000, 500, 0);	break;
-	}
+	K_Math::Vector3	 guiPos = K_Math::Vector3(1176, 614, 0);
+	
 	DecideSkillData();
-	std::cout << "GUIオブジェクトを生成" << std::endl;
-	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 32, 32));
+	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 64, 64));
+	
+	switch (pressBntNum) {
+	case 0: guiObj->AddVec(K_Math::Vector3(0, 64, 0));	break;
+	case 1:	guiObj->AddVec(K_Math::Vector3(-64, 0, 0));	break;
+	case 2: guiObj->AddVec(K_Math::Vector3(64, 0, 0));	break;
+	case 3:	guiObj->AddVec(K_Math::Vector3(0, -64, 0));	break;
+	case 4:	guiObj->AddVec(K_Math::Vector3(0, 0, 0));	break;
+	}
 }
 
 //!@brief スキルUIを描画
