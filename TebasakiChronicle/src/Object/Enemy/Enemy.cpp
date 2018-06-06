@@ -98,8 +98,9 @@ void Enemy::SetNonEnemy()
 //ó‘Ô‚ğ‘S‚Ä‰Šúó‘Ô‚É–ß‚·
 void Enemy::ResetEnemy()
 {
-	gameObject.SetPos(initialPos);
+	collisionManager.SetBaseCollisionObjectPosition(initialPos);
 	gameObject.SetState(Status::State::Active);
+	timeCnt.ResetCntTime();
 	behaviorId = 0;
 	nowMoveOrder = 0;
 	nowPatternOrder = 0;
@@ -133,7 +134,7 @@ void Enemy::Update()
 	{
 		ResetEnemy();
 	}
-	else
+	else if (gameObject.GetState() == Status::State::Death)
 	{
 		return;
 	}
