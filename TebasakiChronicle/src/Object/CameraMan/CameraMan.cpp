@@ -7,8 +7,9 @@ CameraMan::CameraMan(int screenWidth, int screenHeight, float dist, const K_Math
 	trackingPos(target),
 	targetPos(&target)
 {
-	baseShape = CC::CreateBoxShape(1, 1, 1);
+	baseShape = CC::CreateBoxShape(100, 100, 100);
 	collisionManager.CreateBaseCollisionData(baseShape, trackingPos, K_Math::Vector3(0, 0, 0), false);
+	collisionManager.CreateSubCollisionData(baseShape, CollisionMask::Non, CollisionMask::CameraManCollision, K_Math::Vector3(0, 0, 0));
 	cameraShape = CC::CreateBoxShape((float)screenWidth / 2 + 25, (float)screenHeight / 2 + 25, 100);
 }
 

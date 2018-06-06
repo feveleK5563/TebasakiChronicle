@@ -22,19 +22,10 @@ void EnemyManager::CreateEnemy(EnemyType* cpyet, const K_Math::Vector3& setPos, 
 //‘S‚Ä‚Ì“G‚ðXV‚·‚é
 void EnemyManager::UpdateAllEnemy()
 {
-	for (auto it = enemy.begin(); it != enemy.end();)
+	for (auto it : enemy)
 	{
-		if ((*it)->Update())	//Ž€–S‚µ‚½‚çíœ
-		{
-			delete *(it);
-			it = enemy.erase(it);
-		}
-		else
-		{
-			++it;
-		}
+		it->Update();
 	}
-	enemy.shrink_to_fit();
 }
 
 //-----------------------------------------------------------------------------
