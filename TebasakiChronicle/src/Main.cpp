@@ -15,6 +15,7 @@
 #include "../src/Object/Object3D/Object3D.h"
 #include "../src/BaseClass/GUIObject/GUIObject.h"
 
+
 int main()
 {
 	//スクリーン
@@ -136,6 +137,7 @@ int main()
 
 		//プレイやー
 		player->Render();
+
 
 		CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 	

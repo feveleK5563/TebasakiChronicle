@@ -105,7 +105,7 @@ void	Player::UpDate()
 	//スキルの使用---------------------
 	RegistSkill();
 	//skillManager.UpDate();
-	skillManager.SkillUpDate(object);
+	skillManager.UpDate(object);
 
 	//当たり判定動作-------------------
 	cManager.MoveBaseCollision(object.GetMoveVec(), object.GetDirection(), false);

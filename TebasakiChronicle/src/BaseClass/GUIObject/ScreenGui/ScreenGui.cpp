@@ -72,11 +72,3 @@ void	GUIObject::SetScale(const K_Math::Vector3& scale)
 {
 	object.SetScale(scale);
 }
-
-
-//!@brief	GameObjectの取得
-//!@return	ゲームオブジェクト
-GameObject&	GUIObject::GetGameObject()
-{
-	return object;
-}

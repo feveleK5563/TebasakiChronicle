@@ -26,7 +26,7 @@ public:
 
 public:
 	//!@brief 更新処理
-	void	UpDate();
+	void	UpDate(GameObject& gameObj);
 
 	//!@brief 描画処理
 	void	Render();
@@ -40,9 +40,6 @@ public:
 	bool	CheckSurvivalTime();
 
 
-	//!@brief	プレイヤーを移動させるための更新
-	//!@param[in] object プレイヤーのObject
-	void	PlayerUpDate(GameObject& object);
 
 	//!@brief	1回だけ更新させるフラグのセット
 	//!@param[in] oneFlag_	1回だけ更新するなら true

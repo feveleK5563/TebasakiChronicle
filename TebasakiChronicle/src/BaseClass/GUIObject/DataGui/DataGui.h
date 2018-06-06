@@ -39,9 +39,6 @@ public:
 	//!@param[in]	scale 大きさ
 	void	SetScale(const K_Math::Vector3& scale);
 
-	//!@brief	GameObjectの取得
-	//!@return	ゲームオブジェクト
-	GameObject&	GetGameObject();
 private:
 	K_Graphics::Texture*	texture;
 	GameObject		object;		//オブジェクト

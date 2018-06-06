@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="src\BaseClass\Collision\CollisionManager.cpp" />
     <ClCompile Include="src\BaseClass\Collision\CollisionCreator.cpp" />
+    <ClCompile Include="src\BaseClass\GUIObject\GageGui\GageGui.cpp" />
     <ClCompile Include="src\BaseClass\GUIObject\GUIObject.cpp" />
     <ClCompile Include="src\BaseClass\ImageManager\AnimationCharaChip.cpp" />
     <ClCompile Include="src\BaseClass\ImageManager\ImageManager.cpp" />
@@ -59,6 +60,7 @@
     <ClInclude Include="src\BaseClass\Collision\CollisionManager.h" />
     <ClInclude Include="src\BaseClass\Collision\CollisionCreator.h" />
     <ClInclude Include="src\BaseClass\easing.h" />
+    <ClInclude Include="src\BaseClass\GUIObject\GageGui\GageGui.h" />
     <ClInclude Include="src\BaseClass\GUIObject\GUIObject.h" />
     <ClInclude Include="src\BaseClass\ImageManager\AnimationCharaChip.h" />
     <ClInclude Include="src\BaseClass\ImageManager\ImageManager.h" />
