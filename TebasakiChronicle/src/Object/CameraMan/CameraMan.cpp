@@ -4,13 +4,12 @@ CameraMan::CameraMan(int screenWidth, int screenHeight, float dist, const K_Math
 	defaultDist(dist),
 	settingDist(dist),
 	distance(dist),
-	trackingPos(target),
-	targetPos(&target)
+	trackingPos(target)
 {
 	baseShape = CC::CreateBoxShape(100, 100, 100);
 	collisionManager.CreateBaseCollisionData(baseShape, trackingPos, K_Math::Vector3(0, 0, 0), false);
-	collisionManager.CreateSubCollisionData(baseShape, CollisionMask::Non, CollisionMask::CameraManCollision, K_Math::Vector3(0, 0, 0));
-	cameraShape = CC::CreateBoxShape((float)screenWidth / 2 + 25, (float)screenHeight / 2 + 25, 100);
+	cameraShape = CC::CreateBoxShape((float)screenWidth / 2.f, (float)screenHeight / 2.f, 100);
+	collisionManager.CreateSubCollisionData(cameraShape, CollisionMask::Non, CollisionMask::CameraManCollision, K_Math::Vector3(0, 0, 0));
 }
 
 CameraMan::~CameraMan()
@@ -19,9 +18,9 @@ CameraMan::~CameraMan()
 	CC::RemoveCollisionShape(&cameraShape);
 }
 
-void CameraMan::Run()
+void CameraMan::Run(const K_Math::Vector3& target)
 {
-	K_Math::Vector3 toVec = *targetPos - trackingPos;
+	K_Math::Vector3 toVec = target - trackingPos;
 	trackingPos += toVec * 0.05f;
 
 	float toVecDist = settingDist - distance;
@@ -38,9 +37,4 @@ void CameraMan::Run()
 void CameraMan::SetDistance(float setDist)
 {
 	settingDist = setDist;
-}
-
-void CameraMan::ChangeTarget(const K_Math::Vector3& target)
-{
-	targetPos = &target;
 }

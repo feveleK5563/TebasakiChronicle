@@ -15,15 +15,12 @@ private:
 	float						distance;
 
 	K_Math::Vector3				trackingPos;
-	const K_Math::Vector3*		targetPos;
 
 public:
 	CameraMan(int screenWidth, int screenHeight, float dist, const K_Math::Vector3& target);
 	~CameraMan();
 
-	void Run();
+	void Run(const K_Math::Vector3& target);
 
 	void SetDistance(float setDist);
-
-	void ChangeTarget(const K_Math::Vector3& target);
 };

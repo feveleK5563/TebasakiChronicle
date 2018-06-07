@@ -112,6 +112,9 @@ void Enemy::ResetEnemy()
 		collisionManager.SetSubCollisionGiveMask(i, collisionGiveMask[i]);
 		collisionManager.SetSubCollisionMyselfMask(i, collisionMyselfMask[i]);
 	}
+	//アニメーションのリセット
+	gameObject.GetImage().ChangeCharaChip(ems->GetNowAnimChip(nowPatternOrder));
+	gameObject.GetImage().ChangeAnimationPattern(nowMoveOrder);
 }
 
 //-----------------------------------------------------------------------------
