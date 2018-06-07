@@ -30,4 +30,9 @@ private:
 	GUIObject	guiObject;	//GUIオブジェクト
 	float		result;
 	float		baseAngle;
+
+	//変数
+	K_Math::Box2D	areaBox;		//範囲ボックス
+	GUIObject		backGround;		//下に配置するボックス
+	GUIObject		fillAreaBox;	//上に配置するボックス
 };

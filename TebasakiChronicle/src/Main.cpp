@@ -14,6 +14,9 @@
 
 #include "../src/Object/Object3D/Object3D.h"
 #include "../src/BaseClass/GUIObject/GUIObject.h"
+#include "../src/BaseClass/GUIObject/GageGui/GageGui.h"
+#include "../src/BaseClass/GUIObject/ScreenGui/ScreenGui.h"
+#include "../src/BaseClass//GUIObject/DataGui/DataGui.h"
 
 
 int main()
@@ -84,7 +87,13 @@ int main()
 		K_Math::Box2D(0, 0, ScreenWidth, ScreenHeight)
 	);
 
-	
+	//ゲージの描画
+	GageGui		gage;
+		
+	//スクリーン
+	ScreenGui*	gui = new ScreenGui();
+
+	DataGui		datagui(player->object);
 	//******************************************************************
 	
 	while (sc->IsSystemEnd() == false)
@@ -114,7 +123,6 @@ int main()
 		//画面UIの更新
 		screenGui->UpDate();
 
-
 		emanager->RenderAllEnemy();
 
 		Effect::Render();
@@ -133,11 +141,17 @@ int main()
 		back->Render3D();
 		
 		//画面UIの描画
-		screenGui->Render();
+		//screenGui->Render();
 
 		//プレイやー
 		player->Render();
 
+		gui->UpDate();
+		gui->Render();
+
+		datagui.RaitoRaito();
+		datagui.UpDate();
+		datagui.Render();
 
 		CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 	
@@ -151,6 +165,7 @@ int main()
 	delete mapObj;
 	delete back;
 	delete screenGui;
+	delete gui;
 
 	CC::Delete();
 }

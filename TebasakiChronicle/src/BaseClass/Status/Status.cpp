@@ -10,7 +10,7 @@
 //---------------------------------------------------
 Status::Status()
 {
-
+	
 }
 
 //---------------------------------------------------
@@ -37,6 +37,20 @@ void	Status::SetStatusData(const State& state, const K_Math::Vector3& pos,
 	this->attackPoint = attackPoint;
 	this->life = life;
 }
+
+//!@brief	Å‘åLife‚Ìİ’è
+//!@brief	maxLife_	Å‘åLife
+void	Status::SetMaxLife(const int maxLife_)
+{
+	maxLife = maxLife_;
+}
+//!@brief	Å¬Life‚Ìİ’è
+//!@brief	minLife_	Å¬Life
+void	Status::SetMinLife(const int minLife_)
+{
+	minLife = minLife_;
+}
+
 
 //---------------------------------------------------
 //æ“¾ˆ—
@@ -82,3 +96,18 @@ int&				Status::GetLife()
 {
 	return life;
 }
+
+//!@brief	Å‘å‘Ì—Í‚Ìæ“¾
+//!@return	maxLife	Å‘åLife
+int&				Status::GetMaxLife()
+{
+	return maxLife;
+}
+
+//!@brief	Å¬‘Ì—Í‚Ìæ“¾
+//!@return	minLife	Å¬Life
+int&				Status:: GetMinLife()
+{
+	return minLife;
+}
+

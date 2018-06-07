@@ -1,48 +1,39 @@
 #pragma once
-#include "../src/Object/GameObject.h"
-#include "../src/BaseClass/ImageManager/ImageManager.h"
+#include "../src/BaseClass/GUIObject/GUIObject.h"
 
 
 //---------------------------------------------------------------------
-//概要: GUIのオブジェクト(単体のもの)
+//概要: データを表示させるGUI(単体のもの)
 //製作者: 日比野
 //---------------------------------------------------------------------
-class GUIObject
+class DataGui
 {
 public:
-	//!@brief コンストラクタ
-	//!@param[in] imageName_ 画像名
-	//!@param[in] pos_	位置
-	//!@param[in] srcBox_ 画像元のサイズ
-	GUIObject(const std::string& imageName_,
-		const K_Math::Vector3& pos_,
-		const K_Math::Box2D& srcBox_);
+	//!@brief	コンストラクタ
+	DataGui(GameObject& gameObj);
+	//!@brief	デストラクタ
+	~DataGui();
 
-	//!@brief デストラクタ
-	~GUIObject();
-	//!@brief 更新処理
+	//!@brief	更新
 	void	UpDate();
-	//!@brief 2D空間に描画する
+	//!@brief	描画
 	void	Render();
-	//!@brief	3D空間に描画する
-	void	Render3D();
 
-	//!@brief 位置の設定
-	//!@param[in] pos_ 移動させる位置
-	void	SetPos(const K_Math::Vector3& pos_);
+	//!@brief	割合の計算
+	//!@param[in]	gameObj	ゲームオブジェクト
+	void	Raito(GameObject& gameObj);
 
-	//!@brief	位置の移動
-	//!@param[in] moveVec 移動量
-	void	AddVec(const K_Math::Vector3& moveVec);
-
-	//!@brief	大きさの設定
-	//!@param[in]	scale 大きさ
-	void	SetScale(const K_Math::Vector3& scale);
+	//仮のライフ処理
+	void	RaitoRaito();
 
 private:
-	K_Graphics::Texture*	texture;
-	GameObject		object;		//オブジェクト
-	std::string		imageName;	//画像名
-	K_Math::Box2D	srcBox;		//画像元のサイズ
-
+	GUIObject*	lifeNeedle;	//ライフの針
+	float	angle;		//角度
+	float	maxAngle;	//最大角度
+	float	minAngle;	//最小角度
+	float	raito;		//割合
+	int		life;
+	int		maxLife;
+	float	timeCnt;
+	bool	upDataFlag;	
 };

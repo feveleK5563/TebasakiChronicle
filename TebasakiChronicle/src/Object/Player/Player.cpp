@@ -43,8 +43,8 @@ void	Player::Initliaze()
 	minJumpForce = 1.5f;
 	invicibleCnt = 0;
 	maxInvicibleTime = 300;	//300フレーム無敵時間
-	minLife = 0;			//最小ライフ
-	maxLife = 10;			//最大ライフ
+	object.GetStatus().SetMinLife(0);
+	object.GetStatus().SetMaxLife(10);
 
 	//画像の生成
 	object.SetImage(CST::LoadAndGetTexture("Player", "data/image/resource2.png"), true);
@@ -75,7 +75,7 @@ void	Player::Initliaze()
 	//ボックスの形の生成
 	shape = CC::CreateBoxShape(14, 22, 1);
 	shape2 = CC::CreateBoxShape(13, 1, 1);
-
+	
 	//生成した[形]でコリジョンや剛体を作成
 	cManager.CreateBaseCollisionData(shape, object.GetPos(), object.GetAngle(), true);	//ベース
 	cManager.CreateSubCollisionData(shape, CollisionMask::EnemyCollision | CollisionMask::TakeDamagePlayer, CollisionMask::PlayerCollision, object.GetPos()); //被ダメ

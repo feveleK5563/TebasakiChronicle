@@ -42,10 +42,14 @@ public:
 	//!@brief	GameObjectの取得
 	//!@return	ゲームオブジェクト
 	GameObject&	GetGameObject();
+
+	//!@brief	回転速度の設定
+	//!@param[in]	ratateSpeed_ 回転速度
+	void		SetRotateSpeed(const float rotateSpeed_);
 private:
 	K_Graphics::Texture*	texture;
 	GameObject		object;		//オブジェクト
 	std::string		imageName;	//画像名
 	K_Math::Box2D	srcBox;		//画像元のサイズ
-
+	float			rotateSpeed;	//回転速度
 };

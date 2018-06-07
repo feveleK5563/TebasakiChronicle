@@ -83,6 +83,12 @@
     <Filter Include="ソース ファイル\src\BaseClass\GUIObject\GageGui">
       <UniqueIdentifier>{8e98cb23-a61f-4d4d-b094-2e59afbf6508}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\BaseClass\GUIObject\ScreenGui">
+      <UniqueIdentifier>{280483aa-bd93-4be8-91c7-633a9b98195d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\BaseClass\GUIObject\DataGui">
+      <UniqueIdentifier>{d2959802-7785-41e0-858b-cfbc214a68fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -192,6 +198,12 @@
     </ClCompile>
     <ClCompile Include="src\BaseClass\GUIObject\GageGui\GageGui.cpp">
       <Filter>ソース ファイル\src\BaseClass\GUIObject\GageGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BaseClass\GUIObject\ScreenGui\ScreenGui.cpp">
+      <Filter>ソース ファイル\src\BaseClass\GUIObject\ScreenGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BaseClass\GUIObject\DataGui\DataGui.cpp">
+      <Filter>ソース ファイル\src\BaseClass\GUIObject\DataGui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -305,6 +317,12 @@
     </ClInclude>
     <ClInclude Include="src\BaseClass\GUIObject\GageGui\GageGui.h">
       <Filter>ソース ファイル\src\BaseClass\GUIObject\GageGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BaseClass\GUIObject\ScreenGui\ScreenGui.h">
+      <Filter>ソース ファイル\src\BaseClass\GUIObject\ScreenGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BaseClass\GUIObject\DataGui\DataGui.h">
+      <Filter>ソース ファイル\src\BaseClass\GUIObject\DataGui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

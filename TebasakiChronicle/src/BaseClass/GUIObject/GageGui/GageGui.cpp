@@ -4,6 +4,8 @@
 //!@brief	コンストラクタ
 GageGui::GageGui()
 	: guiObject("target",K_Math::Vector3(0,0,0),K_Math::Box2D(0,0,64,64))
+	, backGround("target",K_Math::Vector3(0,0,0),K_Math::Box2D(0,0,64,64))
+	, fillAreaBox("target",K_Math::Vector3(0,0,0),K_Math::Box2D(0,0,64,64))
 {
 	result = 0.0f;
 	baseAngle = -60.0f;
@@ -29,17 +31,17 @@ void		GageGui::ProcessPos()
 		guiObject.GetGameObject().GetPos().y + result,
 		guiObject.GetGameObject().GetPos().z + result)
 	);
-
 }
+
 //!@brief	角度に割合を適用する
 void		GageGui::ProcessRotation()
 {
 	baseAngle++;
 	guiObject.GetGameObject().SetAngle(K_Math::Vector3(
-		cos(K_Math::DegToRad(baseAngle) + result),
-		sin(K_Math::DegToRad(baseAngle) + result),
-		0));
+		0, 0, baseAngle
+	));
 }
+
 //!@brief	大きさ割合を適用する
 void		GageGui::ProcessScale()
 {

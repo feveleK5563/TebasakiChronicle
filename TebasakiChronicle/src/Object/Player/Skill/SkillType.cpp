@@ -83,7 +83,7 @@ Status::CollisionMaskState&	SkillType::GetGiveCollisionMask()
 
 //!@brief	受け取るコリジョンマスクを返す
 //!@return	受け取るコリジョンマスク
-Status::CollisionMaskState&	SkillType::GetReciveCollisionMask() 
+Status::CollisionMaskState&	SkillType::GetReciveCollisionMask()
 {
 	return reciveCollisionMask;
 }

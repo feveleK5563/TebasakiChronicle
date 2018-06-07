@@ -1,74 +1,78 @@
-#include "GUIObject.h"
-#include "CameraList.h"
+#include "DataGui.h"
+#include "../src/Helper.h"
 
-//-------------------------------------------------
-//コンストラクタ
-//-------------------------------------------------
-GUIObject::GUIObject(const std::string& imageName_,
-	const K_Math::Vector3& pos_,
-	const K_Math::Box2D& srcBox_)
-	: imageName(imageName_)
-	, srcBox(srcBox_)
+//!@brief	コンストラクタ
+DataGui::DataGui(GameObject& gameObj)
 {
-	object.SetPos(pos_);
-	object.SetAngle(K_Math::Vector3(0, 0, 0));
-	object.SetScale(K_Math::Vector3(1, 1, 1));
-	object.SetMoveVec(object.GetPos());
+	lifeNeedle = new GUIObject("ScreenUI/Life針", K_Math::Vector3(30, 145, 0), K_Math::Box2D(0, 0, 67, 120));
 
-	texture = new K_Graphics::Texture();
-	texture->Initialize();
-	texture->LoadImage("./data/image/" + imageName + ".png");
-	object.SetImage(texture, true);
-	object.GetImage().CreateCharaChip(srcBox, 1, 1, false);
+	minAngle = 180;		//lifeが0のとき180になる
+	maxAngle = -180;	//lifeがmaxのとき-180の向き
+	angle = maxAngle;
+	raito = 0.0f;
 
-
+	life = gameObj.GetLife();
+	life = 9;
+	maxLife = gameObj.GetStatus().GetMaxLife();
+	timeCnt = 0;
+	upDataFlag = true;
 }
 
-//デストラクタ
-GUIObject::~GUIObject()
+//!@brief	デストラクタ
+DataGui::~DataGui()
 {
-	if (texture != nullptr)
+	Memory::SafeDelete(lifeNeedle);
+}
+
+//!@brief	更新
+void	DataGui::UpDate()
+{
+	if (upDataFlag)
 	{
-		delete texture;
-		texture = nullptr;
+		lifeNeedle->GetGameObject().SetAngle(K_Math::Vector3(0, 0, angle + raito));
+		lifeNeedle->UpDate();
 	}
 }
-//更新処理
-void	GUIObject::UpDate()
-{
-	object.GetImage().Animation();
-}
 
-//!@brief	2D空間に描画する
-void	GUIObject::Render()
+//!@brief	描画
+void	DataGui::Render()
 {
-	object.GetImage().ImageDraw2D(object.GetPos(), object.GetAngle(), object.GetScale(), 0);
+	lifeNeedle->Render();
 }
 
 
-//!@brief	3D空間に描画する
-void	GUIObject::Render3D()
+//!@brief	割合の計算
+//!@param[in]	gameObj	ゲームオブジェクト
+void	DataGui::Raito(GameObject& gameObj)
 {
-	object.GetImage().ImageDraw3D(object.GetPos(), object.GetAngle(), object.GetScale(), object.GetDirection());
+	life = gameObj.GetLife();
+	maxLife = gameObj.GetStatus().GetMaxLife();
+
+	raito = life / maxLife * 180;
+	//範囲制御
+	if (raito > 180 || raito < 0)
+	{
+		raito = 0;
+		upDataFlag = false;
+	}
+	
 }
 
-//!@brief 位置の移動処理
-//!@param[in] pos_ 移動させる位置
-void	GUIObject::SetPos(const K_Math::Vector3& pos_)
+//仮のライフ処理
+void	DataGui::RaitoRaito()
 {
-	object.SetPos(pos_);
-}
-
-//!@brief	位置の移動
-//!@param[in] moveVec 移動量
-void	GUIObject::AddVec(const K_Math::Vector3& moveVec)
-{
-	object.SetPos(object.GetPos() + moveVec);
-}
-
-//!@brief	大きさの設定
-//!@param[in]	scale 大きさ
-void	GUIObject::SetScale(const K_Math::Vector3& scale)
-{
-	object.SetScale(scale);
+	timeCnt++;
+	if (timeCnt >= 60)
+	{
+		life--;
+		timeCnt = 0;
+	}
+	
+	raito = ((float)life / (float)maxLife) * 180.0f;
+	//範囲制御
+	if (raito > 180 || raito < 0)
+	{
+		raito = 0;
+		upDataFlag = false;
+	}
 }

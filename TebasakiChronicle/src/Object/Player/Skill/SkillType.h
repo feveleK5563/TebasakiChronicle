@@ -64,7 +64,7 @@ protected:
 	int					maxUseNum;		//最大使用回数
 	int					attackPoint;	//攻撃力
 	Type				type;			//タイプ
-	Status::CollisionMaskState			giveCollisionMask;		//与えるコリジョンマスク
-	Status::CollisionMaskState			reciveCollisionMask;	//受け取るコリジョンマスク
+	Status::CollisionMaskState		giveCollisionMask;		//与えるコリジョンマスク
+	Status::CollisionMaskState		reciveCollisionMask;	//受け取るコリジョンマスク
 };
 
