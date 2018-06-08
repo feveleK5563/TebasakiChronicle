@@ -21,7 +21,7 @@ GUIObject::GUIObject(const std::string& imageName_,
 	object.SetImage(texture, true);
 	object.GetImage().CreateCharaChip(srcBox, 1, 1, false);
 
-
+	rotateSpeed = 0.0f;
 }
 
 //デストラクタ
@@ -71,4 +71,19 @@ void	GUIObject::AddVec(const K_Math::Vector3& moveVec)
 void	GUIObject::SetScale(const K_Math::Vector3& scale)
 {
 	object.SetScale(scale);
+}
+
+
+//!@brief	GameObjectの取得
+//!@return	ゲームオブジェクト
+GameObject&	GUIObject::GetGameObject()
+{
+	return object;
+}
+
+//!@brief	回転速度の設定
+//!@param[in]	ratateSpeed_ 回転速度
+void		GUIObject::SetRotateSpeed(const float rotateSpeed_)
+{
+	rotateSpeed = rotateSpeed_;
 }

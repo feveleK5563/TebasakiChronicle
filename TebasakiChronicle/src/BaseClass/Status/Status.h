@@ -27,18 +27,20 @@ public:
 		Active,
 		Death,
 	};
+
 	//コリジョンマスク
 	enum CollisionMaskState
 	{
-		None				= 0,
-		Ground				= 1 << 0,
-		PlayerCollision		= 1 << 1,
-		EnemyCollision		= 1 << 2,
-		TakeDamagePlayer	= 1 << 3,
-		TakeDamageEnemy		= 1 << 4,
-		CameraGunCollision	= 1 << 5,
-		EnemyCamCollision	= 1 << 6,
+		None = 0,
+		Ground = 1 << 0,
+		PlayerCollision = 1 << 1,
+		EnemyCollision = 1 << 2,
+		TakeDamagePlayer = 1 << 3,
+		TakeDamageEnemy = 1 << 4,
+		CameraGunCollision = 1 << 5,
+		EnemyCamCollision = 1 << 6,
 	};
+
 public:
 	//一括設定処理
 	void	SetStatusData(
@@ -47,6 +49,12 @@ public:
 		const Direction& dir, const int& attackPoint,const int& life
 	);
 
+	//!@brief	最大Lifeの設定
+	//!@brief	maxLife_	最大Life
+	void	SetMaxLife(const int maxLife_);
+	//!@brief	最小Lifeの設定
+	//!@brief	minLife_	最小Life
+	void	SetMinLife(const int minLife_);
 
 	//取得処理
 	State&				GetState();
@@ -56,6 +64,8 @@ public:
 	Direction&			GetDirection();
 	int&				GetAttackPoint();
 	int&				GetLife();
+	int&				GetMaxLife();
+	int&				GetMinLife();
 
 private:
 	State				state;		//状態
@@ -65,4 +75,6 @@ private:
 	Direction			direction;	//向き
 	int					attackPoint;//攻撃力
 	int					life;		//体力
+	int					maxLife;	//最大life
+	int					minLife;	//最小life
 };

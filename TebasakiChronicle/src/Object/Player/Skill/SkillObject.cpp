@@ -25,9 +25,13 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 
 	shape = CC::CreateBoxShape(16, 24, 1);
 	continueCnt = 0;	//計測時間カウント
+	oneFlag = true;		//1回のみ更新するかのフラグ
+	upDateFlag = true;	//更新するかのフラグ
 
 	//テンポラリコリジョン生成
-	tempColManager.CreateTemporaryCollision(shape, CollisionMask::Non, CollisionMask::PlayerCollision ,
+	tempColManager.CreateTemporaryCollision(shape,
+		CollisionMask::Non,					//Objectが持っているMaskを使用すべき( skillType->GetReciveCollisionMask() )
+		CollisionMask::TakeDamageEnemy ,	//ObjectがもっているMaskを使用すべき( skillType->GetGiveCollisionMask() )
 		object.GetPos(), 
 		object.GetMoveVec(), object.GetDirection(), object.GetAttackPoint(),
 		skillType->GetContinueTime(), object.GetMove().GetGravity(), false, false);
@@ -36,8 +40,21 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 	tempColManager.SetAnimationCharaChip(CST::GetTexture(imageName),
 		animCharaChip.chip,animCharaChip.chipSheetNum, animCharaChip.animSpd, animCharaChip.isAnimRoop);
 
-	//スキルの動作の初期化
-	skillType->BehaivorInit(tempColManager, object.GetStatus(), object.GetMove());
+
+	//ここでスキルタイプを判断する
+	//スキルの系統に応じて、渡すObjectが変化する
+	switch (skillType->GetType())
+	{
+	case SkillType::Type::MoveSkill:
+		skillType->BehaivorInit(tempColManager, obj.GetStatus(), obj.GetMove());
+		break;
+	case SkillType::Type::AttackSkill:
+		skillType->BehaivorInit(tempColManager, object.GetStatus(), object.GetMove());
+		break;
+	case SkillType::Type::PassiveSkill:
+		skillType->BehaivorInit(tempColManager, obj.GetStatus(), obj.GetMove());
+		break;
+	}
 }
 
 //-------------------------------------------------------------
@@ -53,19 +70,27 @@ SkillObject::~SkillObject()
 
 
 //!@brief 更新処理
-void	SkillObject::UpDate()
+void	SkillObject::UpDate(GameObject& gameObj)
 {
 	//コリジョン更新
 	tempColManager.Update();
 
-	//スキルの動作
-	skillType->Behaivor(tempColManager, object.GetStatus(), object.GetMove());
-	skillType->UpDate(object);
-
-	std::cout << "skillObj" << object.GetMove().GetMoveVec().y << std::endl;
-
 	continueCnt++;
 
+	//ここでスキルタイプを判断する
+	//スキルの系統に応じて、渡すObjectが変化する
+	switch (skillType->GetType())
+	{
+	case SkillType::Type::MoveSkill:
+		skillType->Behaivor(tempColManager, gameObj.GetStatus(), gameObj.GetMove());
+		break;
+	case SkillType::Type::AttackSkill:
+		skillType->Behaivor(tempColManager, object.GetStatus(), object.GetMove());
+		break;
+	case SkillType::Type::PassiveSkill:
+		skillType->Behaivor(tempColManager, gameObj.GetStatus(), gameObj.GetMove());
+		break;
+	}
 }
 
 //!@brief 描画処理
@@ -108,21 +133,17 @@ float	SkillObject::GetDir()
 
 
 
-//!@brief	プレイヤーを移動させるための更新
-//!@param[in] object プレイヤーのObject
-void	SkillObject::PlayerUpDate(GameObject& object)
+//!@brief	1回処理を行うか指定
+//!@param[in] oneFlag	1回の処理するかフラグ
+//!@return	1回なら true それ以外なら false
+bool	SkillObject::OneProcess()
 {
-	//コリジョン更新
-	tempColManager.Update();
+	return upDateFlag;
+}
 
-	//スキルの動作
-	skillType->Behaivor(tempColManager, object.GetStatus(), object.GetMove());
-
-	if (!karihandan)
-	{
-		skillType->UpDate(object);
-		karihandan = true;
-	}
-
-	continueCnt++;
+//!@brief	1回だけ更新させるフラグのセット
+//!@param[in] oneFlag	1回だけ更新するなら true
+void	SkillObject::SetOneUpdateFlag(bool oneFlag_)
+{
+	oneFlag = oneFlag_;
 }

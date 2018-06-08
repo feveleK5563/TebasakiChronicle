@@ -111,7 +111,7 @@ bool	SkillManager::ReceiveSkillAndCharaChip(const Enemy::SkillAndCharaChip& skil
 
 
 //!@brief 更新処理
-void	SkillManager::UpDate()
+void	SkillManager::UpDate(GameObject& object)
 {
 	for (auto it = skillObj.begin(); it != skillObj.end();)
 	{
@@ -119,7 +119,7 @@ void	SkillManager::UpDate()
 		{
 			if ((*it)->CheckSurvivalTime())
 			{
-				(*it)->UpDate();
+				(*it)->UpDate(object);
 				++it;
 			}
 			else
@@ -243,30 +243,3 @@ void	SkillManager::UseSkillData(const int& btnNum, GameObject& obj)
 }
 
 
-
-
-
-
-
-
-//仮のスキル動作
-void	SkillManager::SkillUpDate(GameObject& object)
-{
-	for (auto it = skillObj.begin(); it != skillObj.end();)
-	{
-		if ((*it) != nullptr)
-		{
-			if ((*it)->CheckSurvivalTime())
-			{
-				(*it)->PlayerUpDate(object);
-				++it;
-			}
-			else
-			{
-				delete (*it);
-				(*it) = nullptr;
-				it = skillObj.erase(it);
-			}
-		}
-	}
-}

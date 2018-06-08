@@ -39,7 +39,7 @@ public:
 	bool	ReceiveSkillAndCharaChip(const Enemy::SkillAndCharaChip& skill);
 
 	//!@brief 更新処理
-	void	UpDate();
+	void	UpDate(GameObject& object);
 	//!@brief 描画処理
 	void	Render();
 	
@@ -76,8 +76,6 @@ public:
 	//!@param[in] obj ゲームオブジェクト
 	void	UseSkillData(const int& btnNum, GameObject& obj);
 
-	//仮のスキル動作
-	void	SkillUpDate(GameObject& object);
 private:
 	static const int			skillNum = 5;	//スキル数
 	std::array<SkillData, skillNum>	skillDatas;	//スキルデータ

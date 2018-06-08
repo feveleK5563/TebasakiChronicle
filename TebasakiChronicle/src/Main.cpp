@@ -14,6 +14,10 @@
 
 #include "../src/Object/Object3D/Object3D.h"
 #include "../src/BaseClass/GUIObject/GUIObject.h"
+#include "../src/BaseClass/GUIObject/GageGui/GageGui.h"
+#include "../src/BaseClass/GUIObject/ScreenGui/ScreenGui.h"
+#include "../src/BaseClass//GUIObject/DataGui/DataGui.h"
+
 
 #include "Object/CameraMan/CameraMan.h"
 
@@ -75,12 +79,26 @@ int main()
 										pos,rotation,scale);
 
 	//”wŒi‰æ‘œ
-	GUIObject*	back = new GUIObject("back", K_Math::Vector3(0, 50, 0), K_Math::Box2D(0, 0, 1920, 720));
+	GUIObject*	back = new GUIObject("back", K_Math::Vector3(0, 50, 10), K_Math::Box2D(0, 0, 1920, 720));
 	back->SetScale(K_Math::Vector3(2, 2, 1));
 
 	//ƒJƒƒ‰ƒ}ƒ“
 	CameraMan* cameraMan = new CameraMan(ScreenWidth, ScreenHeight, 330, player->object.GetPos());
 
+	//‰æ–Ê‚ÌUI
+	GUIObject*	screenGui = new GUIObject(
+		"ui", 
+		K_Math::Vector3(ScreenWidth/2, ScreenHeight/2, 0), 
+		K_Math::Box2D(0, 0, ScreenWidth, ScreenHeight)
+	);
+
+	//ƒQ[ƒW‚Ì•`‰æ
+	GageGui		gage;
+		
+	//ƒXƒNƒŠ[ƒ“
+	ScreenGui*	gui = new ScreenGui();
+
+	DataGui		datagui(player->object);
 	//******************************************************************
 	
 	while (sc->IsSystemEnd() == false)
@@ -103,11 +121,13 @@ int main()
 
 		mapObj->SetDecisionParam(pos, rotation, scale);
 		
+		
 		//”wŒi‚ÌXV
 		back->UpDate();
+		//‰æ–ÊUI‚ÌXV
+		screenGui->UpDate();
 
 		emanager->RenderAllEnemy();
-		player->Render();
 
 		Effect::Render();
 
@@ -120,9 +140,22 @@ int main()
 
 		CST::GetShaderClass(1)->UseShader();
 
+
 		//”wŒi‚Ì•`‰æ
 		back->Render3D();
+		
+		//‰æ–ÊUI‚Ì•`‰æ
+		//screenGui->Render();
 
+		//ƒvƒŒƒC‚â[
+		player->Render();
+
+		gui->UpDate();
+		gui->Render();
+
+		datagui.RaitoRaito();
+		datagui.UpDate();
+		datagui.Render();
 
 		//CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 	
@@ -136,6 +169,8 @@ int main()
 	delete mapObj;
 	delete back;
 	delete cameraMan;
+	delete screenGui;
+	delete gui;
 
 	CC::Delete();
 }
