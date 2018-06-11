@@ -89,6 +89,9 @@
     <Filter Include="ソース ファイル\src\BaseClass\GUIObject\DataGui">
       <UniqueIdentifier>{d2959802-7785-41e0-858b-cfbc214a68fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\Object\CameraMan">
+      <UniqueIdentifier>{62b03c05-85d6-4bd8-a5c5-0a255d6fd3ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -204,6 +207,9 @@
     </ClCompile>
     <ClCompile Include="src\BaseClass\GUIObject\DataGui\DataGui.cpp">
       <Filter>ソース ファイル\src\BaseClass\GUIObject\DataGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\CameraMan\CameraMan.cpp">
+      <Filter>ソース ファイル\src\Object\CameraMan</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -323,6 +329,9 @@
     </ClInclude>
     <ClInclude Include="src\BaseClass\GUIObject\DataGui\DataGui.h">
       <Filter>ソース ファイル\src\BaseClass\GUIObject\DataGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\CameraMan\CameraMan.h">
+      <Filter>ソース ファイル\src\Object\CameraMan</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
