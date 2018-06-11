@@ -348,7 +348,7 @@ void Behavior_ShotBulletFromMiddle::Initialize(TemporaryCollisionManager& tempma
 		status.GetAttackPoint(),
 		60,
 		0,
-		false,
+		true,
 		false);
 
 	//(仮)爆発エフェクトの発生
