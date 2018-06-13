@@ -21,10 +21,10 @@ CameraMan::~CameraMan()
 void CameraMan::Run(const K_Math::Vector3& target)
 {
 	K_Math::Vector3 toVec = target - trackingPos;
-	trackingPos += toVec * 0.05f;
+	trackingPos += toVec * 0.1f;
 
 	float toVecDist = settingDist - distance;
-	distance += toVecDist * 0.05f;
+	distance += toVecDist * 0.1f;
 
 	CST::GetPerspectiveCamera()->SetTarget(trackingPos.x, trackingPos.y, trackingPos.z);
 	CST::GetPerspectiveCamera()->SetPosition(distance, K_Math::Vector3(0, 0, -1));
