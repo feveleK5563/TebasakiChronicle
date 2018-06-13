@@ -32,12 +32,30 @@ public:
 		DamageRecive,		//ダメージ受ける
 	};
 
+	
 	//コリジョンの種類
 	enum CollisionKind
 	{
 		Base = 0,	//体
 		Foot,		//足元
 		Head,		//頭上
+	};
+
+	//アニメーションモーション
+	enum class AnimState
+	{
+		Non = -1,
+		Idle = 0,		//待機
+		Walk,			//出だし
+		RightRun,		//右足
+		LeftRun,		//左足
+		Jump,			//ジャンプ
+		Fall,			//落下
+		Landing,		//着地
+		GunRightRun,	//右足カメラガン
+		GunLeftRun,		//左足カメラガン
+		GunJump,		//ジャンプカメラガン
+		GunFall,		//落下カメラガン
 	};
 
 public:
@@ -84,22 +102,33 @@ private:
 	//!@brief	点滅処理
 	bool	Flashing();
 
-public:
-	GameObject		object;			//ゲームオブジェクト
-	Status*			enemyData;		//敵のステータス
-private:
-	Motion			motion;			//モーション
-	int				motionCnt;		//モーションのカウント
-	CharaController	controller;		//コントローラー
-	CameraGun		cameraGun;		//カメラガン
-	SkillManager	skillManager;	//スキル
-	int				maxFrame;		//最大のフレーム数
-	float			minJumpForce;	//最低限のジャンプ
-	int				invicibleCnt;	//無敵時間カウント
-	int				maxInvicibleTime;//最大無敵時間
+	//!@brief	アニメーション状態の変更
+	//!@param[in]	animState	アニメーション状態
+	void	ChangeAnimState(const AnimState& animState);
+	
+	//!@brief	アニメーション状態の更新
+	//!@param[in]	animState	アニメーション状態
+	void	UpDateAnimState(const AnimState& animState);
 
+public:
+	GameObject		object;				//ゲームオブジェクト
+	Status*			enemyData;			//敵のステータス
+private:
+	Motion			motion;				//モーション
+	int				motionCnt;			//モーションのカウント
+	CharaController	controller;			//コントローラー
+	CameraGun		cameraGun;			//カメラガン
+	SkillManager	skillManager;		//スキル
+	int				maxFrame;			//最大のフレーム数
+	float			minJumpForce;		//最低限のジャンプ
+	int				invicibleCnt;		//無敵時間カウント
+	int				maxInvicibleTime;	//最大無敵時間
+	AnimState		preAnimState;		//1つ前のアニメーション状態
+	AnimState		animState;			//アニメーションの状態
 public:
 	K_Physics::CollisionShape*	shape;		//ベースコリジョンの形状
 	K_Physics::CollisionShape*	shape2;		//足元と頭上用コリジョンの形状
 	CollisionManager			cManager;	//コリジョンの管理者
+
+	K_Graphics::Texture*		texture;
 };
