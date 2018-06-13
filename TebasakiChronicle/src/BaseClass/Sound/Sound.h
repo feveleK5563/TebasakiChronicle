@@ -6,9 +6,10 @@
 
 //板倉ライブラリサウンドクラスラッピング
 
-//サウンドクラスの初期化。一つあればいいのででシングルトン
-//デストラクタかデストロイで死にます
-
+//サウンドクラス
+//サウンドソースを扱います。
+//再生などの処理はこのクラスが行います
+//デストラクタで死にます
  class Sound
 {
 private:
@@ -71,24 +72,26 @@ public:
 
 };
 
-
+ //サウンドエンジンクラス
+ //サウンドクラスの管理を行います
+ //明示的にDeleteSoundメソッドを呼ばなくても解放は行われます。
+ //AddSourceでSoundを登録して下さい
 class SoundEngine final
 {
 private:
 	K_Audio::SoundSource* GetSource(const char*  sourceName);
 	
-
+	//K_Audio::SoundClassのインスタンスを得る
+	static K_Audio::SoundClass* GetK_AudioSoundClass();
 public:
 	SoundEngine(const SoundEngine&) = delete;		//コピー禁止
 	SoundEngine();
 	~SoundEngine();
 
-
-	//インスタンスを得る
-	static K_Audio::SoundClass* Create();
-
 	//サウンドソースを登録し、再生可能な状態にする
-	void AddSource(Sound&);
+	//1,サウンドソース
+	//void
+	void AddSource(Sound& sound);
 
 	//引数で指定したサウンドソースを破棄
 	//1,サウンドソース名

@@ -2,13 +2,13 @@
 
 SoundEngine::SoundEngine()
 {
-	
+	GetK_AudioSoundClass();
 }
 
 
 K_Audio::SoundSource * SoundEngine::GetSource(const char * sourceName)
 {
-	return Create()->GetSource(sourceName);
+	return GetK_AudioSoundClass()->GetSource(sourceName);
 }
 
 SoundEngine::~SoundEngine()
@@ -16,7 +16,7 @@ SoundEngine::~SoundEngine()
 
 }
 
-K_Audio::SoundClass* SoundEngine::Create()
+K_Audio::SoundClass* SoundEngine::GetK_AudioSoundClass()
 {
 	static std::unique_ptr<K_Audio::SoundClass> soundClass(new K_Audio::SoundClass());
 	return soundClass.get();
@@ -24,14 +24,14 @@ K_Audio::SoundClass* SoundEngine::Create()
 
 void SoundEngine::AddSource(Sound& source)
 {
-	Create()->CreateSource(source.GetName().c_str(), source.GetPath().c_str(), source.GetMode());
-	K_Audio::SoundSource* sound = Create()->GetSource(source.GetName().c_str());
+	GetK_AudioSoundClass()->CreateSource(source.GetName().c_str(), source.GetPath().c_str(), source.GetMode());
+	K_Audio::SoundSource* sound = GetK_AudioSoundClass()->GetSource(source.GetName().c_str());
 	source.SetSource(sound);
 }
 
 void SoundEngine::DeleteSound(const char*  sourceName)
 {
-	Create()->DeleteSource(sourceName);
+	GetK_AudioSoundClass()->DeleteSource(sourceName);
 }
 
 

@@ -105,21 +105,24 @@ int main()
 	//******************************************************************
 	
 	//サウンドエンジンの初期化
+	//インスタンス化すればすぐに使える(内部でSoundClassを作っている)
 	SoundEngine soundEngine;
 	//ポインタで使う場合
 	SoundEngine* pEngine = &soundEngine;
-	//音源のロード
+	//音源のロードはSoundクラスで行う
 	Sound source;
 	source.LoadSound("bgm", "遊戯_drone.ogg");
 	//Engineにサウンドを登録(追加しないとアクセス違反)
 	pEngine->AddSource(source);
+	//登録すれば正しく使える
 	source.Play();
 
 	while (sc->IsSystemEnd() == false)
 	{
 		if (INPUT::IsPressButton(VpadIndex::Pad0, K_Input::VpadButton::R1))
 		{
-				soundEngine.DeleteSound("bgm");
+			//明示的開放
+			soundEngine.DeleteSound("bgm");
 		}
 		sc->ProcessSystem();
 		CC::Run();
