@@ -56,7 +56,9 @@
     <ClCompile Include="src\Object\Player\Skill\SkillType.cpp" />
     <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollision.cpp" />
     <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollisionManager.cpp" />
-    <ClCompile Include="src\Scene\Scene.cpp" />
+    <ClCompile Include="src\Scene\SceneManager.cpp" />
+    <ClCompile Include="src\Scene\Scene_Game\Scene_Game.cpp" />
+    <ClCompile Include="src\Scene\Scene_Title\Scene_Title.cpp" />
     <ClCompile Include="src\TimeCount.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -98,7 +100,10 @@
     <ClInclude Include="src\Object\Player\Skill\SkillType.h" />
     <ClInclude Include="src\Object\TemporaryCollision\TemporaryCollision.h" />
     <ClInclude Include="src\Object\TemporaryCollision\TemporaryCollisionManager.h" />
-    <ClInclude Include="src\Scene\Scene.h" />
+    <ClInclude Include="src\Scene\SceneManager.h" />
+    <ClInclude Include="src\Scene\SceneAbstract.h" />
+    <ClInclude Include="src\Scene\Scene_Game\Scene_Game.h" />
+    <ClInclude Include="src\Scene\Scene_Title\Scene_Title.h" />
     <ClInclude Include="src\TimeCount.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
