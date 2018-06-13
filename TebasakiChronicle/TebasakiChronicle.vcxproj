@@ -29,6 +29,7 @@
     <ClCompile Include="src\BaseClass\ImageManager\ImageManager.cpp" />
     <ClCompile Include="src\BaseClass\Input\Input.cpp" />
     <ClCompile Include="src\BaseClass\Move.cpp" />
+    <ClCompile Include="src\BaseClass\Sound\Sound.cpp" />
     <ClCompile Include="src\BaseClass\Status\Status.cpp" />
     <ClCompile Include="src\CSTList.cpp" />
     <ClCompile Include="src\Effect\Effect.cpp" />
@@ -71,6 +72,7 @@
     <ClInclude Include="src\BaseClass\ImageManager\ImageManager.h" />
     <ClInclude Include="src\BaseClass\Input\Input.h" />
     <ClInclude Include="src\BaseClass\Move.h" />
+    <ClInclude Include="src\BaseClass\Sound\Sound.h" />
     <ClInclude Include="src\BaseClass\Status\Status.h" />
     <ClInclude Include="src\CSTList.h" />
     <ClInclude Include="src\Effect\Effect.h" />

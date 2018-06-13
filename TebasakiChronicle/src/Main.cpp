@@ -21,6 +21,9 @@
 
 #include "Object/CameraMan/CameraMan.h"
 
+#include <memory>
+#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ ) 
+#include "BaseClass/Sound/Sound.h"
 int main()
 {
 	//スクリーン
@@ -101,8 +104,23 @@ int main()
 	DataGui		datagui(player->object);
 	//******************************************************************
 	
+	//サウンドエンジンの初期化
+	SoundEngine soundEngine;
+	//ポインタで使う場合
+	SoundEngine* pEngine = &soundEngine;
+	//音源のロード
+	Sound source;
+	source.LoadSound("bgm", "遊戯_drone.ogg");
+	//Engineにサウンドを登録(追加しないとアクセス違反)
+	pEngine->AddSource(source);
+	source.Play();
+
 	while (sc->IsSystemEnd() == false)
 	{
+		if (INPUT::IsPressButton(VpadIndex::Pad0, K_Input::VpadButton::R1))
+		{
+				soundEngine.DeleteSound("bgm");
+		}
 		sc->ProcessSystem();
 		CC::Run();
 
@@ -161,6 +179,7 @@ int main()
 	
 		sc->SwapBuffer();
 	}
+
 
 	delete sc;
 	delete etm;
