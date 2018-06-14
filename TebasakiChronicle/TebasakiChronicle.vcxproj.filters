@@ -92,6 +92,9 @@
     <Filter Include="ソース ファイル\src\Object\CameraMan">
       <UniqueIdentifier>{62b03c05-85d6-4bd8-a5c5-0a255d6fd3ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\BaseClass\Sound">
+      <UniqueIdentifier>{7d333bf2-3de3-4ef2-ae1b-f6e1a31f0149}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -210,6 +213,9 @@
     </ClCompile>
     <ClCompile Include="src\Object\CameraMan\CameraMan.cpp">
       <Filter>ソース ファイル\src\Object\CameraMan</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BaseClass\Sound\Sound.cpp">
+      <Filter>ソース ファイル\src\BaseClass\Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -332,6 +338,9 @@
     </ClInclude>
     <ClInclude Include="src\Object\CameraMan\CameraMan.h">
       <Filter>ソース ファイル\src\Object\CameraMan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BaseClass\Sound\Sound.h">
+      <Filter>ソース ファイル\src\BaseClass\Sound</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
