@@ -92,11 +92,8 @@
     <Filter Include="ソース ファイル\src\Object\CameraMan">
       <UniqueIdentifier>{62b03c05-85d6-4bd8-a5c5-0a255d6fd3ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\src\Scene\Scene_Title">
-      <UniqueIdentifier>{c8187697-ab16-4604-970e-61608587a40c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\src\Scene\Scene_Game">
-      <UniqueIdentifier>{92af0f53-f9e8-4399-9f22-3d544ef1d0c8}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\src\BaseClass\Sound">
+      <UniqueIdentifier>{7d333bf2-3de3-4ef2-ae1b-f6e1a31f0149}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +108,9 @@
     </ClCompile>
     <ClCompile Include="src\Object\Player\Player.cpp">
       <Filter>ソース ファイル\src\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Scene.cpp">
+      <Filter>ソース ファイル\src\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\BaseClass\ImageManager\AnimationCharaChip.cpp">
       <Filter>ソース ファイル\src\BaseClass\ImageManager</Filter>
@@ -214,14 +214,8 @@
     <ClCompile Include="src\Object\CameraMan\CameraMan.cpp">
       <Filter>ソース ファイル\src\Object\CameraMan</Filter>
     </ClCompile>
-    <ClCompile Include="src\Scene\SceneManager.cpp">
-      <Filter>ソース ファイル\src\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Scene\Scene_Title\Scene_Title.cpp">
-      <Filter>ソース ファイル\src\Scene\Scene_Title</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Scene\Scene_Game\Scene_Game.cpp">
-      <Filter>ソース ファイル\src\Scene\Scene_Game</Filter>
+    <ClCompile Include="src\BaseClass\Sound\Sound.cpp">
+      <Filter>ソース ファイル\src\BaseClass\Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +227,9 @@
     </ClInclude>
     <ClInclude Include="src\Object\Player\Player.h">
       <Filter>ソース ファイル\src\Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Scene.h">
+      <Filter>ソース ファイル\src\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\BaseClass\ImageManager\AnimationCharaChip.h">
       <Filter>ソース ファイル\src\BaseClass\ImageManager</Filter>
@@ -342,17 +339,8 @@
     <ClInclude Include="src\Object\CameraMan\CameraMan.h">
       <Filter>ソース ファイル\src\Object\CameraMan</Filter>
     </ClInclude>
-    <ClInclude Include="src\Scene\SceneManager.h">
-      <Filter>ソース ファイル\src\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Scene\SceneAbstract.h">
-      <Filter>ソース ファイル\src\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Scene\Scene_Title\Scene_Title.h">
-      <Filter>ソース ファイル\src\Scene\Scene_Title</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Scene\Scene_Game\Scene_Game.h">
-      <Filter>ソース ファイル\src\Scene\Scene_Game</Filter>
+    <ClInclude Include="src\BaseClass\Sound\Sound.h">
+      <Filter>ソース ファイル\src\BaseClass\Sound</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
