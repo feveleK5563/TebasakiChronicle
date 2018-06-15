@@ -5,11 +5,11 @@
 class ImageManager
 {
 private:
-	const bool	isDelete;
-	K_Graphics::SpriteObject*			spobj;
-	std::vector<AnimationCharaChip*>	charaChip;
-	int									nowAnimNum;
-	float								animCnt;
+	const bool							isDelete;	//登録されたcharaChipをdeleteするか否か
+	K_Graphics::SpriteObject*			spobj;		//スプライトオブジェクト
+	std::vector<AnimationCharaChip*>	charaChip;	//アニメーション速度、サイズなど
+	int									nowAnimNum;	//現在の画像番号
+	float								animCnt;	//アニメーションのウェイト
 
 public:
 	//コンストラクタ
