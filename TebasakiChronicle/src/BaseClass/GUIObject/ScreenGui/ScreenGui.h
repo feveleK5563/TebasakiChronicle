@@ -25,9 +25,6 @@ private:
 	GUIObject*		gearRight[6];	//歯車右側
 	GUIObject*		gearLife[4];	//Lifeの歯車
 	GUIObject*		skillArea;		//スキルのUI
-	GUIObject*		lifeneedle;		//体力の針
 	GUIObject*		lifeBaseArea;	//体力の基盤
-
-private:
-	float			angle;
+	GUIObject*		enemyLife;		//敵のライフゲージ
 };

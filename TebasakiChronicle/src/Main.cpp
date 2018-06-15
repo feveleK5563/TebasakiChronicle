@@ -149,7 +149,7 @@ int main()
 		gui->UpDate();
 		gui->Render();
 
-		datagui.RaitoRaito();
+		datagui.Raito(player->object);
 		datagui.UpDate();
 		datagui.Render();
 

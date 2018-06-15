@@ -30,8 +30,8 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 
 	//テンポラリコリジョン生成
 	tempColManager.CreateTemporaryCollision(shape,
-		CollisionMask::Non,					//Objectが持っているMaskを使用すべき( skillType->GetReciveCollisionMask() )
-		CollisionMask::TakeDamageEnemy ,	//ObjectがもっているMaskを使用すべき( skillType->GetGiveCollisionMask() )
+		skillType->GetReciveCollisionMask(),					//Objectが持っているMaskを使用すべき( skillType->GetReciveCollisionMask() )
+		skillType->GetGiveCollisionMask() ,						//ObjectがもっているMaskを使用すべき( skillType->GetGiveCollisionMask() )
 		object.GetPos(), 
 		object.GetMoveVec(), object.GetDirection(), object.GetAttackPoint(),
 		skillType->GetContinueTime(), object.GetMove().GetGravity(), false, false);

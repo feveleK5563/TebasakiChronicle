@@ -75,14 +75,14 @@ void	Player::Initliaze()
 
 	//noriachan
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,0,64,64), 6, 8, true);		//Idle
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64,64,64), 3, 4, false);		//Walk(出だし)
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64,64,64), 3, 1, false);		//Walk(出だし)
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*2,64,64), 5, 4, false);	//Run(右)
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*3,64,64), 5, 4, false);	//Run(左)
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*4,64,64), 5, 4, false);	//Jump
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*5,64,64), 5, 4, false);	//fall
 	object.GetImage().CreateCharaChip(K_Math::Box2D(48*5,64*5,64,64), 1, 1, false);	//landing
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*6,64,64), 5, 8, false);	//走りカメラガン(右)
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*7,64,64), 5, 8, false);	//走りカメラガン(左)
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*6,64,64), 5, 4, false);	//走りカメラガン(右)
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*7,64,64), 5, 4, false);	//走りカメラガン(左)
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*8,64,64), 5, 4, false);	//ジャンプ中(カメラガン)
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*9,64,64), 5, 4, false);	//fall(カメラガン)
 
@@ -190,7 +190,7 @@ void	Player::ChangeDir()
 	//右方向を0度とした回転度
 	float stickAngle = INPUT::GetStickRotation(VpadIndex::Pad0, K_Input::VpadStick::L);
 
-	if (stickDepth != 0)
+	if (stickDepth != 0 && K_Math::DegToRad(-90) != stickAngle && stickAngle != K_Math::DegToRad(90))
 	{
 		if ((K_Math::DegToRad(-90) < stickAngle) && (stickAngle < K_Math::DegToRad(90)))
 		{
@@ -274,8 +274,8 @@ void	Player::Think()
 		if (!cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Fall; }
 		break;
 	case Walk:	//歩く
-		ChangeDamageMotion(nowMotion);		//1フレーム
-		if (motionCnt >= maxFrame / 10)
+		ChangeDamageMotion(nowMotion);
+		if (motionCnt >= maxFrame / 30)
 		{
 			nowMotion = Run;
 		}
@@ -346,6 +346,11 @@ void	Player::Think()
 			if (controller.IsLStickInput()) { nowMotion = Run; }
 			nowMotion = Idle;
 		}
+		if (!controller.IsLStickInput()) { nowMotion = Idle; }
+		if (cManager.CheckHitSubCollisionObejct(Foot))
+		{
+			if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::R1)) { nowMotion = TakeOff; }
+		}
 		break;
 	case CameraGunAirUse:	//カメラガン空中構え
 		ChangeDamageMotion(nowMotion);
@@ -411,8 +416,10 @@ void	Player::Move()
 	case Idle:		//待機
 		break;
 	case Walk:		//歩く
+		object.GetMove().SetAddVec(2.0f);
 		break;
 	case Run:		//走る
+		object.GetMove().SetAddVec(4.0f);
 		break;
 	case Jump:		//上昇中
 		if (motionCnt == 0)
@@ -473,6 +480,10 @@ void	Player::Move()
 		ChangeAnimState(AnimState::Walk);
 		break;
 	case Run:
+		if (motionCnt == 0)
+		{
+			motionCnt = preMotionCnt;
+		}
 		if (motionCnt / (maxFrame / 3) == 0)
 		{
 			ChangeAnimState(AnimState::RightRun);
@@ -496,8 +507,11 @@ void	Player::Move()
 		ChangeAnimState(AnimState::Landing);
 		break;
 	case CameraGunUse:
-		break;
 	case CameraGunMoveUse:
+		if (motionCnt == 0)
+		{
+			motionCnt = preMotionCnt;
+		}
 		if (motionCnt / (maxFrame / 3) == 0)
 		{
 			ChangeAnimState(AnimState::GunRightRun);
@@ -540,8 +554,8 @@ bool	Player::UpDateMotion(const Motion& nowMotion)
 	if (motion == nowMotion) { return false; }
 	//更新処理
 	motion = nowMotion;
+	preMotionCnt = motionCnt;
 	motionCnt = 0;
-	//object.GetImage().ChangeAnimationPattern(motion, true);
 	return true;
 }
 
@@ -694,3 +708,30 @@ void	Player::UpDateAnimState(const AnimState& animState)
 	this->animState = animState;
 	object.GetImage().ChangeAnimationPattern(static_cast<int>(animState), true);
 }
+
+
+//!@brief	アニメーション切り替え
+//!@brief	2つのアニメーションを切り替える処理
+//!@param[in]	animState1	アニメーション状態1
+//!@param[in]	animState2	アニメーション状態2
+//!@param[in]	frameCnt	切り替えるフレーム数
+void	Player::SwitchAnimState(const AnimState& animState1, const AnimState& animState2, const float frameCnt)
+{
+	if (motionCnt == 0)
+	{
+		motionCnt = preMotionCnt;
+	}
+	if ((motionCnt / frameCnt) == 0)
+	{
+		ChangeAnimState(animState1);
+	}
+	if ((motionCnt / frameCnt) == 1)
+	{
+		ChangeAnimState(animState2);
+	}
+	if ((motionCnt / frameCnt) >= 2)
+	{
+		motionCnt = 0;
+	}
+}
+

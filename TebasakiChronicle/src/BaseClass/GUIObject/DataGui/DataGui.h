@@ -28,10 +28,11 @@ public:
 
 private:
 	GUIObject*	lifeNeedle;	//ƒ‰ƒCƒt‚Ìj
-	float	angle;		//Šp“x
-	float	maxAngle;	//Å‘åŠp“x
-	float	minAngle;	//Å¬Šp“x
-	float	raito;		//Š„‡
+	float	angle;			//Šp“x
+	float	maxAngle;		//Å‘åŠp“x
+	float	minAngle;		//Å¬Šp“x
+	float	raito;			//Š„‡
+	float	decreaseAmount;	//Œ¸‚ç‚·—Ê
 	int		life;
 	int		maxLife;
 	float	timeCnt;
