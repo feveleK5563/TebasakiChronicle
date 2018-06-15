@@ -6,8 +6,8 @@ SkillJump::SkillJump(const int& moveID,const int& maxUseNum, const float& dist, 
 	: SkillType(moveID,maxUseNum,dist,continueTime,attackPoint)
 {
 	type = Type::MoveSkill;
-	giveCollisionMask = Status::CollisionMaskState::None;
-	reciveCollisionMask = Status::CollisionMaskState::None;
+	giveCollisionMask = CollisionMask::Non;
+	reciveCollisionMask = CollisionMask::Non;
 }
 
 //デストラクタ

@@ -51,6 +51,12 @@ void	Status::SetMinLife(const int minLife_)
 	minLife = minLife_;
 }
 
+//!@brie	コリジョンマスクの設定
+//!@param[in]	collisionMask	コリジョンマスク
+void	Status::SetCollisionMask(const int collisionMask)
+{
+	this->collisionMask = collisionMask;
+}
 
 //---------------------------------------------------
 //取得処理
@@ -111,3 +117,9 @@ int&				Status:: GetMinLife()
 	return minLife;
 }
 
+//!@brief	コリジョンマスクの取得
+//!@return	collsionMask	コリジョンマスク
+int&				Status::GetCollisiomMask()
+{
+	return collisionMask;
+}

@@ -29,7 +29,7 @@ public:
 	};
 
 	//コリジョンマスク
-	enum CollisionMaskState
+	/*enum CollisionMaskState
 	{
 		None = 0,
 		Ground = 1 << 0,
@@ -39,7 +39,7 @@ public:
 		TakeDamageEnemy = 1 << 4,
 		CameraGunCollision = 1 << 5,
 		EnemyCamCollision = 1 << 6,
-	};
+	};*/
 
 public:
 	//一括設定処理
@@ -50,11 +50,14 @@ public:
 	);
 
 	//!@brief	最大Lifeの設定
-	//!@brief	maxLife_	最大Life
+	//!@param[in]	maxLife_	最大Life
 	void	SetMaxLife(const int maxLife_);
 	//!@brief	最小Lifeの設定
-	//!@brief	minLife_	最小Life
+	//!@param[in]	minLife_	最小Life
 	void	SetMinLife(const int minLife_);
+	//!@brie	コリジョンマスクの設定
+	//!@param[in]	collisionMask	コリジョンマスク
+	void	SetCollisionMask(const int collisionMask);
 
 	//取得処理
 	State&				GetState();
@@ -66,6 +69,7 @@ public:
 	int&				GetLife();
 	int&				GetMaxLife();
 	int&				GetMinLife();
+	int&				GetCollisiomMask();
 
 private:
 	State				state;		//状態
@@ -77,4 +81,5 @@ private:
 	int					life;		//体力
 	int					maxLife;	//最大life
 	int					minLife;	//最小life
+	int					collisionMask;	//コリジョンマスク
 };

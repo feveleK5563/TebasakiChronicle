@@ -51,10 +51,10 @@ public:
 
 	//!@brief	与えるコリジョンマスクを返す
 	//!@return	与えるコリジョンマスク
-	Status::CollisionMaskState&	GetGiveCollisionMask();
+	CollisionMask&	GetGiveCollisionMask();
 	//!@brief	受け取るコリジョンマスクを返す
 	//!@return	受け取るコリジョンマスク
-	Status::CollisionMaskState&	GetReciveCollisionMask();
+	CollisionMask&	GetReciveCollisionMask();
 
 
 protected:
@@ -64,7 +64,7 @@ protected:
 	int					maxUseNum;		//最大使用回数
 	int					attackPoint;	//攻撃力
 	Type				type;			//タイプ
-	Status::CollisionMaskState		giveCollisionMask;		//与えるコリジョンマスク
-	Status::CollisionMaskState		reciveCollisionMask;	//受け取るコリジョンマスク
+	CollisionMask		giveCollisionMask;
+	CollisionMask		reciveCollisionMask;
 };
 

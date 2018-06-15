@@ -24,15 +24,30 @@ public:
 	//!@brief	大きさ割合を適用する
 	void		ProcessScale();
 
+	//!@brief	更新
+	void		UpDate();
 	//!@brief	描画
 	void		Render();
-private:
-	GUIObject	guiObject;	//GUIオブジェクト
-	float		result;
-	float		baseAngle;
 
-	//変数
-	K_Math::Box2D	areaBox;		//範囲ボックス
-	GUIObject		backGround;		//下に配置するボックス
-	GUIObject		fillAreaBox;	//上に配置するボックス
+private:
+	//!@brief	位置を指定した数動かす
+	void	AddMove(float moveAmount);
+	//!@brief	回転量を与える
+	void	AddRotation(float angleAmount);
+	//!@brief	出現
+	void	Appear();
+
+	//!@brief	位置の移動
+	void	Move();
+	//!@brief	回転
+	void	Rotate();
+
+private:
+	GUIObject		frame;			//枠
+	GUIObject		backGround;		//下に配置するゲージ
+	GUIObject		fillAreaBox;	//上に配置するゲージ
+
+private:
+	float			nowGagePos;		//ゲージの現在位置
+	int				moveMotion;
 };

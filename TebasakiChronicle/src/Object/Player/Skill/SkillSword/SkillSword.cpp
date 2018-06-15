@@ -6,8 +6,8 @@ SkillSword::SkillSword(const int& moveID,const int& maxUseNum, const float& dist
 	: SkillType(moveID,maxUseNum,dist,continueTime,attackPoint)
 {
 	type = Type::AttackSkill;
-	giveCollisionMask = Status::CollisionMaskState::TakeDamageEnemy;
-	reciveCollisionMask = Status::CollisionMaskState::None;
+	giveCollisionMask = CollisionMask::TakeDamageEnemy;
+	reciveCollisionMask = CollisionMask::Non;
 }
 
 //デストラクタ
