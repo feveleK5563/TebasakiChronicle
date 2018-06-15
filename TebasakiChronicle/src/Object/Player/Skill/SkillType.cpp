@@ -7,7 +7,7 @@
 //!@param[in] Œp‘±ŽžŠÔ
 SkillType::SkillType(const int& moveID,const int& maxUseNum, const float& appearDist, const int& continueTime,const int& attackPoint)
 	: maxUseNum(maxUseNum), appearDist(appearDist), continueTime(continueTime)
-	, charaBehaivor(moveID), attackPoint(attackPoint)
+	, charaBehaivor(11), attackPoint(attackPoint)
 {
 	
 }

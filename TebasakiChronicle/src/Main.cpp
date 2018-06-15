@@ -38,7 +38,7 @@ int main()
 	CST::CreateShader("data/shader/VertexShader.vs", "data/shader/TextureSampler.ps");
 
 	//エフェクトを作成
-	Effect::CreateEffectData(	Effect1,
+	Effect::CreateEffectData(	EffectName::Effect1,
 								CST::LoadAndGetTexture("testEffect", "data/image/testEffect.png"),
 								new AnimationCharaChip(K_Math::Box2D(0, 0, 32, 32), 8, 5, false));
 

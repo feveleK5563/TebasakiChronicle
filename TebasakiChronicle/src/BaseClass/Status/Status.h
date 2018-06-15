@@ -28,19 +28,6 @@ public:
 		Death,
 	};
 
-	//コリジョンマスク
-	/*enum CollisionMaskState
-	{
-		None = 0,
-		Ground = 1 << 0,
-		PlayerCollision = 1 << 1,
-		EnemyCollision = 1 << 2,
-		TakeDamagePlayer = 1 << 3,
-		TakeDamageEnemy = 1 << 4,
-		CameraGunCollision = 1 << 5,
-		EnemyCamCollision = 1 << 6,
-	};*/
-
 public:
 	//一括設定処理
 	void	SetStatusData(

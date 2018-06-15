@@ -30,6 +30,8 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 											direction,
 											cpyet->GetHitDamage(),
 											cpyet->GetMaxLife());
+	gameObject.GetStatus().SetCollisionMask(CollisionMask::TakeDamagePlayer);
+
 	if (cpyet->GetIsUseGravity() == false)
 	{
 		gameObject.GetMove().SetGravity(0.f);

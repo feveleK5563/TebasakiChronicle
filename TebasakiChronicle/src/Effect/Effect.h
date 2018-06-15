@@ -5,7 +5,7 @@
 #include "../CSTList.h"
 #include "../Helper.h"
 
-enum EffectName
+enum struct EffectName
 {
 	Effect1,
 	Effect2,

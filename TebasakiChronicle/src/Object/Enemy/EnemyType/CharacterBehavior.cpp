@@ -341,7 +341,7 @@ void Behavior_ShotBulletFromMiddle::Initialize(TemporaryCollisionManager& tempma
 	tempmanager.CreateTemporaryCollision(
 		CC::CreateBoxShape(10.f, 10.f, 10.f),
 		CollisionMask::Non,
-		CollisionMask::TakeDamagePlayer,
+		(CollisionMask)status.GetCollisiomMask(),
 		status.GetPos() + relative,
 		moveVec,
 		status.GetDirection(),
@@ -352,7 +352,7 @@ void Behavior_ShotBulletFromMiddle::Initialize(TemporaryCollisionManager& tempma
 		false);
 
 	//(仮)爆発エフェクトの発生
-	Effect::CreateEffect(Effect1, status.GetPos() + relative + K_Math::Vector3(0, 0, -1));
+	Effect::CreateEffect(EffectName::Effect1, status.GetPos() + relative + K_Math::Vector3(0, 0, -1));
 }
 void Behavior_ShotBulletFromMiddle::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
 {
@@ -379,7 +379,7 @@ void Behavior_ThrowBomb::Initialize(TemporaryCollisionManager& tempmanager, Stat
 	tempmanager.CreateTemporaryCollision(
 		CC::CreateBoxShape(10.f, 10.f, 10.f),
 		CollisionMask::Non,
-		CollisionMask::TakeDamagePlayer,
+		(CollisionMask)status.GetCollisiomMask(),
 		status.GetPos() + relative,
 		moveVec,
 		status.GetDirection(),

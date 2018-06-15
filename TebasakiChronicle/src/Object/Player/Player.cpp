@@ -42,6 +42,7 @@ void	Player::Initliaze()
 		1,
 		10
 		);
+	object.GetStatus().SetCollisionMask(CollisionMask::TakeDamageEnemy);
 
 	motion = Idle;
 	motionCnt = 0;
@@ -101,7 +102,7 @@ void	Player::Initliaze()
 	
 	//生成した[形]でコリジョンや剛体を作成
 	cManager.CreateBaseCollisionData(shape, object.GetPos(), object.GetAngle(), true);	//ベース
-	cManager.CreateSubCollisionData(shape, CollisionMask::EnemyCollision | CollisionMask::TakeDamagePlayer, CollisionMask::PlayerCollision, object.GetPos()); //被ダメ
+	cManager.CreateSubCollisionData(shape, CollisionMask::EnemyCollision | CollisionMask::TakeDamagePlayer, CollisionMask::PlayerCollision, K_Math::Vector3(0, 0, 0)); //被ダメ
 	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, -22, 0)); //足元
 	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, 22, 0)); //頭上
 
@@ -414,12 +415,8 @@ void	Player::Move()
 	//モーション固有の処理
 	switch (motion) {
 	case Idle:		//待機
-		break;
 	case Walk:		//歩く
-		object.GetMove().SetAddVec(2.0f);
-		break;
 	case Run:		//走る
-		object.GetMove().SetAddVec(4.0f);
 		break;
 	case Jump:		//上昇中
 		if (motionCnt == 0)
