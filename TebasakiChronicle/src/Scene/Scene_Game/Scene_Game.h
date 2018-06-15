@@ -13,6 +13,10 @@
 #include "../../BaseClass//GUIObject/DataGui/DataGui.h"
 #include "../../Object/CameraMan/CameraMan.h"
 
+#include <memory>
+#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ ) 
+#include "../../BaseClass/Sound/Sound.h"
+
 #include "../../Effect/Effect.h"
 #include "../../Helper.h"
 
@@ -37,6 +41,9 @@ private:
 	DataGui		datagui;
 
 	CameraMan* cameraMan;
+
+	SoundEngine soundEngine;
+	Sound source;
 
 public:
 	Scene_Game();		//コンストラクタ

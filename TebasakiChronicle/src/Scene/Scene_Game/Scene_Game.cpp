@@ -35,6 +35,13 @@ Scene_Game::Scene_Game():
 
 	//カメラマン
 	cameraMan = new CameraMan(Define::ScreenWidth, Define::ScreenHeight, 330, player->object.GetPos());
+
+	//サウンド
+	source.LoadSound("bgm", "data/sounds/遊戯_drone.ogg");
+	//Engineにサウンドを登録(追加しないとアクセス違反)
+	soundEngine.AddSource(source);
+	//登録すれば正しく使える
+	source.Play();
 }
 
 //デストラクタ
