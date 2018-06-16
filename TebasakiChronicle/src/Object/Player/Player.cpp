@@ -29,6 +29,7 @@ Player::~Player()
 	}
 }
 
+//-------------------------------------------------------------------
 //‰Šú‰»
 void	Player::Initliaze()
 {
@@ -109,6 +110,7 @@ void	Player::Initliaze()
 	cManager.SetSubCollisionUserData(0, &object.GetStatus());
 }
 
+//---------------------------------------------------------------
 //XV
 void	Player::UpDate()
 {
