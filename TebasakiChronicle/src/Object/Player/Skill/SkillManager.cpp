@@ -1,6 +1,6 @@
 #include "SkillManager.h"
 #include "../src/Helper.h"
-#include "SkillSword\SkillSword.h"
+#include "SkillAttack/SkillAttack.h"
 
 
 //----------------------------------------------------------------

@@ -3,8 +3,8 @@
 #include "K_Graphics/ImageLoader.h"
 #include "../src/BaseClass/ImageManager/AnimationCharaChip.h"
 #include "SkillType.h"
-#include "SkillSword/SkillSword.h"
-#include "SkillJump/SkillJump.h"
+#include "SkillMove/SkillMove.h"
+#include "SkillAttack/SkillAttack.h"
 #include <memory>
 #include "../src/BaseClass/GUIObject/GUIObject.h"
 

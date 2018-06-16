@@ -80,20 +80,14 @@ int main()
 	GUIObject*	back = new GUIObject("back", K_Math::Vector3(0, 50, 10), K_Math::Box2D(0, 0, 1920, 720));
 	back->SetScale(K_Math::Vector3(2, 2, 1));
 
+
+	//ƒQ[ƒW‚ÌUI(“G‚ÌLifeƒQ[ƒW)
+	GageGui		enemyLifeGage;
 	//‰æ–Ê‚ÌUI
-	GUIObject*	screenGui = new GUIObject(
-		"ui", 
-		K_Math::Vector3(ScreenWidth/2, ScreenHeight/2, 0), 
-		K_Math::Box2D(0, 0, ScreenWidth, ScreenHeight)
-	);
-
-	//ƒQ[ƒW‚Ì•`‰æ
-	GageGui		gage;
-		
-	//ƒXƒNƒŠ[ƒ“
-	ScreenGui*	gui = new ScreenGui();
-
+	ScreenGui*	screenGui = new ScreenGui();
+	//ƒvƒŒƒCƒ„[‚Ì‘Ì—ÍUI
 	DataGui		datagui(player->object);
+
 	//******************************************************************
 	
 	while (sc->IsSystemEnd() == false)
@@ -120,8 +114,6 @@ int main()
 		
 		//”wŒi‚ÌXV
 		back->UpDate();
-		//‰æ–ÊUI‚ÌXV
-		screenGui->UpDate();
 
 		emanager->RenderAllEnemy();
 
@@ -140,18 +132,20 @@ int main()
 		//”wŒi‚Ì•`‰æ
 		back->Render3D();
 		
-		//‰æ–ÊUI‚Ì•`‰æ
-		//screenGui->Render();
+		//‰æ–ÊUI
+		screenGui->UpDate();
+		screenGui->Render();
+		//ƒvƒŒƒCƒ„[LifeUI
+		datagui.Raito(player->object);
+		datagui.UpDate();
+		datagui.Render();
+		//“GLifeUI
+		enemyLifeGage.UpDate();
+		enemyLifeGage.Render();
 
 		//ƒvƒŒƒC‚â[
 		player->Render();
 
-		gui->UpDate();
-		gui->Render();
-
-		datagui.RaitoRaito();
-		datagui.UpDate();
-		datagui.Render();
 
 		CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 	
@@ -165,7 +159,6 @@ int main()
 	delete mapObj;
 	delete back;
 	delete screenGui;
-	delete gui;
 
 	CC::Delete();
 }

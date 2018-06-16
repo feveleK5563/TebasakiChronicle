@@ -49,6 +49,10 @@ public:
 	int&				GetAttackPoint();
 	int&				GetLife();
 
+	//!@brief	死んでいるかのチェック
+	//!@param[in]	ライフがない true あるなら false
+	bool	IsDead();
+
 private:
 	Status			status;		//Status
 	Move			move;		//移動処理

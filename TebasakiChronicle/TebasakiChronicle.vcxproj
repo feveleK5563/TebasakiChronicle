@@ -48,10 +48,10 @@
     <ClCompile Include="src\Object\Player\CharaController\CharaController.cpp" />
     <ClCompile Include="src\Object\Player\Player.cpp" />
     <ClCompile Include="src\Object\Player\Skill\SkiiData.cpp" />
-    <ClCompile Include="src\Object\Player\Skill\SkillJump\SkillJump.cpp" />
+    <ClCompile Include="src\Object\Player\Skill\SkillAttack\SkillAttack.cpp" />
     <ClCompile Include="src\Object\Player\Skill\SkillManager.cpp" />
+    <ClCompile Include="src\Object\Player\Skill\SkillMove\SkillMove.cpp" />
     <ClCompile Include="src\Object\Player\Skill\SkillObject.cpp" />
-    <ClCompile Include="src\Object\Player\Skill\SkillSword\SkillSword.cpp" />
     <ClCompile Include="src\Object\Player\Skill\SkillType.cpp" />
     <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollision.cpp" />
     <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollisionManager.cpp" />
@@ -88,11 +88,11 @@
     <ClInclude Include="src\Object\Player\CameraGun\CameraGun.h" />
     <ClInclude Include="src\Object\Player\CharaController\CharaController.h" />
     <ClInclude Include="src\Object\Player\Player.h" />
+    <ClInclude Include="src\Object\Player\Skill\SkillAttack\SkillAttack.h" />
     <ClInclude Include="src\Object\Player\Skill\SkillData.h" />
-    <ClInclude Include="src\Object\Player\Skill\SkillJump\SkillJump.h" />
     <ClInclude Include="src\Object\Player\Skill\SkillManager.h" />
+    <ClInclude Include="src\Object\Player\Skill\SkillMove\SkillMove.h" />
     <ClInclude Include="src\Object\Player\Skill\SkillObject.h" />
-    <ClInclude Include="src\Object\Player\Skill\SkillSword\SkillSword.h" />
     <ClInclude Include="src\Object\Player\Skill\SkillType.h" />
     <ClInclude Include="src\Object\TemporaryCollision\TemporaryCollision.h" />
     <ClInclude Include="src\Object\TemporaryCollision\TemporaryCollisionManager.h" />

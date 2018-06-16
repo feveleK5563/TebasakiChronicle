@@ -10,9 +10,9 @@ DataGui::DataGui(GameObject& gameObj)
 	maxAngle = -180;	//lifeがmaxのとき-180の向き
 	angle = maxAngle;
 	raito = 0.0f;
+	decreaseAmount = 1.0f;
 
 	life = gameObj.GetLife();
-	life = 9;
 	maxLife = gameObj.GetStatus().GetMaxLife();
 	timeCnt = 0;
 	upDataFlag = true;
@@ -48,14 +48,14 @@ void	DataGui::Raito(GameObject& gameObj)
 	life = gameObj.GetLife();
 	maxLife = gameObj.GetStatus().GetMaxLife();
 
-	raito = life / maxLife * 180;
+	raito = ((float)life / (float)maxLife) * 180.0f;
+
 	//範囲制御
 	if (raito > 180 || raito < 0)
 	{
 		raito = 0;
 		upDataFlag = false;
 	}
-	
 }
 
 //仮のライフ処理
@@ -68,11 +68,25 @@ void	DataGui::RaitoRaito()
 		timeCnt = 0;
 	}
 	
-	raito = ((float)life / (float)maxLife) * 180.0f;
+	float preRaito = raito;
+	float nowRaito;
+	//割合の計算
+	nowRaito = ((float)life / (float)maxLife) * 180.0f;
+	
+	//動かす量
+	float amount = abs(nowRaito - preRaito);
+
+	//そのベクトル分の大きさを分割する
+	//raito = ((float)life / (float)maxLife) * 180.0f;
+	if (raito >= amount)
+	{
+		raito += 0.00001f;
+	}
 	//範囲制御
 	if (raito > 180 || raito < 0)
 	{
 		raito = 0;
 		upDataFlag = false;
 	}
+
 }

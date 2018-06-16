@@ -62,9 +62,6 @@
     <Filter Include="ソース ファイル\src\Object\Player\Skill\SkillType">
       <UniqueIdentifier>{df787194-7b65-41dd-a125-f09e0abd28cf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\src\Object\Player\Skill\SkillType\SkillSword">
-      <UniqueIdentifier>{df45246d-28e7-4dc6-8e3e-28296598442b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\src\Object\Object3D">
       <UniqueIdentifier>{7316d41b-4e32-4aac-bf74-adcfdc346994}</UniqueIdentifier>
     </Filter>
@@ -77,9 +74,6 @@
     <Filter Include="ソース ファイル\src\Effect">
       <UniqueIdentifier>{d37e3239-8faf-4004-973c-8674881732b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\src\Object\Player\Skill\SkillType\SkillJump">
-      <UniqueIdentifier>{e494c13d-82fc-4971-805c-8c3fdfb9ae72}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\src\BaseClass\GUIObject\GageGui">
       <UniqueIdentifier>{8e98cb23-a61f-4d4d-b094-2e59afbf6508}</UniqueIdentifier>
     </Filter>
@@ -88,6 +82,12 @@
     </Filter>
     <Filter Include="ソース ファイル\src\BaseClass\GUIObject\DataGui">
       <UniqueIdentifier>{d2959802-7785-41e0-858b-cfbc214a68fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Object\Player\Skill\SkillType\SkillAttack">
+      <UniqueIdentifier>{df45246d-28e7-4dc6-8e3e-28296598442b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Object\Player\Skill\SkillType\SkillMove">
+      <UniqueIdentifier>{e494c13d-82fc-4971-805c-8c3fdfb9ae72}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -172,9 +172,6 @@
     <ClCompile Include="src\Object\Player\Skill\SkillType.cpp">
       <Filter>ソース ファイル\src\Object\Player\Skill\SkillType</Filter>
     </ClCompile>
-    <ClCompile Include="src\Object\Player\Skill\SkillSword\SkillSword.cpp">
-      <Filter>ソース ファイル\src\Object\Player\Skill\SkillType\SkillSword</Filter>
-    </ClCompile>
     <ClCompile Include="src\Object\Object3D\Object3D.cpp">
       <Filter>ソース ファイル\src\Object\Object3D</Filter>
     </ClCompile>
@@ -193,9 +190,6 @@
     <ClCompile Include="src\Effect\Effect.cpp">
       <Filter>ソース ファイル\src\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="src\Object\Player\Skill\SkillJump\SkillJump.cpp">
-      <Filter>ソース ファイル\src\Object\Player\Skill\SkillType\SkillJump</Filter>
-    </ClCompile>
     <ClCompile Include="src\BaseClass\GUIObject\GageGui\GageGui.cpp">
       <Filter>ソース ファイル\src\BaseClass\GUIObject\GageGui</Filter>
     </ClCompile>
@@ -204,6 +198,12 @@
     </ClCompile>
     <ClCompile Include="src\BaseClass\GUIObject\DataGui\DataGui.cpp">
       <Filter>ソース ファイル\src\BaseClass\GUIObject\DataGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Player\Skill\SkillAttack\SkillAttack.cpp">
+      <Filter>ソース ファイル\src\Object\Player\Skill\SkillType\SkillAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Player\Skill\SkillMove\SkillMove.cpp">
+      <Filter>ソース ファイル\src\Object\Player\Skill\SkillType\SkillMove</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -291,9 +291,6 @@
     <ClInclude Include="src\Object\Player\Skill\SkillType.h">
       <Filter>ソース ファイル\src\Object\Player\Skill\SkillType</Filter>
     </ClInclude>
-    <ClInclude Include="src\Object\Player\Skill\SkillSword\SkillSword.h">
-      <Filter>ソース ファイル\src\Object\Player\Skill\SkillType\SkillSword</Filter>
-    </ClInclude>
     <ClInclude Include="src\Object\Object3D\Object3D.h">
       <Filter>ソース ファイル\src\Object\Object3D</Filter>
     </ClInclude>
@@ -312,9 +309,6 @@
     <ClInclude Include="src\Effect\Effect.h">
       <Filter>ソース ファイル\src\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="src\Object\Player\Skill\SkillJump\SkillJump.h">
-      <Filter>ソース ファイル\src\Object\Player\Skill\SkillType\SkillJump</Filter>
-    </ClInclude>
     <ClInclude Include="src\BaseClass\GUIObject\GageGui\GageGui.h">
       <Filter>ソース ファイル\src\BaseClass\GUIObject\GageGui</Filter>
     </ClInclude>
@@ -323,6 +317,12 @@
     </ClInclude>
     <ClInclude Include="src\BaseClass\GUIObject\DataGui\DataGui.h">
       <Filter>ソース ファイル\src\BaseClass\GUIObject\DataGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Player\Skill\SkillAttack\SkillAttack.h">
+      <Filter>ソース ファイル\src\Object\Player\Skill\SkillType\SkillAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Player\Skill\SkillMove\SkillMove.h">
+      <Filter>ソース ファイル\src\Object\Player\Skill\SkillType\SkillMove</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

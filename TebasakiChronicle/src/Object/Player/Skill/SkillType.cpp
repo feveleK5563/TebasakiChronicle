@@ -74,16 +74,3 @@ SkillType::Type&	SkillType::GetType()
 	return type;
 }
 
-//!@brief	与えるコリジョンマスクを返す
-//!@return	与えるコリジョンマスク
-Status::CollisionMaskState&	SkillType::GetGiveCollisionMask()
-{
-	return giveCollisionMask;
-}
-
-//!@brief	受け取るコリジョンマスクを返す
-//!@return	受け取るコリジョンマスク
-Status::CollisionMaskState&	SkillType::GetReciveCollisionMask()
-{
-	return reciveCollisionMask;
-}

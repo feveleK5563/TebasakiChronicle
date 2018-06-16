@@ -30,6 +30,7 @@ public:
 		CameraGunMoveUse,	//カメラガン移動中に構え
 		CameraGunAirUse,	//カメラガン空中で構え
 		DamageRecive,		//ダメージ受ける
+		Death,				//死亡
 	};
 
 	
@@ -110,11 +111,18 @@ private:
 	//!@param[in]	animState	アニメーション状態
 	void	UpDateAnimState(const AnimState& animState);
 
+	//!@brief	アニメーション切り替え
+	//!@brief	2つのアニメーションを切り替える処理
+	//!@param[in]	animState1	アニメーション状態1
+	//!@param[in]	animState2	アニメーション状態2
+	//!@param[in]	frameCnt	切り替えるフレーム数
+	void	SwitchAnimState(const AnimState& animState1,const AnimState& animState2,const float frameCnt);
 public:
 	GameObject		object;				//ゲームオブジェクト
 	Status*			enemyData;			//敵のステータス
 private:
 	Motion			motion;				//モーション
+	int				preMotionCnt;		//前のモーションカウント
 	int				motionCnt;			//モーションのカウント
 	CharaController	controller;			//コントローラー
 	CameraGun		cameraGun;			//カメラガン
@@ -132,3 +140,4 @@ public:
 
 	K_Graphics::Texture*		texture;
 };
+

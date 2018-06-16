@@ -75,14 +75,14 @@ void	Player::Initliaze()
 
 	//noriachan
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,0,64,64), 6, 8, true);		//Idle
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64,64,64), 3, 4, false);		//Walk(出だし)
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64,64,64), 3, 1, false);		//Walk(出だし)
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*2,64,64), 5, 4, false);	//Run(右)
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*3,64,64), 5, 4, false);	//Run(左)
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*4,64,64), 5, 4, false);	//Jump
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*5,64,64), 5, 4, false);	//fall
 	object.GetImage().CreateCharaChip(K_Math::Box2D(48*5,64*5,64,64), 1, 1, false);	//landing
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*6,64,64), 5, 8, false);	//走りカメラガン(右)
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*7,64,64), 5, 8, false);	//走りカメラガン(左)
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*6,64,64), 5, 4, false);	//走りカメラガン(右)
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*7,64,64), 5, 4, false);	//走りカメラガン(左)
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*8,64,64), 5, 4, false);	//ジャンプ中(カメラガン)
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*9,64,64), 5, 4, false);	//fall(カメラガン)
 
@@ -96,14 +96,14 @@ void	Player::Initliaze()
 
 	//こりじょんの設定-------------------------------
 	//ボックスの形の生成
-	shape = CC::CreateBoxShape(14, 22, 1);
-	shape2 = CC::CreateBoxShape(13, 1, 1);
+	shape = CC::CreateBoxShape(12, 30, 1);
+	shape2 = CC::CreateBoxShape(11, 1, 1);
 	
 	//生成した[形]でコリジョンや剛体を作成
 	cManager.CreateBaseCollisionData(shape, object.GetPos(), object.GetAngle(), true);	//ベース
-	cManager.CreateSubCollisionData(shape, CollisionMask::EnemyCollision | CollisionMask::TakeDamagePlayer, CollisionMask::PlayerCollision, object.GetPos()); //被ダメ
-	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, -22, 0)); //足元
-	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, 22, 0)); //頭上
+	cManager.CreateSubCollisionData(shape, CollisionMask::EnemyCollision | CollisionMask::TakeDamagePlayer, CollisionMask::PlayerCollision, K_Math::Vector3(0,0,0)); //被ダメ
+	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, -30, 0)); //足元
+	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, 30, 0)); //頭上
 
 	//コリジョンに情報を持たせる
 	cManager.SetSubCollisionUserData(0, &object.GetStatus());
@@ -190,7 +190,7 @@ void	Player::ChangeDir()
 	//右方向を0度とした回転度
 	float stickAngle = INPUT::GetStickRotation(VpadIndex::Pad0, K_Input::VpadStick::L);
 
-	if (stickDepth != 0)
+	if (stickDepth != 0 && K_Math::DegToRad(-90) != stickAngle && stickAngle != K_Math::DegToRad(90))
 	{
 		if ((K_Math::DegToRad(-90) < stickAngle) && (stickAngle < K_Math::DegToRad(90)))
 		{
@@ -274,8 +274,8 @@ void	Player::Think()
 		if (!cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Fall; }
 		break;
 	case Walk:	//歩く
-		ChangeDamageMotion(nowMotion);		//1フレーム
-		if (motionCnt >= maxFrame / 10)
+		ChangeDamageMotion(nowMotion);
+		if (motionCnt >= maxFrame / 30)
 		{
 			nowMotion = Run;
 		}
@@ -328,6 +328,9 @@ void	Player::Think()
 		{
 			nowMotion = Idle;
 		}
+		if (controller.IsLStickInput()) { nowMotion = Run; }
+		if (!cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Fall; }
+		if (cManager.CheckHitSubCollisionObejct(Head)) { nowMotion = Fall; }
 		break;
 	case SkillAirUse:	//空中にスキル使用
 		ChangeDamageMotion(nowMotion);
@@ -336,7 +339,14 @@ void	Player::Think()
 			nowMotion = Idle;
 		}
 		if (cManager.CheckHitSubCollisionObejct(Head)) { nowMotion = Fall; }
-		if (cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Idle; }
+		if (cManager.CheckHitSubCollisionObejct(Foot)) 
+		{ 
+			nowMotion = Idle;
+		}
+		else
+		{
+			nowMotion = Fall;
+		}
 		break;
 	case CameraGunUse:		//カメラガン構え
 	case CameraGunMoveUse:	//カメラガン移動中構え
@@ -345,6 +355,11 @@ void	Player::Think()
 		{
 			if (controller.IsLStickInput()) { nowMotion = Run; }
 			nowMotion = Idle;
+		}
+		if (!controller.IsLStickInput()) { nowMotion = Idle; }
+		if (cManager.CheckHitSubCollisionObejct(Foot))
+		{
+			if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::R1)) { nowMotion = TakeOff; }
 		}
 		break;
 	case CameraGunAirUse:	//カメラガン空中構え
@@ -366,6 +381,11 @@ void	Player::Think()
 		}
 		break;
 	}
+	//死んでいるか判定
+	if (object.IsDead())
+	{
+		nowMotion = Death;
+	}
 	//モーションの更新
 	UpDateMotion(nowMotion);
 	
@@ -386,10 +406,10 @@ void	Player::Move()
 		{
 			object.GetMove().GravityOperation(cManager.CheckHitSubCollisionObejct(Foot));
 		}
-
 		break;
 		//重力を無効にするモーション(今はなし)
 	case Non:
+	case Death:
 		break;
 	}
 
@@ -409,9 +429,7 @@ void	Player::Move()
 	//モーション固有の処理
 	switch (motion) {
 	case Idle:		//待機
-		break;
 	case Walk:		//歩く
-		break;
 	case Run:		//走る
 		break;
 	case Jump:		//上昇中
@@ -427,7 +445,7 @@ void	Player::Move()
 	case Fall:		//落下中
 		if (motionCnt == 0)
 		{
-			object.GetMove().SetFallSpeed(0);
+			//object.GetMove().SetFallSpeed(0);
 		}
 		break;
 	case TakeOff:	//飛ぶ瞬間
@@ -461,8 +479,10 @@ void	Player::Move()
 		object.GetMove().Horizontal();
 		object.GetMove().Vertical();
 		break;
+	case Death:
+		break;
 	}
-	
+
 	//------------------------------------------------
 	//モーション固有のアニメーション
 	switch (motion) {
@@ -473,6 +493,10 @@ void	Player::Move()
 		ChangeAnimState(AnimState::Walk);
 		break;
 	case Run:
+		if (motionCnt == 0)
+		{
+			motionCnt = preMotionCnt;
+		}
 		if (motionCnt / (maxFrame / 3) == 0)
 		{
 			ChangeAnimState(AnimState::RightRun);
@@ -496,8 +520,11 @@ void	Player::Move()
 		ChangeAnimState(AnimState::Landing);
 		break;
 	case CameraGunUse:
-		break;
 	case CameraGunMoveUse:
+		if (motionCnt == 0)
+		{
+			motionCnt = preMotionCnt;
+		}
 		if (motionCnt / (maxFrame / 3) == 0)
 		{
 			ChangeAnimState(AnimState::GunRightRun);
@@ -522,11 +549,40 @@ void	Player::Move()
 		}
 		break;
 	case SkillUse:		
+		ChangeAnimState(AnimState::Idle);
+		break;
 	case SkillMoveUse:	
+		if (motionCnt == 0)
+		{
+			motionCnt = preMotionCnt;
+		}
+		if (motionCnt / (maxFrame / 3) == 0)
+		{
+			ChangeAnimState(AnimState::GunRightRun);
+		}
+		if (motionCnt / (maxFrame / 3) == 1)
+		{
+			ChangeAnimState(AnimState::GunLeftRun);
+		}
+		if (motionCnt / (maxFrame / 3) >= 2)
+		{
+			motionCnt = 0;
+		}
+		break;
 	case SkillAirUse:
+		if (object.GetMove().GetFallSpeed() > 0)
+		{
+			ChangeAnimState(AnimState::Jump);
+		}
+		else
+		{
+			ChangeAnimState(AnimState::Fall);
+		}
 		break;
 	case DamageRecive:
 		ChangeAnimState(AnimState::Fall);
+		break;
+	case Death:
 		break;
 	}
 	UpDateAnimState(nowAnimState);
@@ -540,8 +596,8 @@ bool	Player::UpDateMotion(const Motion& nowMotion)
 	if (motion == nowMotion) { return false; }
 	//更新処理
 	motion = nowMotion;
+	preMotionCnt = motionCnt;
 	motionCnt = 0;
-	//object.GetImage().ChangeAnimationPattern(motion, true);
 	return true;
 }
 
@@ -694,3 +750,30 @@ void	Player::UpDateAnimState(const AnimState& animState)
 	this->animState = animState;
 	object.GetImage().ChangeAnimationPattern(static_cast<int>(animState), true);
 }
+
+
+//!@brief	アニメーション切り替え
+//!@brief	2つのアニメーションを切り替える処理
+//!@param[in]	animState1	アニメーション状態1
+//!@param[in]	animState2	アニメーション状態2
+//!@param[in]	frameCnt	切り替えるフレーム数
+void	Player::SwitchAnimState(const AnimState& animState1, const AnimState& animState2, const float frameCnt)
+{
+	if (motionCnt == 0)
+	{
+		motionCnt = preMotionCnt;
+	}
+	if ((motionCnt / frameCnt) == 0)
+	{
+		ChangeAnimState(animState1);
+	}
+	if ((motionCnt / frameCnt) == 1)
+	{
+		ChangeAnimState(animState2);
+	}
+	if ((motionCnt / frameCnt) >= 2)
+	{
+		motionCnt = 0;
+	}
+}
+

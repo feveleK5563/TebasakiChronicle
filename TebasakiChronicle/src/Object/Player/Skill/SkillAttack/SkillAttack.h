@@ -6,7 +6,7 @@
 //概要:切るスキルを発動
 //製作者:日比野
 //---------------------------------------------------------------
-class SkillSword : public SkillType
+class SkillAttack : public SkillType
 {
 public:
 	//!@brief コンストラクタ
@@ -15,9 +15,9 @@ public:
 	//!@param[in] 出現距離
 	//!@param[in] 継続時間
 	//!@param[in] 攻撃力
-	SkillSword(const int& moveID,const int& maxUseNum, const float& dist ,const int& continueTime_,const int& attackPoint);
+	SkillAttack(const int& moveID,const int& maxUseNum, const float& dist ,const int& continueTime_,const int& attackPoint);
 
-	~SkillSword();
+	~SkillAttack();
 
 	//!@brief 更新処理
 	void	UpDate(GameObject& object);
