@@ -92,6 +92,7 @@ void	ScreenGui::UpDate()
 	enemyLife->UpDate();
 	enemyLife->Rotation();
 }
+
 //!@brief	•`‰æ
 void	ScreenGui::Render()
 {
@@ -113,6 +114,31 @@ void	ScreenGui::Render()
 	
 }
 
+
+//!@brief	‘‚ß‚É•`‰æ‚·‚é
+void	ScreenGui::EarlyRender()
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		gearLeft[i]->Render();
+	}
+	for (int i = 0; i < 6; ++i)
+	{
+		gearRight[i]->Render();
+	}
+	for (int i = 0; i < 4; ++i)
+	{
+		gearLife[i]->Render();
+	}
+}
+
+//!@brief	’x‚ß‚É•`‰æ‚·‚é
+void	ScreenGui::LateRender()
+{
+	gearLeft[4]->Render();
+	lifeBaseArea->Render();
+	skillArea->Render();
+}
 
 
 

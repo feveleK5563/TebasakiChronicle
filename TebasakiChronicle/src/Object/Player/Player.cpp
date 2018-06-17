@@ -116,7 +116,6 @@ void	Player::UpDate()
 {
 	motionCnt++;
 
-	ChangeDir();			//入力に応じて向きを変える
 	//--------------------------------------------------------
 	//思考&モーションの移動
 	Think();
@@ -182,6 +181,12 @@ void	Player::ReciveDamage()
 		object.GetStatus().GetLife() -= enemyData->GetAttackPoint();
 		KnockBack(enemyData->GetPos());
 	}
+}
+
+//!@brief	オブジェクトの取得
+GameObject&	Player::GetGameObject()
+{
+	return object;
 }
 
 //入力に応じて向きを変える
@@ -411,7 +416,6 @@ void	Player::Move()
 		break;
 		//重力を無効にするモーション(今はなし)
 	case Non:
-	case Death:
 		break;
 	}
 
@@ -419,10 +423,12 @@ void	Player::Move()
 	switch (motion) {
 	default:
 		controller.UpDate(object.GetMove());
+		ChangeDir();			//入力に応じて向きを変える
 		break;
 		//コントローラーで移動を無効にする
 	case Non:
 	case DamageRecive:	//ダメージ受けてる際は反応しない
+	case Death:
 		break;
 	}
 
@@ -585,6 +591,7 @@ void	Player::Move()
 		ChangeAnimState(AnimState::Fall);
 		break;
 	case Death:
+		ChangeAnimState(AnimState::Idle);
 		break;
 	}
 	UpDateAnimState(nowAnimState);

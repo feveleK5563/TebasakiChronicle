@@ -20,20 +20,16 @@ private:
 	};
 public:
 	//!@brief	コンストラクタ
-	GageGui();
+	explicit GageGui(GameObject& object);
 	//!@brief	デストラクタ
 	~GageGui();
-
-	//!@brief	割合を算出する
-	void		Raito(float maxValue,float nowValue,float raito);
-
-	//!@brief	位置に割合を適用する
-	void		ProcessPos();
-
 	//!@brief	更新
-	void		UpDate();
+	void		UpDate(GameObject& object);
 	//!@brief	描画
 	void		Render();
+	//!@brief	イベントを開始する
+	//!@brief	呼ぶとイベントを開始する
+	void		EventStart();
 
 private:
 	//!@brief	状態変更部分
@@ -43,9 +39,10 @@ private:
 	//!@brief	モーションの更新
 	//!@param[in]	eventMotion	現在のイベントモーション
 	void	UpDateEventMotion(const EventMotion& eventMotion);
-
 	//!@brief	ゲージを変動させます
 	void	GageGui::Fluctuation(const K_Math::Vector3& targetPos);
+	//!@brief	リセット
+	void	Reset(GameObject& object);
 private:
 	//コピーを禁止します
 	explicit GageGui(const GageGui& gageGui);
@@ -60,10 +57,8 @@ private:	//仮
 	int		maxLife;
 	int		life;
 private:
-	float			nowGagePos;		//ゲージの現在位置
 	int				moveCnt;		//移動する時間
 	int				rotateCnt;		//回転する時間
-	int				beginCnt;		//初めのカウント
 	int				maxMoveCnt;		//最大移動時間
 	int				maxRotateCnt;	//最大回転時間
 	K_Math::Vector3	maxShowLife;	//最大hpゲージ位置
@@ -71,4 +66,5 @@ private:
 	K_Math::Vector3 showLife;		//hpゲージ位置
 	float			changeAmount;	//変化量
 	EventMotion		eventMotion;	//イベントモーション
+	bool			eventStartFlag;	//イベントスタートフラグ
 };

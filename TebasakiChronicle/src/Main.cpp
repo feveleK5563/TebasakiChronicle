@@ -82,11 +82,11 @@ int main()
 
 
 	//ƒQ[ƒW‚ÌUI(“G‚ÌLifeƒQ[ƒW)
-	GageGui		enemyLifeGage;
+	GageGui		enemyLifeGage(player->GetGameObject());
 	//‰æ–Ê‚ÌUI
 	ScreenGui*	screenGui = new ScreenGui();
 	//ƒvƒŒƒCƒ„[‚Ì‘Ì—ÍUI
-	DataGui*	datagui = new DataGui(player->object);
+	DataGui*	datagui = new DataGui(player->GetGameObject());
 
 	//******************************************************************
 	
@@ -102,7 +102,7 @@ int main()
 		Effect::Run();
 
 		//ƒJƒƒ‰’Ç”ö
-		CST::GetPerspectiveCamera()->SetTarget(player->object.GetPos().x, player->object.GetPos().y, player->object.GetPos().z);
+		CST::GetPerspectiveCamera()->SetTarget(player->GetGameObject().GetPos().x, player->GetGameObject().GetPos().y, player->GetGameObject().GetPos().z);
 		CST::GetPerspectiveCamera()->SetPosition(330, K_Math::Vector3(0, 0, -1));	//330
 
 		CST::FrameBufferBeginDraw(ScreenWidth, ScreenHeight, 0.f, 0.f, 1.f);
@@ -111,7 +111,11 @@ int main()
 
 		mapObj->SetDecisionParam(pos, rotation, scale);
 		
-		
+		//“G‚Ìƒ‰ƒCƒtƒQ[ƒW‚ğ“®‚©‚·AƒCƒxƒ“ƒg‚ğŠJn‚·‚é
+		if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
+		{
+			enemyLifeGage.EventStart();
+		}
 		//”wŒi‚ÌXV
 		back->UpDate();
 
@@ -134,15 +138,20 @@ int main()
 		
 		//‰æ–ÊUI
 		screenGui->UpDate();
-		screenGui->Render();
+		screenGui->EarlyRender();
+
+		//“GLifeUI
+		//Œ»İ‚Í[player‚Ìobjectî•ñ]‚ğ“n‚µ‚Ä‚¢‚é
+		enemyLifeGage.UpDate(player->GetGameObject());
+		enemyLifeGage.Render();
+
+		//‰æ–ÊŒã•`‰æ
+		screenGui->LateRender();
+
 		//ƒvƒŒƒCƒ„[LifeUI
-		//datagui.Raito(player->object);
-		datagui->RaitoRaito();
+		datagui->Raito(player->GetGameObject());
 		datagui->UpDate();
 		datagui->Render();
-		//“GLifeUI
-		enemyLifeGage.UpDate();
-		enemyLifeGage.Render();
 
 		//ƒvƒŒƒC‚â[
 		player->Render();

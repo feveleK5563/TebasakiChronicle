@@ -71,6 +71,10 @@ public:
 	int		GiveDamage();
 	//ダメージの受ける処理
 	void	ReciveDamage();
+
+	//!@brief	オブジェクトの取得
+	GameObject&	GetGameObject();
+
 private:
 	void	ChangeDir();		//入力に応じて向きを変える
 	void	ShotCameraGun();	//カメラガンを飛ばす
@@ -117,7 +121,7 @@ private:
 	//!@param[in]	animState2	アニメーション状態2
 	//!@param[in]	frameCnt	切り替えるフレーム数
 	void	SwitchAnimState(const AnimState& animState1,const AnimState& animState2,const float frameCnt);
-public:
+private:
 	GameObject		object;				//ゲームオブジェクト
 	Status*			enemyData;			//敵のステータス
 private:

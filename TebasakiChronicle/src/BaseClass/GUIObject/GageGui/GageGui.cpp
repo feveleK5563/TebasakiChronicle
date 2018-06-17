@@ -3,7 +3,7 @@
 #include "../src/BaseClass/Input/Input.h"
 
 //!@brief	コンストラクタ
-GageGui::GageGui()
+GageGui::GageGui(GameObject& object)
 	: frame("ScreenUI/lifeBar", K_Math::Vector3(0, 670, 0), K_Math::Box2D(0, 0, 1095, 270))
 	, fillAreaBox("ScreenUI/enemyBar", K_Math::Vector3(-10, 710, 0), K_Math::Box2D(0, 0, 128, 256))
 {
@@ -14,7 +14,6 @@ GageGui::GageGui()
 
 	moveCnt = 0;
 	rotateCnt = 0;
-	beginCnt = 0;
 	maxShowLife = K_Math::Vector3(927, 710, 0);
 	minShowLife = K_Math::Vector3(101, 710, 0);	
 	showLife = maxShowLife;
@@ -25,11 +24,11 @@ GageGui::GageGui()
 	changeAmount = 50.0f;
 
 	//仮
-	minLife = 0;
-	maxLife = 10;
-	life = 10;
+	minLife = object.GetStatus().GetMinLife();
+	maxLife = object.GetStatus().GetMaxLife();
+	life = object.GetStatus().GetLife();
 
-
+	eventStartFlag = false;
 }
 //!@brief	デストラクタ
 GageGui::~GageGui()
@@ -37,27 +36,9 @@ GageGui::~GageGui()
 
 }
 
-//!@brief	割合を算出する
-void		GageGui::Raito(float maxValue, float nowValue, float raito)
-{
-	nowGagePos = nowValue / maxValue * raito;
-}
-
-
-//!@brief	位置に割合を適用する
-void		GageGui::ProcessPos()
-{
-	frame.GetGameObject().SetPos(K_Math::Vector3(
-		frame.GetGameObject().GetPos().x + nowGagePos,
-		frame.GetGameObject().GetPos().y + nowGagePos,
-		frame.GetGameObject().GetPos().z + nowGagePos)
-	);
-}
-
-
 
 //!@brief	更新
-void		GageGui::UpDate()
+void		GageGui::UpDate(GameObject& object)
 {
 	frame.UpDate();
 	fillAreaBox.UpDate();
@@ -69,6 +50,11 @@ void		GageGui::UpDate()
 	//ゲージ処理
 	if (eventMotion != Ev_End) { return; }
 
+	//体力情報を取得
+	minLife = object.GetStatus().GetMinLife();
+	maxLife = object.GetStatus().GetMaxLife();
+	life = object.GetStatus().GetLife();
+
 	//描画位置がわかる
 	float nowLife = (float)((float)life / (float)maxLife) * abs(maxShowLife.x - 0) + minShowLife.x;
 
@@ -78,6 +64,12 @@ void		GageGui::UpDate()
 	//位置を適用させる
 	fillAreaBox.GetGameObject().SetPos(showLife);
 	
+	//イベントリセット
+	if (eventStartFlag)
+	{
+		//Reset(object);	//今はなし
+	}
+
 	//仮ライフ変動
 	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
 	{
@@ -102,6 +94,16 @@ void		GageGui::Render()
 	fillAreaBox.Render();
 }
 
+//!@brief	イベントを開始する
+//!@brief	呼ぶとイベントを開始する
+void		GageGui::EventStart()
+{
+	if (eventMotion == Ev_End || eventMotion == Ev_Non)
+	{
+		eventStartFlag = true;
+	}
+}
+
 
 
 //!@brief	状態変更部分
@@ -112,8 +114,7 @@ void	GageGui::Think()
 	EventMotion	nowEventMotion = eventMotion;
 	switch (nowEventMotion) {
 	case Ev_Non:
-		//ボスが登場したら、Ev_Beginに切り替える
-		if (beginCnt >= maxMoveCnt)
+		if (eventStartFlag)
 		{
 			nowEventMotion = Ev_Begin;
 		}
@@ -130,6 +131,7 @@ void	GageGui::Think()
 			moveCnt = maxMoveCnt;
 			nowEventMotion = Ev_End;
 			showLife = K_Math::Vector3(maxShowLife.x + minShowLife.x, 710, 0);
+			eventStartFlag = false;
 		}
 		break;
 	case Ev_Rotate:
@@ -155,10 +157,6 @@ void	GageGui::Process()
 
 	switch (eventMotion){
 	case Ev_Non:
-		if (beginCnt < maxMoveCnt)
-		{
-			beginCnt++;
-		}
 		break;
 	case Ev_Begin:
 		break;
@@ -191,6 +189,34 @@ void	GageGui::Fluctuation(const K_Math::Vector3& targetPos)
 	K_Math::Vector3 vector = targetPos - showLife;
 	showLife.x += vector.x / changeAmount;
 	showLife.y += vector.y / changeAmount;
+}
+
+//!@brief	リセット
+void	GageGui::Reset(GameObject& object)
+{
+	frame.GetGameObject().SetPos(K_Math::Vector3(0, 670, 0));
+	fillAreaBox.GetGameObject().SetPos(K_Math::Vector3(-10, 710, 0));
+
+	frame.GetGameObject().SetAngle(K_Math::Vector3(0, 0, 180));
+	fillAreaBox.GetGameObject().SetAngle(K_Math::Vector3(0, 0, 0));
+
+	moveCnt = 0;
+	rotateCnt = 0;
+	maxShowLife = K_Math::Vector3(927, 710, 0);
+	minShowLife = K_Math::Vector3(101, 710, 0);
+	showLife = maxShowLife;
+
+	maxMoveCnt = 345;
+	maxRotateCnt = 180;
+	eventMotion = Ev_Non;
+	changeAmount = 50.0f;
+
+	//仮
+	minLife = object.GetStatus().GetMinLife();
+	maxLife = object.GetStatus().GetMaxLife();
+	life = object.GetStatus().GetLife();
+
+	eventStartFlag = false;
 }
 
 

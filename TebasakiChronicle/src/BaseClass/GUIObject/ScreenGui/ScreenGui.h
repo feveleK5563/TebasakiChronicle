@@ -19,6 +19,10 @@ public:
 	//!@brief	•`‰æ
 	void	Render();
 
+	//!@brief	‘‚ß‚É•`‰æ‚·‚é
+	void	EarlyRender();
+	//!@brief	’x‚ß‚É•`‰æ‚·‚é
+	void	LateRender();
 
 private:
 	GUIObject*		gearLeft[5];	//•Ô¶‘¤
