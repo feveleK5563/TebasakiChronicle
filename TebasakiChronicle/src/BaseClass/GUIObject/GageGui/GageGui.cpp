@@ -15,19 +15,20 @@ GageGui::GageGui()
 	moveCnt = 0;
 	rotateCnt = 0;
 	beginCnt = 0;
-	maxShowLife = K_Math::Vector3(1028, 710, 0);
-	minShowLife = K_Math::Vector3(101, 710, 0);
+	maxShowLife = K_Math::Vector3(927, 710, 0);
+	minShowLife = K_Math::Vector3(101, 710, 0);	
+	showLife = maxShowLife;
 
-	maxMoveCnt = 345;	//345
+	maxMoveCnt = 345;
 	maxRotateCnt = 180;
 	eventMotion = Ev_Non;
-	showLife = 1028;
+	changeAmount = 50.0f;
+
 	//仮
 	minLife = 0;
 	maxLife = 10;
 	life = 10;
 
-	timeCnt = 0;
 
 }
 //!@brief	デストラクタ
@@ -68,16 +69,29 @@ void		GageGui::UpDate()
 	//ゲージ処理
 	if (eventMotion != Ev_End) { return; }
 
-	//life = (float)life / (float)maxLife;
 	//描画位置がわかる
-	showLife = (float)life / (float)maxLife * (maxShowLife.x - minShowLife.x);	//hpんぼ比率
-	float preLife = ((float)life - 1) / (float)maxLife * (maxShowLife.x - minShowLife.x);
+	float nowLife = (float)((float)life / (float)maxLife) * abs(maxShowLife.x - 0) + minShowLife.x;
+
+	//ゲージ変動処理
+	this->Fluctuation(K_Math::Vector3(nowLife, 710, 0));
+
+	//位置を適用させる
+	fillAreaBox.GetGameObject().SetPos(showLife);
 	
-	fillAreaBox.GetGameObject().SetPos(K_Math::Vector3(showLife, 710, 0));
-	//if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
+	//仮ライフ変動
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
 	{
-	//	life -= 1;
-		//std::cout << "おされた" << std::endl;
+		if (life > 0)
+		{
+			life -= 1;
+		}
+	}
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::X))
+	{
+		if (life < 10)
+		{
+			life++;
+		}
 	}
 }
 
@@ -115,6 +129,7 @@ void	GageGui::Think()
 		{
 			moveCnt = maxMoveCnt;
 			nowEventMotion = Ev_End;
+			showLife = K_Math::Vector3(maxShowLife.x + minShowLife.x, 710, 0);
 		}
 		break;
 	case Ev_Rotate:
@@ -127,14 +142,16 @@ void	GageGui::Think()
 	case Ev_End:
 		break;
 	}
-
 	UpDateEventMotion(nowEventMotion);
 }
 
 //!@brief	処理部分
 void	GageGui::Process()
 {
-	if (eventMotion == Ev_End) { return; }
+	if (eventMotion == Ev_End)
+	{ 
+		return; 
+	}
 
 	switch (eventMotion){
 	case Ev_Non:
@@ -168,7 +185,13 @@ void	GageGui::UpDateEventMotion(const EventMotion& eventMotion)
 }
 
 
-
+//!@brief	ゲージを変動させます
+void	GageGui::Fluctuation(const K_Math::Vector3& targetPos)
+{
+	K_Math::Vector3 vector = targetPos - showLife;
+	showLife.x += vector.x / changeAmount;
+	showLife.y += vector.y / changeAmount;
+}
 
 
 //コピーを禁止します

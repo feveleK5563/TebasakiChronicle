@@ -86,7 +86,7 @@ int main()
 	//画面のUI
 	ScreenGui*	screenGui = new ScreenGui();
 	//プレイヤーの体力UI
-	DataGui		datagui(player->object);
+	DataGui*	datagui = new DataGui(player->object);
 
 	//******************************************************************
 	
@@ -136,9 +136,10 @@ int main()
 		screenGui->UpDate();
 		screenGui->Render();
 		//プレイヤーLifeUI
-		datagui.Raito(player->object);
-		datagui.UpDate();
-		datagui.Render();
+		//datagui.Raito(player->object);
+		datagui->RaitoRaito();
+		datagui->UpDate();
+		datagui->Render();
 		//敵LifeUI
 		enemyLifeGage.UpDate();
 		enemyLifeGage.Render();
@@ -159,6 +160,7 @@ int main()
 	delete mapObj;
 	delete back;
 	delete screenGui;
+	delete datagui;
 
 	CC::Delete();
 }

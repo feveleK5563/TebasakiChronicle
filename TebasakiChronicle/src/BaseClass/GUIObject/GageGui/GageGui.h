@@ -44,6 +44,8 @@ private:
 	//!@param[in]	eventMotion	現在のイベントモーション
 	void	UpDateEventMotion(const EventMotion& eventMotion);
 
+	//!@brief	ゲージを変動させます
+	void	GageGui::Fluctuation(const K_Math::Vector3& targetPos);
 private:
 	//コピーを禁止します
 	explicit GageGui(const GageGui& gageGui);
@@ -66,7 +68,7 @@ private:
 	int				maxRotateCnt;	//最大回転時間
 	K_Math::Vector3	maxShowLife;	//最大hpゲージ位置
 	K_Math::Vector3	minShowLife;	//最小hpゲージ位置
-	float			showLife;		//hpゲージ位置
-	int				timeCnt;
+	K_Math::Vector3 showLife;		//hpゲージ位置
+	float			changeAmount;	//変化量
 	EventMotion		eventMotion;	//イベントモーション
 };
