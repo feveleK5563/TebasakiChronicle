@@ -6,7 +6,7 @@
 //----------------------------------------------------------------
 SkillData::SkillData()
 {
-	skillID = -1;
+	skillID = 0;
 	Clear();
 	guiObj = nullptr;
 }
@@ -102,7 +102,7 @@ void	SkillData::SetSkillImageName(const std::string& skillImageName_)
 //!@brief 中身のデータをすべてクリアする
 void	SkillData::Clear()
 {
-	skillID = -1;				//スキルID
+	skillID = 0;				//スキルID
 	skillType = nullptr;		//スキルの種類
 	animCharaChip = nullptr;	//アニメーションキャラチップ
 	skillImageName = "";		//スキルの画像名
@@ -261,5 +261,7 @@ void	SkillData::DecideSkillData()
 	case 4:
 		skillIconImage = "skillIcon";
 		break;
+	default:
+		skillIconImage = "skillIcon";
 	}
 }

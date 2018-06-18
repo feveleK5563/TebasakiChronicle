@@ -127,8 +127,10 @@ void	Player::UpDate()
 	cameraGun.UpDate(object.GetPos());
 
 	//スキルの使用---------------------
-	RegistSkill();
-	//skillManager.UpDate();
+	if (skillManager.CheckRegistFlag())
+	{
+		RegistSkill();
+	}
 	skillManager.UpDate(object);
 
 	//当たり判定動作-------------------
@@ -235,9 +237,12 @@ void	Player::ReverseCameraGun()
 		//---------------------------------------------------
 		if (&cameraGun.GetSkillAndCharaChip() != nullptr)
 		{
-			skillManager.ChangeRegistFlag(true);	//登録モードへ
-			//カメラガンからスキルデータを受け取る
-			skillManager.ReceiveSkillAndCharaChip(cameraGun.GetSkillAndCharaChip());
+			if (*cameraGun.GetSkillAndCharaChip().behaviorId != 0)
+			{
+				skillManager.ChangeRegistFlag(true);	//登録モードへ
+				//カメラガンからスキルデータを受け取る
+				skillManager.ReceiveSkillAndCharaChip(cameraGun.GetSkillAndCharaChip());
+			}
 		}
 		//カメラマーカーをプレイヤーの位置に戻す
 		cameraGun.SetCameraGun(false);

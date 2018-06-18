@@ -25,7 +25,6 @@ public:
 
 	//!@brief モデルのロードとテクスチャのロード
 	//!@param[in] filePath モデルのパス
-	//!@param[in] texName テクスチャのパス
 	//!@return 成功ならtrue
 	bool	Load(const std::string& filePath);
 
