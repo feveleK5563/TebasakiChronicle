@@ -89,7 +89,7 @@ void Scene_Game::Draw()
 {
 	//*****************************
 	//FBXモデルの描画
-	CST::GetShaderClass(2)->UseShader();
+	CST::GetShaderClass(0)->UseShader();
 	//----------------------------
 	//地形判定付きオブジェクト
 	mapObj->Render();
