@@ -154,7 +154,7 @@ void Enemy::Update()
 	RecieveCollisionOperation();
 
 	//設定されている動作を行う
-	ems->EMove(nowMoveOrder, nowPatternOrder, timeCnt, collisionManager, tempCollisionManager, gameObject.GetStatus(), gameObject.GetMove());
+	*skillAndChip->behaviorId = ems->EMove(nowMoveOrder, nowPatternOrder, timeCnt, collisionManager, tempCollisionManager, gameObject.GetStatus(), gameObject.GetMove());
 
 	//アニメーションの更新
 	AnimationUpdate();
