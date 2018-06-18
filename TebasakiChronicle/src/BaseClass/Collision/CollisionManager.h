@@ -13,7 +13,6 @@ enum CollisionMask
 	TakeDamageEnemy		= 1 << 4,
 	CameraGunCollision	= 1 << 5,
 	EnemyCamCollision	= 1 << 6,
-	CameraManCollision	= 1 << 7,
 };
 
 //各種キャラクター用コリジョンデータ管理くん

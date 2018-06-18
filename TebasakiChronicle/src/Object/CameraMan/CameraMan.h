@@ -8,7 +8,6 @@ class CameraMan
 private:
 	K_Physics::CollisionShape* baseShape;
 	K_Physics::CollisionShape* cameraShape;
-	CollisionManager collisionManager;
 
 	float						defaultDist;
 	float						settingDist;

@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "../../CSTList.h"
 #include "../../Helper.h"
 
 //コンストラクタ
@@ -57,7 +58,6 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	collisionManager.SetSubCollisionData(cpyet->CreateAndGetCheckFootCollisionData());		//3 足元判定用コリジョン
 	collisionManager.SetSubCollisionData(cpyet->CreateAndGetCheckHeadCollisionData());		//4 頭上判定用コリジョン
 	collisionManager.SetSubCollisionData(cpyet->CreateAndGetRecieveCameraCollisionData());	//5 被カメラガン用コリジョン
-	collisionManager.SetSubCollisionData(cpyet->CreateAndGetCameraManCheckCollisionData());	//6 カメラマン受け用コリジョン
 
 	for (int i = 0; i < subCollisionNum; ++i)
 	{
@@ -124,7 +124,7 @@ void Enemy::ResetEnemy()
 void Enemy::Update()
 {
 	//画面外に出ていたら無効
-	if (collisionManager.CheckHitSubCollisionObejct(CheckCameraMan) == false)
+	if (fabsf(CST::GetPerspectiveCamera()->GetPosition().x - gameObject.GetPos().x) > fabsf((float)Define::ScreenWidth))
 	{
 		if (gameObject.GetState() != Status::State::Non)
 		{
@@ -188,7 +188,7 @@ bool Enemy::RecieveCollisionOperation()
 		}
 	}
 
-	//カメラを受ける
+	//カメラガンを受ける
 	tag = collisionManager.GetConflictionObjectsTag(Enemy::EnemyCollisionName::RecieveCameraGun);
 	for (auto it : tag)
 	{

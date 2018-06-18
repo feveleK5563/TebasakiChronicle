@@ -13,7 +13,7 @@ private:
 	int		maxLife;				//体力上限
 	bool	isUseGravity;			//重力を使用するか否か
 
-	static const int subCollisionNum = 7;			//サブコリジョンの数
+	static const int subCollisionNum = 6;			//サブコリジョンの数
 	int		collisionGiveMask[subCollisionNum];		//サブコリジョンの与マスク
 	int		collisionMyselfMask[subCollisionNum];	//サブコリジョンの受マスク
 
@@ -35,7 +35,6 @@ private:
 		CheckFoot,
 		CheckHead,
 		RecieveCameraGun,
-		CheckCameraMan,
 	};
 
 public:
