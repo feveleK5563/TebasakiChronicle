@@ -198,3 +198,16 @@ int&				GameObject::GetLife()
 {
 	return GetStatus().GetLife();
 }
+
+
+//---------------------------------------------------------
+//!@brief	死んでいるかのチェック
+//!@param[in]	ライフがない true あるなら false
+bool	GameObject::IsDead()
+{
+	if (GetLife() <= 0)
+	{
+		return true;
+	}
+	return false;
+}

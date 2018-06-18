@@ -23,18 +23,20 @@ public:
 	//!@param[in]	gameObj	ゲームオブジェクト
 	void	Raito(GameObject& gameObj);
 
-	//仮のライフ処理
-	void	RaitoRaito();
+private:
+	//!@brief	針の変動処理
+	void	Fluctuation(const K_Math::Vector3& targetPos);
 
 private:
-	GUIObject*	lifeNeedle;	//ライフの針
-	float	angle;			//角度
-	float	maxAngle;		//最大角度
-	float	minAngle;		//最小角度
-	float	raito;			//割合
-	float	decreaseAmount;	//減らす量
+	GUIObject*	lifeNeedle;		//ライフの針
+	float		maxAngle;		//最大角度
+	float		minAngle;		//最小角度
+	float		raito;			//割合
+	float		changeAmount;	//変化量
+	float		offsetAngle;	//オフセット値
+	K_Math::Vector3	showLife;
+
 	int		life;
 	int		maxLife;
 	float	timeCnt;
-	bool	upDataFlag;	
 };

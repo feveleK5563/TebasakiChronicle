@@ -49,14 +49,6 @@ public:
 	//!@return	スキルのタイプ
 	Type&	GetType();
 
-	//!@brief	与えるコリジョンマスクを返す
-	//!@return	与えるコリジョンマスク
-	CollisionMask&	GetGiveCollisionMask();
-	//!@brief	受け取るコリジョンマスクを返す
-	//!@return	受け取るコリジョンマスク
-	CollisionMask&	GetReciveCollisionMask();
-
-
 protected:
 	CharacterBehavior	charaBehaivor;	//動作
 	int					continueTime;	//継続時間
@@ -64,7 +56,5 @@ protected:
 	int					maxUseNum;		//最大使用回数
 	int					attackPoint;	//攻撃力
 	Type				type;			//タイプ
-	CollisionMask		giveCollisionMask;
-	CollisionMask		reciveCollisionMask;
 };
 

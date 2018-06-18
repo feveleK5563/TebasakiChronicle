@@ -41,9 +41,9 @@ ScreenGui::ScreenGui()
 	}
 
 	//ƒXƒLƒ‹Šî”Õ
-	skillArea = new GUIObject("UI/ScreenUI", K_Math::Vector3(1150, 600, 0), K_Math::Box2D(367, 0, 256, 256));
+	skillArea = new GUIObject("ScreenUI/skill", K_Math::Vector3(1170, 610, 0), K_Math::Box2D(0, 0, 256, 256));
 	//Life‚ÌŠî”Õ
-	lifeBaseArea = new GUIObject("UI/ScreenUI", K_Math::Vector3(0, 140, 0), K_Math::Box2D(96, 0, 256, 256));
+	lifeBaseArea = new GUIObject("ScreenUI/life", K_Math::Vector3(25, 160, 0), K_Math::Box2D(0, 0, 256, 256));
 
 	//“G‚Ìƒ‰ƒCƒtƒQ[ƒW
 	enemyLife = new GUIObject("ScreenUI/lifeBar", K_Math::Vector3(0, 720, 0), K_Math::Box2D(0, 0, 1095, 270));
@@ -92,6 +92,7 @@ void	ScreenGui::UpDate()
 	enemyLife->UpDate();
 	enemyLife->Rotation();
 }
+
 //!@brief	•`‰æ
 void	ScreenGui::Render()
 {
@@ -113,6 +114,31 @@ void	ScreenGui::Render()
 	
 }
 
+
+//!@brief	‘‚ß‚É•`‰æ‚·‚é
+void	ScreenGui::EarlyRender()
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		gearLeft[i]->Render();
+	}
+	for (int i = 0; i < 6; ++i)
+	{
+		gearRight[i]->Render();
+	}
+	for (int i = 0; i < 4; ++i)
+	{
+		gearLife[i]->Render();
+	}
+}
+
+//!@brief	’x‚ß‚É•`‰æ‚·‚é
+void	ScreenGui::LateRender()
+{
+	gearLeft[4]->Render();
+	lifeBaseArea->Render();
+	skillArea->Render();
+}
 
 
 

@@ -29,6 +29,7 @@ Player::~Player()
 	}
 }
 
+//-------------------------------------------------------------------
 //初期化
 void	Player::Initliaze()
 {
@@ -42,7 +43,6 @@ void	Player::Initliaze()
 		1,
 		10
 		);
-	object.GetStatus().SetCollisionMask(CollisionMask::TakeDamageEnemy);
 
 	motion = Idle;
 	motionCnt = 0;
@@ -97,25 +97,25 @@ void	Player::Initliaze()
 
 	//こりじょんの設定-------------------------------
 	//ボックスの形の生成
-	shape = CC::CreateBoxShape(14, 22, 1);
-	shape2 = CC::CreateBoxShape(13, 1, 1);
+	shape = CC::CreateBoxShape(12, 30, 1);
+	shape2 = CC::CreateBoxShape(11, 1, 1);
 	
 	//生成した[形]でコリジョンや剛体を作成
 	cManager.CreateBaseCollisionData(shape, object.GetPos(), object.GetAngle(), true);	//ベース
-	cManager.CreateSubCollisionData(shape, CollisionMask::EnemyCollision | CollisionMask::TakeDamagePlayer, CollisionMask::PlayerCollision, K_Math::Vector3(0, 0, 0)); //被ダメ
-	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, -22, 0)); //足元
-	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, 22, 0)); //頭上
+	cManager.CreateSubCollisionData(shape, CollisionMask::EnemyCollision | CollisionMask::TakeDamagePlayer, CollisionMask::PlayerCollision, K_Math::Vector3(0,0,0)); //被ダメ
+	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, -30, 0)); //足元
+	cManager.CreateSubCollisionData(shape2, CollisionMask::Ground, CollisionMask::Non, K_Math::Vector3(0, 30, 0)); //頭上
 
 	//コリジョンに情報を持たせる
 	cManager.SetSubCollisionUserData(0, &object.GetStatus());
 }
 
+//---------------------------------------------------------------
 //更新
 void	Player::UpDate()
 {
 	motionCnt++;
 
-	ChangeDir();			//入力に応じて向きを変える
 	//--------------------------------------------------------
 	//思考&モーションの移動
 	Think();
@@ -181,6 +181,12 @@ void	Player::ReciveDamage()
 		object.GetStatus().GetLife() -= enemyData->GetAttackPoint();
 		KnockBack(enemyData->GetPos());
 	}
+}
+
+//!@brief	オブジェクトの取得
+GameObject&	Player::GetGameObject()
+{
+	return object;
 }
 
 //入力に応じて向きを変える
@@ -329,6 +335,9 @@ void	Player::Think()
 		{
 			nowMotion = Idle;
 		}
+		if (controller.IsLStickInput()) { nowMotion = Run; }
+		if (!cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Fall; }
+		if (cManager.CheckHitSubCollisionObejct(Head)) { nowMotion = Fall; }
 		break;
 	case SkillAirUse:	//空中にスキル使用
 		ChangeDamageMotion(nowMotion);
@@ -337,7 +346,14 @@ void	Player::Think()
 			nowMotion = Idle;
 		}
 		if (cManager.CheckHitSubCollisionObejct(Head)) { nowMotion = Fall; }
-		if (cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Idle; }
+		if (cManager.CheckHitSubCollisionObejct(Foot)) 
+		{ 
+			nowMotion = Idle;
+		}
+		else
+		{
+			nowMotion = Fall;
+		}
 		break;
 	case CameraGunUse:		//カメラガン構え
 	case CameraGunMoveUse:	//カメラガン移動中構え
@@ -372,6 +388,11 @@ void	Player::Think()
 		}
 		break;
 	}
+	//死んでいるか判定
+	if (object.IsDead())
+	{
+		nowMotion = Death;
+	}
 	//モーションの更新
 	UpDateMotion(nowMotion);
 	
@@ -392,7 +413,6 @@ void	Player::Move()
 		{
 			object.GetMove().GravityOperation(cManager.CheckHitSubCollisionObejct(Foot));
 		}
-
 		break;
 		//重力を無効にするモーション(今はなし)
 	case Non:
@@ -403,10 +423,12 @@ void	Player::Move()
 	switch (motion) {
 	default:
 		controller.UpDate(object.GetMove());
+		ChangeDir();			//入力に応じて向きを変える
 		break;
 		//コントローラーで移動を無効にする
 	case Non:
 	case DamageRecive:	//ダメージ受けてる際は反応しない
+	case Death:
 		break;
 	}
 
@@ -431,7 +453,7 @@ void	Player::Move()
 	case Fall:		//落下中
 		if (motionCnt == 0)
 		{
-			object.GetMove().SetFallSpeed(0);
+			//object.GetMove().SetFallSpeed(0);
 		}
 		break;
 	case TakeOff:	//飛ぶ瞬間
@@ -465,8 +487,10 @@ void	Player::Move()
 		object.GetMove().Horizontal();
 		object.GetMove().Vertical();
 		break;
+	case Death:
+		break;
 	}
-	
+
 	//------------------------------------------------
 	//モーション固有のアニメーション
 	switch (motion) {
@@ -533,11 +557,41 @@ void	Player::Move()
 		}
 		break;
 	case SkillUse:		
+		ChangeAnimState(AnimState::Idle);
+		break;
 	case SkillMoveUse:	
+		if (motionCnt == 0)
+		{
+			motionCnt = preMotionCnt;
+		}
+		if (motionCnt / (maxFrame / 3) == 0)
+		{
+			ChangeAnimState(AnimState::GunRightRun);
+		}
+		if (motionCnt / (maxFrame / 3) == 1)
+		{
+			ChangeAnimState(AnimState::GunLeftRun);
+		}
+		if (motionCnt / (maxFrame / 3) >= 2)
+		{
+			motionCnt = 0;
+		}
+		break;
 	case SkillAirUse:
+		if (object.GetMove().GetFallSpeed() > 0)
+		{
+			ChangeAnimState(AnimState::Jump);
+		}
+		else
+		{
+			ChangeAnimState(AnimState::Fall);
+		}
 		break;
 	case DamageRecive:
 		ChangeAnimState(AnimState::Fall);
+		break;
+	case Death:
+		ChangeAnimState(AnimState::Idle);
 		break;
 	}
 	UpDateAnimState(nowAnimState);
@@ -663,11 +717,11 @@ void	Player::KnockBack(const K_Math::Vector3& pos_)
 	object.GetMove().SetVertical(6.0f);
 	if (object.GetPos().x > pos_.x)
 	{
-		object.GetMove().SetHorizontal(-3.0f);
+		object.GetMove().SetHorizontal(+3.0f);
 	}
 	else
 	{
-		object.GetMove().SetHorizontal(+3.0f);
+		object.GetMove().SetHorizontal(-3.0f);
 	}
 }
 

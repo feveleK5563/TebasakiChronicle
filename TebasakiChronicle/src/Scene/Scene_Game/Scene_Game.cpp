@@ -5,7 +5,7 @@ Scene_Game::Scene_Game():
 	etm(new EnemyTypeManager()),
 	emanager(new EnemyManager()),
 	player(new Player()),
-	datagui(player->object)
+	playerLifeGui(new DataGui(player->GetGameObject()))
 {
 	//敵の種類を作成
 	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataA1.txt"));
@@ -16,24 +16,23 @@ Scene_Game::Scene_Game():
 
 	//地形判定付きオブジェクト
 	scale =		{ 10,40,40 };
-	rotation =	{ K_Math::DegToRad(0),K_Math::DegToRad(0),K_Math::DegToRad(0) };
+	rotation =	{ K_Math::DegToRad(0),K_Math::DegToRad(90),K_Math::DegToRad(0) };
 	pos =		{ -120.0f,-50.0f,0.f };
-	mapObj = new Object3D("data/model/map/map.fbx", pos, rotation, scale);
+	mapObj = new Object3D(	"./data/model/testMap2d.fbx", "./data/image/player.tga",
+							pos, rotation, scale);
 
 	//背景画像
 	back = new GUIObject("back", K_Math::Vector3(0, 50, 10), K_Math::Box2D(0, 0, 1920, 720));
 	back->SetScale(K_Math::Vector3(2, 2, 1));
+	
 	//画面のUI
-	screenGui = new GUIObject(
-		"ui",
-		K_Math::Vector3(Define::ScreenWidth / 2, Define::ScreenHeight / 2, 0),
-		K_Math::Box2D(0, 0, Define::ScreenWidth, Define::ScreenHeight)
-	);
-	//スクリーン
-	gui = new ScreenGui();
+	screenGui = new ScreenGui();
+	
+	//敵のライフゲージ(今はプレイヤーのLifeと連動)
+	enemyGageGui = new GageGui(player->GetGameObject());
 
 	//カメラマン
-	cameraMan = new CameraMan(Define::ScreenWidth, Define::ScreenHeight, 500, player->object.GetPos());
+	cameraMan = new CameraMan(Define::ScreenWidth, Define::ScreenHeight, 330, player->GetGameObject().GetPos());
 
 	//サウンド
 	source.LoadSound("bgm", "data/sounds/遊戯_drone.ogg");
@@ -51,8 +50,9 @@ Scene_Game::~Scene_Game()
 	delete player;
 	delete mapObj;
 	delete back;
+	delete playerLifeGui;
 	delete screenGui;
-	delete gui;
+	delete enemyGageGui;
 	delete cameraMan;
 }
 
@@ -70,12 +70,17 @@ SceneName Scene_Game::Update()
 	back->UpDate();
 	//画面UIの更新
 	screenGui->UpDate();
+	//敵のLife
+	enemyGageGui->UpDate(player->GetGameObject());
+	//プレイヤーのLife
+	playerLifeGui->Raito(player->GetGameObject());
+	playerLifeGui->UpDate();
 
 	//エフェクトの更新
 	Effect::Run();
 
 	//カメラ追尾
-	cameraMan->Run(player->object.GetPos());
+	cameraMan->Run(player->GetGameObject().GetPos());
 
 	return nextScene;
 }
@@ -99,16 +104,18 @@ void Scene_Game::Draw()
 	//背景の描画
 	back->Render3D();
 
-	//画面UIの描画
-	//screenGui->Render();
+	//画面UIの描画(後ろの描画するもの)
+	screenGui->EarlyRender();
+
+	//敵のlife
+	enemyGageGui->Render();
+
+	//画面UIの描画(前に描画するもの)
+	screenGui->LateRender();
+
+	//プレイヤーのLife
+	playerLifeGui->Render();
 
 	//プレイやー
 	player->Render();
-
-	gui->UpDate();
-	gui->Render();
-
-	datagui.RaitoRaito();
-	datagui.UpDate();
-	datagui.Render();
 }

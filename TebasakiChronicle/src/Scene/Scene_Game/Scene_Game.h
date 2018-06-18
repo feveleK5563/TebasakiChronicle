@@ -35,10 +35,9 @@ private:
 	Object3D*	mapObj;
 
 	GUIObject*	back;
-	GUIObject*	screenGui;
-	GageGui		gage;
-	ScreenGui*	gui;
-	DataGui		datagui;
+	GageGui*	enemyGageGui;
+	ScreenGui*	screenGui;
+	DataGui*	playerLifeGui;
 
 	CameraMan* cameraMan;
 

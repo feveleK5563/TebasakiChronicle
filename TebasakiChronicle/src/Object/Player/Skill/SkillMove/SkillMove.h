@@ -6,7 +6,7 @@
 //概要:ジャンプするスキルを発動
 //製作者:日比野
 //---------------------------------------------------------------
-class SkillJump : public SkillType
+class SkillMove : public SkillType
 {
 public:
 	//!@brief コンストラクタ
@@ -15,9 +15,9 @@ public:
 	//!@param[in] 出現距離
 	//!@param[in] 継続時間
 	//!@param[in] 攻撃力
-	SkillJump(const int& moveID,const int& maxUseNum, const float& dist ,const int& continueTime_,const int& attackPoint);
+	SkillMove(const int& moveID,const int& maxUseNum, const float& dist ,const int& continueTime_,const int& attackPoint);
 
-	~SkillJump();
+	~SkillMove();
 
 	//!@brief 更新処理
 	void	UpDate(GameObject& object);

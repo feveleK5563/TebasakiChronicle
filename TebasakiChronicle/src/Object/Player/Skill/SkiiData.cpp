@@ -151,20 +151,43 @@ void	SkillData::CreateSkillType()
 {
 	switch (skillID) {
 	case 0:
-		//skillType = std::shared_ptr<SkillType>(new SkillSword(0,10, 50.0f, 120,1));
-		skillType = std::shared_ptr<SkillType>(new SkillJump(0, 8, 0.0f, 60, 0));
+		skillType = std::shared_ptr<SkillType>(new SkillMove(skillID, 8, 0.0f, 60, 0));
 		break;
 	case 1:
-		///skillType = std::shared_ptr<SkillType>(new SkillSword(1, 5, 30.0f, 60, 1));
+		skillType = std::shared_ptr<SkillType>(new SkillMove(skillID, 5, 0.0f, 60, 0));
 		break;
 	case 2:
-		//skillType = std::shared_ptr<SkillType>(new SkillSword(2, 5, 30.0f, 60, 1));
+		skillType = std::shared_ptr<SkillType>(new SkillMove(skillID, 5, 0.0f, 60, 0));
 		break;
 	case 3:
-		//skillType = std::shared_ptr<SkillType>(new SkillSword(3, 5, 30.0f, 60, 1));
+		skillType = std::shared_ptr<SkillType>(new SkillMove(skillID, 10, 0.0f, 60, 0));
 		break;
 	case 4:
-		//skillType = std::shared_ptr<SkillType>(new SkillSword(4, 7, 30.0f, 60, 1));
+		skillType = std::shared_ptr<SkillType>(new SkillAttack(skillID, 7, 30.0f, 60, 1));
+		break;
+	case 5:
+		skillType = std::shared_ptr<SkillType>(new SkillMove(skillID, 7, 0.0f, 60, 0));
+		break;
+	case 6:
+		skillType = std::shared_ptr<SkillType>(new SkillMove(skillID, 7, 0.0f, 60, 0));
+		break;
+	case 7:
+		skillType = std::shared_ptr<SkillType>(new SkillMove(skillID, 5, 0.0f, 60, 0));
+		break;
+	case 8:
+		skillType = std::shared_ptr<SkillType>(new SkillMove(skillID, 5, 0.0f, 60, 0));
+		break;
+	case 9:
+		skillType = std::shared_ptr<SkillType>(new SkillMove(skillID, 5, 0.0f, 60, 0));
+		break;
+	case 10:
+		skillType = std::shared_ptr<SkillType>(new SkillMove(skillID, 5, 0.0f, 60, 0));
+		break;
+	case 11:
+		skillType = std::shared_ptr<SkillType>(new SkillAttack(skillID, 7, 30.0f, 60, 1));
+		break;
+	case 12:
+		skillType = std::shared_ptr<SkillType>(new SkillAttack(skillID, 5, 30.0f, 60, 1));
 		break;
 	default:
 		skillType = nullptr;
@@ -180,7 +203,7 @@ void	SkillData::CreateGUIObject()
 	case 1:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
 	case 2:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
 	case 3:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
-	case 4: guiPos = K_Math::Vector3(1176, 614, 0);	break;
+	case 4: guiPos = K_Math::Vector3(1170, 610, 0);	break;
 	}
 	DecideSkillData();
 	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 64, 64));
@@ -189,7 +212,7 @@ void	SkillData::CreateGUIObject()
 //!@brief GUIオブジェクトの位置の移動
 void	SkillData::MoveGUIObjPos()
 {
-	K_Math::Vector3	 guiPos = K_Math::Vector3(1176, 614, 0);
+	K_Math::Vector3	 guiPos = K_Math::Vector3(1170, 610, 0);
 	
 	DecideSkillData();
 	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 64, 64));
@@ -224,19 +247,19 @@ void	SkillData::DecideSkillData()
 {
 	switch (skillID) {
 	case 0:
-		skillIconImage = "target";
+		skillIconImage = "skillIcon";
 		break;
 	case 1:
-		skillIconImage = "target";
+		skillIconImage = "skillIcon";
 		break;
 	case 2:
-		skillIconImage = "target";
+		skillIconImage = "skillIcon";
 		break;
 	case 3:
-		skillIconImage = "target";
+		skillIconImage = "skillIcon";
 		break;
 	case 4:
-		skillIconImage = "target";
+		skillIconImage = "skillIcon";
 		break;
 	}
 }

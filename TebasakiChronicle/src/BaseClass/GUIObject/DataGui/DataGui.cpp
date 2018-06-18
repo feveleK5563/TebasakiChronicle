@@ -4,18 +4,23 @@
 //!@brief	コンストラクタ
 DataGui::DataGui(GameObject& gameObj)
 {
-	lifeNeedle = new GUIObject("ScreenUI/Life針", K_Math::Vector3(30, 145, 0), K_Math::Box2D(0, 0, 67, 120));
+	lifeNeedle = new GUIObject("ScreenUI/Life針", K_Math::Vector3(31, 155, 0), K_Math::Box2D(0, 0, 67, 120));
 
-	minAngle = 180;		//lifeが0のとき180になる
-	maxAngle = -180;	//lifeがmaxのとき-180の向き
-	angle = maxAngle;
-	raito = 0.0f;
-	decreaseAmount = 1.0f;
+	minAngle = 0;		//lifeが0のとき180になる
+	maxAngle = 180;		//lifeがmaxのとき-180の向き
 
+	//ライフの最大(hp:10)がangle0
+	//ライフの最小(hp:0)がangle180
 	life = gameObj.GetLife();
 	maxLife = gameObj.GetStatus().GetMaxLife();
 	timeCnt = 0;
-	upDataFlag = true;
+	
+	life = 10;
+	maxLife = 10;
+	raito = minAngle;
+	showLife = K_Math::Vector3(0, 0, raito);
+	changeAmount = 50.0f;
+	offsetAngle = 180.0f;
 }
 
 //!@brief	デストラクタ
@@ -27,11 +32,8 @@ DataGui::~DataGui()
 //!@brief	更新
 void	DataGui::UpDate()
 {
-	if (upDataFlag)
-	{
-		lifeNeedle->GetGameObject().SetAngle(K_Math::Vector3(0, 0, angle + raito));
-		lifeNeedle->UpDate();
-	}
+	lifeNeedle->GetGameObject().SetAngle(showLife);
+	lifeNeedle->UpDate();
 }
 
 //!@brief	描画
@@ -48,46 +50,16 @@ void	DataGui::Raito(GameObject& gameObj)
 	life = gameObj.GetLife();
 	maxLife = gameObj.GetStatus().GetMaxLife();
 
-	raito = ((float)life / (float)maxLife) * 180.0f;
+	raito = (float)((float)life / (float)maxLife) * abs(minAngle - maxAngle) - offsetAngle;
 
-	//範囲制御
-	if (raito > 180 || raito < 0)
-	{
-		raito = 0;
-		upDataFlag = false;
-	}
-	std::cout << raito << std::endl;
+	//ゲージ変動
+	Fluctuation(K_Math::Vector3(0, 0, raito));
 }
 
-//仮のライフ処理
-void	DataGui::RaitoRaito()
+
+//!@brief	針の変動処理
+void	DataGui::Fluctuation(const K_Math::Vector3& targetPos)
 {
-	timeCnt++;
-	if (timeCnt >= 60)
-	{
-		life--;
-		timeCnt = 0;
-	}
-	
-	float preRaito = raito;
-	float nowRaito;
-	//割合の計算
-	nowRaito = ((float)life / (float)maxLife) * 180.0f;
-	
-	//動かす量
-	float amount = abs(nowRaito - preRaito);
-
-	//そのベクトル分の大きさを分割する
-	//raito = ((float)life / (float)maxLife) * 180.0f;
-	if (raito >= amount)
-	{
-		raito += 0.00001f;
-	}
-	//範囲制御
-	if (raito > 180 || raito < 0)
-	{
-		raito = 0;
-		upDataFlag = false;
-	}
-
+	K_Math::Vector3 vector = targetPos - showLife;
+	showLife.z += vector.z / changeAmount;
 }

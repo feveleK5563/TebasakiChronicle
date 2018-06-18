@@ -7,7 +7,7 @@
 //!@param[in] 継続時間
 SkillType::SkillType(const int& moveID,const int& maxUseNum, const float& appearDist, const int& continueTime,const int& attackPoint)
 	: maxUseNum(maxUseNum), appearDist(appearDist), continueTime(continueTime)
-	, charaBehaivor(11), attackPoint(attackPoint)
+	, charaBehaivor(moveID), attackPoint(attackPoint)
 {
 	
 }
@@ -74,16 +74,3 @@ SkillType::Type&	SkillType::GetType()
 	return type;
 }
 
-//!@brief	与えるコリジョンマスクを返す
-//!@return	与えるコリジョンマスク
-CollisionMask&	SkillType::GetGiveCollisionMask()
-{
-	return giveCollisionMask;
-}
-
-//!@brief	受け取るコリジョンマスクを返す
-//!@return	受け取るコリジョンマスク
-CollisionMask&	SkillType::GetReciveCollisionMask()
-{
-	return reciveCollisionMask;
-}
