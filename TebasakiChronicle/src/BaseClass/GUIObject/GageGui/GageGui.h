@@ -40,7 +40,7 @@ private:
 	//!@param[in]	eventMotion	現在のイベントモーション
 	void	UpDateEventMotion(const EventMotion& eventMotion);
 	//!@brief	ゲージを変動させます
-	void	GageGui::Fluctuation(const K_Math::Vector3& targetPos);
+	void	Fluctuation(const K_Math::Vector3& targetPos);
 	//!@brief	リセット
 	void	Reset(GameObject& object);
 private:

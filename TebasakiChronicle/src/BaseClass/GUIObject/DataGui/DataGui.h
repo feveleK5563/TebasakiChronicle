@@ -23,9 +23,6 @@ public:
 	//!@param[in]	gameObj	ゲームオブジェクト
 	void	Raito(GameObject& gameObj);
 
-	//仮のライフ処理
-	void	RaitoRaito();
-
 private:
 	//!@brief	針の変動処理
 	void	Fluctuation(const K_Math::Vector3& targetPos);

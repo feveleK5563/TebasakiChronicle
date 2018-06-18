@@ -56,25 +56,6 @@ void	DataGui::Raito(GameObject& gameObj)
 	Fluctuation(K_Math::Vector3(0, 0, raito));
 }
 
-//仮のライフ処理
-void	DataGui::RaitoRaito()
-{
-	timeCnt++;
-	if (timeCnt >= 60)
-	{
-		if (life > 0)
-		{
-			life--;
-		}
-		timeCnt = 0;
-	}
-
-	//割合の計算
-	raito = (float)((float)life / (float)maxLife) * abs(minAngle - maxAngle) - offsetAngle;
-	//ゲージ変動
-	this->Fluctuation(K_Math::Vector3(0, 0, raito));
-}
-
 
 //!@brief	針の変動処理
 void	DataGui::Fluctuation(const K_Math::Vector3& targetPos)
