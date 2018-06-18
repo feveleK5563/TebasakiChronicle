@@ -33,6 +33,7 @@
     <ClCompile Include="src\BaseClass\Status\Status.cpp" />
     <ClCompile Include="src\CSTList.cpp" />
     <ClCompile Include="src\Effect\Effect.cpp" />
+    <ClCompile Include="src\Event\Event.cpp" />
     <ClCompile Include="src\Loader\EnemyLoader.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Object\CameraMan\CameraMan.cpp" />
@@ -78,6 +79,7 @@
     <ClInclude Include="src\BaseClass\Status\Status.h" />
     <ClInclude Include="src\CSTList.h" />
     <ClInclude Include="src\Effect\Effect.h" />
+    <ClInclude Include="src\Event\Event.h" />
     <ClInclude Include="src\Helper.h" />
     <ClInclude Include="src\Loader\EnemyLoader.h" />
     <ClInclude Include="src\Object\CameraMan\CameraMan.h" />

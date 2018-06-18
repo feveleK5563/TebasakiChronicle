@@ -101,6 +101,9 @@
     <Filter Include="ソース ファイル\src\Scene\Shene_Title">
       <UniqueIdentifier>{ff07ba7e-e451-4175-a113-2571d61d7ef1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\src\Event">
+      <UniqueIdentifier>{311f6e09-06cb-412b-ac5a-7698d29dc786}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -228,6 +231,9 @@
     </ClCompile>
     <ClCompile Include="src\Scene\Scene_Title\Scene_Title.cpp">
       <Filter>ソース ファイル\src\Scene\Shene_Title</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Event\Event.cpp">
+      <Filter>ソース ファイル\src\Event</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -362,6 +368,9 @@
     </ClInclude>
     <ClInclude Include="src\Scene\Scene_Title\Scene_Title.h">
       <Filter>ソース ファイル\src\Scene\Shene_Title</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Event\Event.h">
+      <Filter>ソース ファイル\src\Event</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

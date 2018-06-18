@@ -4,14 +4,14 @@
 //!@brief コンストラクタ
 //!@param[in] filePath モデルのパス
 //!@param[in] texName テクスチャのパス
-Object3D::Object3D(const std::string& filePath_, const std::string& texFilePath_,
+Object3D::Object3D(const std::string& filePath_,
 	const K_Math::Vector3& pos_, const K_Math::Vector3& rotation_, const K_Math::Vector3& scale_)
 	:	modelData(nullptr), model(nullptr), object(nullptr), decisionObj(nullptr),
 		texList(new K_Graphics::TextureList()),
 		decisionPos(pos_), decisionRotation(rotation_), decisionScale(scale_), 
-		filePath(filePath_), texFilePath(texFilePath_)
+		filePath(filePath_)
 {
-	Load(filePath, texFilePath);
+	Load(filePath);
 	CreateMeshModel();
 	CreateMeshObject();
 	CreateDecisionObj();
@@ -44,13 +44,8 @@ Object3D::~Object3D()
 //!@param[in] filePath モデルのパス
 //!@param[in] texName テクスチャのパス
 //!@return 成功ならtrue
-bool	Object3D::Load(const std::string& filePath, const std::string& texFilePath)
+bool	Object3D::Load(const std::string& filePath)
 {
-	//テクスチャの読み込み
-	if (!texList->LoadTexture("fbxTex", texFilePath))
-	{
-		return false;
-	}
 	//モデルの読み込み
 	modelData = factory.LoadFBXModel(filePath, texList);
 	return true;
