@@ -9,6 +9,14 @@ private:
 	TimeCount		timeCnt;		//時間計測
 	int				behaviorId;		//現在の敵から読み取れる動作番号
 
+	K_Math::Vector3	initialPos;		//初期位置
+	int		maxLife;				//体力上限
+	bool	isUseGravity;			//重力を使用するか否か
+
+	static const int subCollisionNum = 6;			//サブコリジョンの数
+	int		collisionGiveMask[subCollisionNum];		//サブコリジョンの与マスク
+	int		collisionMyselfMask[subCollisionNum];	//サブコリジョンの受マスク
+
 	int					nowMoveOrder;		//現在の動作順番
 	int					nowPatternOrder;	//現在の動作パターン番号
 	int					beforeMoveOrder;	//前の動作順番
@@ -26,7 +34,7 @@ private:
 		AttackArea,
 		CheckFoot,
 		CheckHead,
-		RecieveCameraGan,
+		RecieveCameraGun,
 	};
 
 public:
@@ -49,18 +57,24 @@ public:
 	//敵情報を設定
 	void SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction, const int indexNum);
 
+	//無効状態にする
+	void SetNonEnemy();
+
+	//状態を全て初期状態に戻す
+	void ResetEnemy();
+
 	//更新(死亡したか否かを返す)
-	bool Update();
+	void Update();
 
 	//コリジョンとの接触処理
-	//被ダメージによって体力が0になったらtrueを返す
+	//ダメージを受けたらtrueを返す
 	bool RecieveCollisionOperation();
 
 	//タグに情報を格納
 	//体力が0になったらtrueを返す
 	void SetTugData();
 
-	//描画、アニメーションの更新
+	//アニメーションの更新
 	void AnimationUpdate();
 	
 	//描画

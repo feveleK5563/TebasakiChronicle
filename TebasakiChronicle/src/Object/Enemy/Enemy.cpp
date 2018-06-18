@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "../../CSTList.h"
 #include "../../Helper.h"
 
 //コンストラクタ
@@ -23,17 +24,23 @@ Enemy::~Enemy()
 void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction, const int indexNum)
 {
 	ems = cpyet->GetEnemyMoveSet();
-	gameObject.GetStatus().SetStatusData(	Status::State::Active,
+	gameObject.GetStatus().SetStatusData(	Status::State::Non,
 											setPos,
 											K_Math::Vector3(0, 0, 0),
 											K_Math::Vector3(1, 1, 1),
 											direction,
 											cpyet->GetHitDamage(),
 											cpyet->GetMaxLife());
+	gameObject.GetStatus().SetCollisionMask(CollisionMask::TakeDamagePlayer);
+
 	if (cpyet->GetIsUseGravity() == false)
 	{
 		gameObject.GetMove().SetGravity(0.f);
 	}
+
+	initialPos = setPos;
+	maxLife = cpyet->GetMaxLife();
+	isUseGravity = cpyet->GetIsUseGravity();
 
 	gameObject.GetMove().SetAddVec(cpyet->GetMoveSpeed());
 	gameObject.GetMove().SetJumpPow(cpyet->GetJumpPower());
@@ -52,6 +59,12 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	collisionManager.SetSubCollisionData(cpyet->CreateAndGetCheckHeadCollisionData());		//4 頭上判定用コリジョン
 	collisionManager.SetSubCollisionData(cpyet->CreateAndGetRecieveCameraCollisionData());	//5 被カメラガン用コリジョン
 
+	for (int i = 0; i < subCollisionNum; ++i)
+	{
+		collisionGiveMask[i] = collisionManager.GetSubCollisionGiveMask(i);
+		collisionMyselfMask[i] = collisionManager.GetSubCollisionMyselfMask(i);
+	}
+
 	//タグの設定
 	skillAndChip = new SkillAndCharaChip();
 	skillAndChip->pos = &gameObject.GetStatus().GetPos();
@@ -66,17 +79,79 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	collisionManager.SetSubCollisionTagIndex(i, indexNum);
 	collisionManager.SetSubCollisionUserData(i, skillAndChip);
 	SetTugData();
+
+	SetNonEnemy();
+}
+
+//-----------------------------------------------------------------------------
+//無効状態にする
+void Enemy::SetNonEnemy()
+{
+	gameObject.SetState(Status::State::Non);
+	//カメラマン受け用コリジョンを除いたサブコリジョンのマスクを無効にする
+	for (int i = 0; i < subCollisionNum - 1; ++i)
+	{
+		collisionManager.SetSubCollisionGiveMask(i, CollisionMask::Non);
+		collisionManager.SetSubCollisionMyselfMask(i, CollisionMask::Non);
+	}
+}
+
+//-----------------------------------------------------------------------------
+//状態を全て初期状態に戻す
+void Enemy::ResetEnemy()
+{
+	collisionManager.SetBaseCollisionObjectPosition(initialPos);
+	gameObject.SetState(Status::State::Active);
+	timeCnt.ResetCntTime();
+	behaviorId = 0;
+	nowMoveOrder = 0;
+	nowPatternOrder = 0;
+	beforeMoveOrder = 0;
+	beforePatternOrder = 0;
+	//カメラマン受け用コリジョンを除いたサブコリジョンのマスクを有効にする
+	for (int i = 0; i < subCollisionNum - 1; ++i)
+	{
+		collisionManager.SetSubCollisionGiveMask(i, collisionGiveMask[i]);
+		collisionManager.SetSubCollisionMyselfMask(i, collisionMyselfMask[i]);
+	}
+	//アニメーションのリセット
+	gameObject.GetImage().ChangeCharaChip(ems->GetNowAnimChip(nowPatternOrder));
+	gameObject.GetImage().ChangeAnimationPattern(nowMoveOrder);
 }
 
 //-----------------------------------------------------------------------------
 //更新
-bool Enemy::Update()
+void Enemy::Update()
 {
+	//画面外に出ていたら無効
+	if (fabsf(CST::GetPerspectiveCamera()->GetPosition().x - gameObject.GetPos().x) > fabsf((float)Define::ScreenWidth))
+	{
+		if (gameObject.GetState() != Status::State::Non)
+		{
+			gameObject.SetPos(initialPos);
+			SetNonEnemy();
+		}
+		return;
+	}
+
+	//画面内に入っている、かつ死んでいない場合は有効にする
+	if (gameObject.GetState() == Status::State::Non)
+	{
+		ResetEnemy();
+	}
+	else if (gameObject.GetState() == Status::State::Death)
+	{
+		return;
+	}
+
 	//移動量をゼロクリア
 	gameObject.GetMove().GetMoveVec() = K_Math::Vector3(0, 0, 0);
 
 	//重力を加算する
 	gameObject.GetMove().GravityOperation(collisionManager.GetConflictionObjectsTag(3).size() > 0);
+
+	//接触しているコリジョンを調べてダメージを受ける
+	RecieveCollisionOperation();
 
 	//設定されている動作を行う
 	ems->EMove(nowMoveOrder, nowPatternOrder, timeCnt, collisionManager, tempCollisionManager, gameObject.GetStatus(), gameObject.GetMove());
@@ -91,15 +166,17 @@ bool Enemy::Update()
 	//タグ情報を更新
 	SetTugData();
 
-	return RecieveCollisionOperation();
+	return;
 }
 
 //-----------------------------------------------------------------------------
 //コリジョンとの接触処理
-//被ダメージによって体力が0になったらtrueを返す
+//ダメージを受けたらtrueを返す
 bool Enemy::RecieveCollisionOperation()
 {
 	std::vector<K_Physics::CollisionTag*> tag;
+
+	int damage = 0;	//被ダメージ
 
 	//ダメージを受ける
 	tag = collisionManager.GetConflictionObjectsTag(Enemy::EnemyCollisionName::RecieveDamage);
@@ -107,13 +184,12 @@ bool Enemy::RecieveCollisionOperation()
 	{
 		if (((Status*)it->userData)->GetState() == Status::State::Active)
 		{
-			gameObject.GetStatus().GetLife() -= ((Status*)it->userData)->GetAttackPoint();
+			damage += ((Status*)it->userData)->GetAttackPoint();
 		}
 	}
-	int hp = gameObject.GetStatus().GetLife();
 
-	//カメラを受ける
-	tag = collisionManager.GetConflictionObjectsTag(Enemy::EnemyCollisionName::RecieveCameraGan);
+	//カメラガンを受ける
+	tag = collisionManager.GetConflictionObjectsTag(Enemy::EnemyCollisionName::RecieveCameraGun);
 	for (auto it : tag)
 	{
 		if (((Status*)it->userData)->GetState() == Status::State::Active)
@@ -123,7 +199,16 @@ bool Enemy::RecieveCollisionOperation()
 		}
 	}
 
-	return gameObject.GetStatus().GetLife() <= 0;
+	//ダメージを体力に反映
+	gameObject.GetStatus().GetLife() -= damage;
+
+	if (gameObject.GetStatus().GetLife() <= 0)
+	{
+		SetNonEnemy();
+		gameObject.SetState(Status::State::Death);
+	}
+
+	return damage > 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -134,7 +219,7 @@ void Enemy::SetTugData()
 }
 
 //-----------------------------------------------------------------------------
-//描画、アニメーションの更新
+//アニメーションの更新
 void Enemy::AnimationUpdate()
 {
 	gameObject.GetImage().Animation();
@@ -158,6 +243,9 @@ void Enemy::AnimationUpdate()
 //描画
 void Enemy::Render()
 {
+	if (gameObject.GetState() != Status::State::Active)
+		return;
+
 	gameObject.GetImage().ImageDraw3D(	gameObject.GetStatus().GetPos(),
 										gameObject.GetStatus().GetAngle(),
 										gameObject.GetStatus().GetScale(),

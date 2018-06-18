@@ -17,7 +17,6 @@ public:
 	void SetEndTime(int setEndTime);
 
 	//時間を測る
-	//※経過時間が終了時間を超えていた場合は計測が自動的に停止する
 	void Run();
 
 	//現在の経過時間を返す

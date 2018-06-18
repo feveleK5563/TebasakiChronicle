@@ -29,11 +29,13 @@
     <ClCompile Include="src\BaseClass\ImageManager\ImageManager.cpp" />
     <ClCompile Include="src\BaseClass\Input\Input.cpp" />
     <ClCompile Include="src\BaseClass\Move.cpp" />
+    <ClCompile Include="src\BaseClass\Sound\Sound.cpp" />
     <ClCompile Include="src\BaseClass\Status\Status.cpp" />
     <ClCompile Include="src\CSTList.cpp" />
     <ClCompile Include="src\Effect\Effect.cpp" />
     <ClCompile Include="src\Loader\EnemyLoader.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Object\CameraMan\CameraMan.cpp" />
     <ClCompile Include="src\Object\Enemy\Enemy.cpp" />
     <ClCompile Include="src\Object\Enemy\EnemyManager.cpp" />
     <ClCompile Include="src\Object\Enemy\EnemyType\CharacterBehavior.cpp" />
@@ -55,7 +57,9 @@
     <ClCompile Include="src\Object\Player\Skill\SkillType.cpp" />
     <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollision.cpp" />
     <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollisionManager.cpp" />
-    <ClCompile Include="src\Scene\Scene.cpp" />
+    <ClCompile Include="src\Scene\SceneManager.cpp" />
+    <ClCompile Include="src\Scene\Scene_Game\Scene_Game.cpp" />
+    <ClCompile Include="src\Scene\Scene_Title\Scene_Title.cpp" />
     <ClCompile Include="src\TimeCount.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -70,11 +74,13 @@
     <ClInclude Include="src\BaseClass\ImageManager\ImageManager.h" />
     <ClInclude Include="src\BaseClass\Input\Input.h" />
     <ClInclude Include="src\BaseClass\Move.h" />
+    <ClInclude Include="src\BaseClass\Sound\Sound.h" />
     <ClInclude Include="src\BaseClass\Status\Status.h" />
     <ClInclude Include="src\CSTList.h" />
     <ClInclude Include="src\Effect\Effect.h" />
     <ClInclude Include="src\Helper.h" />
     <ClInclude Include="src\Loader\EnemyLoader.h" />
+    <ClInclude Include="src\Object\CameraMan\CameraMan.h" />
     <ClInclude Include="src\Object\Enemy\Enemy.h" />
     <ClInclude Include="src\Object\Enemy\EnemyManager.h" />
     <ClInclude Include="src\Object\Enemy\EnemyType\CharacterBehavior.h" />
@@ -96,7 +102,10 @@
     <ClInclude Include="src\Object\Player\Skill\SkillType.h" />
     <ClInclude Include="src\Object\TemporaryCollision\TemporaryCollision.h" />
     <ClInclude Include="src\Object\TemporaryCollision\TemporaryCollisionManager.h" />
-    <ClInclude Include="src\Scene\Scene.h" />
+    <ClInclude Include="src\Scene\SceneManager.h" />
+    <ClInclude Include="src\Scene\SceneAbstract.h" />
+    <ClInclude Include="src\Scene\Scene_Game\Scene_Game.h" />
+    <ClInclude Include="src\Scene\Scene_Title\Scene_Title.h" />
     <ClInclude Include="src\TimeCount.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

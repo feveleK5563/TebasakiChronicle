@@ -330,25 +330,29 @@ void Behavior_AirMovementToDirection::Finalize(TemporaryCollisionManager& tempma
 void Behavior_ShotBulletFromMiddle::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	K_Math::Vector3 relative(16, 0, 0);
+	K_Math::Vector3 moveVec(10, 0, 0);
 	if (status.GetDirection() == Status::Direction::Left)
+	{
 		relative.x *= -1;
+		moveVec.x *= -1;
+	}
 
 	//攻撃用コリジョンを作成
 	tempmanager.CreateTemporaryCollision(
 		CC::CreateBoxShape(10.f, 10.f, 10.f),
 		CollisionMask::Non,
-		CollisionMask::TakeDamagePlayer,
+		(CollisionMask)status.GetCollisiomMask(),
 		status.GetPos() + relative,
-		K_Math::Vector3(10, 0, 0),
+		moveVec,
 		status.GetDirection(),
 		status.GetAttackPoint(),
 		60,
 		0,
-		false,
+		true,
 		false);
 
 	//(仮)爆発エフェクトの発生
-	Effect::CreateEffect(Effect1, status.GetPos() + K_Math::Vector3(0, 0, -1));
+	Effect::CreateEffect(EffectName::Effect1, status.GetPos() + relative + K_Math::Vector3(0, 0, -1));
 }
 void Behavior_ShotBulletFromMiddle::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
 {
@@ -364,16 +368,20 @@ void Behavior_ShotBulletFromMiddle::Finalize(TemporaryCollisionManager& tempmana
 void Behavior_ThrowBomb::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	K_Math::Vector3 relative(16, 0, 0);
+	K_Math::Vector3 moveVec(10, 10, 0);
 	if (status.GetDirection() == Status::Direction::Left)
+	{
 		relative.x *= -1;
+		moveVec.x *= -1;
+	}
 
 	//攻撃用コリジョンを作成
 	tempmanager.CreateTemporaryCollision(
 		CC::CreateBoxShape(10.f, 10.f, 10.f),
 		CollisionMask::Non,
-		CollisionMask::TakeDamagePlayer,
+		(CollisionMask)status.GetCollisiomMask(),
 		status.GetPos() + relative,
-		K_Math::Vector3(10, 10, 0),
+		moveVec,
 		status.GetDirection(),
 		status.GetAttackPoint(),
 		180,
