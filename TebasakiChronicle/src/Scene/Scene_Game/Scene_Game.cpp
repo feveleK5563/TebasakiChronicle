@@ -16,10 +16,9 @@ Scene_Game::Scene_Game():
 
 	//地形判定付きオブジェクト
 	scale =		{ 10,40,40 };
-	rotation =	{ K_Math::DegToRad(0),K_Math::DegToRad(90),K_Math::DegToRad(0) };
+	rotation =	{ K_Math::DegToRad(0),K_Math::DegToRad(0),K_Math::DegToRad(0) };
 	pos =		{ -120.0f,-50.0f,0.f };
-	mapObj = new Object3D(	"./data/model/testMap2d.fbx", "./data/image/player.tga",
-							pos, rotation, scale);
+	mapObj = new Object3D("data/model/map/map.fbx", pos, rotation, scale);
 
 	//背景画像
 	back = new GUIObject("back", K_Math::Vector3(0, 50, 10), K_Math::Box2D(0, 0, 1920, 720));
@@ -34,7 +33,7 @@ Scene_Game::Scene_Game():
 	gui = new ScreenGui();
 
 	//カメラマン
-	cameraMan = new CameraMan(Define::ScreenWidth, Define::ScreenHeight, 330, player->object.GetPos());
+	cameraMan = new CameraMan(Define::ScreenWidth, Define::ScreenHeight, 500, player->object.GetPos());
 
 	//サウンド
 	source.LoadSound("bgm", "data/sounds/遊戯_drone.ogg");

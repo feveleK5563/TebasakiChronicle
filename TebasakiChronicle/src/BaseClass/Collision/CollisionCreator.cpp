@@ -106,6 +106,6 @@ namespace CC
 	//ƒRƒŠƒWƒ‡ƒ“‚Ì•`‰æ
 	void DebugDraw(K_Graphics::ShaderClass* shaderc, K_Graphics::CameraClass* camerac)
 	{
-		cc->bPhysics->DebugDraw(shaderc, camerac);
+		cc->bPhysics->DebugDraw(shaderc, camerac, 0.1f, 1500.f);
 	}
 }

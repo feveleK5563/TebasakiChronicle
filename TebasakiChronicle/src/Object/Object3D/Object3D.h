@@ -18,7 +18,7 @@ public:
 	//!@param[in] pos_	位置
 	//!@param[in] rotation_ 向き
 	//!@param[in] scale_ 大きさ
-	Object3D(const std::string& filePath, const std::string& texFilePath,
+	Object3D(const std::string& filePath,
 		const K_Math::Vector3& pos_,const K_Math::Vector3& rotation_,const K_Math::Vector3& scale_);
 	//!@brief デストラクタ
 	~Object3D();
@@ -27,7 +27,7 @@ public:
 	//!@param[in] filePath モデルのパス
 	//!@param[in] texName テクスチャのパス
 	//!@return 成功ならtrue
-	bool	Load(const std::string& filePath, const std::string& texFilePath);
+	bool	Load(const std::string& filePath);
 
 	//!@brief 地形オブジェクトの設定
 	//!@param[in] decisionPos_ 地形の位置
