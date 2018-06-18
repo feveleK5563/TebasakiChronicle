@@ -5,7 +5,7 @@ Scene_Game::Scene_Game():
 	etm(new EnemyTypeManager()),
 	emanager(new EnemyManager()),
 	player(new Player()),
-	datagui(player->object)
+	playerLifeGui(new DataGui(player->GetGameObject()))
 {
 	//“G‚Ìí—Ş‚ğì¬
 	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataA1.txt"));
@@ -23,17 +23,15 @@ Scene_Game::Scene_Game():
 	//”wŒi‰æ‘œ
 	back = new GUIObject("back", K_Math::Vector3(0, 50, 10), K_Math::Box2D(0, 0, 1920, 720));
 	back->SetScale(K_Math::Vector3(2, 2, 1));
+	
 	//‰æ–Ê‚ÌUI
-	screenGui = new GUIObject(
-		"ui",
-		K_Math::Vector3(Define::ScreenWidth / 2, Define::ScreenHeight / 2, 0),
-		K_Math::Box2D(0, 0, Define::ScreenWidth, Define::ScreenHeight)
-	);
-	//ƒXƒNƒŠ[ƒ“
-	gui = new ScreenGui();
+	screenGui = new ScreenGui();
+	
+	//“G‚Ìƒ‰ƒCƒtƒQ[ƒW(¡‚ÍƒvƒŒƒCƒ„[‚ÌLife‚Æ˜A“®)
+	enemyGageGui = new GageGui(player->GetGameObject());
 
 	//ƒJƒƒ‰ƒ}ƒ“
-	cameraMan = new CameraMan(Define::ScreenWidth, Define::ScreenHeight, 500, player->object.GetPos());
+	cameraMan = new CameraMan(Define::ScreenWidth, Define::ScreenHeight, 330, player->GetGameObject().GetPos());
 
 	//ƒTƒEƒ“ƒh
 	source.LoadSound("bgm", "data/sounds/—V‹Y_drone.ogg");
@@ -51,8 +49,9 @@ Scene_Game::~Scene_Game()
 	delete player;
 	delete mapObj;
 	delete back;
+	delete playerLifeGui;
 	delete screenGui;
-	delete gui;
+	delete enemyGageGui;
 	delete cameraMan;
 }
 
@@ -70,12 +69,17 @@ SceneName Scene_Game::Update()
 	back->UpDate();
 	//‰æ–ÊUI‚ÌXV
 	screenGui->UpDate();
+	//“G‚ÌLife
+	enemyGageGui->UpDate(player->GetGameObject());
+	//ƒvƒŒƒCƒ„[‚ÌLife
+	playerLifeGui->Raito(player->GetGameObject());
+	playerLifeGui->UpDate();
 
 	//ƒGƒtƒFƒNƒg‚ÌXV
 	Effect::Run();
 
 	//ƒJƒƒ‰’Ç”ö
-	cameraMan->Run(player->object.GetPos());
+	cameraMan->Run(player->GetGameObject().GetPos());
 
 	return nextScene;
 }
@@ -99,16 +103,18 @@ void Scene_Game::Draw()
 	//”wŒi‚Ì•`‰æ
 	back->Render3D();
 
-	//‰æ–ÊUI‚Ì•`‰æ
-	//screenGui->Render();
+	//‰æ–ÊUI‚Ì•`‰æ(Œã‚ë‚Ì•`‰æ‚·‚é‚à‚Ì)
+	screenGui->EarlyRender();
+
+	//“G‚Ìlife
+	enemyGageGui->Render();
+
+	//‰æ–ÊUI‚Ì•`‰æ(‘O‚É•`‰æ‚·‚é‚à‚Ì)
+	screenGui->LateRender();
+
+	//ƒvƒŒƒCƒ„[‚ÌLife
+	playerLifeGui->Render();
 
 	//ƒvƒŒƒC‚â[
 	player->Render();
-
-	gui->UpDate();
-	gui->Render();
-
-	datagui.RaitoRaito();
-	datagui.UpDate();
-	datagui.Render();
 }
