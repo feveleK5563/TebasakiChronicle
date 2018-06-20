@@ -58,6 +58,13 @@ void	Status::SetCollisionMask(const int collisionMask)
 	this->collisionMask = collisionMask;
 }
 
+//!@breif	ó‘Ô‚Ìİ’è
+//!@param[in]	state	ó‘Ô
+void	Status::SetState(const State& state)
+{
+	this->state = state;
+}
+
 //---------------------------------------------------
 //æ“¾ˆ—
 //---------------------------------------------------

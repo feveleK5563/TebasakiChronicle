@@ -16,7 +16,10 @@ public:
 	//!@param[in] srcBox_ 画像元のサイズ
 	GUIObject(const std::string& imageName_,
 		const K_Math::Vector3& pos_,
-		const K_Math::Box2D& srcBox_);
+		const K_Math::Box2D& srcBox_,
+		const int animSheet = 1,
+		const float animSpeed = 1.0f
+		);
 
 	//!@brief デストラクタ
 	~GUIObject();
@@ -35,6 +38,10 @@ public:
 	//!@param[in] moveVec 移動量
 	void	AddVec(const K_Math::Vector3& moveVec);
 
+	//!@brief	回転角度の設定
+	//!@param[in]	angle	角度軸(x,y,z)
+	void	SetAngle(const K_Math::Vector3& angle);
+
 	//!@brief	大きさの設定
 	//!@param[in]	scale 大きさ
 	void	SetScale(const K_Math::Vector3& scale);
@@ -46,9 +53,11 @@ public:
 	//!@brief	回転速度の設定
 	//!@param[in]	ratateSpeed_ 回転速度
 	void		SetRotateSpeed(const float rotateSpeed_);
-	//!@brief	回転させる角度の設定
-	//!@param[in]	angle	回転角度(度数法)
-	void		SetRotateAngle(const float angle);
+
+	//!@brief	回転角度の設定
+	//!@param[in]	rotateAngle	回転角度
+	void		SetRotateAngle(const float rotateAngle);
+
 	//!@brief	回転
 	void		Rotation();
 	//!@brief	移動(1フレーム加算)
@@ -56,10 +65,6 @@ public:
 	//!@brief	移動量の設定
 	void		SetMoveAmount(const float moveAmount);
 
-	//!@brief	移動が終了したか
-	bool		FinishMove();
-	//!@brief	回転が終了したか
-	bool		FinishRotation();
 private:
 	K_Graphics::Texture*	texture;
 	GameObject				object;			//オブジェクト

@@ -9,6 +9,7 @@ SkillData::SkillData()
 	skillID = 0;
 	Clear();
 	guiObj = nullptr;
+	skillNumUI = nullptr;
 }
 
 //----------------------------------------------------------------
@@ -114,6 +115,22 @@ void	SkillData::Clear()
 		delete guiObj;
 		guiObj = nullptr;
 	}
+	
+	for (auto ui : registSkillUI)
+	{
+		if (ui != nullptr)
+		{
+			delete ui;
+			ui = nullptr;
+		}
+	}
+	registSkillUI.clear();
+
+	if (skillNumUI != nullptr)
+	{
+		delete skillNumUI;
+		skillNumUI = nullptr;
+	}
 }
 
 
@@ -207,6 +224,8 @@ void	SkillData::CreateGUIObject()
 	}
 	DecideSkillData();
 	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 64, 64));
+	skillNumUI = new GUIObject("ScreenUI/number2", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
+	CreateRegistSkillUI(guiPos);
 }
 
 //!@brief GUIオブジェクトの位置の移動
@@ -216,7 +235,6 @@ void	SkillData::MoveGUIObjPos()
 	
 	DecideSkillData();
 	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 64, 64));
-	
 	switch (pressBntNum) {
 	case 0: guiObj->AddVec(K_Math::Vector3(0, 64, 0));	break;
 	case 1:	guiObj->AddVec(K_Math::Vector3(-64, 0, 0));	break;
@@ -224,14 +242,29 @@ void	SkillData::MoveGUIObjPos()
 	case 3:	guiObj->AddVec(K_Math::Vector3(0, -64, 0));	break;
 	case 4:	guiObj->AddVec(K_Math::Vector3(0, 0, 0));	break;
 	}
+	skillNumUI = new GUIObject("ScreenUI/number2", guiObj->GetGameObject().GetPos() + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
+
 }
 
 //!@brief スキルUIを描画
 void	SkillData::RenderUI()
 {
+	//登録の際のUI表示
+	for (auto ui : registSkillUI)
+	{
+		if (ui == nullptr) { return; }
+		ui->UpDate();
+		ui->Render();
+	}
+
+	//スキルアイコンのUI
 	if (guiObj == nullptr) { return; }
 	guiObj->UpDate();
 	guiObj->Render();
+
+	if (skillNumUI == nullptr) { return; }
+	skillNumUI->UpDate();
+	skillNumUI->Render();
 }
 
 
@@ -263,5 +296,31 @@ void	SkillData::DecideSkillData()
 		break;
 	default:
 		skillIconImage = "skillIcon";
+	}
+}
+
+
+
+//!@brief	スキル登録の際のUIの作成
+//!@param[in]	rerativePos	相対位置
+void	SkillData::CreateRegistSkillUI(const K_Math::Vector3& rerativePos)
+{
+	K_Math::Vector3 srcBox[4] =
+	{
+		K_Math::Vector3(30,0,0),
+		K_Math::Vector3(0,-30,0) ,
+		K_Math::Vector3(-30,0,0),
+		K_Math::Vector3(0,30,0)
+	};
+	float angle[4] = { 270,0,90,180 };
+	int cnt = 0;
+	for (int i = 0; i < 4; ++i)
+	{
+		registSkillUI.emplace_back(new GUIObject("skillSelect", rerativePos + srcBox[i], K_Math::Box2D(0, 0, 64, 64), 10, 6.0f));
+	}
+	for (auto ui : registSkillUI)
+	{
+		ui->SetAngle(K_Math::Vector3(0, 0, angle[cnt]));
+		cnt++;
 	}
 }

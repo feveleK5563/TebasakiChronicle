@@ -41,7 +41,7 @@ void	Player::Initliaze()
 		K_Math::Vector3(1, 1, 1),
 		Status::Direction::Right,
 		1,
-		10
+		3
 		);
 
 	motion = Idle;
@@ -146,6 +146,12 @@ void	Player::UpDate()
 	if (invicibleCnt > 0)
 	{
 		invicibleCnt--;
+	}
+
+	//ライフが0以下になる
+	if (object.GetLife() <= 0)
+	{
+		object.SetState(Status::State::Death);
 	}
 }
 
@@ -398,6 +404,7 @@ void	Player::Think()
 	{
 		nowMotion = Death;
 	}
+
 	//モーションの更新
 	UpDateMotion(nowMotion);
 	

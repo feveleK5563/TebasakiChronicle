@@ -85,6 +85,11 @@ public:
 	void	DecideSkillData();
 
 private:
+	//!@brief	スキル登録の際のUIの作成
+	//!@param[in]	rerativePos	相対位置
+	void	CreateRegistSkillUI(const K_Math::Vector3& rerativePos);
+
+private:
 	int							skillID;		//スキルID
 	std::shared_ptr<SkillType>	skillType;		//スキルの種類
 	AnimationCharaChip*			animCharaChip;	//アニメーションキャラチップ
@@ -92,6 +97,8 @@ private:
 	int							useNum;			//使用回数
 
 	GUIObject*					guiObj;			//スキルのUI
+	std::vector<GUIObject*>		registSkillUI;	//登録する際のスキルUI
+	GUIObject*					skillNumUI;		//スキルの数UI
 	int							pressBntNum;	//押されたボタン番号
 	std::string					skillIconImage;	//スキルIcon画像名
 };

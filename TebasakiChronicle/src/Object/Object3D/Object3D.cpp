@@ -72,7 +72,7 @@ void	Object3D::SetDecisionParam(const K_Math::Vector3& decisionPos_,
 //!@brief ƒ‚ƒfƒ‹‚Ì•`‰æ
 void	Object3D::Render()
 {
-	object->Draw(CST::GetPerspectiveCamera(), CST::GetShaderClass(0),
+	object->Draw(CST::GetPerspectiveCamera(), CST::GetShaderClass(2),
 		decisionPos,
 		decisionRotation,
 		decisionScale);

@@ -45,6 +45,9 @@ public:
 	//!@brie	コリジョンマスクの設定
 	//!@param[in]	collisionMask	コリジョンマスク
 	void	SetCollisionMask(const int collisionMask);
+	//!@breif	状態の設定
+	//!@param[in]	state	状態
+	void	SetState(const State& state);
 
 	//取得処理
 	State&				GetState();
