@@ -1,4 +1,5 @@
 #include "Scene_Game.h"
+#include "../../BaseClass/Collision/CollisionCreator.h"
 
 //コンストラクタ
 Scene_Game::Scene_Game():
@@ -81,6 +82,11 @@ SceneName Scene_Game::Update()
 	//カメラ追尾
 	cameraMan->Run(player->GetGameObject().GetPos());
 
+	if (player->GetGameObject().IsDead())
+	{
+		nextScene = SceneName::Title;
+	}
+
 	return nextScene;
 }
 
@@ -115,6 +121,6 @@ void Scene_Game::Draw()
 	//プレイヤーのLife
 	playerLifeGui->Render();
 
-	//プレイやー
+	//プレイヤー
 	player->Render();
 }
