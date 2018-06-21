@@ -53,6 +53,7 @@ Scene_Game::~Scene_Game()
 	delete screenGui;
 	delete enemyGageGui;
 	delete cameraMan;
+	soundEngine.DeleteSound(source.GetName().c_str());
 }
 
 //更新(次に設定したいシーン名を返す)

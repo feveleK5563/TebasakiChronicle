@@ -17,11 +17,7 @@ SkillData::SkillData()
 //----------------------------------------------------------------
 SkillData::~SkillData()
 {
-	if (guiObj != nullptr)
-	{
-		delete guiObj;
-		guiObj = nullptr;
-	}
+	Clear();
 }
 
 
@@ -149,16 +145,22 @@ int		SkillData::GetNowUseNum() const
 bool	SkillData::CheckUseNum()
 {
 	if (skillType == nullptr) { return false; }
-	if (useNum >= skillType->GetMaxUseNum())
+	//if (useNum >= skillType->GetMaxUseNum())
+	{
+		//return false;
+	}
+
+	if (useNum <= 0)
 	{
 		return false;
 	}
+	
 	return true;
 }
 //!@brief 使用回数をカウントする処理
 void	SkillData::CountUseNum()
 {
-	useNum++;
+	useNum -= 1;
 }
 
 
@@ -209,6 +211,8 @@ void	SkillData::CreateSkillType()
 	default:
 		skillType = nullptr;
 	}
+	if (skillType == nullptr) { return; }
+	useNum = skillType->GetMaxUseNum();
 }
 
 //!@brief スキルのGUIオブジェクトの生成
@@ -224,8 +228,9 @@ void	SkillData::CreateGUIObject()
 	}
 	DecideSkillData();
 	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 64, 64));
-	skillNumUI = new GUIObject("ScreenUI/number2", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
 	CreateRegistSkillUI(guiPos);
+
+	skillNumUI = new GUIObject("ScreenUI/number2", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
 }
 
 //!@brief GUIオブジェクトの位置の移動
@@ -242,8 +247,18 @@ void	SkillData::MoveGUIObjPos()
 	case 3:	guiObj->AddVec(K_Math::Vector3(0, -64, 0));	break;
 	case 4:	guiObj->AddVec(K_Math::Vector3(0, 0, 0));	break;
 	}
-	skillNumUI = new GUIObject("ScreenUI/number2", guiObj->GetGameObject().GetPos() + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
 
+	skillNumUI = new GUIObject("ScreenUI/number2", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
+	
+	K_Math::Vector3	addVec[] =
+	{
+		K_Math::Vector3(0,64,0),
+		K_Math::Vector3(-64,0,0),
+		K_Math::Vector3(64,0,0),
+		K_Math::Vector3(0,-64,0)
+	};
+
+	skillNumUI->AddVec(addVec[pressBntNum]);
 }
 
 //!@brief スキルUIを描画
@@ -264,7 +279,8 @@ void	SkillData::RenderUI()
 
 	if (skillNumUI == nullptr) { return; }
 	skillNumUI->UpDate();
-	skillNumUI->Render();
+	std::string	text = std::to_string(GetNowUseNum());
+	skillNumUI->RenderNumberImage(text.c_str());
 }
 
 
@@ -324,3 +340,4 @@ void	SkillData::CreateRegistSkillUI(const K_Math::Vector3& rerativePos)
 		cnt++;
 	}
 }
+

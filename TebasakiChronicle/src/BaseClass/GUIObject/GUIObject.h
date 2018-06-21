@@ -65,6 +65,9 @@ public:
 	//!@brief	移動量の設定
 	void		SetMoveAmount(const float moveAmount);
 
+	//!@brief	数字画像描画専用
+	//!@param[in]	numStr	数字文字列
+	void		RenderNumberImage(const char* numStr);
 private:
 	K_Graphics::Texture*	texture;
 	GameObject				object;			//オブジェクト

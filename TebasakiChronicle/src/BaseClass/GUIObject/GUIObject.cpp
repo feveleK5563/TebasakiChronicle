@@ -140,3 +140,21 @@ void		GUIObject::SetMoveAmount(const float moveAmount)
 	this->moveAmount = moveAmount;
 }
 
+//!@brief	”š‰æ‘œ•`‰æê—p
+//!@param[in]	numStr	”š•¶š—ñ
+void		GUIObject::RenderNumberImage(const char* numStr)
+{
+	int dx = object.GetPos().x;
+	int dy = object.GetPos().y;
+	for (int i = 0; i < (int)strlen(numStr); ++i)
+	{
+		int code = ((unsigned char)numStr[i]);
+		int fx = (code - '0') * 16;
+		int fy = 0;
+		K_Math::Vector3 drawPos = K_Math::Vector3(dx, dy, 0);
+		K_Math::Box2D src = K_Math::Box2D(fx, fy, 16, 16);
+		GetGameObject().GetImage().GetNowAnimationCharaChip()->chip = src;
+		GetGameObject().GetImage().ImageDraw2D(drawPos, object.GetAngle(), object.GetScale(), 0);
+		dx += 8 + 3;
+	}
+}

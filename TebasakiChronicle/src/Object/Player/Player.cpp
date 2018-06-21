@@ -36,7 +36,7 @@ void	Player::Initliaze()
 	//オブジェクトの初期化
 	object.GetStatus().SetStatusData(
 		Status::State::Active,
-		K_Math::Vector3(50, 0, 0),
+		K_Math::Vector3(50, 50, 0),
 		K_Math::Vector3(0, 0, 0),
 		K_Math::Vector3(1, 1, 1),
 		Status::Direction::Right,

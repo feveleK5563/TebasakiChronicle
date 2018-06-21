@@ -20,7 +20,7 @@ SkillManager::SkillManager()
 //----------------------------------------------------------------
 SkillManager::~SkillManager()
 {
-	
+
 }
 
 
@@ -106,6 +106,7 @@ bool	SkillManager::ReceiveSkillAndCharaChip(const Enemy::SkillAndCharaChip& skil
 	skillDatas[skillNum - 1].SetAnimCharaChip(skill.nowCharaChip);
 	skillDatas[skillNum - 1].SetPressBtnNum(skillNum - 1);
 	skillDatas[skillNum - 1].CreateGUIObject();
+	skillDatas[skillNum - 1].CreateSkillType();
 	return true;
 }
 
