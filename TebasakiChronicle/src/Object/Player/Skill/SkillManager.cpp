@@ -20,7 +20,7 @@ SkillManager::SkillManager()
 //----------------------------------------------------------------
 SkillManager::~SkillManager()
 {
-	
+
 }
 
 
@@ -96,7 +96,7 @@ bool	SkillManager::ReceiveSkillAndCharaChip(const Enemy::SkillAndCharaChip& skil
 	//SkillIDが0でないかをチェック
 	if (IsNonSkillID(*skill.behaviorId))
 	{
-		//return false;
+		return false;
 	}
 
 	skillDatas[skillNum - 1].Clear();	//クリア
@@ -106,6 +106,7 @@ bool	SkillManager::ReceiveSkillAndCharaChip(const Enemy::SkillAndCharaChip& skil
 	skillDatas[skillNum - 1].SetAnimCharaChip(skill.nowCharaChip);
 	skillDatas[skillNum - 1].SetPressBtnNum(skillNum - 1);
 	skillDatas[skillNum - 1].CreateGUIObject();
+	skillDatas[skillNum - 1].CreateSkillType();
 	return true;
 }
 
@@ -209,6 +210,7 @@ void	SkillManager::RegistSkillData(const int& btnNum)
 {
 	if (CheckRegistFlag())
 	{
+		if (skillDatas[skillNum - 1].GetSkillID() == 0) { return; }
 		std::cout << "登録します" << std::endl;
 		RegistSkill(btnNum);						//スキルを登録
 		skillDatas[btnNum].CreateSkillType();		//スキルの種類を生成

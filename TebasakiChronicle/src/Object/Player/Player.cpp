@@ -36,12 +36,12 @@ void	Player::Initliaze()
 	//オブジェクトの初期化
 	object.GetStatus().SetStatusData(
 		Status::State::Active,
-		K_Math::Vector3(50, 32, 0),
+		K_Math::Vector3(50, 50, 0),
 		K_Math::Vector3(0, 0, 0),
 		K_Math::Vector3(1, 1, 1),
 		Status::Direction::Right,
 		1,
-		10
+		3
 		);
 
 	motion = Idle;
@@ -127,8 +127,10 @@ void	Player::UpDate()
 	cameraGun.UpDate(object.GetPos());
 
 	//スキルの使用---------------------
-	RegistSkill();
-	//skillManager.UpDate();
+	if (skillManager.CheckRegistFlag())
+	{
+		RegistSkill();
+	}
 	skillManager.UpDate(object);
 
 	//当たり判定動作-------------------
@@ -144,6 +146,12 @@ void	Player::UpDate()
 	if (invicibleCnt > 0)
 	{
 		invicibleCnt--;
+	}
+
+	//ライフが0以下になる
+	if (object.GetLife() <= 0)
+	{
+		object.SetState(Status::State::Death);
 	}
 }
 
@@ -235,9 +243,12 @@ void	Player::ReverseCameraGun()
 		//---------------------------------------------------
 		if (&cameraGun.GetSkillAndCharaChip() != nullptr)
 		{
-			skillManager.ChangeRegistFlag(true);	//登録モードへ
-			//カメラガンからスキルデータを受け取る
-			skillManager.ReceiveSkillAndCharaChip(cameraGun.GetSkillAndCharaChip());
+			if (*cameraGun.GetSkillAndCharaChip().behaviorId != 0)
+			{
+				skillManager.ChangeRegistFlag(true);	//登録モードへ
+				//カメラガンからスキルデータを受け取る
+				skillManager.ReceiveSkillAndCharaChip(cameraGun.GetSkillAndCharaChip());
+			}
 		}
 		//カメラマーカーをプレイヤーの位置に戻す
 		cameraGun.SetCameraGun(false);
@@ -393,6 +404,7 @@ void	Player::Think()
 	{
 		nowMotion = Death;
 	}
+
 	//モーションの更新
 	UpDateMotion(nowMotion);
 	

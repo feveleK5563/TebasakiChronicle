@@ -205,7 +205,7 @@ int&				GameObject::GetLife()
 //!@param[in]	ƒ‰ƒCƒt‚ª‚È‚¢ true ‚ ‚é‚È‚ç false
 bool	GameObject::IsDead()
 {
-	if (GetLife() <= 0)
+	if (this->GetState() == Status::State::Death)
 	{
 		return true;
 	}

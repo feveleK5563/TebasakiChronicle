@@ -55,7 +55,7 @@ Scene_Game::~Scene_Game()
 	delete enemyGageGui;
 	delete cameraMan;
 
-	soundEngine.DeleteSound("bgm");
+	soundEngine.DeleteSound(source.GetName().c_str());
 }
 
 //更新(次に設定したいシーン名を返す)
@@ -95,16 +95,15 @@ SceneName Scene_Game::Update()
 //描画
 void Scene_Game::Draw()
 {
-	emanager->RenderAllEnemy();
-
 	//*****************************
 	//FBXモデルの描画
 	CST::GetShaderClass(2)->UseShader();
 	//----------------------------
 	//地形判定付きオブジェクト
 	mapObj->Render();
-
 	CST::GetShaderClass(1)->UseShader();
+
+	emanager->RenderAllEnemy();
 
 	Effect::Render();
 
@@ -125,4 +124,5 @@ void Scene_Game::Draw()
 
 	//プレイヤー
 	player->Render();
+
 }

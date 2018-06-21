@@ -6,7 +6,9 @@
 //-------------------------------------------------
 GUIObject::GUIObject(const std::string& imageName_,
 	const K_Math::Vector3& pos_,
-	const K_Math::Box2D& srcBox_)
+	const K_Math::Box2D& srcBox_,
+	const int animSheet,
+	const float animSpeed)
 	: imageName(imageName_)
 	, srcBox(srcBox_)
 {
@@ -23,7 +25,7 @@ GUIObject::GUIObject(const std::string& imageName_,
 	texture->Initialize();
 	texture->LoadImage("./data/image/" + imageName + ".png");
 	object.SetImage(texture, true);
-	object.GetImage().CreateCharaChip(srcBox, 1, 1, false);
+	object.GetImage().CreateCharaChip(srcBox, animSheet, animSpeed, true);
 }
 
 //ƒfƒXƒgƒ‰ƒNƒ^
@@ -68,6 +70,13 @@ void	GUIObject::AddVec(const K_Math::Vector3& moveVec)
 	object.SetPos(object.GetPos() + moveVec);
 }
 
+//!@brief	‰ñ“]Šp“x‚Ìİ’è
+//!@param[in]	angle	Šp“x²(x,y,z)
+void	GUIObject::SetAngle(const K_Math::Vector3& angle)
+{
+	object.SetAngle(angle);
+}
+
 //!@brief	‘å‚«‚³‚Ìİ’è
 //!@param[in]	scale ‘å‚«‚³
 void	GUIObject::SetScale(const K_Math::Vector3& scale)
@@ -90,11 +99,11 @@ void		GUIObject::SetRotateSpeed(const float rotateSpeed_)
 	rotateSpeed = rotateSpeed_;
 }
 
-//!@brief	‰ñ“]‚³‚¹‚éŠp“x‚Ìİ’è
-//!@param[in]	angle	‰ñ“]Šp“x(“x”–@)
-void		GUIObject::SetRotateAngle(const float angle)
+//!@brief	‰ñ“]Šp“x‚Ìİ’è
+//!@param[in]	rotateAngle	‰ñ“]Šp“x
+void		GUIObject::SetRotateAngle(const float rotateAngle)
 {
-	maxAngle = angle;
+	angle = rotateAngle;
 }
 
 //!@brief	‰ñ“]
@@ -131,33 +140,21 @@ void		GUIObject::SetMoveAmount(const float moveAmount)
 	this->moveAmount = moveAmount;
 }
 
-//!@brief	ˆÚ“®‚ªI—¹‚µ‚½‚©
-bool		GUIObject::FinishMove()
+//!@brief	”š‰æ‘œ•`‰æê—p
+//!@param[in]	numStr	”š•¶š—ñ
+void		GUIObject::RenderNumberImage(const char* numStr)
 {
-	if (moveCnt <= moveAmount)
+	int dx = object.GetPos().x;
+	int dy = object.GetPos().y;
+	for (int i = 0; i < (int)strlen(numStr); ++i)
 	{
-		return false;
+		int code = ((unsigned char)numStr[i]);
+		int fx = (code - '0') * 16;
+		int fy = 0;
+		K_Math::Vector3 drawPos = K_Math::Vector3(dx, dy, 0);
+		K_Math::Box2D src = K_Math::Box2D(fx, fy, 16, 16);
+		GetGameObject().GetImage().GetNowAnimationCharaChip()->chip = src;
+		GetGameObject().GetImage().ImageDraw2D(drawPos, object.GetAngle(), object.GetScale(), 0);
+		dx += 8 + 3;
 	}
-	moveCnt = 0;
-	return true;
-}
-
-//!@brief	‰ñ“]‚ªI—¹‚µ‚½‚©
-bool		GUIObject::FinishRotation()
-{
-	if (rotateSpeed < 0.0f)
-	{
-		if (angle >= maxAngle)
-		{
-			return true;
-		}
-	}
-	else
-	{
-		if (angle <= -maxAngle)
-		{
-			return true;
-		}
-	}
-	return false;
 }

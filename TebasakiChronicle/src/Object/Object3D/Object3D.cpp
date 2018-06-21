@@ -5,7 +5,9 @@
 //!@param[in] filePath モデルのパス
 //!@param[in] texName テクスチャのパス
 Object3D::Object3D(const std::string& filePath_,
-	const K_Math::Vector3& pos_, const K_Math::Vector3& rotation_, const K_Math::Vector3& scale_)
+	const K_Math::Vector3& pos_,
+	const K_Math::Vector3& rotation_,
+	const K_Math::Vector3& scale_)
 	:	modelData(nullptr), model(nullptr), object(nullptr), decisionObj(nullptr),
 		texList(new K_Graphics::TextureList()),
 		decisionPos(pos_), decisionRotation(rotation_), decisionScale(scale_), 
@@ -42,7 +44,6 @@ Object3D::~Object3D()
 
 //!@brief モデルのロードとテクスチャのロード
 //!@param[in] filePath モデルのパス
-//!@param[in] texName テクスチャのパス
 //!@return 成功ならtrue
 bool	Object3D::Load(const std::string& filePath)
 {
@@ -50,6 +51,7 @@ bool	Object3D::Load(const std::string& filePath)
 	modelData = factory.LoadFBXModel(filePath, texList);
 	return true;
 }
+
 
 //!@brief 地形オブジェクトのパラメータ設定
 //!@param[in] decisionPos_ 地形の位置

@@ -6,9 +6,10 @@
 //----------------------------------------------------------------
 SkillData::SkillData()
 {
-	skillID = -1;
+	skillID = 0;
 	Clear();
 	guiObj = nullptr;
+	skillNumUI = nullptr;
 }
 
 //----------------------------------------------------------------
@@ -16,11 +17,7 @@ SkillData::SkillData()
 //----------------------------------------------------------------
 SkillData::~SkillData()
 {
-	if (guiObj != nullptr)
-	{
-		delete guiObj;
-		guiObj = nullptr;
-	}
+	Clear();
 }
 
 
@@ -102,7 +99,7 @@ void	SkillData::SetSkillImageName(const std::string& skillImageName_)
 //!@brief 中身のデータをすべてクリアする
 void	SkillData::Clear()
 {
-	skillID = -1;				//スキルID
+	skillID = 0;				//スキルID
 	skillType = nullptr;		//スキルの種類
 	animCharaChip = nullptr;	//アニメーションキャラチップ
 	skillImageName = "";		//スキルの画像名
@@ -113,6 +110,22 @@ void	SkillData::Clear()
 	{
 		delete guiObj;
 		guiObj = nullptr;
+	}
+	
+	for (auto ui : registSkillUI)
+	{
+		if (ui != nullptr)
+		{
+			delete ui;
+			ui = nullptr;
+		}
+	}
+	registSkillUI.clear();
+
+	if (skillNumUI != nullptr)
+	{
+		delete skillNumUI;
+		skillNumUI = nullptr;
 	}
 }
 
@@ -132,16 +145,22 @@ int		SkillData::GetNowUseNum() const
 bool	SkillData::CheckUseNum()
 {
 	if (skillType == nullptr) { return false; }
-	if (useNum >= skillType->GetMaxUseNum())
+	//if (useNum >= skillType->GetMaxUseNum())
+	{
+		//return false;
+	}
+
+	if (useNum <= 0)
 	{
 		return false;
 	}
+	
 	return true;
 }
 //!@brief 使用回数をカウントする処理
 void	SkillData::CountUseNum()
 {
-	useNum++;
+	useNum -= 1;
 }
 
 
@@ -192,6 +211,8 @@ void	SkillData::CreateSkillType()
 	default:
 		skillType = nullptr;
 	}
+	if (skillType == nullptr) { return; }
+	useNum = skillType->GetMaxUseNum();
 }
 
 //!@brief スキルのGUIオブジェクトの生成
@@ -207,6 +228,9 @@ void	SkillData::CreateGUIObject()
 	}
 	DecideSkillData();
 	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 64, 64));
+	CreateRegistSkillUI(guiPos);
+
+	skillNumUI = new GUIObject("ScreenUI/number2", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
 }
 
 //!@brief GUIオブジェクトの位置の移動
@@ -216,7 +240,6 @@ void	SkillData::MoveGUIObjPos()
 	
 	DecideSkillData();
 	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 64, 64));
-	
 	switch (pressBntNum) {
 	case 0: guiObj->AddVec(K_Math::Vector3(0, 64, 0));	break;
 	case 1:	guiObj->AddVec(K_Math::Vector3(-64, 0, 0));	break;
@@ -224,14 +247,40 @@ void	SkillData::MoveGUIObjPos()
 	case 3:	guiObj->AddVec(K_Math::Vector3(0, -64, 0));	break;
 	case 4:	guiObj->AddVec(K_Math::Vector3(0, 0, 0));	break;
 	}
+
+	skillNumUI = new GUIObject("ScreenUI/number2", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
+	
+	K_Math::Vector3	addVec[] =
+	{
+		K_Math::Vector3(0,64,0),
+		K_Math::Vector3(-64,0,0),
+		K_Math::Vector3(64,0,0),
+		K_Math::Vector3(0,-64,0)
+	};
+
+	skillNumUI->AddVec(addVec[pressBntNum]);
 }
 
 //!@brief スキルUIを描画
 void	SkillData::RenderUI()
 {
+	//登録の際のUI表示
+	for (auto ui : registSkillUI)
+	{
+		if (ui == nullptr) { return; }
+		ui->UpDate();
+		ui->Render();
+	}
+
+	//スキルアイコンのUI
 	if (guiObj == nullptr) { return; }
 	guiObj->UpDate();
 	guiObj->Render();
+
+	if (skillNumUI == nullptr) { return; }
+	skillNumUI->UpDate();
+	std::string	text = std::to_string(GetNowUseNum());
+	skillNumUI->RenderNumberImage(text.c_str());
 }
 
 
@@ -261,5 +310,34 @@ void	SkillData::DecideSkillData()
 	case 4:
 		skillIconImage = "skillIcon";
 		break;
+	default:
+		skillIconImage = "skillIcon";
 	}
 }
+
+
+
+//!@brief	スキル登録の際のUIの作成
+//!@param[in]	rerativePos	相対位置
+void	SkillData::CreateRegistSkillUI(const K_Math::Vector3& rerativePos)
+{
+	K_Math::Vector3 srcBox[4] =
+	{
+		K_Math::Vector3(30,0,0),
+		K_Math::Vector3(0,-30,0) ,
+		K_Math::Vector3(-30,0,0),
+		K_Math::Vector3(0,30,0)
+	};
+	float angle[4] = { 270,0,90,180 };
+	int cnt = 0;
+	for (int i = 0; i < 4; ++i)
+	{
+		registSkillUI.emplace_back(new GUIObject("skillSelect", rerativePos + srcBox[i], K_Math::Box2D(0, 0, 64, 64), 10, 6.0f));
+	}
+	for (auto ui : registSkillUI)
+	{
+		ui->SetAngle(K_Math::Vector3(0, 0, angle[cnt]));
+		cnt++;
+	}
+}
+
