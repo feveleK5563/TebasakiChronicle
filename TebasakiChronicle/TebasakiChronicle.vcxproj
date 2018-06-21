@@ -59,6 +59,8 @@
     <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollision.cpp" />
     <ClCompile Include="src\Object\TemporaryCollision\TemporaryCollisionManager.cpp" />
     <ClCompile Include="src\Scene\SceneManager.cpp" />
+    <ClCompile Include="src\Scene\Scene_GameClear\Scene_GameClear.cpp" />
+    <ClCompile Include="src\Scene\Scene_GameOver\Scene_GameOver.cpp" />
     <ClCompile Include="src\Scene\Scene_Game\Scene_Game.cpp" />
     <ClCompile Include="src\Scene\Scene_Title\Scene_Title.cpp" />
     <ClCompile Include="src\TimeCount.cpp" />
@@ -106,6 +108,8 @@
     <ClInclude Include="src\Object\TemporaryCollision\TemporaryCollisionManager.h" />
     <ClInclude Include="src\Scene\SceneManager.h" />
     <ClInclude Include="src\Scene\SceneAbstract.h" />
+    <ClInclude Include="src\Scene\Scene_GameClear\Scene_GameClear.h" />
+    <ClInclude Include="src\Scene\Scene_GameOver\Scene_GameOver.h" />
     <ClInclude Include="src\Scene\Scene_Game\Scene_Game.h" />
     <ClInclude Include="src\Scene\Scene_Title\Scene_Title.h" />
     <ClInclude Include="src\TimeCount.h" />

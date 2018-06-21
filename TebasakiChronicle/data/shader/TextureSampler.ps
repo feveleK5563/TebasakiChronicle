@@ -56,11 +56,4 @@ vec4 specular(){
 void main(void)
 {
 	resultColor = texture2D(sampler, outTexCoord);
-
-	resultColor = resultColor * diffuse() + specular();
-
-	vec4 fogColor = vec4(0.5, 0.7, 0.9, 1.0);
-	float fogRatio = (outPosition.z / 1000.0);
-	fogRatio = clamp(fogRatio, 0.0, 1.0);
-	resultColor = resultColor * (1 - fogRatio) + fogColor * fogRatio;
 }

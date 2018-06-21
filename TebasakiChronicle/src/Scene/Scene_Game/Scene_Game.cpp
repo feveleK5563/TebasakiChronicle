@@ -54,6 +54,8 @@ Scene_Game::~Scene_Game()
 	delete screenGui;
 	delete enemyGageGui;
 	delete cameraMan;
+
+	soundEngine.DeleteSound("bgm");
 }
 
 //更新(次に設定したいシーン名を返す)
@@ -84,7 +86,7 @@ SceneName Scene_Game::Update()
 
 	if (player->GetGameObject().IsDead())
 	{
-		nextScene = SceneName::Title;
+		nextScene = SceneName::GameOver;
 	}
 
 	return nextScene;

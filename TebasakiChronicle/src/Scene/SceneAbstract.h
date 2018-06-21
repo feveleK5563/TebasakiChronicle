@@ -5,6 +5,8 @@ enum struct SceneName
 	Non,
 	Title,
 	Game,
+	GameOver,
+	GameClear,
 };
 
 class SceneAbstract
