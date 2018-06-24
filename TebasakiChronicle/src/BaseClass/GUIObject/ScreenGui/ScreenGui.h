@@ -11,24 +11,31 @@ class ScreenGui
 public:
 	//!@brief	コンストラクタ
 	ScreenGui();
-	//!@brief	ですトラクタ
+	//!@brief	デストラクタ
 	~ScreenGui();
 
 	//!@brief	更新
 	void	UpDate();
 	//!@brief	描画
 	void	Render();
-
 	//!@brief	早めに描画する
 	void	EarlyRender();
 	//!@brief	遅めに描画する
 	void	LateRender();
 
 private:
+	struct GearData
+	{
+		int		no;
+		K_Math::Vector3	pos;
+	};
+private:
 	GUIObject*		gearLeft[5];	//歯車左側
 	GUIObject*		gearRight[6];	//歯車右側
 	GUIObject*		gearLife[4];	//Lifeの歯車
 	GUIObject*		skillArea;		//スキルのUI
 	GUIObject*		lifeBaseArea;	//体力の基盤
-	GUIObject*		enemyLife;		//敵のライフゲージ
+
+	std::vector<GUIObject*>	gears;		//ギア
+	
 };

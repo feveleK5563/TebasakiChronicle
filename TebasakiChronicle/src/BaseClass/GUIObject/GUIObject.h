@@ -33,15 +33,12 @@ public:
 	//!@brief 位置の設定
 	//!@param[in] pos_ 移動させる位置
 	void	SetPos(const K_Math::Vector3& pos_);
-
 	//!@brief	位置の移動
 	//!@param[in] moveVec 移動量
 	void	AddVec(const K_Math::Vector3& moveVec);
-
 	//!@brief	回転角度の設定
 	//!@param[in]	angle	角度軸(x,y,z)
 	void	SetAngle(const K_Math::Vector3& angle);
-
 	//!@brief	大きさの設定
 	//!@param[in]	scale 大きさ
 	void	SetScale(const K_Math::Vector3& scale);
@@ -53,10 +50,12 @@ public:
 	//!@brief	回転速度の設定
 	//!@param[in]	ratateSpeed_ 回転速度
 	void		SetRotateSpeed(const float rotateSpeed_);
-
 	//!@brief	回転角度の設定
 	//!@param[in]	rotateAngle	回転角度
 	void		SetRotateAngle(const float rotateAngle);
+	//!@brief	画像ソースのオフセット量
+	//!@param[in]	offsetSrcPos	オフセット量
+	void		SetOffsetSrcPos(const K_Math::Vector2& offsetSrcPos);
 
 	//!@brief	回転
 	void		Rotation();
@@ -78,4 +77,5 @@ private:
 	float					maxAngle;		//最大角度
 	float					moveCnt;		//移動カウント
 	float					moveAmount;		//移動させる量
+	K_Math::Vector2			offsetSrcPos;	//オフセット量
 };

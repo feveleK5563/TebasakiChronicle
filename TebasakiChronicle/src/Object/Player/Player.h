@@ -57,6 +57,8 @@ public:
 		GunLeftRun,		//左足カメラガン
 		GunJump,		//ジャンプカメラガン
 		GunFall,		//落下カメラガン
+		GunIdle,		//待機中のカメラガン
+		Damage,			//ダメージ
 	};
 
 public:

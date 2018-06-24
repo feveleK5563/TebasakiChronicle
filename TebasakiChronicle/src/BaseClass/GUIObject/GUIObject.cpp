@@ -2,7 +2,7 @@
 #include "CameraList.h"
 
 //-------------------------------------------------
-//コンストラクタ
+//!@brief	コンストラクタ
 //-------------------------------------------------
 GUIObject::GUIObject(const std::string& imageName_,
 	const K_Math::Vector3& pos_,
@@ -15,6 +15,8 @@ GUIObject::GUIObject(const std::string& imageName_,
 	rotateSpeed = 1.0f;
 	angle = 0.0f;
 	maxAngle = 360.0f;
+	moveAmount = 0.0f;
+	offsetSrcPos = K_Math::Vector2(0,0);
 
 	object.SetPos(pos_);
 	object.SetAngle(K_Math::Vector3(0, 0, angle));
@@ -28,7 +30,9 @@ GUIObject::GUIObject(const std::string& imageName_,
 	object.GetImage().CreateCharaChip(srcBox, animSheet, animSpeed, true);
 }
 
-//デストラクタ
+//-----------------------------------------------------------------------
+//!@brief	デストラクタ
+//-----------------------------------------------------------------------
 GUIObject::~GUIObject()
 {
 	if (texture != nullptr)
@@ -37,20 +41,26 @@ GUIObject::~GUIObject()
 		texture = nullptr;
 	}
 }
-//更新処理
+
+//------------------------------------------------------------------------
+//!@brief	更新処理
+//------------------------------------------------------------------------
 void	GUIObject::UpDate()
 {
 	object.GetImage().Animation();
 }
 
+//------------------------------------------------------------------------
 //!@brief	2D空間に描画する
+//------------------------------------------------------------------------
 void	GUIObject::Render()
 {
 	object.GetImage().ImageDraw2D(object.GetPos(), object.GetAngle(), object.GetScale(), 0);
 }
 
-
+//------------------------------------------------------------------------
 //!@brief	3D空間に描画する
+//------------------------------------------------------------------------
 void	GUIObject::Render3D()
 {
 	object.GetImage().ImageDraw3D(object.GetPos(), object.GetAngle(), object.GetScale(), object.GetDirection());
@@ -105,6 +115,12 @@ void		GUIObject::SetRotateAngle(const float rotateAngle)
 {
 	angle = rotateAngle;
 }
+//!@brief	画像ソースのオフセット量
+//!@param[in]	offsetSrcPos	オフセット量(x,y)
+void		GUIObject::SetOffsetSrcPos(const K_Math::Vector2& offsetSrcPos)
+{
+	this->offsetSrcPos = offsetSrcPos;
+}
 
 //!@brief	回転
 void		GUIObject::Rotation()
@@ -130,7 +146,7 @@ void		GUIObject::Rotation()
 //!@brief	移動(1フレーム加算)
 void		GUIObject::AddVec()
 {
-	moveCnt++;
+	moveCnt += 1;
 	object.GetMove().SetAddVec(1);
 }
 
@@ -144,17 +160,15 @@ void		GUIObject::SetMoveAmount(const float moveAmount)
 //!@param[in]	numStr	数字文字列
 void		GUIObject::RenderNumberImage(const char* numStr)
 {
-	int dx = object.GetPos().x;
-	int dy = object.GetPos().y;
+	K_Math::Vector2 distance = object.GetPos();
 	for (int i = 0; i < (int)strlen(numStr); ++i)
 	{
 		int code = ((unsigned char)numStr[i]);
-		int fx = (code - '0') * 16;
-		int fy = 0;
-		K_Math::Vector3 drawPos = K_Math::Vector3(dx, dy, 0);
-		K_Math::Box2D src = K_Math::Box2D(fx, fy, 16, 16);
-		GetGameObject().GetImage().GetNowAnimationCharaChip()->chip = src;
-		GetGameObject().GetImage().ImageDraw2D(drawPos, object.GetAngle(), object.GetScale(), 0);
-		dx += 8 + 3;
+		int fx = (code - '0') * srcBox.w;
+		int fy = 0 * srcBox.h;
+		GetGameObject().GetImage().GetNowAnimationCharaChip()->chip = K_Math::Box2D(fx, fy, srcBox.w, srcBox.h);
+		GetGameObject().GetImage().ImageDraw2D(K_Math::Vector3(distance.x, distance.y, 0), object.GetAngle(), object.GetScale(), 0);
+		distance.x += offsetSrcPos.x;
+		distance.y += offsetSrcPos.y;
 	}
 }

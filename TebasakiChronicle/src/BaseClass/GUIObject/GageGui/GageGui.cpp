@@ -69,22 +69,6 @@ void		GageGui::UpDate(GameObject& object)
 	{
 		//Reset(object);	//¡‚Í‚È‚µ
 	}
-
-	//‰¼ƒ‰ƒCƒt•Ï“®
-	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
-	{
-		if (life > 0)
-		{
-			life -= 1;
-		}
-	}
-	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::X))
-	{
-		if (life < 10)
-		{
-			life++;
-		}
-	}
 }
 
 //!@brief	•`‰æ
@@ -161,12 +145,12 @@ void	GageGui::Process()
 	case Ev_Begin:
 		break;
 	case Ev_Move:
-		moveCnt++;
+		moveCnt += 1;
 		fillAreaBox.GetGameObject().GetPos().x += 3.0f;
 		break;
 	case Ev_Rotate:
-		rotateCnt++;
-		frame.GetGameObject().GetAngle().z--;
+		rotateCnt += 1;
+		frame.GetGameObject().GetAngle().z -= 1;
 		break;
 	case Ev_End:
 		break;

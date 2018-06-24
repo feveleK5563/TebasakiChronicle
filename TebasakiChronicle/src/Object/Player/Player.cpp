@@ -49,31 +49,16 @@ void	Player::Initliaze()
 	maxFrame = 60;
 	minJumpForce = 1.5f;
 	invicibleCnt = 0;
-	maxInvicibleTime = 300;	//300フレーム無敵時間
+	maxInvicibleTime = 120;	//300フレーム無敵時間
 	object.GetStatus().SetMinLife(0);
 	object.GetStatus().SetMaxLife(10);
 
 	texture = new K_Graphics::Texture();
 	texture->Initialize();
-	texture->LoadImage("./data/image/タイトルなし.png");
+	texture->LoadImage("./data/image/Player/ノーリアちゃん.png");
 	//画像の生成
 	object.SetImage(texture, true);
-	//Motionの状態の順番でなければアニメーションが対応しない
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0, 0, 32, 48), 6, 6, true);		//Idle
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0, 48, 32, 48), 10, 8, true);	//Walk
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0, 48, 32, 48), 10, 6, true);	//Run
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(192, 0, 32, 48), 2, 1, false);	//Jump
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(256, 0, 32, 48), 2, 3, false);	//Fall
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(320, 0, 32, 48), 2, 6, false);	//TakeOff
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(320, 0, 32, 48), 2, 6, false);	//Landing
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(320, 48, 32, 48), 4, 4, false);	//SkillUse
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(320, 48, 32, 48), 4, 4, false);	//SkillMoveUse //キャラチップの変更有
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(320, 48, 32, 48), 4, 4, false);	//SkillAirUse //キャラチップの変更有
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0, 96, 32, 48), 4, 4, false);	//CameraGunUse //キャラチップの変更有
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0, 96, 32, 48), 4, 4, false);	//CameraGunMoveUse //キャラチップの変更有
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0, 96, 32, 48), 4, 4, false);	//CameraGunAirUse //キャラチップの変更有
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(416, 0, 32, 48), 3, 4, false);	//ReciveDamage	//キャラチップの変更有
-
+	//AnimStateの状態の順番でなければアニメーションが対応しない
 	//noriachan
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,0,64,64), 6, 8, true);		//Idle
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64,64,64), 3, 1, false);		//Walk(出だし)
@@ -81,11 +66,13 @@ void	Player::Initliaze()
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*3,64,64), 5, 4, false);	//Run(左)
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*4,64,64), 5, 4, false);	//Jump
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*5,64,64), 5, 4, false);	//fall
-	object.GetImage().CreateCharaChip(K_Math::Box2D(48*5,64*5,64,64), 1, 1, false);	//landing
+	object.GetImage().CreateCharaChip(K_Math::Box2D(64*5,64*5,64,64), 1, 3, false);	//landing
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*6,64,64), 5, 4, false);	//走りカメラガン(右)
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*7,64,64), 5, 4, false);	//走りカメラガン(左)
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*8,64,64), 5, 4, false);	//ジャンプ中(カメラガン)
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*9,64,64), 5, 4, false);	//fall(カメラガン)
+	object.GetImage().CreateCharaChip(K_Math::Box2D(64*3,64,64,64),1,5,false);		//待機中のカメラガン
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*10,64,64), 5, 4, false);	//ダメージ
 
 
 	//Moveの重力の設定
@@ -122,8 +109,11 @@ void	Player::UpDate()
 	Move();
 
 	//カメラガン-----------------------
-	ShotCameraGun();				//かめらがんを撃つ
-	ReverseCameraGun();				//カメラがんを戻す
+	if (object.GetState() != Status::State::Death)
+	{
+		ShotCameraGun();				//かめらがんを撃つ
+		ReverseCameraGun();				//カメラがんを戻す
+	}
 	cameraGun.UpDate(object.GetPos());
 
 	//スキルの使用---------------------
@@ -145,7 +135,7 @@ void	Player::UpDate()
 
 	if (invicibleCnt > 0)
 	{
-		invicibleCnt--;
+		invicibleCnt -= 1;
 	}
 
 	//ライフが0以下になる
@@ -293,7 +283,7 @@ void	Player::Think()
 		break;
 	case Walk:	//歩く
 		ChangeDamageMotion(nowMotion);
-		if (motionCnt >= maxFrame / 30)
+		if (motionCnt >= maxFrame / (maxFrame / 2))
 		{
 			nowMotion = Run;
 		}
@@ -367,9 +357,17 @@ void	Player::Think()
 		}
 		break;
 	case CameraGunUse:		//カメラガン構え
+		ChangeDamageMotion(nowMotion);
+		if (INPUT::IsReaveButton(VpadIndex::Pad0, VpadButton::L1)) { nowMotion = Idle; }
+		if (controller.IsLStickInput()) { nowMotion = Run; }
+		if (cManager.CheckHitSubCollisionObejct(Foot))
+		{
+			if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::R1)) { nowMotion = TakeOff; }
+		}
+		break;
 	case CameraGunMoveUse:	//カメラガン移動中構え
 		ChangeDamageMotion(nowMotion);
-		if (motionCnt > maxFrame / 3)
+		if (motionCnt > maxFrame / 2)
 		{
 			if (controller.IsLStickInput()) { nowMotion = Run; }
 			nowMotion = Idle;
@@ -382,7 +380,7 @@ void	Player::Think()
 		break;
 	case CameraGunAirUse:	//カメラガン空中構え
 		ChangeDamageMotion(nowMotion);
-		if (motionCnt > maxFrame / 3)
+		if (motionCnt > maxFrame / 2)
 		{
 			nowMotion = Idle;
 		}
@@ -540,6 +538,8 @@ void	Player::Move()
 		ChangeAnimState(AnimState::Landing);
 		break;
 	case CameraGunUse:
+		ChangeAnimState(AnimState::GunIdle);
+		break;
 	case CameraGunMoveUse:
 		if (motionCnt == 0)
 		{
@@ -600,7 +600,7 @@ void	Player::Move()
 		}
 		break;
 	case DamageRecive:
-		ChangeAnimState(AnimState::Fall);
+		ChangeAnimState(AnimState::Damage);
 		break;
 	case Death:
 		ChangeAnimState(AnimState::Idle);

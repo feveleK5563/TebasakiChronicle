@@ -1,5 +1,5 @@
 #include "SkillData.h"
-
+#include "../src/Helper.h"
 
 //----------------------------------------------------------------
 //コンストラクタ
@@ -8,7 +8,7 @@ SkillData::SkillData()
 {
 	skillID = 0;
 	Clear();
-	guiObj = nullptr;
+	skillIcon = nullptr;
 	skillNumUI = nullptr;
 }
 
@@ -104,29 +104,15 @@ void	SkillData::Clear()
 	animCharaChip = nullptr;	//アニメーションキャラチップ
 	skillImageName = "";		//スキルの画像名
 	useNum = 0;					//使用回数を0
-	pressBntNum = -1;
+	pressBntNum = -1;			//ボタン番号なし
 
-	if (guiObj != nullptr)
-	{
-		delete guiObj;
-		guiObj = nullptr;
-	}
-	
+	Memory::SafeDelete(skillIcon);
 	for (auto ui : registSkillUI)
 	{
-		if (ui != nullptr)
-		{
-			delete ui;
-			ui = nullptr;
-		}
+		Memory::SafeDelete(ui);
 	}
 	registSkillUI.clear();
-
-	if (skillNumUI != nullptr)
-	{
-		delete skillNumUI;
-		skillNumUI = nullptr;
-	}
+	Memory::SafeDelete(skillNumUI);
 }
 
 
@@ -145,16 +131,11 @@ int		SkillData::GetNowUseNum() const
 bool	SkillData::CheckUseNum()
 {
 	if (skillType == nullptr) { return false; }
-	//if (useNum >= skillType->GetMaxUseNum())
-	{
-		//return false;
-	}
-
+	
 	if (useNum <= 0)
 	{
 		return false;
 	}
-	
 	return true;
 }
 //!@brief 使用回数をカウントする処理
@@ -218,18 +199,15 @@ void	SkillData::CreateSkillType()
 //!@brief スキルのGUIオブジェクトの生成
 void	SkillData::CreateGUIObject()
 {
-	K_Math::Vector3	guiPos;
-	switch (pressBntNum) {
-	case 0: guiPos = K_Math::Vector3(1000, 500, 0);	break;
-	case 1:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
-	case 2:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
-	case 3:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
-	case 4: guiPos = K_Math::Vector3(1170, 610, 0);	break;
-	}
+	K_Math::Vector3	guiPos = K_Math::Vector3(1170, 610, 0);
+	
+	//スキルIDからアイコン画像を決める
 	DecideSkillData();
-	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 64, 64));
+	//スキルアイコンUIの生成
+	skillIcon = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 64, 64));
 	CreateRegistSkillUI(guiPos);
-
+	
+	//スキル数のUIの生成
 	skillNumUI = new GUIObject("ScreenUI/number2", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
 }
 
@@ -237,19 +215,6 @@ void	SkillData::CreateGUIObject()
 void	SkillData::MoveGUIObjPos()
 {
 	K_Math::Vector3	 guiPos = K_Math::Vector3(1170, 610, 0);
-	
-	DecideSkillData();
-	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 64, 64));
-	switch (pressBntNum) {
-	case 0: guiObj->AddVec(K_Math::Vector3(0, 64, 0));	break;
-	case 1:	guiObj->AddVec(K_Math::Vector3(-64, 0, 0));	break;
-	case 2: guiObj->AddVec(K_Math::Vector3(64, 0, 0));	break;
-	case 3:	guiObj->AddVec(K_Math::Vector3(0, -64, 0));	break;
-	case 4:	guiObj->AddVec(K_Math::Vector3(0, 0, 0));	break;
-	}
-
-	skillNumUI = new GUIObject("ScreenUI/number2", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
-	
 	K_Math::Vector3	addVec[] =
 	{
 		K_Math::Vector3(0,64,0),
@@ -258,6 +223,12 @@ void	SkillData::MoveGUIObjPos()
 		K_Math::Vector3(0,-64,0)
 	};
 
+	//スキルIDからアイコンを決める
+	DecideSkillData();
+	skillIcon = new GUIObject(skillIconImage, guiPos + addVec[pressBntNum], K_Math::Box2D(0, 0, 64, 64));
+	
+	//スキル数の表示UIの作成
+	skillNumUI = new GUIObject("ScreenUI/number2", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
 	skillNumUI->AddVec(addVec[pressBntNum]);
 }
 
@@ -271,12 +242,13 @@ void	SkillData::RenderUI()
 		ui->UpDate();
 		ui->Render();
 	}
-
+	
 	//スキルアイコンのUI
-	if (guiObj == nullptr) { return; }
-	guiObj->UpDate();
-	guiObj->Render();
+	if (skillIcon == nullptr) { return; }
+	skillIcon->UpDate();
+	skillIcon->Render();
 
+	//スキル数のUIの表示
 	if (skillNumUI == nullptr) { return; }
 	skillNumUI->UpDate();
 	std::string	text = std::to_string(GetNowUseNum());
@@ -332,7 +304,7 @@ void	SkillData::CreateRegistSkillUI(const K_Math::Vector3& rerativePos)
 	int cnt = 0;
 	for (int i = 0; i < 4; ++i)
 	{
-		registSkillUI.emplace_back(new GUIObject("skillSelect", rerativePos + srcBox[i], K_Math::Box2D(0, 0, 64, 64), 10, 6.0f));
+		registSkillUI.emplace_back(new GUIObject("ScreenUI/skillSelect2", rerativePos + srcBox[i], K_Math::Box2D(0, 0, 64, 64), 10, 3.0f));
 	}
 	for (auto ui : registSkillUI)
 	{
