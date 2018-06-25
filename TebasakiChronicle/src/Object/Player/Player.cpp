@@ -339,6 +339,7 @@ void	Player::Think()
 		if (controller.IsLStickInput()) { nowMotion = Run; }
 		if (!cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Fall; }
 		if (cManager.CheckHitSubCollisionObejct(Head)) { nowMotion = Fall; }
+		if (object.GetMove().GetFallSpeed() > 0.0f) { nowMotion = Jump; }
 		break;
 	case SkillAirUse:	//空中にスキル使用
 		ChangeDamageMotion(nowMotion);
@@ -355,6 +356,7 @@ void	Player::Think()
 		{
 			nowMotion = Fall;
 		}
+		if (object.GetMove().GetFallSpeed() > 0.0f) { nowMotion = Jump; }
 		break;
 	case CameraGunUse:		//カメラガン構え
 		ChangeDamageMotion(nowMotion);
@@ -404,8 +406,7 @@ void	Player::Think()
 	}
 
 	//モーションの更新
-	UpDateMotion(nowMotion);
-	
+	UpDateMotion(nowMotion);	
 }
 
 
@@ -463,7 +464,7 @@ void	Player::Move()
 	case Fall:		//落下中
 		if (motionCnt == 0)
 		{
-			//object.GetMove().SetFallSpeed(0);
+			object.GetMove().SetFallSpeed(0);
 		}
 		break;
 	case TakeOff:	//飛ぶ瞬間
