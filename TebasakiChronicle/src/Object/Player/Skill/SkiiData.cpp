@@ -184,7 +184,8 @@ void	SkillData::CreateSkillType()
 		skillType = std::shared_ptr<SkillType>(new SkillMove(skillID, 5, 0.0f, 60, 0));
 		break;
 	case 11:
-		skillType = std::shared_ptr<SkillType>(new SkillAttack(skillID, 7, 30.0f, 60, 1));
+		//skillType = std::shared_ptr<SkillType>(new SkillAttack(skillID, 7, 30.0f, 60, 1));
+		skillType = std::shared_ptr<SkillType>(new SkillMove(3, 100, 0.0f, 60, 0));	//仮
 		break;
 	case 12:
 		skillType = std::shared_ptr<SkillType>(new SkillAttack(skillID, 5, 30.0f, 60, 1));
@@ -209,6 +210,7 @@ void	SkillData::CreateGUIObject()
 	
 	//スキル数のUIの生成
 	skillNumUI = new GUIObject("ScreenUI/number2", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
+	skillNumUI->SetOffsetSrcPos(K_Math::Vector2(11, 0));
 }
 
 //!@brief GUIオブジェクトの位置の移動
@@ -230,6 +232,7 @@ void	SkillData::MoveGUIObjPos()
 	//スキル数の表示UIの作成
 	skillNumUI = new GUIObject("ScreenUI/number2", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
 	skillNumUI->AddVec(addVec[pressBntNum]);
+	skillNumUI->SetOffsetSrcPos(K_Math::Vector2(11, 0));
 }
 
 //!@brief スキルUIを描画

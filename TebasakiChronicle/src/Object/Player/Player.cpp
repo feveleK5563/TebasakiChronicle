@@ -303,11 +303,11 @@ void	Player::Think()
 		break;
 	case Jump:	//è„è∏íÜ
 		ChangeDamageMotion(nowMotion);		
+		if (cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Fall; }
 		if (object.GetMove().GetFallSpeed() <= 0.0f) { nowMotion = Fall; }
 		if (cManager.CheckHitSubCollisionObejct(Head)) { nowMotion = Fall; }
 		ChangeSkillMotion(nowMotion, SkillAirUse);
 		if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::L1)) { nowMotion = CameraGunAirUse; }
-		if (cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Fall; }
 		break;
 	case Fall:	//óéâ∫íÜ
 		ChangeDamageMotion(nowMotion);		
