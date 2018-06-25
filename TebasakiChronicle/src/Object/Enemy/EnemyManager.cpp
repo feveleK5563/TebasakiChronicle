@@ -1,14 +1,12 @@
 #include "EnemyManager.h"
 
 //コンストラクタ
-EnemyManager::EnemyManager():
-	isDeadBoss(false){}
+EnemyManager::EnemyManager() {}
 
 //デストラクタ
 EnemyManager::~EnemyManager()
 {
-	for (auto it : enemy)
-		delete it;
+	DeleteAllEnemy();
 }
 
 //-----------------------------------------------------------------------------
@@ -23,7 +21,7 @@ void EnemyManager::CreateEnemy(EnemyType* cpyet, const K_Math::Vector3& setPos, 
 void EnemyManager::CreateBossEnemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction)
 {
 	int indexNum = (int)enemy.size();
-	bossEnemy.emplace_back(new Enemy(cpyet, setPos, direction, indexNum));
+	bossEnemy.emplace_back(new Enemy(cpyet, setPos, direction, indexNum, true));
 }
 
 //-----------------------------------------------------------------------------
@@ -35,14 +33,9 @@ void EnemyManager::UpdateAllEnemy()
 		it->Update();
 	}
 
-	isDeadBoss = true;
 	for (auto& it : bossEnemy)
 	{
 		it->Update();
-		if (!it->IsDead())
-		{
-			isDeadBoss = false;
-		}
 	}
 }
 
@@ -62,18 +55,28 @@ void EnemyManager::RenderAllEnemy()
 }
 
 //-----------------------------------------------------------------------------
+//全てのボスの存在を有効にする
+void EnemyManager::AllActiveBoss()
+{
+	for (auto& it : bossEnemy)
+	{
+		it->ResetAndActiveEnemy();
+	}
+}
+//-----------------------------------------------------------------------------
 //ボスが存在しているかつ全てのボスが死亡状態か否かを返す
 //ボスが存在していない場合はfalseを返す
 bool EnemyManager::GetIsDeadBoss()
 {
-	if (bossEnemy.size() > 0)
-	{
-		return isDeadBoss;
-	}
-	else
-	{
+	if (bossEnemy.size() <= 0)
 		return false;
+
+	for (auto& it : bossEnemy)
+	{
+		if (!it->IsDead())
+			return false;
 	}
+	return true;
 }
 
 //-----------------------------------------------------------------------------
@@ -88,5 +91,5 @@ void EnemyManager::DeleteAllEnemy()
 	for (auto& it : bossEnemy)
 		delete it;
 	bossEnemy.clear();
-	enemy.shrink_to_fit();
+	bossEnemy.shrink_to_fit();
 }

@@ -193,20 +193,20 @@ void Behavior_FrontAttack::CreateAttackCollision()
 }
 void Behavior_FrontAttack::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
-	K_Math::Vector3 relative(16, 0, 0);
+	K_Math::Vector3 relative(40, 0, 0);
 	if (status.GetDirection() == Status::Direction::Left)
 		relative.x *= -1;
 
 	//UŒ‚—pƒRƒŠƒWƒ‡ƒ“‚ğì¬
 	tempmanager.CreateTemporaryCollision(
-		CC::CreateBoxShape(14.f, 20.f, 10.f),
+		CC::CreateBoxShape(12.f, 20.f, 10.f),
 		CollisionMask::Non,
-		CollisionMask::TakeDamagePlayer,
+		(CollisionMask)status.GetCollisiomMask(),
 		status.GetPos() + relative,
 		K_Math::Vector3(0, 0, 0),
 		status.GetDirection(),
 		status.GetAttackPoint(),
-		60,
+		30,
 		0,
 		false,
 		false);

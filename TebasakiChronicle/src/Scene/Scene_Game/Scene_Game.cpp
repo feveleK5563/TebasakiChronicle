@@ -10,8 +10,10 @@ Scene_Game::Scene_Game():
 {
 	//“G‚ÌŽí—Þ‚ðì¬
 	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataA1.txt"));
+	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataA2.txt"));
 	//ã‹L‚Åì¬‚µ‚½Ží—Þ‚ðŠî‚É“G‚ð¶¬‚·‚é
 	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(-10, 20, 0), Status::Direction::Left);
+	emanager->CreateBossEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(50, 20, 0), Status::Direction::Left);
 
 	player->Initliaze();
 
@@ -40,6 +42,9 @@ Scene_Game::Scene_Game():
 	soundEngine.AddSource(source);
 	//“o˜^‚·‚ê‚Î³‚µ‚­Žg‚¦‚é
 	source.Play();
+
+
+	timeCnt.SetEndTime(180);
 }
 
 //ƒfƒXƒgƒ‰ƒNƒ^
@@ -62,6 +67,13 @@ Scene_Game::~Scene_Game()
 SceneName Scene_Game::Update()
 {
 	SceneName nextScene = SceneName::Non;
+
+	timeCnt.Run();
+	if (timeCnt.IsTimeEnd() == true)
+	{
+		emanager->AllActiveBoss();
+		timeCnt.SetEndTime(-1);
+	}
 
 	player->UpDate();
 	emanager->UpdateAllEnemy();
@@ -87,6 +99,11 @@ SceneName Scene_Game::Update()
 	if (player->GetGameObject().IsDead())
 	{
 		nextScene = SceneName::GameOver;
+	}
+
+	if (emanager->GetIsDeadBoss() == true)
+	{
+		nextScene = SceneName::GameClear;
 	}
 
 	return nextScene;

@@ -44,6 +44,8 @@ private:
 	SoundEngine soundEngine;
 	Sound source;
 
+	TimeCount timeCnt;	//仮(ボス出現までのカウントダウン)
+
 public:
 	Scene_Game();		//コンストラクタ
 	~Scene_Game();		//デストラクタ
