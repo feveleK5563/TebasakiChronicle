@@ -21,7 +21,7 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 	);
 	
 	object.SetPos(K_Math::Vector3(object.GetPos().x + GetDir() * skillType->GetAppearDist(), object.GetPos().y, object.GetPos().z));
-
+	object.GetStatus().SetCollisionMask(CollisionMask::TakeDamageEnemy);
 
 	shape = CC::CreateBoxShape(16, 24, 1);
 	continueCnt = 0;	//計測時間カウント

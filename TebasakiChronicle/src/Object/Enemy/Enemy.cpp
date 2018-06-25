@@ -89,7 +89,7 @@ void Enemy::SetNonEnemy()
 {
 	gameObject.SetState(Status::State::Non);
 	//カメラマン受け用コリジョンを除いたサブコリジョンのマスクを無効にする
-	for (int i = 0; i < subCollisionNum - 1; ++i)
+	for (int i = 0; i < subCollisionNum; ++i)
 	{
 		collisionManager.SetSubCollisionGiveMask(i, CollisionMask::Non);
 		collisionManager.SetSubCollisionMyselfMask(i, CollisionMask::Non);
@@ -109,7 +109,7 @@ void Enemy::ResetEnemy()
 	beforeMoveOrder = 0;
 	beforePatternOrder = 0;
 	//カメラマン受け用コリジョンを除いたサブコリジョンのマスクを有効にする
-	for (int i = 0; i < subCollisionNum - 1; ++i)
+	for (int i = 0; i < subCollisionNum; ++i)
 	{
 		collisionManager.SetSubCollisionGiveMask(i, collisionGiveMask[i]);
 		collisionManager.SetSubCollisionMyselfMask(i, collisionMyselfMask[i]);
@@ -169,6 +169,12 @@ void Enemy::Update()
 	return;
 }
 
+//死亡している否かを返す
+bool Enemy::IsDead()
+{
+	return gameObject.IsDead();
+}
+
 //-----------------------------------------------------------------------------
 //コリジョンとの接触処理
 //ダメージを受けたらtrueを返す
@@ -202,10 +208,11 @@ bool Enemy::RecieveCollisionOperation()
 	//ダメージを体力に反映
 	gameObject.GetStatus().GetLife() -= damage;
 
+	//体力が0以下になったら死亡
 	if (gameObject.GetStatus().GetLife() <= 0)
 	{
-		SetNonEnemy();
-		gameObject.SetState(Status::State::Death);
+		SetNonEnemy();	//敵にまつわる各種データを無効にする
+		gameObject.SetState(Status::State::Death);	//ステータスをDeathに修正
 	}
 
 	return damage > 0;
