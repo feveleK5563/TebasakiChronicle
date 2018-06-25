@@ -17,14 +17,14 @@ void CollisionCreator::Destroy()
 	delete cCreator;
 }
 
-CollisionCreator* cc = CollisionCreator::GetInstance();
+CollisionCreator* cc = nullptr;
 
 namespace CC
 {
 	//コリジョンを管理する物理クラスの参照を取得
 	K_Physics::BulletPhysics*	GetBulletPhysics()
 	{
-		return cc->bPhysics;
+		return &cc->bPhysics;
 	}
 
 	//終了処理
@@ -40,72 +40,68 @@ namespace CC
 	//初期化処理
 	void Initialize()
 	{
-		if (cc->bPhysics == nullptr)
-		{
-			cc->bPhysics = new K_Physics::BulletPhysics();
-			return;
-		}
-		cc->bPhysics->Initialize();
+		cc = CollisionCreator::GetInstance();
+		cc->bPhysics.Initialize();
 	}
 
 	//球の形状を作成し、アドレス値を得る
 	K_Physics::CollisionShape* CreateSphereShape(float radius)
 	{
-		return cc->bPhysics->CreateSphereShape(radius);
+		return cc->bPhysics.CreateSphereShape(radius);
 	}
 	//カプセルの形状を作成し、アドレス値を得る
 	K_Physics::CollisionShape* CreateCapsuleShape(float radius, float height)
 	{
-		return cc->bPhysics->CreateCapsuleShape(radius, height);
+		return cc->bPhysics.CreateCapsuleShape(radius, height);
 	}
 	//直方体の形状を作成し、アドレス値を得る
 	K_Physics::CollisionShape* CreateBoxShape(float halfWidth, float halfHeight, float halfDepth)
 	{
-		return cc->bPhysics->CreateBoxShape(halfWidth, halfHeight, halfDepth);
+		return cc->bPhysics.CreateBoxShape(halfWidth, halfHeight, halfDepth);
 	}
 
 	//コリジョンオブジェクトを作成し、アドレス値を得る
 	K_Physics::CollisionData* CreateCollisionObject(btCollisionShape* shape, bool ghost, int myselfMask, int giveMask, const K_Math::Vector3 &pos, const K_Math::Vector3 &rot)
 	{
-		return cc->bPhysics->CreateCollisionObject(shape, ghost, myselfMask, giveMask, pos, rot);
+		return cc->bPhysics.CreateCollisionObject(shape, ghost, myselfMask, giveMask, pos, rot);
 	}
 
 	//物理世界を更新し、座標を変更する(フレームの最初に呼ぶ)
 	void Run()
 	{
-		cc->bPhysics->Run();
+		cc->bPhysics.Run();
 	}
 
 	//コリジョンの移動と当たり判定(正確&重い)
 	void MoveCharacter(K_Physics::CollisionData* obj, const K_Math::Vector3 &move, float vLimitAngle, float hLimitAngle)
 	{
-		cc->bPhysics->MoveCharacter(obj, move, vLimitAngle, hLimitAngle);
+		cc->bPhysics.MoveCharacter(obj, move, vLimitAngle, hLimitAngle);
 	}
 	//コリジョンの移動と当たり判定(大雑把&軽い)
 	void MoveCharacterDiscrete(K_Physics::CollisionData* obj, const K_Math::Vector3& move, bool vLimitDirection, bool hLimitDirection)
 	{
-		cc->bPhysics->MoveCharacterDiscrete(obj, move, vLimitDirection, hLimitDirection);
+		cc->bPhysics.MoveCharacterDiscrete(obj, move, vLimitDirection, hLimitDirection);
 	}
 	//衝突のチェック
 	std::vector<K_Physics::CollisionTag*>& FindConfrictionObjects(K_Physics::CollisionData *myself)
 	{
-		return cc->bPhysics->FindConfrictionObjects(myself);
+		return cc->bPhysics.FindConfrictionObjects(myself);
 	}
 
 	//コリジョンデータを解放する
 	void RemoveCollision(K_Physics::CollisionData** data)
 	{
-		cc->bPhysics->RemoveCollision(data);
+		cc->bPhysics.RemoveCollision(data);
 	}
 	//コリジョンの形状情報を解放する
 	void RemoveCollisionShape(K_Physics::CollisionShape** shape)
 	{
-		cc->bPhysics->RemoveCollisionShape(shape);
+		cc->bPhysics.RemoveCollisionShape(shape);
 	}
 
 	//コリジョンの描画
 	void DebugDraw(K_Graphics::ShaderClass* shaderc, K_Graphics::CameraClass* camerac)
 	{
-		cc->bPhysics->DebugDraw(shaderc, camerac, 0.1f, 1500.f);
+		cc->bPhysics.DebugDraw(shaderc, camerac, 0.1f, 1500.f);
 	}
 }

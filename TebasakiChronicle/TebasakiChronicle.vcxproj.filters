@@ -89,12 +89,6 @@
     <Filter Include="ソース ファイル\src\BaseClass\Sound">
       <UniqueIdentifier>{7d333bf2-3de3-4ef2-ae1b-f6e1a31f0149}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\src\Scene\Shene_Game">
-      <UniqueIdentifier>{e3b190e4-cb05-49ec-bfd6-b47cdc38a528}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\src\Scene\Shene_Title">
-      <UniqueIdentifier>{ff07ba7e-e451-4175-a113-2571d61d7ef1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\src\Event">
       <UniqueIdentifier>{311f6e09-06cb-412b-ac5a-7698d29dc786}</UniqueIdentifier>
     </Filter>
@@ -103,6 +97,18 @@
     </Filter>
     <Filter Include="ソース ファイル\src\Object\Player\Skill\SkillType\SkillMove">
       <UniqueIdentifier>{df45246d-28e7-4dc6-8e3e-28296598442b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Scene\Scene_GameClear">
+      <UniqueIdentifier>{7d0c3774-154b-4fd5-aab2-2e9ac0097313}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Scene\Scene_Game">
+      <UniqueIdentifier>{e3b190e4-cb05-49ec-bfd6-b47cdc38a528}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Scene\Scene_Title">
+      <UniqueIdentifier>{ff07ba7e-e451-4175-a113-2571d61d7ef1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\src\Scene\Scene_GameOver">
+      <UniqueIdentifier>{6539fb6b-671a-4e67-9096-48e36da60628}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -221,10 +227,10 @@
       <Filter>ソース ファイル\src\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\Scene\Scene_Game\Scene_Game.cpp">
-      <Filter>ソース ファイル\src\Scene\Shene_Game</Filter>
+      <Filter>ソース ファイル\src\Scene\Scene_Game</Filter>
     </ClCompile>
     <ClCompile Include="src\Scene\Scene_Title\Scene_Title.cpp">
-      <Filter>ソース ファイル\src\Scene\Shene_Title</Filter>
+      <Filter>ソース ファイル\src\Scene\Scene_Title</Filter>
     </ClCompile>
     <ClCompile Include="src\Event\Event.cpp">
       <Filter>ソース ファイル\src\Event</Filter>
@@ -234,6 +240,12 @@
     </ClCompile>
     <ClCompile Include="src\Object\Player\Skill\SkillAttack\SkillAttack.cpp">
       <Filter>ソース ファイル\src\Object\Player\Skill\SkillType\SkillAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Scene_GameClear\Scene_GameClear.cpp">
+      <Filter>ソース ファイル\src\Scene\Scene_GameClear</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Scene_GameOver\Scene_GameOver.cpp">
+      <Filter>ソース ファイル\src\Scene\Scene_GameOver</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -358,10 +370,10 @@
       <Filter>ソース ファイル\src\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\Scene\Scene_Game\Scene_Game.h">
-      <Filter>ソース ファイル\src\Scene\Shene_Game</Filter>
+      <Filter>ソース ファイル\src\Scene\Scene_Game</Filter>
     </ClInclude>
     <ClInclude Include="src\Scene\Scene_Title\Scene_Title.h">
-      <Filter>ソース ファイル\src\Scene\Shene_Title</Filter>
+      <Filter>ソース ファイル\src\Scene\Scene_Title</Filter>
     </ClInclude>
     <ClInclude Include="src\Event\Event.h">
       <Filter>ソース ファイル\src\Event</Filter>
@@ -371,6 +383,12 @@
     </ClInclude>
     <ClInclude Include="src\Object\Player\Skill\SkillAttack\SkillAttack.h">
       <Filter>ソース ファイル\src\Object\Player\Skill\SkillType\SkillAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Scene_GameClear\Scene_GameClear.h">
+      <Filter>ソース ファイル\src\Scene\Scene_GameClear</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Scene_GameOver\Scene_GameOver.h">
+      <Filter>ソース ファイル\src\Scene\Scene_GameOver</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,15 +4,15 @@
 #include "MeshModel.h"
 #include "../../BaseClass/Input/Input.h"
 
-class Scene_Title : public SceneAbstract
+class Scene_GameOver : public SceneAbstract
 {
 private:
 	K_Graphics::Texture* tex;
 	K_Graphics::SpriteObject* spobj;
 
 public:
-	Scene_Title();					//コンストラクタ
-	~Scene_Title();					//デストラクタ
+	Scene_GameOver();				//コンストラクタ
+	~Scene_GameOver();				//デストラクタ
 	SceneName Update() override;	//更新(次に設定したいシーン名を返す)
 	void Draw() override;			//描画
 };

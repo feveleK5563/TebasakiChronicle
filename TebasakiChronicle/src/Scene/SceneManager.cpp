@@ -16,6 +16,14 @@ void SceneManager::ChangeScene(SceneName nextScene)
 	case SceneName::Game:
 		scene = new Scene_Game();
 		break;
+
+	case SceneName::GameOver:
+		scene = new Scene_GameOver();
+		break;
+
+	case SceneName::GameClear:
+		scene = new Scene_GameClear();
+		break;
 	}
 }
 

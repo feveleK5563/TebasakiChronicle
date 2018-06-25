@@ -7,17 +7,10 @@ class CollisionCreator
 {
 private:
 	static CollisionCreator* cCreator;
-	CollisionCreator() : 
-		bPhysics(nullptr){}
-
-	~CollisionCreator()
-	{
-		if (bPhysics != nullptr)
-			delete bPhysics;
-	}
+	CollisionCreator() {}
 
 public:
-	K_Physics::BulletPhysics* bPhysics;
+	K_Physics::BulletPhysics bPhysics;
 
 	//インスタンスを得る
 	static CollisionCreator* GetInstance();

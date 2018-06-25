@@ -3,6 +3,8 @@
 #include "SceneAbstract.h"
 #include "Scene_Title/Scene_Title.h"
 #include "Scene_Game/Scene_Game.h"
+#include "Scene_GameOver/Scene_GameOver.h"
+#include "Scene_GameClear/Scene_GameClear.h"
 
 class SceneManager
 {
