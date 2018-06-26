@@ -123,6 +123,11 @@ private:
 	//!@param[in]	animState2	アニメーション状態2
 	//!@param[in]	frameCnt	切り替えるフレーム数
 	void	SwitchAnimState(const AnimState& animState1,const AnimState& animState2,const float frameCnt);
+
+private:
+	//--------------------------------
+	//エフェクト
+
 private:
 	GameObject		object;				//ゲームオブジェクト
 	Status*			enemyData;			//敵のステータス
@@ -145,5 +150,6 @@ public:
 	CollisionManager			cManager;	//コリジョンの管理者
 
 	K_Graphics::Texture*		texture;
+
 };
 

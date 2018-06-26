@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "../src/Effect/Effect.h"
+#include "../src/Helper.h"
 
 
 //--------------------------------------------------------------
@@ -22,11 +24,7 @@ Player::~Player()
 	CC::RemoveCollisionShape(&shape);
 	CC::RemoveCollisionShape(&shape2);
 
-	if (texture != nullptr)
-	{
-		delete texture;
-		texture = nullptr;
-	}
+	Memory::SafeDelete(texture);
 }
 
 //-------------------------------------------------------------------
@@ -455,6 +453,8 @@ void	Player::Move()
 		if (motionCnt == 0)
 		{
 			object.GetMove().JumpOperation();
+			//仮のエフェクト発動
+			Effect::CreateEffect(EffectName::Effect1, object.GetPos()-K_Math::Vector3(0,24,0));
 		}
 		if (INPUT::IsReaveButton(VpadIndex::Pad0, K_Input::VpadButton::R1) && (object.GetMove().GetFallSpeed() > minJumpForce))
 		{
