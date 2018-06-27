@@ -32,18 +32,18 @@ void	SkillType::UpDate(GameObject& object)
 }
 
 //èâä˙âª
-void	SkillType::BehaivorInit(TemporaryCollisionManager& tempCol, Status& status, Move& move)
+void	SkillType::BehaivorInit(TemporaryCollisionManager& tempCol, Status& status, Move& move, TimeCount& timeCnt)
 {
-	charaBehaivor.Initialize(tempCol, status, move);
+	charaBehaivor.Initialize(tempCol, status, move, timeCnt);
 }
 //èIóπ
 void	SkillType::BehaivorFinal(TemporaryCollisionManager& tempCol, Status& status, Move& move)
 {
 	charaBehaivor.Finalize(tempCol, status, move);
 }
-void	SkillType::Behaivor(TemporaryCollisionManager& tempCol, Status& status, Move& move)
+void	SkillType::Behaivor(TemporaryCollisionManager& tempCol, Status& status, Move& move, TimeCount& timeCnt)
 {
-	charaBehaivor.Action(tempCol, status, move);
+	charaBehaivor.Action(tempCol, status, move, timeCnt);
 }
 
 

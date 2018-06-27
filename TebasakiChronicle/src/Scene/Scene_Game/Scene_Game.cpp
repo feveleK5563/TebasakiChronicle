@@ -24,6 +24,7 @@ Scene_Game::Scene_Game():
 	mapObj = new Object3D("data/model/map/map.fbx", pos, rotation, scale);
 
 	//”wŒi‰æ‘œ
+	CST::LoadAndGetTexture("back", "data/image/back.png");
 	back = new GUIObject("back", K_Math::Vector3(0, 50, 10), K_Math::Box2D(0, 0, 1920, 720));
 	back->SetScale(K_Math::Vector3(2, 2, 1));
 	
@@ -43,7 +44,9 @@ Scene_Game::Scene_Game():
 	//“o˜^‚·‚ê‚Î³‚µ‚­Žg‚¦‚é
 	source.Play();
 
-
+	//ˆÈ‰º‰¼
+	emanager->AllActiveBoss();
+	CST::LoadAndGetTexture("Effect", "data/image/effect.png");
 	timeCnt.SetEndTime(180);
 }
 
@@ -61,6 +64,9 @@ Scene_Game::~Scene_Game()
 	delete cameraMan;
 
 	soundEngine.DeleteSound(source.GetName().c_str());
+
+	CST::DeleteTexture("back");
+	CST::DeleteTexture("Effect");
 }
 
 //XV(ŽŸ‚ÉÝ’è‚µ‚½‚¢ƒV[ƒ“–¼‚ð•Ô‚·)
@@ -95,6 +101,7 @@ SceneName Scene_Game::Update()
 
 	//ƒJƒƒ‰’Ç”ö
 	cameraMan->Run(player->GetGameObject().GetPos());
+
 
 	if (player->GetGameObject().IsDead())
 	{

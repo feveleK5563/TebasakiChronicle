@@ -8,10 +8,20 @@
 #include "Helper.h"
 #include "Scene/SceneManager.h"
 
+#include <cstdio>
+#include <cstdlib>
+#include <crtdbg.h>
+#include <new>
+#include <memory>
+
+//#define new ::new(_NORMAL_BLOCK, __FILE__, __LINE__)
+//#define malloc(X) _malloc_dbg(X,_NORMAL_BLOCK,__FILE__,__LINE__)xpand(p, s)		_expand_dbg(p, s, _NORMAL_BLOCK, __FILE__, __LINE__)
+
 int main()
 {
 	//メモリリーク検知くん
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//_CrtSetBreakAlloc(99679);
 
 	//ウィンドウ
 	K_System::SystemClass* sc = new K_System::SystemClass("TebasakiChronicle", Define::ScreenWidth, Define::ScreenHeight, false);
@@ -38,9 +48,9 @@ int main()
 	CST::CreateShader("data/shader/VertexShader.vs", "data/shader/TextureSampler.ps");
 
 	//エフェクトを作成
-	Effect::CreateEffectData(	EffectName::Effect1,
-								CST::LoadAndGetTexture("testEffect", "data/image/testEffect.png"),
-								new AnimationCharaChip(K_Math::Box2D(0, 0, 32, 32), 8, 5, false));
+	Effect::CreateEffectData(EffectName::Effect1,
+		CST::LoadAndGetTexture("testEffect", "data/image/testEffect.png"),
+		new AnimationCharaChip(K_Math::Box2D(0, 0, 32, 32), 8, 5, false));
 
 	//シーン管理
 	SceneManager* sceneManager = new SceneManager(SceneName::Title);
@@ -65,7 +75,7 @@ int main()
 		
 		sceneManager->Draw();
 
-		CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
+		//CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 	
 		sc->SwapBuffer();
 	}

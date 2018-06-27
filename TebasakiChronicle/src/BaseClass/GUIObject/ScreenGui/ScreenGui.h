@@ -30,5 +30,4 @@ private:
 	GUIObject*		gearLife[4];	//Lifeの歯車
 	GUIObject*		skillArea;		//スキルのUI
 	GUIObject*		lifeBaseArea;	//体力の基盤
-	GUIObject*		enemyLife;		//敵のライフゲージ
 };

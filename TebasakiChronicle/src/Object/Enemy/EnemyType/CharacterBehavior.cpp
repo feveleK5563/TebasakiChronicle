@@ -72,14 +72,14 @@ void CharacterBehavior::SetBehavior(int moveNum)
 }
 //-----------------------------------------------
 //最初の処理
-void CharacterBehavior::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+void CharacterBehavior::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move, TimeCount& timeCnt)
 {
 	timeCnt.ResetCntTime();
 	behavior->Initialize(tempmanager, status, move);
 }
 //-----------------------------------------------
 //動作の実行
-void CharacterBehavior::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+void CharacterBehavior::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, TimeCount& timeCnt)
 {
 	timeCnt.Run();
 	behavior->Action(tempmanager, status, move, timeCnt);
@@ -350,6 +350,13 @@ void Behavior_ShotBulletFromMiddle::Initialize(TemporaryCollisionManager& tempma
 		0,
 		true,
 		false);
+
+	tempmanager.SetAnimationCharaChip(
+		CST::GetTexture("Effect"),
+		K_Math::Box2D(0, 64, 48, 48),
+		3,
+		10.f,
+		true);
 
 	//(仮)爆発エフェクトの発生
 	Effect::CreateEffect(EffectName::Effect1, status.GetPos() + relative + K_Math::Vector3(0, 0, -1));
