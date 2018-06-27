@@ -10,8 +10,10 @@ Scene_Game::Scene_Game():
 {
 	//“G‚ÌŽí—Þ‚ðì¬
 	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataA1.txt"));
+	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataA2.txt"));
 	//ã‹L‚Åì¬‚µ‚½Ží—Þ‚ðŠî‚É“G‚ð¶¬‚·‚é
 	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(-10, 20, 0), Status::Direction::Left);
+	emanager->CreateBossEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(50, 20, 0), Status::Direction::Left);
 
 	player->Initliaze();
 
@@ -22,6 +24,7 @@ Scene_Game::Scene_Game():
 	mapObj = new Object3D("data/model/map/map.fbx", pos, rotation, scale);
 
 	//”wŒi‰æ‘œ
+	CST::LoadAndGetTexture("back", "data/image/back.png");
 	back = new GUIObject("back", K_Math::Vector3(0, 50, 10), K_Math::Box2D(0, 0, 1920, 720));
 	back->SetScale(K_Math::Vector3(2, 2, 1));
 	
@@ -40,6 +43,11 @@ Scene_Game::Scene_Game():
 	soundEngine.AddSource(source);
 	//“o˜^‚·‚ê‚Î³‚µ‚­Žg‚¦‚é
 	source.Play();
+
+	//ˆÈ‰º‰¼
+	emanager->AllActiveBoss();
+	CST::LoadAndGetTexture("Effect", "data/image/effect.png");
+	timeCnt.SetEndTime(180);
 }
 
 //ƒfƒXƒgƒ‰ƒNƒ^
@@ -56,12 +64,22 @@ Scene_Game::~Scene_Game()
 	delete cameraMan;
 
 	soundEngine.DeleteSound(source.GetName().c_str());
+
+	CST::DeleteTexture("back");
+	CST::DeleteTexture("Effect");
 }
 
 //XV(ŽŸ‚ÉÝ’è‚µ‚½‚¢ƒV[ƒ“–¼‚ð•Ô‚·)
 SceneName Scene_Game::Update()
 {
 	SceneName nextScene = SceneName::Non;
+
+	timeCnt.Run();
+	if (timeCnt.IsTimeEnd() == true)
+	{
+		emanager->AllActiveBoss();
+		timeCnt.SetEndTime(-1);
+	}
 
 	player->UpDate();
 	emanager->UpdateAllEnemy();
@@ -84,9 +102,15 @@ SceneName Scene_Game::Update()
 	//ƒJƒƒ‰’Ç”ö
 	cameraMan->Run(player->GetGameObject().GetPos());
 
+
 	if (player->GetGameObject().IsDead())
 	{
 		nextScene = SceneName::GameOver;
+	}
+
+	if (emanager->GetIsDeadBoss() == true)
+	{
+		nextScene = SceneName::GameClear;
 	}
 
 	return nextScene;

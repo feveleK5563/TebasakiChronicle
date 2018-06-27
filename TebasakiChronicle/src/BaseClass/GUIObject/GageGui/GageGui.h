@@ -45,12 +45,12 @@ private:
 	void	Reset(GameObject& object);
 private:
 	//コピーを禁止します
-	explicit GageGui(const GageGui& gageGui);
+	//explicit GageGui(const GageGui& gageGui);
 	GageGui& operator=(const GageGui& gageGui);
 
 private:
-	GUIObject		frame;			//枠
-	GUIObject		fillAreaBox;	//上に配置するゲージ
+	GUIObject*		frame;			//枠
+	GUIObject*		fillAreaBox;	//上に配置するゲージ
 
 private:	//仮
 	int		minLife;

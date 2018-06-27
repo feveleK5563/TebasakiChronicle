@@ -29,6 +29,9 @@ void EnemyMoveTransition::SetTransition(int transitionNum)
 	case 2: //視界内にプレイヤーが入っているとき
 		transition = new ETransition_PlayerIntoVisibility();
 		break;
+
+	case 3:	//攻撃遷移用コリジョンにプレイヤーが入っているとき
+		transition = new ETransition_PlayerIntoAttackArea();
 	}
 }
 //-----------------------------------------------
@@ -60,6 +63,16 @@ bool ETransition_EndMovePattern::IsTransition(CollisionManager& cm, Status& stat
 bool ETransition_PlayerIntoVisibility::IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern)
 {
 	if (cm.CheckHitSubCollisionObejct(1))
+		return true;
+
+	return false;
+}
+
+//-----------------------------------------------
+//3：攻撃遷移用コリジョンにプレイヤーが入っているとき
+bool ETransition_PlayerIntoAttackArea::IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern)
+{
+	if (cm.CheckHitSubCollisionObejct(2))
 		return true;
 
 	return false;

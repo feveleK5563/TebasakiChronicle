@@ -3,12 +3,13 @@
 #include "../../Helper.h"
 
 //コンストラクタ
-Enemy::Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction, const int indexNum) :
+Enemy::Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction, const int indexNum, bool isBoss) :
 	behaviorId(0),
 	nowMoveOrder(0),
 	nowPatternOrder(0),
 	beforeMoveOrder(0),
-	beforePatternOrder(0)
+	beforePatternOrder(0),
+	isBoss(isBoss)
 {
 	SetEnemyType(cpyet, setPos, direction, indexNum);
 }
@@ -98,7 +99,7 @@ void Enemy::SetNonEnemy()
 
 //-----------------------------------------------------------------------------
 //状態を全て初期状態に戻す
-void Enemy::ResetEnemy()
+void Enemy::ResetAndActiveEnemy()
 {
 	collisionManager.SetBaseCollisionObjectPosition(initialPos);
 	gameObject.SetState(Status::State::Active);
@@ -123,23 +124,12 @@ void Enemy::ResetEnemy()
 //更新
 void Enemy::Update()
 {
-	//画面外に出ていたら無効
-	if (fabsf(CST::GetPerspectiveCamera()->GetPosition().x - gameObject.GetPos().x) > fabsf((float)Define::ScreenWidth))
+	if (isBoss == false)
 	{
-		if (gameObject.GetState() != Status::State::Non)
-		{
-			gameObject.SetPos(initialPos);
-			SetNonEnemy();
-		}
-		return;
+		if (DecisionInScreen())
+			return;
 	}
-
-	//画面内に入っている、かつ死んでいない場合は有効にする
-	if (gameObject.GetState() == Status::State::Non)
-	{
-		ResetEnemy();
-	}
-	else if (gameObject.GetState() == Status::State::Death)
+	else if (gameObject.GetState() != Status::State::Active)
 	{
 		return;
 	}
@@ -169,10 +159,39 @@ void Enemy::Update()
 	return;
 }
 
+//-----------------------------------------------------------------------------
 //死亡している否かを返す
 bool Enemy::IsDead()
 {
 	return gameObject.IsDead();
+}
+
+//-----------------------------------------------------------------------------
+//画面内判定
+bool Enemy::DecisionInScreen()
+{
+	//画面外に出ていたら無効
+	if (fabsf(CST::GetPerspectiveCamera()->GetPosition().x - gameObject.GetPos().x) > fabsf((float)Define::ScreenWidth))
+	{
+		if (gameObject.GetState() != Status::State::Non)
+		{
+			gameObject.SetPos(initialPos);
+			SetNonEnemy();
+		}
+		return true;
+	}
+
+	//画面内に入っている、かつ死んでいない場合は有効にする
+	if (gameObject.GetState() == Status::State::Non)
+	{
+		ResetAndActiveEnemy();
+	}
+	else if (gameObject.GetState() == Status::State::Death)
+	{
+		return true;
+	}
+
+	return false;
 }
 
 //-----------------------------------------------------------------------------

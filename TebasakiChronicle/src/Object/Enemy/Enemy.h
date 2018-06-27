@@ -8,6 +8,7 @@ private:
 	EnemyMoveSet*	ems;			//動作(delete禁止)
 	TimeCount		timeCnt;		//時間計測
 	int				behaviorId;		//現在の敵から読み取れる動作番号
+	bool			isBoss;			//こいつがボスか否か
 
 	K_Math::Vector3	initialPos;		//初期位置
 	int		maxLife;				//体力上限
@@ -50,7 +51,7 @@ public:
 	SkillAndCharaChip* skillAndChip;
 
 	//コンストラクタ
-	Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction, const int indexNum);
+	Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction, const int indexNum, bool isBoss = false);
 	//デストラクタ
 	~Enemy();
 
@@ -61,13 +62,16 @@ public:
 	void SetNonEnemy();
 
 	//状態を全て初期状態に戻す
-	void ResetEnemy();
+	void ResetAndActiveEnemy();
 
 	//更新
 	void Update();
 
 	//死亡している否かを返す
 	bool IsDead();
+
+	//画面内判定
+	bool DecisionInScreen();
 
 	//コリジョンとの接触処理
 	//ダメージを受けたらtrueを返す

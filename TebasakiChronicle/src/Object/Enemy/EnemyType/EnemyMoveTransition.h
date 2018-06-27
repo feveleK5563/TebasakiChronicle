@@ -54,3 +54,11 @@ class ETransition_PlayerIntoVisibility : public EnemyMoveTransitionAbstract
 public:
 	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern);
 };
+
+//-----------------------------------------------
+//3：攻撃遷移用コリジョンにプレイヤーが入っているとき
+class ETransition_PlayerIntoAttackArea : public EnemyMoveTransitionAbstract
+{
+public:
+	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern);
+};

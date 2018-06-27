@@ -60,6 +60,7 @@ private:
 	K_Physics::CollisionShape*	shape;			//ベースコリジョン
 	int							continueCnt;	//継続時間計測
 	TemporaryCollisionManager	tempColManager;	//テンポラリオブジェクト
+	TimeCount					timeCnt;
 
 
 	bool	oneFlag;

@@ -19,7 +19,8 @@ void TimeCount::SetEndTime(int setEndTime)
 
 void TimeCount::Run()
 {
-	if (cntTime >= endTime)
+	if (endTime >= 0 &&
+		cntTime >= endTime)
 	{
 		isTimeEnd = true;
 	}

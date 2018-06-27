@@ -1,10 +1,12 @@
 #include "DataGui.h"
+#include "../../../CSTList.h"
 #include "../src/Helper.h"
 
 //!@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
 DataGui::DataGui(GameObject& gameObj)
 {
-	lifeNeedle = new GUIObject("ScreenUI/Lifej", K_Math::Vector3(31, 155, 0), K_Math::Box2D(0, 0, 67, 120));
+	CST::LoadAndGetTexture("Lifej", "data/image/ScreenUI/Lifej.png");
+	lifeNeedle = new GUIObject("Lifej", K_Math::Vector3(31, 155, 0), K_Math::Box2D(0, 0, 67, 120));
 
 	minAngle = 0;		//life‚ª0‚Ì‚Æ‚«180‚É‚È‚é
 	maxAngle = 180;		//life‚ªmax‚Ì‚Æ‚«-180‚ÌŒü‚«
@@ -27,6 +29,7 @@ DataGui::DataGui(GameObject& gameObj)
 DataGui::~DataGui()
 {
 	Memory::SafeDelete(lifeNeedle);
+	CST::DeleteTexture("Lifej");
 }
 
 //!@brief	XV

@@ -25,7 +25,6 @@ class CharacterBehavior
 {
 private:
 	CharacterBehaviorAbstract*	behavior;
-	TimeCount					timeCnt;
 
 public:
 	CharacterBehavior(int moveNum);
@@ -34,8 +33,8 @@ public:
 	//“®ì‚ğİ’è‚·‚é
 	void SetBehavior(int moveNum);
 
-	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move, TimeCount& timeCnt);
+	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, TimeCount& timeCnt);
 	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
 };
 

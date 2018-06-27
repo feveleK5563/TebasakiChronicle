@@ -6,7 +6,6 @@ class EnemyManager
 private:
 	std::vector<Enemy*> enemy;
 	std::vector<Enemy*> bossEnemy;
-	bool isDeadBoss;
 
 public:
 	EnemyManager();
@@ -22,6 +21,8 @@ public:
 	//全ての敵を描画する
 	void RenderAllEnemy();
 
+	//全てのボスの存在を有効にする
+	void AllActiveBoss();
 	//ボスが存在しているかつ全てのボスが死亡状態か否かを返す
 	//ボスが存在していない場合はfalseを返す
 	bool GetIsDeadBoss();

@@ -56,11 +56,11 @@ int EnemyMovePattern::EMove(int& nowMoveOrder, TimeCount& timeCnt, TemporaryColl
 	if (timeCnt.GetNowCntTime() == 0)	//Å‰‚És‚¤ˆ—
 	{
 		timeCnt.SetEndTime(mp[nowMoveOrder]->moveTimeMax);
-		mp[nowMoveOrder]->em.Initialize(tempmanager, status, move);
+		mp[nowMoveOrder]->em.Initialize(tempmanager, status, move, timeCnt);
 	}
 	
 	// “®ì
-	mp[nowMoveOrder]->em.Action(tempmanager, status, move);
+	mp[nowMoveOrder]->em.Action(tempmanager, status, move, timeCnt);
 
 	timeCnt.Run();
 	return mp[nowMoveOrder]->behaviorId;
