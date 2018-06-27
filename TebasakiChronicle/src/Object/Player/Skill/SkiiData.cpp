@@ -10,6 +10,10 @@ SkillData::SkillData()
 	Clear();
 	skillIcon = nullptr;
 	skillNumUI = nullptr;
+
+	CST::LoadAndGetTexture("skillIcon", "data/image/skillIcon.png");
+	CST::LoadAndGetTexture("numberUI", "data/image/ScreenUI/number2.png");
+	CST::LoadAndGetTexture("skillSelect", "data/image/ScreenUI/skillSelect2.png");
 }
 
 //----------------------------------------------------------------
@@ -209,7 +213,7 @@ void	SkillData::CreateGUIObject()
 	CreateRegistSkillUI(guiPos);
 	
 	//スキル数のUIの生成
-	skillNumUI = new GUIObject("ScreenUI/number2", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
+	skillNumUI = new GUIObject("numberUI", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
 	skillNumUI->SetOffsetSrcPos(K_Math::Vector2(11, 0));
 }
 
@@ -230,7 +234,7 @@ void	SkillData::MoveGUIObjPos()
 	skillIcon = new GUIObject(skillIconImage, guiPos + addVec[pressBntNum], K_Math::Box2D(0, 0, 64, 64));
 	
 	//スキル数の表示UIの作成
-	skillNumUI = new GUIObject("ScreenUI/number2", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
+	skillNumUI = new GUIObject("numberUI", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
 	skillNumUI->AddVec(addVec[pressBntNum]);
 	skillNumUI->SetOffsetSrcPos(K_Math::Vector2(11, 0));
 }
@@ -307,7 +311,7 @@ void	SkillData::CreateRegistSkillUI(const K_Math::Vector3& rerativePos)
 	int cnt = 0;
 	for (int i = 0; i < 4; ++i)
 	{
-		registSkillUI.emplace_back(new GUIObject("ScreenUI/skillSelect2", rerativePos + srcBox[i], K_Math::Box2D(0, 0, 64, 64), 10, 3.0f));
+		registSkillUI.emplace_back(new GUIObject("skillSelect", rerativePos + srcBox[i], K_Math::Box2D(0, 0, 64, 64), 10, 3.0f));
 	}
 	for (auto ui : registSkillUI)
 	{

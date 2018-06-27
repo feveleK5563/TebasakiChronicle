@@ -29,6 +29,32 @@ GUIObject::GUIObject(const std::string& imageName_,
 	object.GetImage().CreateCharaChip(srcBox, animSheet, animSpeed, true);
 }
 
+GUIObject::GUIObject(
+	const std::string& imageName,
+	const std::string& filePath,
+	const K_Math::Vector3& pos_,
+	const K_Math::Box2D& srcBox_,
+	const int animSheet,
+	const float animSpeed 
+)
+	: imageName(imageName)
+	, srcBox(srcBox_)
+{
+	rotateSpeed = 1.0f;
+	angle = 0.0f;
+	maxAngle = 360.0f;
+	moveAmount = 0.0f;
+	offsetSrcPos = K_Math::Vector2(0, 0);
+	object.SetPos(pos_);
+	object.SetAngle(K_Math::Vector3(0, 0, angle));
+	object.SetScale(K_Math::Vector3(1, 1, 1));
+	object.SetMoveVec(object.GetPos());
+
+	CST::LoadAndGetTexture(imageName, filePath);
+	texture = CST::GetTexture(imageName);
+	object.SetImage(texture, true);
+	object.GetImage().CreateCharaChip(srcBox, animSheet, animSpeed, true);
+}
 //-----------------------------------------------------------------------
 //!@brief	デストラクタ
 //-----------------------------------------------------------------------

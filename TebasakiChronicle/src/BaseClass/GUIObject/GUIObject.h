@@ -20,6 +20,14 @@ public:
 		const int animSheet = 1,
 		const float animSpeed = 1.0f
 		);
+	GUIObject(
+		const std::string& imageName,
+		const std::string& filePath,
+		const K_Math::Vector3& pos_,
+		const K_Math::Box2D& srcBox_,
+		const int animSheet = 1,
+		const float animSpeed = 1.0f
+	);
 
 	//!@brief デストラクタ
 	~GUIObject();

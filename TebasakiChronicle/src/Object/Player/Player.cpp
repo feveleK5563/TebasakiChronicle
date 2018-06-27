@@ -388,12 +388,19 @@ void	Player::Think()
 		if (cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Idle; }
 		break;
 	case DamageRecive:		//ダメージ受ける
-		if (motionCnt > maxFrame / 6 && cManager.CheckHitSubCollisionObejct(Foot))
+		if (motionCnt > maxFrame / 2 || cManager.CheckHitSubCollisionObejct(Foot))
 		{
-			//本来はここでパラメータをいじらない
-			object.SetMoveVec(K_Math::Vector3(0,0,0));
-			object.GetMove().SetFallSpeed(0.0f);
-			nowMotion = Idle;
+			if (!cManager.CheckHitSubCollisionObejct(Foot))
+			{
+				nowMotion = Fall;
+			}
+			else
+			{
+				//本来はここでパラメータをいじらない
+				object.SetMoveVec(K_Math::Vector3(0, 0, 0));
+				object.GetMove().SetFallSpeed(0.0f);
+				nowMotion = Idle;
+			}
 		}
 		break;
 	}
