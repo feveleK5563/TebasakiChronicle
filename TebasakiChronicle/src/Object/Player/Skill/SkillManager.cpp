@@ -20,7 +20,10 @@ SkillManager::SkillManager()
 //----------------------------------------------------------------
 SkillManager::~SkillManager()
 {
-
+	for (auto it : skillObj)
+	{
+		delete it;
+	}
 }
 
 

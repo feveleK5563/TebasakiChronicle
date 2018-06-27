@@ -1,16 +1,20 @@
 #include "GageGui.h"
 #include "CameraList.h"
 #include "../src/BaseClass/Input/Input.h"
+#include "../../../CSTList.h"
 
 //!@brief	コンストラクタ
 GageGui::GageGui(GameObject& object)
-	: frame("ScreenUI/lifeBar", K_Math::Vector3(0, 670, 0), K_Math::Box2D(0, 0, 1095, 270))
-	, fillAreaBox("ScreenUI/enemyBar", K_Math::Vector3(-10, 710, 0), K_Math::Box2D(0, 0, 128, 256))
 {
-	frame.GetGameObject().SetAngle(K_Math::Vector3(0, 0, 180));
-	fillAreaBox.GetGameObject().SetAngle(K_Math::Vector3(0, 0, 0));
+	CST::LoadAndGetTexture("LifeBar", "data/image/ScreenUI/LifeBar.png");
+	CST::LoadAndGetTexture("enemyGageBar", "data/image/ScreenUI/enemyGageBar.png");
+
+	frame = new GUIObject("LifeBar", K_Math::Vector3(0, 670, 0), K_Math::Box2D(0, 0, 1095, 270));
+	fillAreaBox = new GUIObject("enemyGageBar", K_Math::Vector3(-10, 710, 0), K_Math::Box2D(0, 0, 128, 256));
+	frame->GetGameObject().SetAngle(K_Math::Vector3(0, 0, 180));
+	fillAreaBox->GetGameObject().SetAngle(K_Math::Vector3(0, 0, 0));
 	//回転軸の変更
-	frame.GetGameObject().GetImage().GetNowAnimationCharaChip()->basisRenderPos.x -= frame.GetGameObject().GetImage().GetNowAnimationCharaChip()->chip.w / 2;
+	frame->GetGameObject().GetImage().GetNowAnimationCharaChip()->basisRenderPos.x -= frame->GetGameObject().GetImage().GetNowAnimationCharaChip()->chip.w / 2;
 
 	moveCnt = 0;
 	rotateCnt = 0;
@@ -33,15 +37,16 @@ GageGui::GageGui(GameObject& object)
 //!@brief	デストラクタ
 GageGui::~GageGui()
 {
-
+	CST::DeleteTexture("LifeBar");
+	CST::DeleteTexture("enemyGageBar");
 }
 
 
 //!@brief	更新
 void		GageGui::UpDate(GameObject& object)
 {
-	frame.UpDate();
-	fillAreaBox.UpDate();
+	frame->UpDate();
+	fillAreaBox->UpDate();
 
 	//イベント
 	Think();
@@ -62,20 +67,36 @@ void		GageGui::UpDate(GameObject& object)
 	this->Fluctuation(K_Math::Vector3(nowLife, 710, 0));
 
 	//位置を適用させる
-	fillAreaBox.GetGameObject().SetPos(showLife);
+	fillAreaBox->GetGameObject().SetPos(showLife);
 	
 	//イベントリセット
 	if (eventStartFlag)
 	{
 		//Reset(object);	//今はなし
 	}
+
+	//仮ライフ変動
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
+	{
+		if (life > 0)
+		{
+			life -= 1;
+		}
+	}
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::X))
+	{
+		if (life < 10)
+		{
+			life++;
+		}
+	}
 }
 
 //!@brief	描画
 void		GageGui::Render()
 {
-	frame.Render();
-	fillAreaBox.Render();
+	frame->Render();
+	fillAreaBox->Render();
 }
 
 //!@brief	イベントを開始する
@@ -145,12 +166,12 @@ void	GageGui::Process()
 	case Ev_Begin:
 		break;
 	case Ev_Move:
-		moveCnt += 1;
-		fillAreaBox.GetGameObject().GetPos().x += 3.0f;
+		moveCnt++;
+		fillAreaBox->GetGameObject().GetPos().x += 3.0f;
 		break;
 	case Ev_Rotate:
-		rotateCnt += 1;
-		frame.GetGameObject().GetAngle().z -= 1;
+		rotateCnt++;
+		frame->GetGameObject().GetAngle().z--;
 		break;
 	case Ev_End:
 		break;
@@ -178,11 +199,11 @@ void	GageGui::Fluctuation(const K_Math::Vector3& targetPos)
 //!@brief	リセット
 void	GageGui::Reset(GameObject& object)
 {
-	frame.GetGameObject().SetPos(K_Math::Vector3(0, 670, 0));
-	fillAreaBox.GetGameObject().SetPos(K_Math::Vector3(-10, 710, 0));
+	frame->GetGameObject().SetPos(K_Math::Vector3(0, 670, 0));
+	fillAreaBox->GetGameObject().SetPos(K_Math::Vector3(-10, 710, 0));
 
-	frame.GetGameObject().SetAngle(K_Math::Vector3(0, 0, 180));
-	fillAreaBox.GetGameObject().SetAngle(K_Math::Vector3(0, 0, 0));
+	frame->GetGameObject().SetAngle(K_Math::Vector3(0, 0, 180));
+	fillAreaBox->GetGameObject().SetAngle(K_Math::Vector3(0, 0, 0));
 
 	moveCnt = 0;
 	rotateCnt = 0;
@@ -205,12 +226,12 @@ void	GageGui::Reset(GameObject& object)
 
 
 //コピーを禁止します
-GageGui::GageGui(const GageGui& gageGui)
-	: frame("ScreenUI/lifeBar", K_Math::Vector3(0, 720, 0), K_Math::Box2D(0, 0, 1095, 270))
-	, fillAreaBox("ScreenUI/greenBar", K_Math::Vector3(0, 720, 0), K_Math::Box2D(0, 0, 64, 64))
-{
-
-}
+//GageGui::GageGui(const GageGui& gageGui)
+//	: frame("ScreenUI/lifeBar", K_Math::Vector3(0, 720, 0), K_Math::Box2D(0, 0, 1095, 270))
+//	, fillAreaBox("ScreenUI/greenBar", K_Math::Vector3(0, 720, 0), K_Math::Box2D(0, 0, 64, 64))
+//{
+//
+//}
 GageGui& GageGui::operator=(const GageGui& gageGui)
 {
 	return *this;

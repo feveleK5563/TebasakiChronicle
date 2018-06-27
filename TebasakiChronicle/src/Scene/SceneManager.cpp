@@ -28,7 +28,8 @@ void SceneManager::ChangeScene(SceneName nextScene)
 }
 
 //コンストラクタ(同時に指定シーンに設定)
-SceneManager::SceneManager(SceneName setScene)
+SceneManager::SceneManager(SceneName setScene):
+	scene(nullptr)
 {
 	ChangeScene(setScene);
 }

@@ -1,5 +1,6 @@
 #include "GUIObject.h"
-#include "CameraList.h"
+#include "../../CSTList.h"
+//#include "CameraList.h"
 
 //-------------------------------------------------
 //!@brief	コンストラクタ
@@ -23,9 +24,7 @@ GUIObject::GUIObject(const std::string& imageName_,
 	object.SetScale(K_Math::Vector3(1, 1, 1));
 	object.SetMoveVec(object.GetPos());
 
-	texture = new K_Graphics::Texture();
-	texture->Initialize();
-	texture->LoadImage("./data/image/" + imageName + ".png");
+	texture = CST::GetTexture(imageName);
 	object.SetImage(texture, true);
 	object.GetImage().CreateCharaChip(srcBox, animSheet, animSpeed, true);
 }
@@ -35,11 +34,7 @@ GUIObject::GUIObject(const std::string& imageName_,
 //-----------------------------------------------------------------------
 GUIObject::~GUIObject()
 {
-	if (texture != nullptr)
-	{
-		delete texture;
-		texture = nullptr;
-	}
+
 }
 
 //------------------------------------------------------------------------

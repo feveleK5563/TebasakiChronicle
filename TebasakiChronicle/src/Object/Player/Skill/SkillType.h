@@ -39,11 +39,11 @@ public:
 
 
 	//初期化
-	void	BehaivorInit(TemporaryCollisionManager& tempCol, Status& status, Move& move);
+	void	BehaivorInit(TemporaryCollisionManager& tempCol, Status& status, Move& move, TimeCount& timeCnt);
 	//終了
 	void	BehaivorFinal(TemporaryCollisionManager& tempCol, Status& status, Move& move);
 	//動作
-	void	Behaivor(TemporaryCollisionManager& tempCol,Status& status,Move& move);
+	void	Behaivor(TemporaryCollisionManager& tempCol,Status& status,Move& move, TimeCount& timeCnt);
 	
 	//!@brief	スキルのタイプ(系統)を返す
 	//!@return	スキルのタイプ
