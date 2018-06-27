@@ -20,7 +20,10 @@ SkillManager::SkillManager()
 //----------------------------------------------------------------
 SkillManager::~SkillManager()
 {
-
+	for (auto skillObject : skillObj)
+	{
+		Memory::SafeDelete(skillObject);
+	}
 }
 
 
