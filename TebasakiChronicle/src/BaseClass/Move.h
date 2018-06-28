@@ -32,7 +32,7 @@ public:
 	float	GetJumpPow();
 	float	GetFallSpeed();
 	float	GetGravity();
-
+	float	GetHorizontalSpeed();
 
 	//!@brief	—‰º‘¬“x‚Ì§Œä
 	void	ControlFallSpeed();

@@ -34,7 +34,7 @@ void	Player::Initliaze()
 	//オブジェクトの初期化
 	object.GetStatus().SetStatusData(
 		Status::State::Active,
-		K_Math::Vector3(50, 50, 0),
+		K_Math::Vector3(100, 50, 0),
 		K_Math::Vector3(0, 0, 0),
 		K_Math::Vector3(1, 1, 1),
 		Status::Direction::Right,
@@ -341,18 +341,17 @@ void	Player::Think()
 		break;
 	case SkillAirUse:	//空中にスキル使用
 		ChangeDamageMotion(nowMotion);
-		if (motionCnt > maxFrame / 6)
-		{
-			nowMotion = Idle;
-		}
 		if (cManager.CheckHitSubCollisionObejct(Head)) { nowMotion = Fall; }
 		if (cManager.CheckHitSubCollisionObejct(Foot)) 
 		{ 
-			nowMotion = Idle;
+			nowMotion = Landing;
 		}
 		else
 		{
-			nowMotion = Fall;
+			if (motionCnt > maxFrame / 6)
+			{
+				nowMotion = Fall;
+			}
 		}
 		if (object.GetMove().GetFallSpeed() > 0.0f) { nowMotion = Jump; }
 		break;
@@ -380,27 +379,42 @@ void	Player::Think()
 		break;
 	case CameraGunAirUse:	//カメラガン空中構え
 		ChangeDamageMotion(nowMotion);
-		if (motionCnt > maxFrame / 2)
-		{
-			nowMotion = Idle;
-		}
 		if (cManager.CheckHitSubCollisionObejct(Head)) { nowMotion = Fall; }
-		if (cManager.CheckHitSubCollisionObejct(Foot)) { nowMotion = Idle; }
-		break;
-	case DamageRecive:		//ダメージ受ける
-		if (motionCnt > maxFrame / 2 || cManager.CheckHitSubCollisionObejct(Foot))
+		if (cManager.CheckHitSubCollisionObejct(Foot))
 		{
-			if (!cManager.CheckHitSubCollisionObejct(Foot))
+			nowMotion = Landing; 
+		}
+		else
+		{
+			if (motionCnt > maxFrame / 2)
 			{
 				nowMotion = Fall;
 			}
-			else
+		}
+		break;
+	case DamageRecive:		//ダメージ受ける
+		//30フレーム経過したかチェック
+		if (motionCnt > maxFrame / 2)
+		{
+			if (cManager.CheckHitSubCollisionObejct(Foot))
 			{
 				//本来はここでパラメータをいじらない
 				object.SetMoveVec(K_Math::Vector3(0, 0, 0));
 				object.GetMove().SetFallSpeed(0.0f);
-				nowMotion = Idle;
+				nowMotion = Landing;
 			}
+			else
+			{
+				nowMotion = Fall;
+			}
+		}
+		//地面と衝突したかチェック
+		if (cManager.CheckHitSubCollisionObejct(Foot))
+		{
+			//本来はここでパラメータをいじらない
+			object.SetMoveVec(K_Math::Vector3(0, 0, 0));
+			object.GetMove().SetFallSpeed(0.0f);
+			nowMotion = Landing;
 		}
 		break;
 	}
@@ -423,7 +437,7 @@ void	Player::Move()
 	switch (motion) {
 	default:
 		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
-		
+
 		//上昇中もしくは足元に地面がない
 		if (object.GetMoveVec().y > 0.0f || !cManager.CheckHitSubCollisionObejct(Foot))
 		{
@@ -448,7 +462,6 @@ void	Player::Move()
 		break;
 	}
 
-	AnimState	nowAnimState = animState;
 	//-------------------------------------------------
 	//モーション固有の処理
 	switch (motion) {
@@ -461,8 +474,9 @@ void	Player::Move()
 		{
 			object.GetMove().JumpOperation();
 			//仮のエフェクト発動
-			Effect::CreateEffect(EffectName::Effect1, object.GetPos()-K_Math::Vector3(0,24,0));
+			//Effect::CreateEffect(EffectName::Effect1, object.GetPos()-K_Math::Vector3(0,24,0));
 		}
+		//ジャンプ力の調節
 		if (INPUT::IsReaveButton(VpadIndex::Pad0, K_Input::VpadButton::R1) && (object.GetMove().GetFallSpeed() > minJumpForce))
 		{
 			object.GetMove().SetFallSpeed(minJumpForce);
@@ -471,7 +485,15 @@ void	Player::Move()
 	case Fall:		//落下中
 		if (motionCnt == 0)
 		{
-			object.GetMove().SetFallSpeed(0);
+			if (preMotion != Motion::DamageRecive)
+			{
+				object.GetMove().SetFallSpeed(0);
+			}
+		}
+		//ダメージの横移動を残す
+		if (preMotion == Motion::DamageRecive)
+		{
+			object.GetMove().Horizontal();
 		}
 		break;
 	case TakeOff:	//飛ぶ瞬間
@@ -484,15 +506,29 @@ void	Player::Move()
 		break;
 	case SkillUse:		//スキル使用中
 	case SkillMoveUse:	//移動中のスキル使用
-	case SkillAirUse:	//空中のスキル使用
 		if (motionCnt == 0)
 		{
 			UseSkill();
 		}
 		break;
+	case SkillAirUse:	//空中のスキル使用
+		if (motionCnt == 0)
+		{
+			UseSkill();
+		}
+		if (preMotion == DamageRecive)
+		{
+			object.GetMove().Horizontal();
+		}
+		break;
 	case CameraGunUse:		//カメラガン構え
 	case CameraGunMoveUse:	//カメラガン移動中構え
+		break;
 	case CameraGunAirUse:	//カメラガン空中構え
+		if (preMotion == DamageRecive)
+		{
+			object.GetMove().Horizontal();
+		}
 		break;
 	case DamageRecive:		//ダメージ処理
 		//点滅するフラグをOnにする
@@ -501,13 +537,15 @@ void	Player::Move()
 			object.GetMove().SetFallSpeed(0.0f);
 			ReciveDamage();
 			invicibleCnt = maxInvicibleTime;
+			object.GetMove().Vertical();	//ジャンプ作用を与える
 		}
 		object.GetMove().Horizontal();
-		object.GetMove().Vertical();
 		break;
 	case Death:
 		break;
 	}
+
+	AnimState	nowAnimState = animState;
 
 	//------------------------------------------------
 	//モーション固有のアニメーション
@@ -615,6 +653,7 @@ void	Player::Move()
 		break;
 	}
 	UpDateAnimState(nowAnimState);
+
 }
 
 
@@ -623,8 +662,10 @@ void	Player::Move()
 bool	Player::UpDateMotion(const Motion& nowMotion)
 {
 	if (motion == nowMotion) { return false; }
-	//更新処理
+	//1つ前のモーションを保持し、次のモーションへ
+	preMotion = motion;
 	motion = nowMotion;
+	//1つ前のモーション時間を保持
 	preMotionCnt = motionCnt;
 	motionCnt = 0;
 	return true;
@@ -775,7 +816,7 @@ void	Player::UpDateAnimState(const AnimState& animState)
 	{
 		return;
 	}
-	this->preAnimState = animState;
+	this->preAnimState = this->animState;
 	this->animState = animState;
 	object.GetImage().ChangeAnimationPattern(static_cast<int>(animState), true);
 }

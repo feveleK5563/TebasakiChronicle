@@ -133,6 +133,7 @@ private:
 	Status*			enemyData;			//敵のステータス
 private:
 	Motion			motion;				//モーション
+	Motion			preMotion;			//1つ前のモーション
 	int				preMotionCnt;		//前のモーションカウント
 	int				motionCnt;			//モーションのカウント
 	CharaController	controller;			//コントローラー

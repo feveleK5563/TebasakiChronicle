@@ -24,10 +24,6 @@ SkillManager::~SkillManager()
 	{
 		Memory::SafeDelete(skillObject);
 	}
-	for (auto it : skillObj)
-	{
-		delete it;
-	}
 }
 
 
