@@ -2,6 +2,7 @@
 #include "CameraList.h"
 #include "../src/BaseClass/Input/Input.h"
 #include "../../../CSTList.h"
+#include "../../../Helper.h"
 
 //!@brief	コンストラクタ
 GageGui::GageGui(GameObject& object)
@@ -37,6 +38,8 @@ GageGui::GageGui(GameObject& object)
 //!@brief	デストラクタ
 GageGui::~GageGui()
 {
+	Memory::SafeDelete(frame);
+	Memory::SafeDelete(fillAreaBox);
 	CST::DeleteTexture("LifeBar");
 	CST::DeleteTexture("enemyGageBar");
 }

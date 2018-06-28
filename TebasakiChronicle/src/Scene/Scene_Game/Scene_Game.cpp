@@ -45,7 +45,6 @@ Scene_Game::Scene_Game():
 	source.Play();
 
 	//ˆÈ‰º‰¼
-	emanager->AllActiveBoss();
 	CST::LoadAndGetTexture("Effect", "data/image/effect.png");
 	timeCnt.SetEndTime(180);
 }
