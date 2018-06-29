@@ -65,8 +65,14 @@ public:
 	//デストラクタ
 	~EnemyMovePattern();
 
+	//動作が終了したか否かを返す
+	bool IsEndMovePattern(int& nowMoveOrder, TimeCount& timeCnt, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+
 	//動作を行い、現在取得可能なスキルの番号を返す
-	int EMove(int& nowMoveOrder, TimeCount& timeCnt, TemporaryCollisionManager& tempmanager, Status& status, Move& move, bool& endMovePattern);
+	int EMove(int& nowMoveOrder, TimeCount& timeCnt, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+
+	//終了時の処理を行う
+	void EMoveEnd(int& nowMoveOrder, TimeCount& timeCnt, TemporaryCollisionManager& tempmanager, Status& status, Move& move);
 
 	//動作順をリセットする
 	void MoveReset(int& nowMoveOrder);

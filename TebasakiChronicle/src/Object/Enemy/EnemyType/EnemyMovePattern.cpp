@@ -34,36 +34,49 @@ EnemyMovePattern::~EnemyMovePattern()
 }
 
 //-----------------------------------------------------------------------------
-//動作を行い、現在取得可能なスキルの番号を返す
-int EnemyMovePattern::EMove(int& nowMoveOrder, TimeCount& timeCnt, TemporaryCollisionManager& tempmanager, Status& status, Move& move, bool& endMovePattern)
+//動作が終了したか否かを返す
+bool EnemyMovePattern::IsEndMovePattern(int& nowMoveOrder, TimeCount& timeCnt, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
-	endMovePattern = false;
 	//timeCntがmoveTimeMaxを超えたら、次の動作に移行する
 	if (timeCnt.IsTimeEnd())
 	{
 		//終了時の処理
-		mp[nowMoveOrder]->em.Finalize(tempmanager, status, move);
-		timeCnt.ResetCntTime();
+		EMoveEnd(nowMoveOrder, timeCnt, tempmanager, status, move);
 
 		++nowMoveOrder;
 		if (nowMoveOrder >= (int)mp.size())
 		{
 			nowMoveOrder = 0;
-			endMovePattern = true;
+			return true;
 		}
 	}
 
+	return false;
+}
+
+//-----------------------------------------------------------------------------
+//動作を行い、現在取得可能なスキルの番号を返す
+int EnemyMovePattern::EMove(int& nowMoveOrder, TimeCount& timeCnt, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+{
 	if (timeCnt.GetNowCntTime() == 0)	//最初に行う処理
 	{
 		timeCnt.SetEndTime(mp[nowMoveOrder]->moveTimeMax);
 		mp[nowMoveOrder]->em.Initialize(tempmanager, status, move, timeCnt);
 	}
-	
+
 	// 動作
 	mp[nowMoveOrder]->em.Action(tempmanager, status, move, timeCnt);
 
 	timeCnt.Run();
 	return mp[nowMoveOrder]->behaviorId;
+}
+
+//-----------------------------------------------------------------------------
+//終了時の処理を行う
+void EnemyMovePattern::EMoveEnd(int& nowMoveOrder, TimeCount& timeCnt, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+{
+	mp[nowMoveOrder]->em.Finalize(tempmanager, status, move);
+	timeCnt.ResetCntTime();
 }
 
 //-----------------------------------------------------------------------------
