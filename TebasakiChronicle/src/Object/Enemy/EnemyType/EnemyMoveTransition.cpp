@@ -32,6 +32,14 @@ void EnemyMoveTransition::SetTransition(int transitionNum)
 
 	case 3:	//攻撃遷移用コリジョンにプレイヤーが入っているとき
 		transition = new ETransition_PlayerIntoAttackArea();
+
+	case 4:	//足元が地形と接触しているとき
+		transition = new ETransition_HitFoot();
+		break;
+
+	case 5: //視界内のプレイヤーが向いている方向にいるとき
+		transition = new ETransition_IntoVisibilityAndMatchDirection();
+		break;
 	}
 }
 //-----------------------------------------------
@@ -75,5 +83,31 @@ bool ETransition_PlayerIntoAttackArea::IsTransition(CollisionManager& cm, Status
 	if (cm.CheckHitSubCollisionObejct(2))
 		return true;
 
+	return false;
+}
+
+//-----------------------------------------------
+//4：足元が地形と接触しているとき
+bool ETransition_HitFoot::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern)
+{
+	if (cm.CheckHitSubCollisionObejct(3))
+		return true;
+
+	return false;
+}
+
+//-----------------------------------------------
+//5：視界内のプレイヤーが向いている方向にいるとき
+bool ETransition_IntoVisibilityAndMatchDirection::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern)
+{
+	auto pdata = cm.GetConflictionObjectsTag(1);
+	if (pdata.size() <= 0)
+		return false;
+
+	if ((((Status*)pdata[0])->GetPos().x < status.GetPos().x && status.GetDirection() == Status::Direction::Left) ||
+		(((Status*)pdata[0])->GetPos().x > status.GetPos().x && status.GetDirection() == Status::Direction::Right))
+	{
+		return true;
+	}
 	return false;
 }

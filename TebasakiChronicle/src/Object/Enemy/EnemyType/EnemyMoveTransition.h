@@ -62,3 +62,19 @@ class ETransition_PlayerIntoAttackArea : public EnemyMoveTransitionAbstract
 public:
 	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern);
 };
+
+//-----------------------------------------------
+//4：足元が地形と接触しているとき
+class ETransition_HitFoot : public EnemyMoveTransitionAbstract
+{
+public:
+	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern);
+};
+
+//-----------------------------------------------
+//5：視界内のプレイヤーが向いている方向にいるとき
+class ETransition_IntoVisibilityAndMatchDirection : public EnemyMoveTransitionAbstract
+{
+public:
+	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern);
+};

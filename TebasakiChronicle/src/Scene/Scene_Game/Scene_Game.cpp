@@ -10,10 +10,10 @@ Scene_Game::Scene_Game():
 {
 	//“G‚ÌŽí—Þ‚ðì¬
 	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataA1.txt"));
-	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataA2.txt"));
+	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataB1.txt"));
 	//ã‹L‚Åì¬‚µ‚½Ží—Þ‚ðŠî‚É“G‚ð¶¬‚·‚é
 	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(-10, 20, 0), Status::Direction::Left);
-	emanager->CreateBossEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(50, 20, 0), Status::Direction::Left);
+	emanager->CreateBossEnemy(etm->GetEnemyTypeData(1), K_Math::Vector3(50, 20, 0), Status::Direction::Right);
 
 	player->Initliaze();
 
