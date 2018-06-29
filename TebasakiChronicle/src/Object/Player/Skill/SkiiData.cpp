@@ -1,5 +1,5 @@
 #include "SkillData.h"
-
+#include "../src/Helper.h"
 
 //----------------------------------------------------------------
 //コンストラクタ
@@ -8,8 +8,12 @@ SkillData::SkillData()
 {
 	skillID = 0;
 	Clear();
-	guiObj = nullptr;
+	skillIcon = nullptr;
 	skillNumUI = nullptr;
+
+	CST::LoadAndGetTexture("skillIcon", "data/image/skillIcon.png");
+	CST::LoadAndGetTexture("numberUI", "data/image/ScreenUI/number2.png");
+	CST::LoadAndGetTexture("skillSelect", "data/image/ScreenUI/skillSelect2.png");
 }
 
 //----------------------------------------------------------------
@@ -104,29 +108,15 @@ void	SkillData::Clear()
 	animCharaChip = nullptr;	//アニメーションキャラチップ
 	skillImageName = "";		//スキルの画像名
 	useNum = 0;					//使用回数を0
-	pressBntNum = -1;
+	pressBntNum = -1;			//ボタン番号なし
 
-	if (guiObj != nullptr)
-	{
-		delete guiObj;
-		guiObj = nullptr;
-	}
-	
+	Memory::SafeDelete(skillIcon);
 	for (auto ui : registSkillUI)
 	{
-		if (ui != nullptr)
-		{
-			delete ui;
-			ui = nullptr;
-		}
+		Memory::SafeDelete(ui);
 	}
 	registSkillUI.clear();
-
-	if (skillNumUI != nullptr)
-	{
-		delete skillNumUI;
-		skillNumUI = nullptr;
-	}
+	Memory::SafeDelete(skillNumUI);
 }
 
 
@@ -145,16 +135,11 @@ int		SkillData::GetNowUseNum() const
 bool	SkillData::CheckUseNum()
 {
 	if (skillType == nullptr) { return false; }
-	//if (useNum >= skillType->GetMaxUseNum())
-	{
-		//return false;
-	}
-
+	
 	if (useNum <= 0)
 	{
 		return false;
 	}
-	
 	return true;
 }
 //!@brief 使用回数をカウントする処理
@@ -203,7 +188,8 @@ void	SkillData::CreateSkillType()
 		skillType = std::shared_ptr<SkillType>(new SkillMove(skillID, 5, 0.0f, 60, 0));
 		break;
 	case 11:
-		skillType = std::shared_ptr<SkillType>(new SkillAttack(skillID, 7, 30.0f, 60, 1));
+		//skillType = std::shared_ptr<SkillType>(new SkillAttack(skillID, 7, 30.0f, 60, 1));
+		skillType = std::shared_ptr<SkillType>(new SkillMove(3, 100, 0.0f, 60, 0));	//仮
 		break;
 	case 12:
 		skillType = std::shared_ptr<SkillType>(new SkillAttack(skillID, 5, 30.0f, 60, 1));
@@ -218,38 +204,23 @@ void	SkillData::CreateSkillType()
 //!@brief スキルのGUIオブジェクトの生成
 void	SkillData::CreateGUIObject()
 {
-	K_Math::Vector3	guiPos;
-	switch (pressBntNum) {
-	case 0: guiPos = K_Math::Vector3(1000, 500, 0);	break;
-	case 1:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
-	case 2:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
-	case 3:	guiPos = K_Math::Vector3(1000, 500, 0);	break;
-	case 4: guiPos = K_Math::Vector3(1170, 610, 0);	break;
-	}
+	K_Math::Vector3	guiPos = K_Math::Vector3(1170, 610, 0);
+	
+	//スキルIDからアイコン画像を決める
 	DecideSkillData();
-	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 64, 64));
+	//スキルアイコンUIの生成
+	skillIcon = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 64, 64));
 	CreateRegistSkillUI(guiPos);
-
-	skillNumUI = new GUIObject("ScreenUI/number2", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
+	
+	//スキル数のUIの生成
+	skillNumUI = new GUIObject("numberUI", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
+	skillNumUI->SetOffsetSrcPos(K_Math::Vector2(11, 0));
 }
 
 //!@brief GUIオブジェクトの位置の移動
 void	SkillData::MoveGUIObjPos()
 {
 	K_Math::Vector3	 guiPos = K_Math::Vector3(1170, 610, 0);
-	
-	DecideSkillData();
-	guiObj = new GUIObject(skillIconImage, guiPos, K_Math::Box2D(0, 0, 64, 64));
-	switch (pressBntNum) {
-	case 0: guiObj->AddVec(K_Math::Vector3(0, 64, 0));	break;
-	case 1:	guiObj->AddVec(K_Math::Vector3(-64, 0, 0));	break;
-	case 2: guiObj->AddVec(K_Math::Vector3(64, 0, 0));	break;
-	case 3:	guiObj->AddVec(K_Math::Vector3(0, -64, 0));	break;
-	case 4:	guiObj->AddVec(K_Math::Vector3(0, 0, 0));	break;
-	}
-
-	skillNumUI = new GUIObject("ScreenUI/number2", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
-	
 	K_Math::Vector3	addVec[] =
 	{
 		K_Math::Vector3(0,64,0),
@@ -258,7 +229,14 @@ void	SkillData::MoveGUIObjPos()
 		K_Math::Vector3(0,-64,0)
 	};
 
+	//スキルIDからアイコンを決める
+	DecideSkillData();
+	skillIcon = new GUIObject(skillIconImage, guiPos + addVec[pressBntNum], K_Math::Box2D(0, 0, 64, 64));
+	
+	//スキル数の表示UIの作成
+	skillNumUI = new GUIObject("numberUI", guiPos + K_Math::Vector3(10, 10, 0), K_Math::Box2D(0, 0, 16, 16));
 	skillNumUI->AddVec(addVec[pressBntNum]);
+	skillNumUI->SetOffsetSrcPos(K_Math::Vector2(11, 0));
 }
 
 //!@brief スキルUIを描画
@@ -271,12 +249,13 @@ void	SkillData::RenderUI()
 		ui->UpDate();
 		ui->Render();
 	}
-
+	
 	//スキルアイコンのUI
-	if (guiObj == nullptr) { return; }
-	guiObj->UpDate();
-	guiObj->Render();
+	if (skillIcon == nullptr) { return; }
+	skillIcon->UpDate();
+	skillIcon->Render();
 
+	//スキル数のUIの表示
 	if (skillNumUI == nullptr) { return; }
 	skillNumUI->UpDate();
 	std::string	text = std::to_string(GetNowUseNum());
@@ -332,7 +311,7 @@ void	SkillData::CreateRegistSkillUI(const K_Math::Vector3& rerativePos)
 	int cnt = 0;
 	for (int i = 0; i < 4; ++i)
 	{
-		registSkillUI.emplace_back(new GUIObject("skillSelect", rerativePos + srcBox[i], K_Math::Box2D(0, 0, 64, 64), 10, 6.0f));
+		registSkillUI.emplace_back(new GUIObject("skillSelect", rerativePos + srcBox[i], K_Math::Box2D(0, 0, 64, 64), 10, 3.0f));
 	}
 	for (auto ui : registSkillUI)
 	{

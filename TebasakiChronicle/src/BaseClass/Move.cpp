@@ -138,7 +138,15 @@ float	Move::GetGravity()
 {
 	return gravity;
 }
+//!@brief	水平方向スピードの取得
+float	Move::GetHorizontalSpeed()
+{
+	return horizontalSpeed;
+}
 
+//------------------------------------------------------
+//制御処理
+//------------------------------------------------------
 //!@brief	落下速度の制御
 void	Move::ControlFallSpeed()
 {
@@ -147,7 +155,6 @@ void	Move::ControlFallSpeed()
 		fallSpeed = maxFallSpeed;
 	}
 }
-
 
 //------------------------------------------------------
 //動作
@@ -187,6 +194,6 @@ void	Move::Horizontal()
 //垂直移動
 void	Move::Vertical()
 {
-	verticalSpeed = verticalPower;
-	moveVec.y += verticalSpeed;
+	fallSpeed = verticalPower;
+	moveVec.y += fallSpeed;
 }

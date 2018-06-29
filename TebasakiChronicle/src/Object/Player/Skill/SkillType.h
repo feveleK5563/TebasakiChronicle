@@ -50,7 +50,7 @@ public:
 	Type&	GetType();
 
 protected:
-	CharacterBehavior	charaBehaivor;	//動作
+	CharacterBehavior*	charaBehaivor;	//動作
 	int					continueTime;	//継続時間
 	float				appearDist;		//出現距離(プレイヤーからの距離)
 	int					maxUseNum;		//最大使用回数

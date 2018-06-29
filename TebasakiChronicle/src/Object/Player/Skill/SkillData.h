@@ -72,15 +72,20 @@ public:
 	//!@brief スキルIDからスキルの種類を決める
 	void	CreateSkillType();
 
+	//!@brief 押されたボタン番号を取得
+	void	SetPressBtnNum(int num);
 
+public:
+	//-------------------------------------------------
+	//!@brief	UI
 	//!@brief スキルのGUIオブジェクトの生成
 	void	CreateGUIObject();
 	//!@brief GUIオブジェクトの位置の移動
 	void	MoveGUIObjPos();
 	//!@brief スキルUIを描画
 	void	RenderUI();
-	//!@brief 押されたボタン番号を取得
-	void	SetPressBtnNum(int num);
+
+private:
 	//!@brief スキルIDからデータを決める
 	void	DecideSkillData();
 
@@ -96,7 +101,7 @@ private:
 	std::string					skillImageName;	//スキルの画像名
 	int							useNum;			//使用回数
 
-	GUIObject*					guiObj;			//スキルのUI
+	GUIObject*					skillIcon;		//スキルのUI
 	GUIObject*					skillNumUI;		//スキル数のUI
 	std::vector<GUIObject*>		registSkillUI;	//登録する際のスキルUI
 	int							pressBntNum;	//押されたボタン番号

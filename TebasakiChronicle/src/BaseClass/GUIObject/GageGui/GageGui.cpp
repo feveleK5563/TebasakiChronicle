@@ -42,6 +42,8 @@ GageGui::~GageGui()
 	Memory::SafeDelete(fillAreaBox);
 	CST::DeleteTexture("LifeBar");
 	CST::DeleteTexture("enemyGageBar");
+	Memory::SafeDelete(frame);
+	Memory::SafeDelete(fillAreaBox);
 }
 
 

@@ -7,7 +7,7 @@
 //!@param[in] Œp‘±ŽžŠÔ
 SkillType::SkillType(const int& moveID,const int& maxUseNum, const float& appearDist, const int& continueTime,const int& attackPoint)
 	: maxUseNum(maxUseNum), appearDist(appearDist), continueTime(continueTime)
-	, charaBehaivor(moveID), attackPoint(attackPoint)
+	, charaBehaivor(new CharacterBehavior(moveID)), attackPoint(attackPoint)
 {
 	
 }
@@ -18,7 +18,7 @@ SkillType::SkillType(const int& moveID,const int& maxUseNum, const float& appear
 //-----------------------------------------------------------
 SkillType::~SkillType()
 {
-
+	Memory::SafeDelete(charaBehaivor);
 }
 
 
@@ -34,16 +34,16 @@ void	SkillType::UpDate(GameObject& object)
 //‰Šú‰»
 void	SkillType::BehaivorInit(TemporaryCollisionManager& tempCol, Status& status, Move& move, TimeCount& timeCnt)
 {
-	charaBehaivor.Initialize(tempCol, status, move, timeCnt);
+	charaBehaivor->Initialize(tempCol, status, move, timeCnt);
 }
 //I—¹
 void	SkillType::BehaivorFinal(TemporaryCollisionManager& tempCol, Status& status, Move& move)
 {
-	charaBehaivor.Finalize(tempCol, status, move);
+	charaBehaivor->Finalize(tempCol, status, move);
 }
 void	SkillType::Behaivor(TemporaryCollisionManager& tempCol, Status& status, Move& move, TimeCount& timeCnt)
 {
-	charaBehaivor.Action(tempCol, status, move, timeCnt);
+	charaBehaivor->Action(tempCol, status, move, timeCnt);
 }
 
 
