@@ -3,17 +3,12 @@
 
 //コンストラクタ
 Scene_Game::Scene_Game():
-	etm(new EnemyTypeManager()),
 	emanager(new EnemyManager()),
 	player(new Player()),
 	playerLifeGui(new DataGui(player->GetGameObject()))
 {
-	//敵の種類を作成
-	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataA1.txt"));
-	etm->CreateEnemyData(eLoader.LoadEnemyData("data/EnemyData/EnemyDataB1.txt"));
-	//上記で作成した種類を基に敵を生成する
-	emanager->CreateEnemy(etm->GetEnemyTypeData(0), K_Math::Vector3(-10, 20, 0), Status::Direction::Left);
-	emanager->CreateBossEnemy(etm->GetEnemyTypeData(1), K_Math::Vector3(50, 20, 0), Status::Direction::Right);
+	//敵の配置情報の読み込み
+	emanager->LayoutEnemy("data/EnemyData/EnemyLayout/sample.txt");
 
 	player->Initliaze();
 
@@ -52,7 +47,6 @@ Scene_Game::Scene_Game():
 //デストラクタ
 Scene_Game::~Scene_Game()
 {
-	delete etm;
 	delete emanager;
 	delete player;
 	delete mapObj;

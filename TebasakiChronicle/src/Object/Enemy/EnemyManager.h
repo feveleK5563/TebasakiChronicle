@@ -1,11 +1,15 @@
 #pragma once
 #include "Enemy.h"
+#include "../../Loader/EnemyLoader.h"
+#include "EnemyType/EnemyTypeManager.h"
 
 class EnemyManager
 {
 private:
 	std::vector<Enemy*> enemy;
 	std::vector<Enemy*> bossEnemy;
+	EnemyLoader			enemyLoader;
+	EnemyTypeManager	enemyTypeManager;
 
 public:
 	EnemyManager();
@@ -15,6 +19,9 @@ public:
 	void CreateEnemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction);
 	//ボス敵を一体作成する
 	void CreateBossEnemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction);
+
+	//敵の配置情報を読み込み、敵を作成する
+	void LayoutEnemy(const std::string& enemyLayoutPath);
 
 	//作成した全ての敵を更新する
 	void UpdateAllEnemy();

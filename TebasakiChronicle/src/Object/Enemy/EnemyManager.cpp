@@ -20,8 +20,50 @@ void EnemyManager::CreateEnemy(EnemyType* cpyet, const K_Math::Vector3& setPos, 
 //ボス敵を一体作成する
 void EnemyManager::CreateBossEnemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction)
 {
-	int indexNum = (int)enemy.size();
+	int indexNum = (int)bossEnemy.size();
 	bossEnemy.emplace_back(new Enemy(cpyet, setPos, direction, indexNum, true));
+}
+
+//敵の配置情報を読み込み、敵を作成する
+void EnemyManager::LayoutEnemy(const std::string& enemyLayoutPath)
+{
+	std::ifstream ifs(enemyLayoutPath);
+	if (!ifs)
+	{
+		return;
+	}
+
+	//全敵データの読み込み
+	{
+		int enemyTypeNum;
+		ifs >> enemyTypeNum;
+		std::string enemyDataPath;
+		for (int i = 0; i < enemyTypeNum; ++i)
+		{
+			ifs >> enemyDataPath;
+			enemyTypeManager.CreateEnemyData(enemyLoader.LoadEnemyData(enemyDataPath));
+		}
+	}
+
+	//敵の配置情報の読み込み
+	{
+		int enemyNum;
+		ifs >> enemyNum;
+		for (int i = 0; i < enemyNum; ++i)
+		{
+			int enemyId;
+			int direction;
+			K_Math::Vector3 pos;
+
+			ifs >> enemyId >> direction >> pos.x >> pos.y >> pos.z;
+
+			CreateEnemy(
+				enemyTypeManager.GetEnemyTypeData(enemyId),
+				pos,
+				direction == 0 ? Status::Direction::Left : Status::Direction::Right
+			);
+		}
+	}
 }
 
 //-----------------------------------------------------------------------------

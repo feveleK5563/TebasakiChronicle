@@ -1,7 +1,5 @@
 #pragma once
 #include "../SceneAbstract.h"
-#include "../../Loader/EnemyLoader.h"
-#include "../../Object/Enemy/EnemyType/EnemyTypeManager.h"
 #include "../../Object/Enemy/EnemyManager.h"
 
 #include "../../Object/Player/Player.h"
@@ -23,8 +21,6 @@
 class Scene_Game : public SceneAbstract
 {
 private:
-	EnemyLoader eLoader;
-	EnemyTypeManager* etm;
 	EnemyManager* emanager;
 
 	Player* player;
