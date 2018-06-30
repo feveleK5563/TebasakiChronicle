@@ -31,7 +31,7 @@ private:
 	enum EnemyCollisionName
 	{
 		RecieveDamage,
-		Fieldofview,
+		Visibility,
 		AttackArea,
 		CheckFoot,
 		CheckHead,

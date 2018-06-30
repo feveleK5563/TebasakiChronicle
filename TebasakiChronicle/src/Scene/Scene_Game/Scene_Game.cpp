@@ -67,12 +67,12 @@ SceneName Scene_Game::Update()
 {
 	SceneName nextScene = SceneName::Non;
 
-	timeCnt.Run();
+	/*timeCnt.Run();
 	if (timeCnt.IsTimeEnd() == true)
 	{
 		emanager->AllActiveBoss();
 		timeCnt.SetEndTime(-1);
-	}
+	}*/
 
 	player->UpDate();
 	emanager->UpdateAllEnemy();
@@ -101,10 +101,10 @@ SceneName Scene_Game::Update()
 		nextScene = SceneName::GameOver;
 	}
 
-	if (emanager->GetIsDeadBoss() == true)
+	/*if (emanager->GetIsDeadBoss() == true)
 	{
 		nextScene = SceneName::GameClear;
-	}
+	}*/
 
 	return nextScene;
 }

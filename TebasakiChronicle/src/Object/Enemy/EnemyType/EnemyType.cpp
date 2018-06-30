@@ -88,7 +88,7 @@ K_Physics::CollisionData* EnemyType::CreateAndGetRecieveCameraCollisionData()
 }
 //-----------------------------------------------------------------------------
 //視界用コリジョンデータの生成と取得
-K_Physics::CollisionData* EnemyType::CreateAndGetFieldofviewCollisionData()
+K_Physics::CollisionData* EnemyType::CreateAndGetVisibilityCollisionData()
 {
 	return CC::CreateCollisionObject(collisionData.visibilityShape, true, CollisionMask::PlayerCollision, CollisionMask::Non, collisionData.visibilityPos);
 }

@@ -74,7 +74,7 @@ public:
 	//被カメラガン用コリジョンデータの生成と取得
 	K_Physics::CollisionData* CreateAndGetRecieveCameraCollisionData();
 	//視界用コリジョンデータの生成と取得
-	K_Physics::CollisionData* CreateAndGetFieldofviewCollisionData();
+	K_Physics::CollisionData* CreateAndGetVisibilityCollisionData();
 	//攻撃動作遷移用コリジョンの生成と取得
 	K_Physics::CollisionData* CreateAndGetAttackAreaCollisionData();
 	//足元用コリジョンの生成と取得

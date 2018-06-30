@@ -54,7 +54,7 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	//コリジョンの設定
 	collisionManager.SetBaseCollisionData(cpyet->CreateAndGetBaseCollisionData(), setPos);	//ベースコリジョン
 	collisionManager.SetSubCollisionData(cpyet->CreateAndGetRecieveDamageCollisionData());	//0 被ダメージ用コリジョン
-	collisionManager.SetSubCollisionData(cpyet->CreateAndGetFieldofviewCollisionData());	//1 視界用コリジョン
+	collisionManager.SetSubCollisionData(cpyet->CreateAndGetVisibilityCollisionData());		//1 視界用コリジョン
 	collisionManager.SetSubCollisionData(cpyet->CreateAndGetAttackAreaCollisionData());		//2 攻撃動作遷移用コリジョン
 	collisionManager.SetSubCollisionData(cpyet->CreateAndGetCheckFootCollisionData());		//3 足元判定用コリジョン
 	collisionManager.SetSubCollisionData(cpyet->CreateAndGetCheckHeadCollisionData());		//4 頭上判定用コリジョン

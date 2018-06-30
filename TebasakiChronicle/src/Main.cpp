@@ -75,7 +75,7 @@ int main()
 		
 		sceneManager->Draw();
 
-		//CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
+		CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 	
 		sc->SwapBuffer();
 	}

@@ -32,6 +32,7 @@ void EnemyMoveTransition::SetTransition(int transitionNum)
 
 	case 3:	//攻撃遷移用コリジョンにプレイヤーが入っているとき
 		transition = new ETransition_PlayerIntoAttackArea();
+		break;
 
 	case 4:	//足元が地形と接触しているとき
 		transition = new ETransition_HitFoot();

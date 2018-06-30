@@ -24,6 +24,7 @@ void EnemyManager::CreateBossEnemy(EnemyType* cpyet, const K_Math::Vector3& setP
 	bossEnemy.emplace_back(new Enemy(cpyet, setPos, direction, indexNum, true));
 }
 
+//-----------------------------------------------------------------------------
 //“G‚Ì”z’uî•ñ‚ğ“Ç‚İ‚İA“G‚ğì¬‚·‚é
 void EnemyManager::LayoutEnemy(const std::string& enemyLayoutPath)
 {

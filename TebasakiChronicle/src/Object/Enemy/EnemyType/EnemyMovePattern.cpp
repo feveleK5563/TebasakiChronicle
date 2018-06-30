@@ -10,7 +10,8 @@ EnemyMovePattern::EnemyMovePattern(const MoveSetUpData& msud)
 	}
 	for (int i = 0; i < msud.patternNum; ++i)
 	{
-		emt.emplace_back(new EnemyMoveTransition(*(msud.transitionIdArr + i)));
+		int hoge = *(msud.transitionIdArr + i);
+		emt.emplace_back(new EnemyMoveTransition(hoge));
 	}
 }
 
