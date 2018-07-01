@@ -96,7 +96,8 @@ SceneName Scene_Game::Update()
 	cameraMan->Run(player->GetGameObject().GetPos());
 
 
-	if (player->GetGameObject().IsDead())
+	if (player->GetGameObject().IsDead() ||
+		player->GetGameObject().GetPos().y < -(float)Define::ScreenHeight)
 	{
 		nextScene = SceneName::GameOver;
 	}

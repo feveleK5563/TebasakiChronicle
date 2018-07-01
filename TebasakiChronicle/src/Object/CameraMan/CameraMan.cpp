@@ -1,4 +1,7 @@
+#define NOMINMAX
+#include <algorithm>
 #include "CameraMan.h"
+#include "../../Helper.h"
 
 CameraMan::CameraMan(int screenWidth, int screenHeight, float dist, const K_Math::Vector3& target) :
 	defaultDist(dist),
@@ -16,11 +19,16 @@ void CameraMan::Run(const K_Math::Vector3& target)
 {
 	K_Math::Vector3 toVec = target - trackingPos;
 	trackingPos += toVec * 0.1f;
+	trackingPos.y = std::max(trackingPos.y, -(float)Define::ScreenHeight);
 
 	float toVecDist = settingDist - distance;
 	distance += toVecDist * 0.1f;
 
-	CST::GetPerspectiveCamera()->SetTarget(trackingPos.x, trackingPos.y, trackingPos.z);
+	CST::GetPerspectiveCamera()->SetTarget(
+		trackingPos.x,
+		trackingPos.y,
+		trackingPos.z);
+
 	CST::GetPerspectiveCamera()->SetPosition(distance, K_Math::Vector3(0, 0, -1));
 }
 
