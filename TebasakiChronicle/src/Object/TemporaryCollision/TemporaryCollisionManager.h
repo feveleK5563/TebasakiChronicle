@@ -38,4 +38,7 @@ public:
 
 	//コリジョンの描画を行う
 	void Render();
+
+	//全てのコリジョンを削除する
+	void DeleteCollision();
 };

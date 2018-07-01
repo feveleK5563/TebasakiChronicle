@@ -1,4 +1,5 @@
 #include "TemporaryCollisionManager.h"
+#include "../../Helper.h"
 
 //コリジョンの形状情報を管理させない
 TemporaryCollisionManager::TemporaryCollisionManager() {}
@@ -9,10 +10,7 @@ TemporaryCollisionManager::TemporaryCollisionManager(K_Physics::CollisionShape* 
 //デストラクタ
 TemporaryCollisionManager::~TemporaryCollisionManager()
 {
-	for (auto it : tempCollision)
-	{
-		delete it;
-	}
+	DeleteCollision();
 }
 
 //-----------------------------------------------------------------------------
@@ -74,4 +72,16 @@ void TemporaryCollisionManager::Render()
 	{
 		it->Render();
 	}
+}
+
+//-----------------------------------------------------------------------------
+//全てのコリジョンを削除する
+void TemporaryCollisionManager::DeleteCollision()
+{
+	for (auto it : tempCollision)
+	{
+		Memory::SafeDelete(it);
+	}
+	tempCollision.clear();
+	tempCollision.shrink_to_fit();
 }

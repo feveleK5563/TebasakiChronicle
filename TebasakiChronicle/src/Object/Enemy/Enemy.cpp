@@ -95,6 +95,7 @@ void Enemy::SetNonEnemy()
 		collisionManager.SetSubCollisionGiveMask(i, CollisionMask::Non);
 		collisionManager.SetSubCollisionMyselfMask(i, CollisionMask::Non);
 	}
+	tempCollisionManager.DeleteCollision();
 }
 
 //-----------------------------------------------------------------------------
