@@ -50,28 +50,46 @@ void	Player::Initliaze()
 	maxInvicibleTime = 120;	//300フレーム無敵時間
 	object.GetStatus().SetMinLife(0);
 	object.GetStatus().SetMaxLife(10);
+	preTargetDir = object.GetDirection();
+	targetDir = object.GetDirection();
+
 
 	texture = new K_Graphics::Texture();
 	texture->Initialize();
-	texture->LoadImage("./data/image/Player/ノーリアちゃん.png");
+	texture->LoadImage("./data/image/Player/image.png");
 	//画像の生成
 	object.SetImage(texture, true);
 	//AnimStateの状態の順番でなければアニメーションが対応しない
 	//noriachan
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,0,64,64), 6, 8, true);		//Idle
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64,64,64), 3, 1, false);		//Walk(出だし)
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*2,64,64), 5, 4, false);	//Run(右)
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*3,64,64), 5, 4, false);	//Run(左)
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*4,64,64), 5, 4, false);	//Jump
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*5,64,64), 5, 4, false);	//fall
-	object.GetImage().CreateCharaChip(K_Math::Box2D(64*5,64*5,64,64), 1, 3, false);	//landing
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*6,64,64), 5, 4, false);	//走りカメラガン(右)
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*7,64,64), 5, 4, false);	//走りカメラガン(左)
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*8,64,64), 5, 4, false);	//ジャンプ中(カメラガン)
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*9,64,64), 5, 4, false);	//fall(カメラガン)
-	object.GetImage().CreateCharaChip(K_Math::Box2D(64*3,64,64,64),1,5,false);		//待機中のカメラガン
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*10,64,64), 5, 4, false);	//ダメージ
+	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,0,64,64), 6, 8, true);		//Idle
+	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64,64,64), 3, 1, false);		//Walk(出だし)
+	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*2,64,64), 5, 4, false);	//Run(右)
+	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*3,64,64), 5, 4, false);	//Run(左)
+	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*4,64,64), 5, 4, false);	//Jump
+	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*5,64,64), 5, 4, false);	//fall
+	//object.GetImage().CreateCharaChip(K_Math::Box2D(64*5,64*5,64,64), 1, 3, false);	//landing
+	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*6,64,64), 5, 4, false);	//走りカメラガン(右)
+	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*7,64,64), 5, 4, false);	//走りカメラガン(左)
+	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*8,64,64), 5, 4, false);	//ジャンプ中(カメラガン)
+	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*9,64,64), 5, 4, false);	//fall(カメラガン)
+	//object.GetImage().CreateCharaChip(K_Math::Box2D(64*3,64,64,64),1,5,false);		//待機中のカメラガン
+	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*10,64,64), 5, 4, false);	//ダメージ
+	//object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 11, 64, 64), 5, 4, false);	//後ろ歩き右
+	//object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 12, 64, 64), 5, 4, false);	//後ろ歩き左
 
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 0, 64, 64), 6, 8, true);				//Idle
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64, 64, 64), 3, 1, false);			//Walk(出だし)
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 2, 64, 64), 11, 4, true);		//Run
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 3, 64, 64), 5, 4, false);		//Jump
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 4, 64, 64), 5, 4, false);		//fall
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 3, 64, 64), 1, 1, false);		//TakeOff
+	object.GetImage().CreateCharaChip(K_Math::Box2D(64 * 5, 64 * 5, 64, 64), 1, 3, false);	//landing
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 5, 64, 64), 10, 4, true);		//GunRun
+	object.GetImage().CreateCharaChip(K_Math::Box2D(64, 64 * 6, 64, 64), 5, 4, false);		//GunJump
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 7, 64, 64), 5, 4, false);		//GunFall
+	object.GetImage().CreateCharaChip(K_Math::Box2D(64 * 3, 64, 64, 64), 1, 5, false);		//GunIdle
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 8, 64, 64), 5, 4, false);		//Damage
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 9, 64, 64), 10, 4, true);		//GunRunBack
 
 	//Moveの重力の設定
 	object.GetMove().SetAddVec(4.f);
@@ -236,6 +254,13 @@ void	Player::ReverseCameraGun()
 				skillManager.ChangeRegistFlag(true);	//登録モードへ
 				//カメラガンからスキルデータを受け取る
 				skillManager.ReceiveSkillAndCharaChip(cameraGun.GetSkillAndCharaChip());
+				
+				//仮のエフェクト*******
+				//カメラがんのシャッター
+				//Effect::CreateEffect(EffectName::Effect1, cameraGun.object.GetPos());
+				//カメラがんからの発射光的なもの
+				//プレイヤーの動きについてきてほしい
+				//Effect::CreateEffect(EffectName::Effect1, K_Math::Vector3(cameraGun.GetDir() * 24 + object.GetPos().x, object.GetPos().y + 5, object.GetPos().z));
 			}
 		}
 		//カメラマーカーをプレイヤーの位置に戻す
@@ -305,7 +330,7 @@ void	Player::Think()
 		if (object.GetMove().GetFallSpeed() <= 0.0f) { nowMotion = Fall; }
 		if (cManager.CheckHitSubCollisionObejct(Head)) { nowMotion = Fall; }
 		ChangeSkillMotion(nowMotion, SkillAirUse);
-		if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::L1)) { nowMotion = CameraGunAirUse; }
+		if (INPUT::IsStayButton(VpadIndex::Pad0, VpadButton::L1)) { nowMotion = CameraGunAirUse; }
 		break;
 	case Fall:	//落下中
 		ChangeDamageMotion(nowMotion);		
@@ -317,14 +342,16 @@ void	Player::Think()
 		ChangeDamageMotion(nowMotion);
 		if (motionCnt >= maxFrame / maxFrame)
 		{
-			nowMotion = Jump;
+			if (INPUT::IsStayButton(VpadIndex::Pad0, VpadButton::L1)) { nowMotion = CameraGunAirUse; }
+			else { nowMotion = Jump; }
 		}
 		break;
 	case Landing:	//着地の瞬間
 		ChangeDamageMotion(nowMotion);
 		if (motionCnt >= maxFrame / maxFrame)
 		{
-			nowMotion = Idle;
+			if (INPUT::IsStayButton(VpadIndex::Pad0, VpadButton::L1)){ nowMotion = CameraGunUse; }
+			else { nowMotion = Idle; }
 		}
 		break;
 	case SkillUse:		//スキル使用中
@@ -358,7 +385,7 @@ void	Player::Think()
 	case CameraGunUse:		//カメラガン構え
 		ChangeDamageMotion(nowMotion);
 		if (INPUT::IsReaveButton(VpadIndex::Pad0, VpadButton::L1)) { nowMotion = Idle; }
-		if (controller.IsLStickInput()) { nowMotion = Run; }
+		if (controller.IsLStickInput()) { nowMotion = CameraGunMoveUse; }
 		if (cManager.CheckHitSubCollisionObejct(Foot))
 		{
 			if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::R1)) { nowMotion = TakeOff; }
@@ -366,27 +393,43 @@ void	Player::Think()
 		break;
 	case CameraGunMoveUse:	//カメラガン移動中構え
 		ChangeDamageMotion(nowMotion);
-		if (motionCnt > maxFrame / 2)
+		//カメラガン使用ボタンが押されている間
+		if (INPUT::IsStayButton(VpadIndex::Pad0, VpadButton::L1))
 		{
-			if (controller.IsLStickInput()) { nowMotion = Run; }
-			nowMotion = Idle;
+			if (!controller.IsLStickInput()) { nowMotion = CameraGunUse; }
 		}
-		if (!controller.IsLStickInput()) { nowMotion = Idle; }
+		else
+		{
+			nowMotion = Run;
+		}
 		if (cManager.CheckHitSubCollisionObejct(Foot))
 		{
 			if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::R1)) { nowMotion = TakeOff; }
+		}
+		else
+		{
+			if (INPUT::IsStayButton(VpadIndex::Pad0, VpadButton::L1)) { nowMotion = CameraGunAirUse; }
+			else { nowMotion = Fall; }
 		}
 		break;
 	case CameraGunAirUse:	//カメラガン空中構え
 		ChangeDamageMotion(nowMotion);
 		if (cManager.CheckHitSubCollisionObejct(Head)) { nowMotion = Fall; }
-		if (cManager.CheckHitSubCollisionObejct(Foot))
+		if (cManager.CheckHitSubCollisionObejct(Foot)){	nowMotion = Landing; }
+		if (INPUT::IsStayButton(VpadIndex::Pad0, VpadButton::L1))
 		{
-			nowMotion = Landing; 
+			if (cManager.CheckHitSubCollisionObejct(Foot))
+			{
+				nowMotion = CameraGunUse;
+			}
 		}
 		else
 		{
-			if (motionCnt > maxFrame / 2)
+			if (cManager.CheckHitSubCollisionObejct(Foot))
+			{
+				nowMotion = Landing;
+			}
+			else
 			{
 				nowMotion = Fall;
 			}
@@ -433,15 +476,37 @@ void	Player::Think()
 //モーションに対応した処理
 void	Player::Move()
 {
-	//重力加速
+	//落下中にスキル使用モードまたはカメラがんモードに入ると、移動ベクトルが0になり,落下しなくなる
+	//対応策:前のモーションが落下だった場合、移動ベクトルを前のものを代入する
+	
+	//移動速度:落下モーションへ切り替えた際に、移動ベクトルのyが0になる
+	//そのため、空中カメラがんから、落下に切り替わる際に、移動ベクトルのyが0になる
+	//対応策:落下に切り替わる際に、移動ベクトルのyを0にせず、そのままの移動速度を継続してもらう
+	//対応策:そもそも、モーションでカメラがんの空中使用が必要ではない気がするため、落下中にボタンが押されたら、
+	//アニメーションの状態をカメラがんの空中使用にするなど
+
 	switch (motion) {
 	default:
 		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
-
+		break;
+	//case Fall:
+	///case CameraGunAirUse:
+		//object.SetMoveVec(K_Math::Vector3(object.GetMove().GetHorizontalSpeed(), object.GetMove().GetFallSpeed(), 0));
+		break;
+	case Non:
+		break;
+	}
+	//重力加速
+	switch (motion) {
+	default:
 		//上昇中もしくは足元に地面がない
 		if (object.GetMoveVec().y > 0.0f || !cManager.CheckHitSubCollisionObejct(Foot))
 		{
 			object.GetMove().GravityOperation(cManager.CheckHitSubCollisionObejct(Foot));
+		}
+		if (object.GetMoveVec().y <= -15.0f)
+		{
+			object.GetMoveVec().y = -15.0f;
 		}
 		break;
 		//重力を無効にするモーション(今はなし)
@@ -453,12 +518,26 @@ void	Player::Move()
 	switch (motion) {
 	default:
 		controller.UpDate(object.GetMove());
-		ChangeDir();			//入力に応じて向きを変える
 		break;
 		//コントローラーで移動を無効にする
 	case Non:
 	case DamageRecive:	//ダメージ受けてる際は反応しない
 	case Death:
+		break;
+	}
+
+	switch (motion) {
+	default:
+		ChangeDir();			//入力に応じて向きを変える
+		break;
+	case Non:
+	case DamageRecive:
+	case Death:
+	case TakeOff:
+	case Landing:
+	case CameraGunUse:
+	case CameraGunMoveUse:
+	case CameraGunAirUse:
 		break;
 	}
 
@@ -494,6 +573,7 @@ void	Player::Move()
 		if (preMotion == Motion::DamageRecive)
 		{
 			object.GetMove().Horizontal();
+			object.GetMove().RegulationHorizon();
 		}
 		break;
 	case TakeOff:	//飛ぶ瞬間
@@ -529,6 +609,20 @@ void	Player::Move()
 		{
 			object.GetMove().Horizontal();
 		}
+		if (motionCnt == 0)
+		{
+			if (cManager.CheckHitSubCollisionObejct(Foot))
+			{
+				object.GetMove().JumpOperation();
+				//仮のエフェクト発動
+				//Effect::CreateEffect(EffectName::Effect1, object.GetPos()-K_Math::Vector3(0,24,0));
+			}
+		}
+		//ジャンプ力の調節
+		if (INPUT::IsReaveButton(VpadIndex::Pad0, K_Input::VpadButton::R1) && (object.GetMove().GetFallSpeed() > minJumpForce))
+		{
+			object.GetMove().SetFallSpeed(minJumpForce);
+		}
 		break;
 	case DamageRecive:		//ダメージ処理
 		//点滅するフラグをOnにする
@@ -546,7 +640,6 @@ void	Player::Move()
 	}
 
 	AnimState	nowAnimState = animState;
-
 	//------------------------------------------------
 	//モーション固有のアニメーション
 	switch (motion) {
@@ -561,18 +654,7 @@ void	Player::Move()
 		{
 			motionCnt = preMotionCnt;
 		}
-		if (motionCnt / (maxFrame / 3) == 0)
-		{
-			ChangeAnimState(AnimState::RightRun);
-		}
-		if (motionCnt / (maxFrame / 3) == 1)
-		{
-			ChangeAnimState(AnimState::LeftRun);
-		}
-		if (motionCnt / (maxFrame / 3) >= 2)
-		{
-			motionCnt = 0;
-		}
+		ChangeAnimState(AnimState::Run);
 		break;
 	case Jump:
 		ChangeAnimState(AnimState::Jump);
@@ -591,18 +673,7 @@ void	Player::Move()
 		{
 			motionCnt = preMotionCnt;
 		}
-		if (motionCnt / (maxFrame / 3) == 0)
-		{
-			ChangeAnimState(AnimState::GunRightRun);
-		}
-		if (motionCnt / (maxFrame / 3) == 1)
-		{
-			ChangeAnimState(AnimState::GunLeftRun);
-		}
-		if (motionCnt / (maxFrame / 3) >= 2)
-		{
-			motionCnt = 0;
-		}
+		CameraGunMoveAnimation();
 		break;
 	case CameraGunAirUse:
 		if (object.GetMove().GetFallSpeed() > 0)
@@ -613,6 +684,7 @@ void	Player::Move()
 		{
 			ChangeAnimState(AnimState::GunFall);
 		}
+		
 		break;
 	case SkillUse:		
 		ChangeAnimState(AnimState::Idle);
@@ -622,18 +694,7 @@ void	Player::Move()
 		{
 			motionCnt = preMotionCnt;
 		}
-		if (motionCnt / (maxFrame / 3) == 0)
-		{
-			ChangeAnimState(AnimState::GunRightRun);
-		}
-		if (motionCnt / (maxFrame / 3) == 1)
-		{
-			ChangeAnimState(AnimState::GunLeftRun);
-		}
-		if (motionCnt / (maxFrame / 3) >= 2)
-		{
-			motionCnt = 0;
-		}
+		ChangeAnimState(AnimState::GunRun);
 		break;
 	case SkillAirUse:
 		if (object.GetMove().GetFallSpeed() > 0)
@@ -847,3 +908,66 @@ void	Player::SwitchAnimState(const AnimState& animState1, const AnimState& animS
 	}
 }
 
+
+////////////////////////////////////////////////////////////////////////////////////
+//カメラガン関連
+////////////////////////////////////////////////////////////////////////////////////
+
+//!@brief	ターゲット位置が左右どちらにあるか判断
+//!@param[in]	targetPos	ターゲット位置
+//!@return	ターゲット位置が自分の位置より左なら Left
+//!@return	ターゲット位置が自分の位置より右なら Right
+const Status::Direction&	Player::IsTargetDir(const K_Math::Vector3 targetPos)
+{
+	if (object.GetPos().x < targetPos.x)
+	{
+		return Status::Direction::Right;
+	}
+	else
+	{
+		return Status::Direction::Left;
+	}
+}
+
+//!@brief	カメラガンのMoveアニメーション
+//!@brief	プレイヤーがカメラガンを持って走っている際の向きアニメーションの切り替えなど
+void	Player::CameraGunMoveAnimation()
+{
+	//カメラガンが左右どちらにあるか判断
+	preTargetDir = targetDir;
+	targetDir = this->IsTargetDir(cameraGun.object.GetPos());
+	if (targetDir == Status::Direction::Left)
+	{
+		//右を押したら、反対向き
+		if (controller.IsStickRight())
+		{
+			//std::cout << "向き反転" << std::endl;
+			ChangeAnimState(AnimState::GunRunBack);
+		}
+		else
+		{
+			ChangeAnimState(AnimState::GunRun);
+		}
+	}
+	else
+	{
+		//左を押したら、反対向き
+		if (controller.IsStickLeft())
+		{
+			//std::cout << "向き反転" << std::endl;
+			ChangeAnimState(AnimState::GunRunBack);
+		}
+		else
+		{
+			ChangeAnimState(AnimState::GunRun);
+		}
+	}
+	if (preTargetDir != targetDir)
+	{
+		if (motionCnt >= maxFrame / 10)
+		{
+			object.SetDirection(targetDir);
+			motionCnt = 0;
+		}
+	}
+}

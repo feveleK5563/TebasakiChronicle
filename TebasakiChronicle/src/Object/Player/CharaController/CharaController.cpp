@@ -71,3 +71,37 @@ bool	CharaController::IsLStickInput()
 	}
 	return true;
 }
+
+//!@brief	左入力が押されたか判断
+bool	CharaController::IsStickLeft()
+{
+	//左スティックの倒れている深さ
+	float stickDepth = INPUT::GetStickPower(VpadIndex::Pad0, K_Input::VpadStick::L);
+	//右方向を0度とした回転度
+	float stickAngle = INPUT::GetStickRotation(VpadIndex::Pad0, K_Input::VpadStick::L);
+
+	if (stickDepth != 0 && K_Math::DegToRad(-90) != stickAngle && stickAngle != K_Math::DegToRad(90))
+	{
+		if (!((K_Math::DegToRad(-90) < stickAngle) && (stickAngle < K_Math::DegToRad(90))))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+//!@brief	右入力が押されたか判断
+bool	CharaController::IsStickRight()
+{
+	//左スティックの倒れている深さ
+	float stickDepth = INPUT::GetStickPower(VpadIndex::Pad0, K_Input::VpadStick::L);
+	//右方向を0度とした回転度
+	float stickAngle = INPUT::GetStickRotation(VpadIndex::Pad0, K_Input::VpadStick::L);
+	if (stickDepth != 0 && K_Math::DegToRad(-90) != stickAngle && stickAngle != K_Math::DegToRad(90))
+	{
+		if ((K_Math::DegToRad(-90) < stickAngle) && (stickAngle < K_Math::DegToRad(90)))
+		{
+			return true;
+		}
+	}
+	return false;
+}

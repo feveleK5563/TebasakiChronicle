@@ -18,6 +18,11 @@ public:
 
 	//スティック入力があったかを返す
 	bool	IsLStickInput();
+
+	//!@brief	左入力が押されたか判断
+	bool	IsStickLeft();
+	//!@brief	右入力が押されたか判断
+	bool	IsStickRight();
 private:
 	float friction;
 	float inputAngle;

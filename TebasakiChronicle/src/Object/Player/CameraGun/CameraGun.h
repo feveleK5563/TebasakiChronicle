@@ -49,4 +49,6 @@ private:
 
 	int							targetNum;		//ターゲットの番号を格納する
 	Enemy::SkillAndCharaChip*	targetData;		//ターゲットのスキルデータを格納する
+private:
+	bool						effectCreateFlag;//エフェクト生成フラグ
 };

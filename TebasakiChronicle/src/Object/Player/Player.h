@@ -48,17 +48,17 @@ public:
 		Non = -1,
 		Idle = 0,		//待機
 		Walk,			//出だし
-		RightRun,		//右足
-		LeftRun,		//左足
+		Run,			//走る
 		Jump,			//ジャンプ
 		Fall,			//落下
+		TakeOff,		//飛ぶ瞬間
 		Landing,		//着地
-		GunRightRun,	//右足カメラガン
-		GunLeftRun,		//左足カメラガン
+		GunRun,			//走りカメラがん
 		GunJump,		//ジャンプカメラガン
 		GunFall,		//落下カメラガン
 		GunIdle,		//待機中のカメラガン
 		Damage,			//ダメージ
+		GunRunBack,		//後ろ走りカメラがん
 	};
 
 public:
@@ -125,6 +125,19 @@ private:
 	void	SwitchAnimState(const AnimState& animState1,const AnimState& animState2,const float frameCnt);
 
 private:
+	//////////////////////////////////////////////////////////////
+	//カメラガン関連
+	//////////////////////////////////////////////////////////////
+	//!@brief	ターゲット位置が左右どちらにあるか判断
+	//!@param[in]	targetPos	ターゲット位置
+	//!@return	ターゲット位置が自分の位置より左なら Left
+	//!@return	ターゲット位置が自分の位置より右なら Right
+	const Status::Direction&	IsTargetDir(const K_Math::Vector3 targetPos);
+	//!@brief	カメラガンのMoveアニメーション
+	//!@brief	プレイヤーがカメラガンを持って走っている際の向きアニメーションの切り替えなど
+	void	CameraGunMoveAnimation();
+
+private:
 	//--------------------------------
 	//エフェクト
 
@@ -149,8 +162,8 @@ public:
 	K_Physics::CollisionShape*	shape;		//ベースコリジョンの形状
 	K_Physics::CollisionShape*	shape2;		//足元と頭上用コリジョンの形状
 	CollisionManager			cManager;	//コリジョンの管理者
-
 	K_Graphics::Texture*		texture;
-
+	Status::Direction			preTargetDir;	//前のターゲットへの向き
+	Status::Direction			targetDir;		//現在のターゲットへの向き
 };
 
