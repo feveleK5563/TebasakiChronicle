@@ -6,23 +6,14 @@ EffectManager::EffectManager(){}
 //デストラクタ
 EffectManager::~EffectManager()
 {
-	for (auto it : effectData)
-	{
-		Memory::SafeDelete(it.second->animChip);
-		delete it.second;
-	}
-	for (auto it : effectObj)
-	{
-		delete it->imageManager;
-		delete it;
-	}
+	AllDeleteEffect();
 }
 
 //エフェクトのデータを格納する
-void EffectManager::CreateEffectData(EffectName effectName, K_Graphics::Texture* tex, AnimationCharaChip* anim, int endTime)
+void EffectManager::CreateEffectData(EffectName effectName, const std::string& texName, const std::string& texPath, AnimationCharaChip* anim, int endTime)
 {
 	effectData[effectName] = new EffectData();
-	effectData[effectName]->texture = tex;
+	effectData[effectName]->texture = CST::LoadAndGetTexture(texName, texPath);
 	effectData[effectName]->animChip = anim;
 	effectData[effectName]->endTime = endTime;
 }
@@ -55,6 +46,7 @@ void EffectManager::Run()
 		(*it)->timeCnt.Run();
 		++it;
 	}
+	effectObj.shrink_to_fit();
 }
 
 //エフェクトの描画
@@ -64,6 +56,26 @@ void EffectManager::Render()
 	{
 		it->imageManager->ImageDraw3D(it->pos, K_Math::Vector3(0, 0, 0), K_Math::Vector3(1, 1, 1), 0);
 	}
+}
+
+//全てのエフェクトを削除する
+void EffectManager::AllDeleteEffect()
+{
+	for (auto it : effectData)
+	{
+		CST::DeleteTexture(it.second->texName);
+		Memory::SafeDelete(it.second->animChip);
+		delete it.second;
+	}
+	effectData.clear();
+
+	for (auto it : effectObj)
+	{
+		delete it->imageManager;
+		delete it;
+	}
+	effectObj.clear();
+	effectObj.shrink_to_fit();
 }
 
 //インスタンスを得る
@@ -79,9 +91,9 @@ EffectManager* effectManager = EffectManager::GetInstance();
 namespace Effect
 {
 	//エフェクトのデータを作成し、格納する
-	void CreateEffectData(EffectName effectName, K_Graphics::Texture* tex, AnimationCharaChip* anim)
+	void CreateEffectData(EffectName effectName, const std::string& texName, const std::string& texPath, AnimationCharaChip* anim)
 	{
-		effectManager->CreateEffectData(effectName, tex, anim, int(anim->chipSheetNum * anim->animSpd));
+		effectManager->CreateEffectData(effectName, texName, texPath, anim, int(anim->chipSheetNum * anim->animSpd));
 	}
 
 	//指定座標に指定したエフェクトを生成する
@@ -100,5 +112,11 @@ namespace Effect
 	void Render()
 	{
 		effectManager->Render();
+	}
+
+	//全てのエフェクトとそのデータを削除する
+	void AllDeleteEffect()
+	{
+		effectManager->AllDeleteEffect();
 	}
 }

@@ -39,6 +39,11 @@ Scene_Game::Scene_Game():
 	//登録すれば正しく使える
 	source.Play();
 
+	//エフェクトを作成
+	Effect::CreateEffectData(EffectName::Effect1,
+		"testEffect", "data/image/testEffect.png",
+		new AnimationCharaChip(K_Math::Box2D(0, 0, 32, 32), 8, 5, false));
+
 	//以下仮
 	CST::LoadAndGetTexture("Effect", "data/image/effect.png");
 	timeCnt.SetEndTime(180);
@@ -57,6 +62,8 @@ Scene_Game::~Scene_Game()
 	delete cameraMan;
 
 	soundEngine.DeleteSound(source.GetName().c_str());
+
+	Effect::AllDeleteEffect();
 
 	CST::DeleteTexture("back");
 	CST::DeleteTexture("Effect");

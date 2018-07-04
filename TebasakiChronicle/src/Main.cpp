@@ -47,16 +47,13 @@ int main()
 	CST::CreateShader("data/shader/SimpleShader.vs", "data/shader/SimpleShader.ps");
 	CST::CreateShader("data/shader/VertexShader.vs", "data/shader/TextureSampler.ps");
 
-	//エフェクトを作成
-	Effect::CreateEffectData(EffectName::Effect1,
-		CST::LoadAndGetTexture("testEffect", "data/image/testEffect.png"),
-		new AnimationCharaChip(K_Math::Box2D(0, 0, 32, 32), 8, 5, false));
-
 	//シーン管理
 	SceneManager* sceneManager = new SceneManager(SceneName::Title);
 
 	//******************************************************************
 	
+	bool isDebugDraw = false;
+
 	while (sc->IsSystemEnd() == false)
 	{
 		//---------------------------------------------
@@ -66,6 +63,10 @@ int main()
 
 		sceneManager->Update();
 		
+		if (INPUT::IsPressButton(VpadIndex::Pad0, K_Input::VpadButton::Y))
+		{
+			isDebugDraw = !isDebugDraw;
+		}
 
 		//---------------------------------------------
 		//描画
@@ -75,6 +76,7 @@ int main()
 		
 		sceneManager->Draw();
 
+		if (isDebugDraw)
 		CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 	
 		sc->SwapBuffer();

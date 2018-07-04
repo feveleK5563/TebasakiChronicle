@@ -18,6 +18,7 @@ private:
 	struct EffectData
 	{
 		AnimationCharaChip*		animChip;	//アニメーション管理
+		std::string				texName;	//テクスチャ名
 		K_Graphics::Texture*	texture;	//テクスチャ
 		int						endTime;	//終了時間
 	};
@@ -37,7 +38,7 @@ private:
 
 public:
 	//エフェクトのデータを格納する
-	void CreateEffectData(EffectName effectName, K_Graphics::Texture* tex, AnimationCharaChip* anim, int endTime);
+	void CreateEffectData(EffectName effectName, const std::string& texName, const std::string& texPath, AnimationCharaChip* anim, int endTime);
 	//指定座標に指定したエフェクトを生成する
 	void CreateEffect(EffectName effectName, const K_Math::Vector3& setPos);
 
@@ -46,6 +47,9 @@ public:
 
 	//エフェクトの描画処理
 	void Render();
+
+	//全てのエフェクトとそのデータを削除する
+	void AllDeleteEffect();
 
 	//インスタンスを得る
 	static EffectManager* GetInstance();
@@ -54,7 +58,7 @@ public:
 namespace Effect
 {
 	//エフェクトのデータを格納する
-	void CreateEffectData(EffectName effectName, K_Graphics::Texture* tex, AnimationCharaChip* anim);
+	void CreateEffectData(EffectName effectName, const std::string& texName, const std::string& texPath, AnimationCharaChip* anim);
 
 	//指定座標に指定したエフェクトを生成する
 	void CreateEffect(EffectName effectName, const K_Math::Vector3& setPos);
@@ -64,4 +68,7 @@ namespace Effect
 
 	//エフェクトの描画処理
 	void Render();
+
+	//全てのエフェクトとそのデータを削除する
+	void AllDeleteEffect();
 }
