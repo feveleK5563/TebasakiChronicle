@@ -39,7 +39,7 @@ void	Player::Initliaze()
 		K_Math::Vector3(1, 1, 1),
 		Status::Direction::Right,
 		1,
-		3
+		10
 		);
 
 	motion = Idle;
@@ -47,7 +47,7 @@ void	Player::Initliaze()
 	maxFrame = 60;
 	minJumpForce = 1.5f;
 	invicibleCnt = 0;
-	maxInvicibleTime = 120;	//300フレーム無敵時間
+	maxInvicibleTime = 120;		//無敵時間
 	object.GetStatus().SetMinLife(0);
 	object.GetStatus().SetMaxLife(10);
 	preTargetDir = object.GetDirection();
@@ -56,27 +56,10 @@ void	Player::Initliaze()
 
 	texture = new K_Graphics::Texture();
 	texture->Initialize();
-	texture->LoadImage("./data/image/Player/image.png");
+	texture->LoadImage("./data/image/Player/player.png");
 	//画像の生成
 	object.SetImage(texture, true);
 	//AnimStateの状態の順番でなければアニメーションが対応しない
-	//noriachan
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,0,64,64), 6, 8, true);		//Idle
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64,64,64), 3, 1, false);		//Walk(出だし)
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*2,64,64), 5, 4, false);	//Run(右)
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*3,64,64), 5, 4, false);	//Run(左)
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*4,64,64), 5, 4, false);	//Jump
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*5,64,64), 5, 4, false);	//fall
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(64*5,64*5,64,64), 1, 3, false);	//landing
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*6,64,64), 5, 4, false);	//走りカメラガン(右)
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*7,64,64), 5, 4, false);	//走りカメラガン(左)
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*8,64,64), 5, 4, false);	//ジャンプ中(カメラガン)
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*9,64,64), 5, 4, false);	//fall(カメラガン)
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(64*3,64,64,64),1,5,false);		//待機中のカメラガン
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0,64*10,64,64), 5, 4, false);	//ダメージ
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 11, 64, 64), 5, 4, false);	//後ろ歩き右
-	//object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 12, 64, 64), 5, 4, false);	//後ろ歩き左
-
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 0, 64, 64), 6, 8, true);				//Idle
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64, 64, 64), 3, 1, false);			//Walk(出だし)
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 2, 64, 64), 11, 4, true);		//Run
@@ -476,29 +459,10 @@ void	Player::Think()
 //モーションに対応した処理
 void	Player::Move()
 {
-	//落下中にスキル使用モードまたはカメラがんモードに入ると、移動ベクトルが0になり,落下しなくなる
-	//対応策:前のモーションが落下だった場合、移動ベクトルを前のものを代入する
-	
-	//移動速度:落下モーションへ切り替えた際に、移動ベクトルのyが0になる
-	//そのため、空中カメラがんから、落下に切り替わる際に、移動ベクトルのyが0になる
-	//対応策:落下に切り替わる際に、移動ベクトルのyを0にせず、そのままの移動速度を継続してもらう
-	//対応策:そもそも、モーションでカメラがんの空中使用が必要ではない気がするため、落下中にボタンが押されたら、
-	//アニメーションの状態をカメラがんの空中使用にするなど
-
-	switch (motion) {
-	default:
-		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
-		break;
-	//case Fall:
-	///case CameraGunAirUse:
-		//object.SetMoveVec(K_Math::Vector3(object.GetMove().GetHorizontalSpeed(), object.GetMove().GetFallSpeed(), 0));
-		break;
-	case Non:
-		break;
-	}
 	//重力加速
 	switch (motion) {
 	default:
+		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
 		//上昇中もしくは足元に地面がない
 		if (object.GetMoveVec().y > 0.0f || !cManager.CheckHitSubCollisionObejct(Foot))
 		{
@@ -684,7 +648,21 @@ void	Player::Move()
 		{
 			ChangeAnimState(AnimState::GunFall);
 		}
-		
+		//カメラガンが左右どちらにあるか判断
+		preTargetDir = targetDir;
+		targetDir = this->IsTargetDir(cameraGun.object.GetPos());
+		if (preTargetDir != targetDir)
+		{
+			if (motionCnt >= maxFrame / 10)
+			{
+				object.SetDirection(targetDir);
+				motionCnt = 0;
+			}
+		}
+		if (targetDir != object.GetDirection())
+		{
+			object.SetDirection(targetDir);
+		}
 		break;
 	case SkillUse:		
 		ChangeAnimState(AnimState::Idle);
@@ -917,9 +895,13 @@ void	Player::SwitchAnimState(const AnimState& animState1, const AnimState& animS
 //!@param[in]	targetPos	ターゲット位置
 //!@return	ターゲット位置が自分の位置より左なら Left
 //!@return	ターゲット位置が自分の位置より右なら Right
-const Status::Direction&	Player::IsTargetDir(const K_Math::Vector3 targetPos)
+const Status::Direction	Player::IsTargetDir(const K_Math::Vector3 targetPos)
 {
-	if (object.GetPos().x < targetPos.x)
+	float offset = 0.0f;
+	if (object.GetDirection() == Status::Direction::Left){	offset = -10.0f; }
+	else{	offset = 10.0f; }
+
+	if (object.GetPos().x < targetPos.x + offset)
 	{
 		return Status::Direction::Right;
 	}
@@ -969,5 +951,9 @@ void	Player::CameraGunMoveAnimation()
 			object.SetDirection(targetDir);
 			motionCnt = 0;
 		}
+	}
+	if (targetDir != object.GetDirection())
+	{
+		object.SetDirection(targetDir);
 	}
 }

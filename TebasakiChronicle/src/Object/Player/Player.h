@@ -132,7 +132,7 @@ private:
 	//!@param[in]	targetPos	ターゲット位置
 	//!@return	ターゲット位置が自分の位置より左なら Left
 	//!@return	ターゲット位置が自分の位置より右なら Right
-	const Status::Direction&	IsTargetDir(const K_Math::Vector3 targetPos);
+	const Status::Direction	IsTargetDir(const K_Math::Vector3 targetPos);
 	//!@brief	カメラガンのMoveアニメーション
 	//!@brief	プレイヤーがカメラガンを持って走っている際の向きアニメーションの切り替えなど
 	void	CameraGunMoveAnimation();

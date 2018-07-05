@@ -188,8 +188,7 @@ void	SkillData::CreateSkillType()
 		skillType = std::shared_ptr<SkillType>(new SkillMove(skillID, 5, 0.0f, 60, 0));
 		break;
 	case 11:
-		//skillType = std::shared_ptr<SkillType>(new SkillAttack(skillID, 7, 30.0f, 60, 1));
-		skillType = std::shared_ptr<SkillType>(new SkillMove(3, 100, 0.0f, 60, 0));	//‰¼
+		skillType = std::shared_ptr<SkillType>(new SkillAttack(skillID, 7, 30.0f, 60, 1));
 		break;
 	case 12:
 		skillType = std::shared_ptr<SkillType>(new SkillAttack(skillID, 5, 30.0f, 60, 1));
