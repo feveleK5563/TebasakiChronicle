@@ -82,13 +82,13 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	SetTugData();
 
 	SetNonEnemy();
+	gameObject.SetState(Status::State::Non);
 }
 
 //-----------------------------------------------------------------------------
 //無効状態にする
 void Enemy::SetNonEnemy()
 {
-	gameObject.SetState(Status::State::Non);
 	//カメラマン受け用コリジョンを除いたサブコリジョンのマスクを無効にする
 	for (int i = 0; i < subCollisionNum; ++i)
 	{
@@ -142,10 +142,10 @@ void Enemy::Update()
 	gameObject.GetMove().GravityOperation(collisionManager.GetConflictionObjectsTag(3).size() > 0);
 
 	//接触しているコリジョンを調べてダメージを受ける
-	RecieveCollisionOperation();
+	bool isTakeDamage = RecieveCollisionOperation();
 
 	//設定されている動作を行う
-	*skillAndChip->behaviorId = ems->EMove(nowMoveOrder, nowPatternOrder, timeCnt, collisionManager, tempCollisionManager, gameObject.GetStatus(), gameObject.GetMove());
+	*skillAndChip->behaviorId = ems->EMove(nowMoveOrder, nowPatternOrder, timeCnt, collisionManager, tempCollisionManager, gameObject.GetStatus(), gameObject.GetMove(), isTakeDamage);
 
 	//アニメーションの更新
 	AnimationUpdate();
@@ -178,6 +178,7 @@ bool Enemy::DecisionInScreen()
 		{
 			gameObject.SetPos(initialPos);
 			SetNonEnemy();
+			gameObject.SetState(Status::State::Non);
 		}
 		return true;
 	}
@@ -200,6 +201,9 @@ bool Enemy::DecisionInScreen()
 //ダメージを受けたらtrueを返す
 bool Enemy::RecieveCollisionOperation()
 {
+	if (gameObject.GetState() == Status::State::Invalid)
+		return false;
+
 	std::vector<K_Physics::CollisionTag*> tag;
 
 	int damage = 0;	//被ダメージ
@@ -220,7 +224,7 @@ bool Enemy::RecieveCollisionOperation()
 	{
 		if (((Status*)it->userData)->GetState() == Status::State::Active)
 		{
-			//カメラガンから受ける影響をここに書きなされ
+			//カメラガンから受ける影響をここに記述
 
 		}
 	}
@@ -231,8 +235,11 @@ bool Enemy::RecieveCollisionOperation()
 	//体力が0以下になったら死亡
 	if (gameObject.GetStatus().GetLife() <= 0)
 	{
-		SetNonEnemy();	//敵にまつわる各種データを無効にする
-		gameObject.SetState(Status::State::Death);	//ステータスをDeathに修正
+		SetNonEnemy();	//敵を無効にする
+		gameObject.SetState(Status::State::Death);	//ステータスをDeathに変更
+
+		//(仮)爆発エフェクトの発生
+		Effect::CreateEffect(EffectName::Effect1, gameObject.GetPos());
 	}
 
 	return damage > 0;
@@ -270,7 +277,8 @@ void Enemy::AnimationUpdate()
 //描画
 void Enemy::Render()
 {
-	if (gameObject.GetState() != Status::State::Active)
+	if (gameObject.GetState() != Status::State::Active ||
+		(gameObject.GetState() == Status::State::Invalid && (timeCnt.GetNowCntTime() % 2) == 0))
 		return;
 
 	gameObject.GetImage().ImageDraw3D(	gameObject.GetStatus().GetPos(),

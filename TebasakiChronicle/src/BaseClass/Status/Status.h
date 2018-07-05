@@ -26,6 +26,7 @@ public:
 		Non,
 		Active,
 		Death,
+		Invalid,
 	};
 
 public:

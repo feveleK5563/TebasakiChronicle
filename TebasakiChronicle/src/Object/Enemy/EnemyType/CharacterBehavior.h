@@ -185,3 +185,13 @@ public:
 	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
 	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
 };
+
+//-----------------------------------------------
+//ˆê’èŠÔ–³“Gó‘Ô‚É‚È‚é
+class Behavior_Invulnerable : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
+	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+};

@@ -7,7 +7,7 @@ class EnemyMoveTransitionAbstract
 {
 public:
 	virtual ~EnemyMoveTransitionAbstract();
-	virtual bool IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern) = 0;
+	virtual bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage) = 0;
 };
 
 //-----------------------------------------------------------------------------
@@ -26,7 +26,7 @@ public:
 	void SetTransition(int transitionNum);
 
 	//遷移条件をクリアしたらtrueを返す
-	bool IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern);
+	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage);
 };
 
 //条件が重複する場合、パターン番号の若いほうが優先される
@@ -36,7 +36,7 @@ public:
 class ETransition_NotTransition : public EnemyMoveTransitionAbstract
 {
 public:
-	bool IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern);
+	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage);
 };
 
 //-----------------------------------------------
@@ -44,7 +44,7 @@ public:
 class ETransition_EndMovePattern : public EnemyMoveTransitionAbstract
 {
 public:
-	bool IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern);
+	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage);
 };
 
 //-----------------------------------------------
@@ -52,7 +52,7 @@ public:
 class ETransition_PlayerIntoVisibility : public EnemyMoveTransitionAbstract
 {
 public:
-	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern);
+	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage);
 };
 
 //-----------------------------------------------
@@ -60,7 +60,7 @@ public:
 class ETransition_PlayerIntoAttackArea : public EnemyMoveTransitionAbstract
 {
 public:
-	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern);
+	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage);
 };
 
 //-----------------------------------------------
@@ -68,7 +68,7 @@ public:
 class ETransition_HitFoot : public EnemyMoveTransitionAbstract
 {
 public:
-	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern);
+	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage);
 };
 
 //-----------------------------------------------
@@ -76,5 +76,13 @@ public:
 class ETransition_IntoVisibilityAndMatchDirection : public EnemyMoveTransitionAbstract
 {
 public:
-	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern);
+	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage);
+};
+
+//-----------------------------------------------
+//6：ダメージを受けたとき
+class ETransition_TakeDamage : public EnemyMoveTransitionAbstract
+{
+public:
+	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage);
 };

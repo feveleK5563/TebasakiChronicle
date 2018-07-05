@@ -41,25 +41,29 @@ void EnemyMoveTransition::SetTransition(int transitionNum)
 	case 5: //視界内のプレイヤーが向いている方向にいるとき
 		transition = new ETransition_IntoVisibilityAndMatchDirection();
 		break;
+
+	case 6:	//ダメージを受けたとき
+		transition = new ETransition_TakeDamage();
+		break;
 	}
 }
 //-----------------------------------------------
 //遷移条件をクリアしたらtrueを返す
-bool EnemyMoveTransition::IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern)
+bool EnemyMoveTransition::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage)
 {
-	return transition->IsTransition(cm, status, endMovePattern) == isReturnTrue;
+	return transition->IsTransition(cm, status, endMovePattern, isTakeDamage) == isReturnTrue;
 }
 
 //-----------------------------------------------------------------------------
 //0：遷移しない
-bool ETransition_NotTransition::IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern)
+bool ETransition_NotTransition::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage)
 {
 	return false;
 }
 
 //-----------------------------------------------------------------------------
 //1：一連の動作が終了したとき
-bool ETransition_EndMovePattern::IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern)
+bool ETransition_EndMovePattern::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage)
 {
 	if (endMovePattern == true)
 		return true;
@@ -69,7 +73,7 @@ bool ETransition_EndMovePattern::IsTransition(CollisionManager& cm, Status& stat
 
 //-----------------------------------------------------------------------------
 //2：視界内にプレイヤーが入っているとき
-bool ETransition_PlayerIntoVisibility::IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern)
+bool ETransition_PlayerIntoVisibility::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage)
 {
 	if (cm.CheckHitSubCollisionObejct(1))
 		return true;
@@ -79,7 +83,7 @@ bool ETransition_PlayerIntoVisibility::IsTransition(CollisionManager& cm, Status
 
 //-----------------------------------------------
 //3：攻撃遷移用コリジョンにプレイヤーが入っているとき
-bool ETransition_PlayerIntoAttackArea::IsTransition(CollisionManager& cm, Status& status, const bool endMovePattern)
+bool ETransition_PlayerIntoAttackArea::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage)
 {
 	if (cm.CheckHitSubCollisionObejct(2))
 		return true;
@@ -89,7 +93,7 @@ bool ETransition_PlayerIntoAttackArea::IsTransition(CollisionManager& cm, Status
 
 //-----------------------------------------------
 //4：足元が地形と接触しているとき
-bool ETransition_HitFoot::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern)
+bool ETransition_HitFoot::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage)
 {
 	if (cm.CheckHitSubCollisionObejct(3))
 		return true;
@@ -99,7 +103,7 @@ bool ETransition_HitFoot::IsTransition(CollisionManager& cm, Status& status, boo
 
 //-----------------------------------------------
 //5：視界内のプレイヤーが向いている方向にいるとき
-bool ETransition_IntoVisibilityAndMatchDirection::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern)
+bool ETransition_IntoVisibilityAndMatchDirection::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage)
 {
 	auto pdata = cm.GetConflictionObjectsTag(1);
 	if (pdata.size() <= 0)
@@ -111,4 +115,11 @@ bool ETransition_IntoVisibilityAndMatchDirection::IsTransition(CollisionManager&
 		return true;
 	}
 	return false;
+}
+
+//-----------------------------------------------
+//6：ダメージを受けたとき
+bool ETransition_TakeDamage::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage)
+{
+	return isTakeDamage;
 }

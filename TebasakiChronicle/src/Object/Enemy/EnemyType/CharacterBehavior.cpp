@@ -68,6 +68,10 @@ void CharacterBehavior::SetBehavior(int moveNum)
 	case 12:	//重力アリの爆弾を投げる
 		behavior = new Behavior_ThrowBomb();
 		break;
+
+	case 13:	//一定時間無敵状態になる
+		behavior = new Behavior_Invulnerable();
+		break;
 	}
 }
 //-----------------------------------------------
@@ -357,9 +361,6 @@ void Behavior_ShotBulletFromMiddle::Initialize(TemporaryCollisionManager& tempma
 		3,
 		10.f,
 		true);
-
-	//(仮)爆発エフェクトの発生
-	Effect::CreateEffect(EffectName::Effect1, status.GetPos() + relative + K_Math::Vector3(0, 0, -1));
 }
 void Behavior_ShotBulletFromMiddle::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
 {
@@ -403,4 +404,19 @@ void Behavior_ThrowBomb::Action(TemporaryCollisionManager& tempmanager, Status& 
 void Behavior_ThrowBomb::Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	//何もしない
+}
+
+//-----------------------------------------------
+//一定時間無敵状態になる
+void Behavior_Invulnerable::Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+{
+	status.SetState(Status::State::Invalid);
+}
+void Behavior_Invulnerable::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
+{
+
+}
+void Behavior_Invulnerable::Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+{
+	status.SetState(Status::State::Active);
 }

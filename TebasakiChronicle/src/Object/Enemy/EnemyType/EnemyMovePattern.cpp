@@ -96,7 +96,7 @@ const std::vector<AnimationCharaChip*>&  EnemyMovePattern::GetNowAnimChip()
 
 //-----------------------------------------------------------------------------
 //指定番号の遷移条件を実行し、クリアしたらtrueを返す
-bool EnemyMovePattern::IsTransition(int num, CollisionManager& colmanager, Status& status, const bool endMovePattern)
+bool EnemyMovePattern::IsTransition(int num, CollisionManager& colmanager, Status& status, const bool endMovePattern, bool isTakeDamage)
 {
-	return emt[num]->IsTransition(colmanager, status, endMovePattern);
+	return emt[num]->IsTransition(colmanager, status, endMovePattern, isTakeDamage);
 }
