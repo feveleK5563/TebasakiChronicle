@@ -51,8 +51,6 @@ int main()
 	SceneManager* sceneManager = new SceneManager(SceneName::Title);
 
 	//******************************************************************
-	
-	bool isDebugDraw = false;
 
 	while (sc->IsSystemEnd() == false)
 	{
@@ -62,11 +60,6 @@ int main()
 		CC::Run();
 
 		sceneManager->Update();
-		
-		if (INPUT::IsPressButton(VpadIndex::Pad0, K_Input::VpadButton::Y))
-		{
-			isDebugDraw = !isDebugDraw;
-		}
 
 		//---------------------------------------------
 		//•`‰æ
@@ -76,7 +69,6 @@ int main()
 		
 		sceneManager->Draw();
 
-		if (isDebugDraw)
 		CC::DebugDraw(CST::GetShaderClass(1), CST::GetPerspectiveCamera());
 	
 		sc->SwapBuffer();

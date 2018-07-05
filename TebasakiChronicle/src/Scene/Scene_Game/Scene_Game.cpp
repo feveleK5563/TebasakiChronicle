@@ -8,12 +8,12 @@ Scene_Game::Scene_Game():
 	playerLifeGui(new DataGui(player->GetGameObject()))
 {
 	//敵の配置情報の読み込み
-	emanager->LayoutEnemy("data/EnemyData/EnemyLayout/sample.txt");
+	emanager->LayoutEnemy("data/EnemyData/EnemyLayout/opStageEnemySettings.txt");
 
 	player->Initliaze();
 
 	//地形判定付きオブジェクト
-	scale =		{ 10,40,40 };
+	scale =		{ 30,30,30 };
 	rotation =	{ K_Math::DegToRad(0),K_Math::DegToRad(0),K_Math::DegToRad(0) };
 	pos =		{ -120.0f,-50.0f,0.f };
 	mapObj = new Object3D("data/model/map/map.fbx", pos, rotation, scale);

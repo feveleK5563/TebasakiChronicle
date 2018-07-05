@@ -42,7 +42,7 @@ void EnemyManager::LayoutEnemy(const std::string& enemyLayoutPath)
 		for (int i = 0; i < enemyTypeNum; ++i)
 		{
 			ifs >> enemyDataPath;
-			enemyTypeManager.CreateEnemyData(enemyLoader.LoadEnemyData(enemyDataPath));
+			enemyTypeManager.CreateEnemyData(enemyLoader.LoadEnemyData("data/EnemyData/" + enemyDataPath));
 		}
 	}
 

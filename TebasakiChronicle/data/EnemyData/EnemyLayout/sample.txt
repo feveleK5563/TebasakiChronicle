@@ -1,6 +1,6 @@
 2
-data/EnemyData/EnemyDataA1.txt
-data/EnemyData/EnemyDataA2.txt
+EnemyDataA1.txt
+EnemyDataA2.txt
 3
 0 1 144.000000 92.000000 0.000000 
 0 0 216.000000 92.000000 0.000000 
