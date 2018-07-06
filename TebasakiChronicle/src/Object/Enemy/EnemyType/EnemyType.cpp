@@ -13,7 +13,8 @@ EnemyType::~EnemyType()
 	CST::DeleteTexture(paramData.textureName);
 	delete emSet;
 	CC::RemoveCollisionShape(&collisionData.baseShape);
-	CC::RemoveCollisionShape(&collisionData.receiveShape);
+	CC::RemoveCollisionShape(&collisionData.receiveDamShape);
+	CC::RemoveCollisionShape(&collisionData.receiveCamShape);
 	CC::RemoveCollisionShape(&collisionData.visibilityShape);
 	CC::RemoveCollisionShape(&collisionData.attackAreaShape);
 	CC::RemoveCollisionShape(&collisionData.checkShape);
@@ -78,13 +79,13 @@ K_Physics::CollisionData* EnemyType::CreateAndGetBaseCollisionData()
 //被ダメ用コリジョンデータの生成と取得
 K_Physics::CollisionData* EnemyType::CreateAndGetRecieveDamageCollisionData()
 {
-	return CC::CreateCollisionObject(collisionData.receiveShape, true, CollisionMask::TakeDamageEnemy, CollisionMask::EnemyCollision, collisionData.receivePos);
+	return CC::CreateCollisionObject(collisionData.receiveDamShape, true, CollisionMask::TakeDamageEnemy, CollisionMask::EnemyCollision, collisionData.receiveDamPos);
 }
 //-----------------------------------------------------------------------------
 //被カメラガン用コリジョンデータの生成と取得
 K_Physics::CollisionData* EnemyType::CreateAndGetRecieveCameraCollisionData()
 {
-	return CC::CreateCollisionObject(collisionData.receiveShape, true, CollisionMask::CameraGunCollision, CollisionMask::EnemyCamCollision, collisionData.receivePos);
+	return CC::CreateCollisionObject(collisionData.receiveCamShape, true, CollisionMask::CameraGunCollision, CollisionMask::EnemyCamCollision, collisionData.receiveCamPos);
 }
 //-----------------------------------------------------------------------------
 //視界用コリジョンデータの生成と取得

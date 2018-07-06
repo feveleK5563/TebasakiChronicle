@@ -8,7 +8,7 @@ Scene_Game::Scene_Game():
 	playerLifeGui(new DataGui(player->GetGameObject()))
 {
 	//“G‚Ì”z’uî•ñ‚Ì“Ç‚Ýž‚Ý
-	emanager->LayoutEnemy("data/EnemyData/EnemyLayout/opStageEnemySettings.txt");
+	emanager->LayoutEnemy("data/EnemyData/EnemyLayout/sample.txt");
 
 	player->Initliaze();
 

@@ -22,20 +22,22 @@ public:
 	struct CollisionData	//コリジョンの情報
 	{
 		K_Physics::CollisionShape*	baseShape;			//地形用コリジョンの形状
-		K_Physics::CollisionShape*	receiveShape;		//被ダメ、カメラガン用コリジョンの形状
+		K_Physics::CollisionShape*	receiveDamShape;	//被ダメ用コリジョンの形状
+		K_Physics::CollisionShape*	receiveCamShape;	//カメラガン用コリジョンの形状
 		K_Physics::CollisionShape*	visibilityShape;	//視界用コリジョンの形状
 		K_Physics::CollisionShape*	attackAreaShape;	//攻撃動作遷移用コリジョンの形状
 		K_Physics::CollisionShape*	checkShape;			//足元、頭上判定用コリジョンの形状
-		K_Math::Vector3		receivePos;		//被ダメ、カメラガン用コリジョンの位置
+		K_Math::Vector3		receiveDamPos;	//被ダメ、カメラガン用コリジョンの位置
+		K_Math::Vector3		receiveCamPos;	//被ダメ、カメラガン用コリジョンの位置
 		K_Math::Vector3		visibilityPos;	//視界用コリジョンの位置
 		K_Math::Vector3		attackAreaPos;	//攻撃動作遷移用コリジョンの位置
 		K_Math::Vector3		checkFootPos;	//足元判定コリジョンの位置
 		K_Math::Vector3		checkHeadPos;	//頭上判定コリジョンの位置
 
-		CollisionData(	K_Physics::CollisionShape* bs, K_Physics::CollisionShape* rs, K_Physics::CollisionShape* vs, K_Physics::CollisionShape* aas, K_Physics::CollisionShape* cs,
-						K_Math::Vector3& rp, K_Math::Vector3& vp, K_Math::Vector3& aap, K_Math::Vector3& cfp, K_Math::Vector3& chp):
-			baseShape(bs), receiveShape(rs), visibilityShape(vs), attackAreaShape(aas), checkShape(cs),
-			receivePos(rp), visibilityPos(vp), attackAreaPos(aap), checkFootPos(cfp), checkHeadPos(chp){}
+		CollisionData(	K_Physics::CollisionShape* bs, K_Physics::CollisionShape* rds, K_Physics::CollisionShape* rcs, K_Physics::CollisionShape* vs, K_Physics::CollisionShape* aas, K_Physics::CollisionShape* cs,
+						K_Math::Vector3& rdp, K_Math::Vector3& rcp, K_Math::Vector3& vp, K_Math::Vector3& aap, K_Math::Vector3& cfp, K_Math::Vector3& chp):
+			baseShape(bs), receiveDamShape(rds), receiveCamShape(rcs), visibilityShape(vs), attackAreaShape(aas), checkShape(cs),
+			receiveDamPos(rdp), receiveCamPos(rcp), visibilityPos(vp), attackAreaPos(aap), checkFootPos(cfp), checkHeadPos(chp){}
 	};
 
 private:

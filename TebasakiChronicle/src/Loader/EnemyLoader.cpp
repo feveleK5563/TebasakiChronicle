@@ -37,11 +37,16 @@ void EnemyLoader::LoadEnemyCollisionData(std::ifstream& ifs, EnemyTypeManager::E
 	K_Math::Vector3 cfp = { 0.f, -shapeSize[1], 0.f };
 	K_Math::Vector3 chp = { 0.f, shapeSize[1], 0.f };
 	K_Physics::CollisionShape* cs = CC::CreateBoxShape(shapeSize[0] - 1.f, 1.f, 1.f);
-	//被ダメ、被カメラ用コリジョンの形状
-	K_Math::Vector3 rp;
-	ifs >> rp.x >> rp.y >> rp.z;
+	//被ダメ用コリジョンの形状
+	K_Math::Vector3 rdp;
+	ifs >> rdp.x >> rdp.y >> rdp.z;
 	ifs >> shapeSize[0] >> shapeSize[1] >> shapeSize[2];
-	K_Physics::CollisionShape* rs = CC::CreateBoxShape(shapeSize[0], shapeSize[1], shapeSize[2]);
+	K_Physics::CollisionShape* rds = CC::CreateBoxShape(shapeSize[0], shapeSize[1], shapeSize[2]);
+	//被ダメ用コリジョンの形状
+	K_Math::Vector3 rcp;
+	ifs >> rcp.x >> rcp.y >> rcp.z;
+	ifs >> shapeSize[0] >> shapeSize[1] >> shapeSize[2];
+	K_Physics::CollisionShape* rcs = CC::CreateBoxShape(shapeSize[0], shapeSize[1], shapeSize[2]);
 	//視界用コリジョンの形状
 	K_Math::Vector3 vp;
 	ifs >> vp.x >> vp.y >> vp.z;
@@ -53,7 +58,7 @@ void EnemyLoader::LoadEnemyCollisionData(std::ifstream& ifs, EnemyTypeManager::E
 	ifs >> shapeSize[0] >> shapeSize[1] >> shapeSize[2];
 	K_Physics::CollisionShape* aas = CC::CreateBoxShape(shapeSize[0], shapeSize[1], shapeSize[2]);
 
-	ed->collision = new EnemyType::CollisionData(bs, rs, vs, aas, cs, rp, vp, aap, cfp, chp);
+	ed->collision = new EnemyType::CollisionData(bs, rds, rcs, vs, aas, cs, rdp, rcp, vp, aap, cfp, chp);
 }
 
 //順番3：動作データの読み込み
