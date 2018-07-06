@@ -197,3 +197,24 @@ void	Move::Vertical()
 	fallSpeed = verticalPower;
 	moveVec.y += fallSpeed;
 }
+
+
+//!@brief	í«îˆèàóù
+void	Move::RegulationHorizon()
+{
+	/*if (horizontalSpeed <= 0.1f && -0.1f <= horizontalSpeed) { return; }
+	float speed = 0 - horizontalSpeed;
+	horizontalSpeed = speed / 200.0f;
+*/
+	if (horizontalSpeed <= 0.1f && -0.1f <= horizontalSpeed) { return; }
+	if (horizontalSpeed < -0.1f)
+	{
+		float speed = 0 - horizontalSpeed;
+		horizontalSpeed += speed / 50.0f;
+	}
+	else if (horizontalSpeed > 0.1f)
+	{
+		float speed = 0 - horizontalSpeed;
+		horizontalSpeed -= speed / 50.0f;
+	}
+}

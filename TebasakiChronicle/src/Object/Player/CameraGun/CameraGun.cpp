@@ -8,8 +8,10 @@
 //-------------------------------------------------
 //コンストラクタ
 //-------------------------------------------------
-
-CameraGun::CameraGun() {}
+CameraGun::CameraGun() 
+{
+	effectCreateFlag = true;
+}
 //-------------------------------------------------
 //デストラクタ
 //-------------------------------------------------
@@ -72,6 +74,13 @@ void	CameraGun::UpDate(const K_Math::Vector3& pPos)
 		{
 			K_Math::Vector3	tarPos = *targetData->pos;
 			Chase(tarPos);
+			//エフェクト******
+			//if (effectCreateFlag)
+			//{
+			//	//仮のエフェクト
+			//	Effect::CreateEffect(EffectName::Effect1, object.GetPos());
+			//	effectCreateFlag = false;
+			//}
 		}
 		else
 		{
@@ -82,8 +91,10 @@ void	CameraGun::UpDate(const K_Math::Vector3& pPos)
 			{
 				object.GetMoveVec().x += addSpeed;
 			}
-
 			RecieveData();
+
+			//エフェクトを作成できるようにする
+			//effectCreateFlag = true;
 		}
 	}
 	

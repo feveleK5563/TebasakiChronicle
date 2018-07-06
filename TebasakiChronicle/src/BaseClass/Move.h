@@ -43,6 +43,10 @@ public:
 	void	Horizontal();		//水平移動
 	void	Vertical();			//垂直移動
 
+	//!@brief	水平移動の調節
+	//!@brief	徐々に0にしていき、水平の移動をなくしていきます
+	void	RegulationHorizon();
+
 private:
 	K_Math::Vector3		moveVec;		//移動量
 	float				addVec;			//加算移動量(キャラクターの移動時に加算する値)
