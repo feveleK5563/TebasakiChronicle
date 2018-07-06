@@ -11,7 +11,6 @@ private:
 	bool			isBoss;			//こいつがボスか否か
 
 	K_Math::Vector3	initialPos;		//初期位置
-	int		maxLife;				//体力上限
 	bool	isUseGravity;			//重力を使用するか否か
 
 	static const int subCollisionNum = 6;			//サブコリジョンの数

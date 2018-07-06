@@ -40,7 +40,7 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	}
 
 	initialPos = setPos;
-	maxLife = cpyet->GetMaxLife();
+	gameObject.GetStatus().GetMaxLife() = cpyet->GetMaxLife();
 	isUseGravity = cpyet->GetIsUseGravity();
 
 	gameObject.GetMove().SetAddVec(cpyet->GetMoveSpeed());
@@ -105,6 +105,7 @@ void Enemy::ResetAndActiveEnemy()
 	collisionManager.SetBaseCollisionObjectPosition(initialPos);
 	gameObject.SetState(Status::State::Active);
 	timeCnt.ResetCntTime();
+	gameObject.GetStatus().GetLife() = gameObject.GetStatus().GetMaxLife();
 	behaviorId = 0;
 	nowMoveOrder = 0;
 	nowPatternOrder = 0;
@@ -172,7 +173,7 @@ bool Enemy::IsDead()
 bool Enemy::DecisionInScreen()
 {
 	//‰æ–ÊŠO‚Éo‚Ä‚¢‚½‚ç–³Œø
-	if (fabsf(CST::GetPerspectiveCamera()->GetPosition().x - gameObject.GetPos().x) > fabsf((float)Define::ScreenWidth))
+	if (fabsf(CST::GetPerspectiveCamera()->GetPosition().x - gameObject.GetPos().x) > fabsf(Define::ScreenWidth / 2))
 	{
 		if (gameObject.GetState() != Status::State::Non)
 		{

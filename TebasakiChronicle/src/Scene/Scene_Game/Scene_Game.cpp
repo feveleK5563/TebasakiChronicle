@@ -46,7 +46,6 @@ Scene_Game::Scene_Game():
 
 	//以下仮
 	CST::LoadAndGetTexture("Effect", "data/image/effect.png");
-	timeCnt.SetEndTime(180);
 }
 
 //デストラクタ
@@ -73,13 +72,6 @@ Scene_Game::~Scene_Game()
 SceneName Scene_Game::Update()
 {
 	SceneName nextScene = SceneName::Non;
-
-	/*timeCnt.Run();
-	if (timeCnt.IsTimeEnd() == true)
-	{
-		emanager->AllActiveBoss();
-		timeCnt.SetEndTime(-1);
-	}*/
 
 	player->UpDate();
 	emanager->UpdateAllEnemy();
@@ -109,10 +101,10 @@ SceneName Scene_Game::Update()
 		nextScene = SceneName::GameOver;
 	}
 
-	/*if (emanager->GetIsDeadBoss() == true)
+	if (player->GetGameObject().GetPos().x > 14000)
 	{
 		nextScene = SceneName::GameClear;
-	}*/
+	}
 
 	return nextScene;
 }
