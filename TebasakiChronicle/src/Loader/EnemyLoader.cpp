@@ -42,7 +42,7 @@ void EnemyLoader::LoadEnemyCollisionData(std::ifstream& ifs, EnemyTypeManager::E
 	ifs >> rdp.x >> rdp.y >> rdp.z;
 	ifs >> shapeSize[0] >> shapeSize[1] >> shapeSize[2];
 	K_Physics::CollisionShape* rds = CC::CreateBoxShape(shapeSize[0], shapeSize[1], shapeSize[2]);
-	//被ダメ用コリジョンの形状
+	//被カメラ用コリジョンの形状
 	K_Math::Vector3 rcp;
 	ifs >> rcp.x >> rcp.y >> rcp.z;
 	ifs >> shapeSize[0] >> shapeSize[1] >> shapeSize[2];

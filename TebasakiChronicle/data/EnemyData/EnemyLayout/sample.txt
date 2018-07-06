@@ -1,6 +1,6 @@
 2
 EnemyDataA1.txt
-EnemyDataA2.txt
+EnemyDataB1.txt
 3
 0 1 144.000000 92.000000 0.000000 
 0 0 216.000000 92.000000 0.000000 

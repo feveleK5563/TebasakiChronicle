@@ -3,6 +3,8 @@ data\image\Enemy\EnemyTypeA.png EnemyTypeA
 12 24 1 
 0 0 0 
 12 24 1 
+0 0 0
+12 24 1 
 0 0 0 
 0 0 1 
 0 0 0 

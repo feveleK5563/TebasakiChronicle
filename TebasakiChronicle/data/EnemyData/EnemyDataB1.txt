@@ -2,6 +2,8 @@ data/image/Enemy/EnemyTypeB.png EnemyTypeB
 1 1 2 10 1 
 17 17 1 
 0 0 0 
+17 17 1 
+0 0 0 
 40 40 1 
 0 -50 0 
 10 50 1 
