@@ -3,6 +3,7 @@
 #include "../src/Object/Player/CharaController/CharaController.h"
 #include "../src/Object/Player/Skill/SkillManager.h"
 #include "../src/BaseClass/Sound/Sound.h"
+#include "../src/BaseClass/Asset/Asset.h"
 
 //--------------------------------------------------------------------
 //プレイヤー
@@ -174,8 +175,8 @@ private:
 	Sound						RunSource;			//走る足音
 	Sound						landingSource;		//着地音
 	Sound						cameraGunShotSource;//カメラガンを撃つ
-
-
+	
+	Asset*						asset;
 
 
 };

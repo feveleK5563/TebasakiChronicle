@@ -1,0 +1,2 @@
+GOGOGO,data/sounds/player/gogogo.ogg
+GOGOGO2,data/sounds/player/gogogo2.ogg
