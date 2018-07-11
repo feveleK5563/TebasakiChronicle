@@ -5,6 +5,7 @@
 #include "../../../BaseClass/Collision/CollisionManager.h"
 #include "../../Enemy/Enemy.h"
 
+
 //----------------------------------------------------------------
 //カメラガン
 //概要:撮影用のカメラで、敵を撮影して、スキルを取得する
@@ -41,7 +42,6 @@ private:
 	bool	CheckAddSpeed();
 
 public:
-
 	GameObject					object;			//ゲームオブジェクト
 private:
 	K_Physics::CollisionShape*	shape;			//形の作成
@@ -50,5 +50,5 @@ private:
 	int							targetNum;		//ターゲットの番号を格納する
 	Enemy::SkillAndCharaChip*	targetData;		//ターゲットのスキルデータを格納する
 private:
-	bool						effectCreateFlag;//エフェクト生成フラグ
+	bool						effectCreateFlag;	//エフェクト生成フラグ
 };

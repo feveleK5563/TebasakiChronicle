@@ -14,6 +14,19 @@
 Player::Player()
 {
 	enemyData = nullptr;
+	shutterSource.LoadSound("Shutter", "data/sounds/camera/shutter.ogg", ALLREAD);
+	jumpSource.LoadSound("Jump", "data/sounds/player/jump.ogg", ALLREAD);
+	damageSource.LoadSound("Damage", "data/sounds/player/damage.ogg", ALLREAD);
+	RunSource.LoadSound("Run", "data/sounds/player/walk.ogg", ALLREAD);
+	landingSource.LoadSound("landing", "data/sounds/player/landing.ogg", ALLREAD);
+	cameraGunShotSource.LoadSound("cameraShot", "data/sounds/player/gunShot.ogg", ALLREAD);
+	
+	soundEngine.AddSource(shutterSource);
+	soundEngine.AddSource(jumpSource);
+	soundEngine.AddSource(damageSource);
+	soundEngine.AddSource(RunSource);
+	soundEngine.AddSource(landingSource);
+	soundEngine.AddSource(cameraGunShotSource);
 }
 
 //-----------------------------------------------
@@ -25,6 +38,13 @@ Player::~Player()
 	CC::RemoveCollisionShape(&shape2);
 
 	Memory::SafeDelete(texture);
+
+	soundEngine.DeleteSound("Shutter");
+	soundEngine.DeleteSound("Jump");
+	soundEngine.DeleteSound("Damage");
+	soundEngine.DeleteSound("Run");
+	soundEngine.DeleteSound("landing");
+	soundEngine.DeleteSound("cameraShot");
 }
 
 //-------------------------------------------------------------------
@@ -220,6 +240,9 @@ void	Player::ShotCameraGun()
 		}
 		cameraGun.SetDirection(object.GetDirection());	//方向を同期させる
 		cameraGun.SetCameraGun(true);
+
+		//カメラガンを撃つ音
+		cameraGunShotSource.PlaySE();
 	}
 }
 
@@ -244,6 +267,9 @@ void	Player::ReverseCameraGun()
 				//カメラがんからの発射光的なもの
 				//プレイヤーの動きについてきてほしい
 				//Effect::CreateEffect(EffectName::Effect1, K_Math::Vector3(cameraGun.GetDir() * 24 + object.GetPos().x, object.GetPos().y + 5, object.GetPos().z));
+
+				//シャッター音
+				shutterSource.PlaySE();
 			}
 		}
 		//カメラマーカーをプレイヤーの位置に戻す
@@ -509,8 +535,14 @@ void	Player::Move()
 	//モーション固有の処理
 	switch (motion) {
 	case Idle:		//待機
+		break;
 	case Walk:		//歩く
+		break;
 	case Run:		//走る
+		if (motionCnt == 0)
+		{
+			//RunSource.PlaySE();	//草むらを歩く音の例
+		}
 		break;
 	case Jump:		//上昇中
 		if (motionCnt == 0)
@@ -518,6 +550,8 @@ void	Player::Move()
 			object.GetMove().JumpOperation();
 			//仮のエフェクト発動
 			//Effect::CreateEffect(EffectName::Effect1, object.GetPos()-K_Math::Vector3(0,24,0));
+	
+			jumpSource.PlaySE();		//ジャンプ音
 		}
 		//ジャンプ力の調節
 		if (INPUT::IsReaveButton(VpadIndex::Pad0, K_Input::VpadButton::R1) && (object.GetMove().GetFallSpeed() > minJumpForce))
@@ -546,6 +580,8 @@ void	Player::Move()
 		if (motionCnt == 0)
 		{
 			object.GetMove().SetFallSpeed(0);
+			//着地音
+			landingSource.PlaySE();
 		}
 		break;
 	case SkillUse:		//スキル使用中
@@ -596,6 +632,8 @@ void	Player::Move()
 			ReciveDamage();
 			invicibleCnt = maxInvicibleTime;
 			object.GetMove().Vertical();	//ジャンプ作用を与える
+
+			damageSource.PlaySE(0.7f);		//ダメージ音
 		}
 		object.GetMove().Horizontal();
 		break;

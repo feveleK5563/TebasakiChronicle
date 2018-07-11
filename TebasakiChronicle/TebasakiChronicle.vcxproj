@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\BaseClass\Asset\Asset.cpp" />
     <ClCompile Include="src\BaseClass\Collision\CollisionManager.cpp" />
     <ClCompile Include="src\BaseClass\Collision\CollisionCreator.cpp" />
     <ClCompile Include="src\BaseClass\GUIObject\DataGui\DataGui.cpp" />
@@ -66,6 +67,7 @@
     <ClCompile Include="src\TimeCount.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\BaseClass\Asset\Asset.h" />
     <ClInclude Include="src\BaseClass\Collision\CollisionManager.h" />
     <ClInclude Include="src\BaseClass\Collision\CollisionCreator.h" />
     <ClInclude Include="src\BaseClass\easing.h" />

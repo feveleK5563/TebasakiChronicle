@@ -1,3 +1,4 @@
+#pragma once
 #include "K_Audio\SoundSource.h"
 #include "SoundClass.h"
 #include <string>

@@ -2,7 +2,7 @@
 #include "../src/Object//Player/CameraGun/CameraGun.h"
 #include "../src/Object/Player/CharaController/CharaController.h"
 #include "../src/Object/Player/Skill/SkillManager.h"
-
+#include "../src/BaseClass/Sound/Sound.h"
 
 //--------------------------------------------------------------------
 //プレイヤー
@@ -165,5 +165,60 @@ public:
 	K_Graphics::Texture*		texture;
 	Status::Direction			preTargetDir;	//前のターゲットへの向き
 	Status::Direction			targetDir;		//現在のターゲットへの向き
-};
 
+private:
+	SoundEngine					soundEngine;		//サウンドエンジン
+	Sound						shutterSource;		//シャッター音
+	Sound						jumpSource;			//ジャンプ音
+	Sound						damageSource;		//ダメージ音
+	Sound						RunSource;			//走る足音
+	Sound						landingSource;		//着地音
+	Sound						cameraGunShotSource;//カメラガンを撃つ
+
+
+
+
+};
+//
+/////////////////////////////////
+////プレイヤーやエネミー
+//
+//class Asset
+//{
+//public:
+//	virtual void PlaySE(const char* name) = 0;
+//};
+//class Asset1 : public Asset
+//{
+//private:
+//	SoundEngine en;
+//	Sound a[10];
+//public:
+//	Asset1()
+//	{
+//		a[0].LoadSound(name[],path[]);
+//
+//
+//
+//
+//		for (auto i(0); i < 10; ++i)
+//		{
+//			
+//			en.AddSource(a[i]);
+//		}
+//		
+//	}//ぜんぶ確保
+//	void PlaySE(const char* name);
+//	
+//
+//};
+//
+//Asset* playerAssets = new Asset1;
+//
+//class Asset
+//{
+//public:
+//	//名前のテキストパスと
+//	Asset(const std::string& filePath);
+//	
+//};

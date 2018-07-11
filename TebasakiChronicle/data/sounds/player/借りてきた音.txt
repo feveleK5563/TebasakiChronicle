@@ -1,0 +1,19 @@
+<Wingless Seraph>
+damage.ogg
+
+
+<ひたちー素材館>
+jumpVoice.ogg		(名前変更)
+damageVoice2.ogg 	(名前変更)
+idleVoice.ogg		(名前変更)
+letsgo.ogg		(名前変更)
+
+
+
+<効果音ラボ>
+stopVoice.ogg	(名前変更)
+walk.ogg	(名前変更)
+landing.ogg	(名前変更)
+gunShot.ogg	(名前変更)
+gunShot2.ogg	(名前変更)
+damageVoice.ogg	(名前変更)

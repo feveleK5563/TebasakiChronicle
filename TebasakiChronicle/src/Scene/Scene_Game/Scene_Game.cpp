@@ -94,7 +94,6 @@ SceneName Scene_Game::Update()
 	//ƒJƒƒ‰’Ç”ö
 	cameraMan->Run(player->GetGameObject().GetPos());
 
-
 	if (player->GetGameObject().IsDead() ||
 		player->GetGameObject().GetPos().y < -(float)Define::ScreenHeight)
 	{
