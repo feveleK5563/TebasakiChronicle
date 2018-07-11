@@ -12,6 +12,7 @@ private:
 	GameObject		gameObject;			//ステータス、移動や重力の動作、画像管理、SE、easingを内包したやつ
 	TimeCount		timeCnt;			//時間計測
 	bool			isHitGround;		//これがtrueだと地形に接触したら消滅する
+	bool			isHitTarget;		//これがtrueだと対象に接触したら消滅する
 
 public:
 	//コンストラクタ
@@ -25,7 +26,7 @@ public:
 						const int					deletetime,			//自身を削除するまでの時間
 						const float					gravitySize,		//重力量(0で無効)
 						const bool					ishitground,		//地形に接触したら消滅するフラグ
-						const bool					doground );			//ベースコリジョンを地形として扱うフラグ
+						const bool					ishittarget);		//対象に接触したら消滅するフラグ
 
 	//デストラクタ
 	//コリジョンの形状情報をdeleteする
