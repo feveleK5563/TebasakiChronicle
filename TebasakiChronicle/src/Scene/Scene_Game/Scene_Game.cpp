@@ -51,14 +51,14 @@ Scene_Game::Scene_Game():
 //デストラクタ
 Scene_Game::~Scene_Game()
 {
-	delete emanager;
-	delete player;
-	delete mapObj;
-	delete back;
-	delete playerLifeGui;
-	delete screenGui;
-	delete enemyGageGui;
-	delete cameraMan;
+	Memory::SafeDelete(emanager);
+	Memory::SafeDelete(player);
+	Memory::SafeDelete(mapObj);
+	Memory::SafeDelete(back);
+	Memory::SafeDelete(playerLifeGui);
+	Memory::SafeDelete(screenGui);
+	Memory::SafeDelete(enemyGageGui);
+	Memory::SafeDelete(cameraMan);
 
 	soundEngine.DeleteSound(source.GetName().c_str());
 
@@ -94,19 +94,9 @@ SceneName Scene_Game::Update()
 	//カメラ追尾
 	cameraMan->Run(player->GetGameObject().GetPos());
 
+	event.ThinkChangeEvent(player->GetGameObject());
 
-	if (player->GetGameObject().IsDead() ||
-		player->GetGameObject().GetPos().y < -(float)Define::ScreenHeight)
-	{
-		nextScene = SceneName::GameOver;
-	}
-
-	if (player->GetGameObject().GetPos().x > 14000)
-	{
-		nextScene = SceneName::GameClear;
-	}
-
-	return nextScene;
+	return event.GetNextScene();
 }
 
 //描画
