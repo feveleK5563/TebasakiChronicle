@@ -19,7 +19,7 @@ void CameraMan::Run(const K_Math::Vector3& target)
 {
 	K_Math::Vector3 toVec = target - trackingPos;
 	trackingPos += toVec * 0.1f;
-	trackingPos.y = std::max(trackingPos.y, -(float)Define::ScreenHeight);
+	trackingPos.y = std::max(trackingPos.y, -150.f);
 
 	float toVecDist = settingDist - distance;
 	distance += toVecDist * 0.1f;

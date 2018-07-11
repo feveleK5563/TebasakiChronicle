@@ -94,24 +94,9 @@ SceneName Scene_Game::Update()
 	//ƒJƒƒ‰’Ç”ö
 	cameraMan->Run(player->GetGameObject().GetPos());
 
-<<<<<<< HEAD
-	if (player->GetGameObject().IsDead() ||
-		player->GetGameObject().GetPos().y < -(float)Define::ScreenHeight)
-	{
-		nextScene = SceneName::GameOver;
-	}
-
-	if (player->GetGameObject().GetPos().x > 14000)
-	{
-		nextScene = SceneName::GameClear;
-	}
-
-	return nextScene;
-=======
 	event.ThinkChangeEvent(player->GetGameObject());
 
 	return event.GetNextScene();
->>>>>>> origin/Event_Shimizu
 }
 
 //•`‰æ
