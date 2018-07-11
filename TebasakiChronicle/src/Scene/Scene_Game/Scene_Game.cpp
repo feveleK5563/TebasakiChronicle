@@ -51,14 +51,14 @@ Scene_Game::Scene_Game():
 //デストラクタ
 Scene_Game::~Scene_Game()
 {
-	delete emanager;
-	delete player;
-	delete mapObj;
-	delete back;
-	delete playerLifeGui;
-	delete screenGui;
-	delete enemyGageGui;
-	delete cameraMan;
+	Memory::SafeDelete(emanager);
+	Memory::SafeDelete(player);
+	Memory::SafeDelete(mapObj);
+	Memory::SafeDelete(back);
+	Memory::SafeDelete(playerLifeGui);
+	Memory::SafeDelete(screenGui);
+	Memory::SafeDelete(enemyGageGui);
+	Memory::SafeDelete(cameraMan);
 
 	soundEngine.DeleteSound(source.GetName().c_str());
 
@@ -94,6 +94,7 @@ SceneName Scene_Game::Update()
 	//カメラ追尾
 	cameraMan->Run(player->GetGameObject().GetPos());
 
+<<<<<<< HEAD
 	if (player->GetGameObject().IsDead() ||
 		player->GetGameObject().GetPos().y < -(float)Define::ScreenHeight)
 	{
@@ -106,6 +107,11 @@ SceneName Scene_Game::Update()
 	}
 
 	return nextScene;
+=======
+	event.ThinkChangeEvent(player->GetGameObject());
+
+	return event.GetNextScene();
+>>>>>>> origin/Event_Shimizu
 }
 
 //描画

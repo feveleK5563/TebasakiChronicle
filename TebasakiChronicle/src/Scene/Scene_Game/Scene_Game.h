@@ -17,6 +17,8 @@
 
 #include "../../Effect/Effect.h"
 #include "../../Helper.h"
+#include "../../Event/Event.h"
+
 
 class Scene_Game : public SceneAbstract
 {
@@ -39,6 +41,8 @@ private:
 
 	SoundEngine soundEngine;
 	Sound source;
+
+	Event event;
 
 public:
 	Scene_Game();		//コンストラクタ
