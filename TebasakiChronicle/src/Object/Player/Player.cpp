@@ -28,7 +28,8 @@ Player::Player()
 	soundEngine.AddSource(landingSource);
 	soundEngine.AddSource(cameraGunShotSource);
 
-	asset = new Asset("data/SoundLoadData/playerSound.txt");
+	asset = new Asset(new AssetSound("data/SoundLoadData/playerSound.txt"));
+	asset->LoadEffect("data/EffectLoadData/playerEffect.txt");
 }
 
 //-----------------------------------------------
@@ -167,9 +168,11 @@ void	Player::UpDate()
 		object.SetState(Status::State::Death);
 	}
 
+	//‚±‚±‚Í‚¨‚µ‚Ås‚Á‚Ä‚¢‚Ü‚·
 	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
 	{
 		asset->GetSound("GOGOGO2").PlaySE();
+		asset->GetEffect(static_cast<int>(EffectName::Effect2)).CreateEffect(EffectName::Effect2, object.GetPos());
 	}
 }
 
@@ -550,7 +553,6 @@ void	Player::Move()
 	case Run:		//‘–‚é
 		if (motionCnt == 0)
 		{
-			asset->GetSound("GOGOGO").PlaySE();
 			//RunSource.PlaySE();	//‘‚Ş‚ç‚ğ•à‚­‰¹‚Ì—á
 		}
 		break;
