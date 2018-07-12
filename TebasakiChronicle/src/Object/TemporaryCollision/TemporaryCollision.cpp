@@ -11,11 +11,9 @@ TemporaryCollision::TemporaryCollision(	K_Physics::CollisionShape*	shape,
 										const int					damage,
 										const int					deletetime,
 										const float					gravitySize,
-										const bool					ishitground,
-										const bool					ishittarget):
+										const bool					ishitground):
 	cShape(shape),
-	isHitGround(ishitground),
-	isHitTarget(ishittarget)
+	isHitGround(ishitground)
 {
 	colmanager.CreateBaseCollisionData(shape, setpos, K_Math::Vector3(0, 0, 0), false);
 	colmanager.CreateSubCollisionData(shape, mmask, gmask, K_Math::Vector3(0, 0, 0));
@@ -83,10 +81,9 @@ bool TemporaryCollision::Update()
 //消滅フラグを立てる
 bool TemporaryCollision::Extinction()
 {
-	if ((gameObject.GetStatus().GetState() != Status::State::Active) ||			//外部によってStateがActive以外にされていたら消滅
-		timeCnt.IsTimeEnd() ||													//時間経過で消滅
-		(isHitGround == true && colmanager.CheckHitBaseCollisionObject()) ||	//地形と接触して消える場合の判定
-		(isHitTarget == true && colmanager.CheckHitSubCollisionObejct(0)))		//対象と接触して消える場合の判定
+	if ((gameObject.GetStatus().GetState() != Status::State::Active) ||		//外部によってStateがActive以外にされていたら消滅
+		timeCnt.IsTimeEnd() ||												//時間経過で消滅
+		(isHitGround == true && colmanager.CheckHitBaseCollisionObject()))	//地形と接触して消える場合の判定
 	{
 		return true;
 	}

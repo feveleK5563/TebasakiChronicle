@@ -34,7 +34,7 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 		CollisionMask::Non ,				//ObjectがもっているMaskを使用すべき( skillType->GetGiveCollisionMask() )
 		object.GetPos(), 
 		object.GetMoveVec(), object.GetDirection(), object.GetAttackPoint(),
-		skillType->GetContinueTime(), object.GetMove().GetGravity(), false, false);
+		skillType->GetContinueTime(), object.GetMove().GetGravity(), false);
 
 	//アニメーションセット
 	tempColManager.SetAnimationCharaChip(CST::GetTexture(imageName),
