@@ -22,7 +22,8 @@ public:
 									const int					damage,			//対象に与えるダメージ量
 									const int					deletetime,		//自身を削除するまでの時間
 									const float					gravitySize,	//重力量(0で無効)
-									const bool					ishitground);	//地形に接触したら消滅するフラグ
+									const bool					ishitground,	//地形に接触したら消滅するフラグ
+									const bool					ishittarget);	//対象に接触したら消滅するフラグ
 
 	//生成したコリジョンにテクスチャを設定する
 	void SetAnimationCharaChip(	K_Graphics::Texture*	texture,

@@ -212,6 +212,7 @@ void Behavior_FrontAttack::Initialize(TemporaryCollisionManager& tempmanager, St
 		status.GetAttackPoint(),
 		30,
 		0,
+		false,
 		false);
 }
 void Behavior_FrontAttack::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
@@ -351,6 +352,7 @@ void Behavior_ShotBulletFromMiddle::Initialize(TemporaryCollisionManager& tempma
 		status.GetAttackPoint(),
 		60,
 		0,
+		true,
 		true);
 
 	tempmanager.SetAnimationCharaChip(
@@ -392,6 +394,7 @@ void Behavior_ThrowBomb::Initialize(TemporaryCollisionManager& tempmanager, Stat
 		status.GetAttackPoint(),
 		180,
 		-0.5f,
+		true,
 		true);
 }
 void Behavior_ThrowBomb::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
