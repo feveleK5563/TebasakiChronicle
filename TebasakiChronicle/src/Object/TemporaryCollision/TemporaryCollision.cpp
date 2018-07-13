@@ -28,6 +28,7 @@ TemporaryCollision::TemporaryCollision(	K_Physics::CollisionShape*	shape,
 		dir,
 		damage,
 		0);
+	gameObject.GetStatus().SetCollisionMask(CollisionMask::Non);
 	gameObject.GetMove().GetMoveVec() = movevec;
 	gameObject.GetMove().SetGravity(gravitySize);
 

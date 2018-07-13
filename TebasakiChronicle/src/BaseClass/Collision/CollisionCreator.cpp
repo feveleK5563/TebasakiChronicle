@@ -75,6 +75,8 @@ namespace CC
 	//コリジョンの移動と当たり判定(正確&重い)
 	void MoveCharacter(K_Physics::CollisionData* obj, const K_Math::Vector3 &move, float vLimitAngle, float hLimitAngle)
 	{
+		//ここで例外が発生
+		//詳細:プレイヤーが落下して死亡したら例外を吐きました
 		cc->bPhysics.MoveCharacter(obj, move, vLimitAngle, hLimitAngle);
 	}
 	//コリジョンの移動と当たり判定(大雑把&軽い)

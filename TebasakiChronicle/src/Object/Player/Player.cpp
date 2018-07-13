@@ -208,6 +208,12 @@ void	Player::ReciveDamage()
 		int index = data[0]->tagIndex;
 		enemyData = (Status*)data[0]->userData;
 		object.GetStatus().GetLife() -= enemyData->GetAttackPoint();
+		//敵のデータを取得した際に弾の場合弾を殺す必要がる
+		//そのために敵のデータのステータスをデスにする必要がある
+		if (enemyData->GetCollisiomMask() == CollisionMask::Non)
+		{
+			enemyData->GetState() = Status::State::Death;
+		}
 		KnockBack(enemyData->GetPos());
 	}
 }
