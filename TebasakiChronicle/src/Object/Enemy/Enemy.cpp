@@ -213,9 +213,11 @@ bool Enemy::RecieveCollisionOperation()
 	tag = collisionManager.GetConflictionObjectsTag(Enemy::EnemyCollisionName::RecieveDamage);
 	for (auto it : tag)
 	{
-		if (((Status*)it->userData)->GetState() == Status::State::Active)
+		Status* hitThing = (Status*)it->userData;
+		if (hitThing->GetState() == Status::State::Active)
 		{
-			damage += ((Status*)it->userData)->GetAttackPoint();
+			damage += hitThing->GetAttackPoint();
+			hitThing->GetState() = Status::State::Death;
 		}
 	}
 

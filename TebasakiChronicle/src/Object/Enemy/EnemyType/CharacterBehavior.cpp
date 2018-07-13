@@ -353,7 +353,7 @@ void Behavior_ShotBulletFromMiddle::Initialize(TemporaryCollisionManager& tempma
 		60,
 		0,
 		true,
-		false);
+		true);
 
 	tempmanager.SetAnimationCharaChip(
 		CST::GetTexture("Effect"),
@@ -395,7 +395,7 @@ void Behavior_ThrowBomb::Initialize(TemporaryCollisionManager& tempmanager, Stat
 		180,
 		-0.5f,
 		true,
-		false);
+		true);
 }
 void Behavior_ThrowBomb::Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt)
 {
