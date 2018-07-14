@@ -565,7 +565,7 @@ void	Player::Move()
 	case Jump:		//è„è∏íÜ
 		if (motionCnt == 0)
 		{
-			if (preMotion != Motion::CameraGunAirUse || preMotion != Motion::SkillAirUse)
+			if (preMotion != Motion::SkillAirUse)
 			{
 				object.GetMove().JumpOperation();
 			}
