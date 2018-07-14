@@ -568,11 +568,10 @@ void	Player::Move()
 			if (preMotion != Motion::SkillAirUse)
 			{
 				object.GetMove().JumpOperation();
+				jumpSource.PlaySE();	//ジャンプ音
 			}
 			//仮のエフェクト発動
 			//Effect::CreateEffect(EffectName::Effect1, object.GetPos()-K_Math::Vector3(0,24,0));
-	
-			jumpSource.PlaySE();		//ジャンプ音
 		}
 		//ジャンプ力の調節
 		if (INPUT::IsReaveButton(VpadIndex::Pad0, K_Input::VpadButton::R1) && (object.GetMove().GetFallSpeed() > minJumpForce))
