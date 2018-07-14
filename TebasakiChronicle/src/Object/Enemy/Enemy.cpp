@@ -280,13 +280,16 @@ void Enemy::AnimationUpdate()
 //•`‰æ
 void Enemy::Render()
 {
-	if (gameObject.GetState() != Status::State::Active ||
-		(gameObject.GetState() == Status::State::Invalid && (timeCnt.GetNowCntTime() % 2) == 0))
-		return;
+	if (gameObject.GetState() != Status::State::Non &&
+		gameObject.GetState() != Status::State::Death)
+	{
+		if (gameObject.GetState() == Status::State::Invalid && (timeCnt.GetNowCntTime() % 10) != 0)
+			return;
 
-	gameObject.GetImage().ImageDraw3D(	gameObject.GetStatus().GetPos(),
-										gameObject.GetStatus().GetAngle(),
-										gameObject.GetStatus().GetScale(),
-										gameObject.GetStatus().GetDirection());
-	tempCollisionManager.Render();
+		gameObject.GetImage().ImageDraw3D(gameObject.GetStatus().GetPos(),
+			gameObject.GetStatus().GetAngle(),
+			gameObject.GetStatus().GetScale(),
+			gameObject.GetStatus().GetDirection());
+		tempCollisionManager.Render();
+	}
 }

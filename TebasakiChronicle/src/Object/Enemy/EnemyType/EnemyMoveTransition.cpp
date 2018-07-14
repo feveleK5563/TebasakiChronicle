@@ -121,5 +121,5 @@ bool ETransition_IntoVisibilityAndMatchDirection::IsTransition(CollisionManager&
 //6：ダメージを受けたとき
 bool ETransition_TakeDamage::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern, bool isTakeDamage)
 {
-	return isTakeDamage;
+	return status.GetLife() > 0 && isTakeDamage;
 }
