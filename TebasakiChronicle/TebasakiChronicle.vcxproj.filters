@@ -133,9 +133,6 @@
     <ClCompile Include="src\BaseClass\ImageManager\ImageManager.cpp">
       <Filter>ソース ファイル\src\BaseClass\ImageManager</Filter>
     </ClCompile>
-    <ClCompile Include="src\CSTList.cpp">
-      <Filter>ソース ファイル\src</Filter>
-    </ClCompile>
     <ClCompile Include="src\BaseClass\Collision\CollisionCreator.cpp">
       <Filter>ソース ファイル\src\BaseClass\Collision</Filter>
     </ClCompile>
@@ -252,6 +249,9 @@
     </ClCompile>
     <ClCompile Include="src\BaseClass\Asset\Asset.cpp">
       <Filter>ソース ファイル\src\BaseClass\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CSTList.cpp">
+      <Filter>ソース ファイル\src\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

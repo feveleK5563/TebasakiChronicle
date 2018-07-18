@@ -64,7 +64,7 @@ void	Player::Initliaze()
 		K_Math::Vector3(1, 1, 1),
 		Status::Direction::Right,
 		1,
-		10
+		2
 		);
 
 	motion = Idle;
@@ -81,7 +81,7 @@ void	Player::Initliaze()
 
 	texture = new K_Graphics::Texture();
 	texture->Initialize();
-	texture->LoadImage("./data/image/Player/player.png");
+	texture->LoadImage("./data/image/Player/playerImg.png");
 	//画像の生成
 	object.SetImage(texture, true);
 	//AnimStateの状態の順番でなければアニメーションが対応しない
@@ -98,6 +98,7 @@ void	Player::Initliaze()
 	object.GetImage().CreateCharaChip(K_Math::Box2D(64 * 3, 64, 64, 64), 1, 5, false);		//GunIdle
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 8, 64, 64), 5, 4, false);		//Damage
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 9, 64, 64), 10, 4, true);		//GunRunBack
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 11, 64, 64), 7, 10, false);		//Death
 
 	//Moveの重力の設定
 	object.GetMove().SetAddVec(4.f);
@@ -131,20 +132,8 @@ void	Player::UpDate()
 	//思考&モーションの移動
 	Think();
 	Move();
-
-	//カメラガン-----------------------
-	if (object.GetState() != Status::State::Death)
-	{
-		ShotCameraGun();				//かめらがんを撃つ
-		ReverseCameraGun();				//カメラがんを戻す
-	}
+	//--------------------------------------------------------
 	cameraGun.UpDate(object.GetPos());
-
-	//スキルの使用---------------------
-	if (skillManager.CheckRegistFlag())
-	{
-		RegistSkill();
-	}
 	skillManager.UpDate(object);
 
 	//当たり判定動作-------------------
@@ -162,17 +151,11 @@ void	Player::UpDate()
 		invicibleCnt -= 1;
 	}
 
-	//ライフが0以下になる
-	if (object.GetLife() <= 0)
-	{
-		object.SetState(Status::State::Death);
-	}
-
 	//ここはお試しで行っています
 	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
 	{
-		asset->GetSound("GOGOGO2").PlaySE();
-		asset->GetEffect(static_cast<int>(EffectName::Effect2)).CreateEffect(EffectName::Effect2, object.GetPos());
+		//asset->GetSound("GOGOGO2").PlaySE();
+		//asset->GetEffect(static_cast<int>(EffectName::Effect2)).CreateEffect(EffectName::Effect2, object.GetPos());
 	}
 }
 
@@ -488,8 +471,9 @@ void	Player::Think()
 		}
 		break;
 	}
+
 	//死んでいるか判定
-	if (object.IsDead())
+	if (object.GetLife() <= 0)
 	{
 		nowMotion = Death;
 	}
@@ -519,6 +503,7 @@ void	Player::Move()
 		break;
 		//重力を無効にするモーション(今はなし)
 	case Non:
+	case Death:
 		break;
 	}
 
@@ -546,6 +531,25 @@ void	Player::Move()
 	case CameraGunUse:
 	case CameraGunMoveUse:
 	case CameraGunAirUse:
+		break;
+	}
+
+	//生きている際に行う動作
+	switch (motion) {
+	default:
+		//カメラガン-----------------------
+		if (object.GetState() != Status::State::Death)
+		{
+			ShotCameraGun();				//かめらがんを撃つ
+			ReverseCameraGun();				//カメラがんを戻す
+		}
+		//スキルの使用---------------------
+		if (skillManager.CheckRegistFlag())
+		{
+			RegistSkill();
+		}
+		break;
+	case Death:
 		break;
 	}
 
@@ -658,6 +662,19 @@ void	Player::Move()
 		object.GetMove().Horizontal();
 		break;
 	case Death:
+		if (motionCnt == 0)
+		{
+			invicibleCnt = 0;
+		}
+		cameraGun.SetCameraGun(false);
+		if (motionCnt >= maxFrame * 3)
+		{
+			object.SetState(Status::State::Death);
+		}
+		//当たり判定をなくす
+		cManager.SetSubCollisionMyselfMask(Base, CollisionMask::Non);
+		cManager.SetSubCollisionGiveMask(Base, CollisionMask::Non);
+		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
 		break;
 	}
 
@@ -746,7 +763,7 @@ void	Player::Move()
 		ChangeAnimState(AnimState::Damage);
 		break;
 	case Death:
-		ChangeAnimState(AnimState::Idle);
+		ChangeAnimState(AnimState::Death);
 		break;
 	}
 	UpDateAnimState(nowAnimState);
