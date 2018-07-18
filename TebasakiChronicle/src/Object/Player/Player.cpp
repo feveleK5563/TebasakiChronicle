@@ -87,7 +87,7 @@ void	Player::Initliaze()
 	//AnimStateの状態の順番でなければアニメーションが対応しない
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 0, 64, 64), 6, 8, true);				//Idle
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64, 64, 64), 3, 1, false);			//Walk(出だし)
-	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 2, 64, 64), 11, 4, true);		//Run
+	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 2, 64, 64), 10, 4, true);		//Run
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 3, 64, 64), 5, 4, false);		//Jump
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 4, 64, 64), 5, 4, false);		//fall
 	object.GetImage().CreateCharaChip(K_Math::Box2D(0, 64 * 3, 64, 64), 1, 1, false);		//TakeOff
@@ -565,11 +565,13 @@ void	Player::Move()
 	case Jump:		//上昇中
 		if (motionCnt == 0)
 		{
-			object.GetMove().JumpOperation();
+			if (preMotion != Motion::SkillAirUse)
+			{
+				object.GetMove().JumpOperation();
+				jumpSource.PlaySE();	//ジャンプ音
+			}
 			//仮のエフェクト発動
 			//Effect::CreateEffect(EffectName::Effect1, object.GetPos()-K_Math::Vector3(0,24,0));
-	
-			jumpSource.PlaySE();		//ジャンプ音
 		}
 		//ジャンプ力の調節
 		if (INPUT::IsReaveButton(VpadIndex::Pad0, K_Input::VpadButton::R1) && (object.GetMove().GetFallSpeed() > minJumpForce))
