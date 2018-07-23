@@ -54,15 +54,27 @@ void EnemyManager::LayoutEnemy(const std::string& enemyLayoutPath)
 		{
 			int enemyId;
 			int direction;
+			bool isBoss;
 			K_Math::Vector3 pos;
 
-			ifs >> enemyId >> direction >> pos.x >> pos.y >> pos.z;
+			ifs >> enemyId >> isBoss >> direction >> pos.x >> pos.y >> pos.z;
 
-			CreateEnemy(
-				enemyTypeManager.GetEnemyTypeData(enemyId),
-				pos,
-				direction == 0 ? Status::Direction::Left : Status::Direction::Right
-			);
+			if (isBoss)
+			{
+				CreateBossEnemy(
+					enemyTypeManager.GetEnemyTypeData(enemyId),
+					pos,
+					direction == 0 ? Status::Direction::Left : Status::Direction::Right
+				);
+			}
+			else
+			{
+				CreateEnemy(
+					enemyTypeManager.GetEnemyTypeData(enemyId),
+					pos,
+					direction == 0 ? Status::Direction::Left : Status::Direction::Right
+				);
+			}
 		}
 	}
 }
@@ -99,8 +111,11 @@ void EnemyManager::RenderAllEnemy()
 
 //-----------------------------------------------------------------------------
 //全てのボスの存在を有効にする
-void EnemyManager::AllActiveBoss()
+void EnemyManager::AllActiveBoss(bool activeBoss)
 {
+	if (!activeBoss)
+		return;
+
 	for (auto& it : bossEnemy)
 	{
 		it->ResetAndActiveEnemy();

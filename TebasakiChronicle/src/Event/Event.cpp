@@ -6,23 +6,18 @@ Event::Event() :
 
 }
 
-
 //-----------------------------------------------------------------------------
-//プレイヤー情報から、イベントの状態を変化させる
-void Event::ThinkChangeEvent(GameObject& playerData)
+//引数の情報から、イベントの状態を変化させる
+bool Event::ChangeEvent(bool changeFlag, EventState nextEvent)
 {
-	//ゲームオーバー条件
-	if (playerData.IsDead() ||	//死亡
-		playerData.GetPos().y < -(float)Define::ScreenHeight)	//画面下に落下
-	{
-		state = EventState::GameOver;
-	}
+	//遷移フラグがfalseなら遷移しない
+	if (!changeFlag || state == nextEvent)
+		return false;
 
-	//ゲームクリア条件
-	if (playerData.GetPos().x > 14000)	//画面右に行ったら
-	{
-		state = EventState::GameClear;
-	}
+	//イベントの状態を変更
+	state = nextEvent;
+
+	return true;
 }
 
 //-----------------------------------------------------------------------------
@@ -40,4 +35,11 @@ SceneName Event::GetNextScene()
 	default:
 		return SceneName::Non;
 	}
+}
+
+//-----------------------------------------------------------------------------
+//現在のイベントの状態を返す
+EventState Event::GetEventState()
+{
+	return state;
 }

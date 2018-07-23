@@ -29,7 +29,7 @@ public:
 	void RenderAllEnemy();
 
 	//全てのボスの存在を有効にする
-	void AllActiveBoss();
+	void AllActiveBoss(bool activeBoss);
 	//ボスが存在しているかつ全てのボスが死亡状態か否かを返す
 	//ボスが存在していない場合はfalseを返す
 	bool GetIsDeadBoss();

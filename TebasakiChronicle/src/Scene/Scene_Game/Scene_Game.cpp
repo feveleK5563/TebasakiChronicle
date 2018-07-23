@@ -5,7 +5,10 @@
 Scene_Game::Scene_Game():
 	emanager(new EnemyManager()),
 	player(new Player()),
-	playerLifeGui(new DataGui(player->GetGameObject()))
+	playerLifeGui(new DataGui(player->GetGameObject())),
+	isCreateWall(false),
+	eventState(EventState::Nomal),
+	processForEvent(&Scene_Game::ProcessForNomal)
 {
 	//敵の配置情報の読み込み
 	emanager->LayoutEnemy("data/EnemyData/EnemyLayout/opStageEnemySettings.txt");
@@ -44,10 +47,11 @@ Scene_Game::Scene_Game():
 		"testEffect", "data/image/testEffect.png",
 		new AnimationCharaChip(K_Math::Box2D(0, 0, 32, 32), 8, 5, false));
 
-	//以下仮
+	//エフェクト画像の読み込み(仮)
 	CST::LoadAndGetTexture("Effect", "data/image/effect.png");
 }
 
+//-------------------------------------------------------------------
 //デストラクタ
 Scene_Game::~Scene_Game()
 {
@@ -66,12 +70,19 @@ Scene_Game::~Scene_Game()
 
 	CST::DeleteTexture("back");
 	CST::DeleteTexture("Effect");
+
+	if (isCreateWall)
+	{
+		CC::RemoveCollisionShape(&notReturnWallShape);
+		CC::RemoveCollision(&notReturnWall);
+	}
 }
 
+//-------------------------------------------------------------------
 //更新(次に設定したいシーン名を返す)
 SceneName Scene_Game::Update()
 {
-	SceneName nextScene = SceneName::Non;
+	nextScene = SceneName::Non;
 
 	player->UpDate();
 	emanager->UpdateAllEnemy();
@@ -91,14 +102,16 @@ SceneName Scene_Game::Update()
 	//エフェクトの更新
 	Effect::Run();
 
-	//カメラ追尾
-	cameraMan->Run(player->GetGameObject().GetPos());
+	//イベントに応じた処理
+	(this->*processForEvent)();
 
-	event.ThinkChangeEvent(player->GetGameObject());
+	//イベント状態の変更
+	EventChage();
 
-	return event.GetNextScene();
+	return nextScene;
 }
 
+//-------------------------------------------------------------------
 //描画
 void Scene_Game::Draw()
 {
@@ -131,5 +144,80 @@ void Scene_Game::Draw()
 
 	//プレイヤー
 	player->Render();
+
+}
+
+//-------------------------------------------------------------------
+//イベントの変更
+void Scene_Game::EventChage()
+{
+	//ゲームオーバー
+	if ((player->GetGameObject().IsDead()) ||	//プレイヤーのHPが0
+		(player->GetGameObject().GetPos().y < -(float)Define::ScreenHeight))	//画面下に落ちる
+	{
+		eventState = EventState::GameOver;
+		processForEvent = &Scene_Game::ProcessForGameOver;
+	}
+
+	//ボス戦移行
+	if ((eventState == EventState::Nomal) &&			//イベント状態がNomal
+		(player->GetGameObject().GetPos().x > 14000))	//一定のX座標を超える
+	{
+		eventState = EventState::BossReady;
+		isCreateWall = true;
+
+		//壁を作成
+		notReturnWallShape = CC::CreateBoxShape(50.f, 1000.f, 30.f);
+
+		notReturnWall = CC::CreateCollisionObject(
+			notReturnWallShape,
+			false,
+			CollisionMask::Non,
+			CollisionMask::Ground,
+			K_Math::Vector3(player->GetGameObject().GetPos().x - 50, 0, 0),
+			K_Math::Vector3(0, 0, 0));
+	}
+}
+
+
+//-------------------------------------------------------------------
+//イベント通常状態の処理
+void Scene_Game::ProcessForNomal()
+{
+	//カメラがプレイヤーを追尾
+	cameraMan->Run(player->GetGameObject().GetPos());
+}
+
+//-------------------------------------------------------------------
+//イベントボス準備状態の処理
+void Scene_Game::ProcessForBossReady()
+{
+
+}
+
+//-------------------------------------------------------------------
+//イベントボス戦状態の処理
+void Scene_Game::ProcessForBoss()
+{
+}
+
+//-------------------------------------------------------------------
+//イベントボス終了状態の処理
+void Scene_Game::ProcessForBossEnd()
+{
+
+}
+
+//-------------------------------------------------------------------
+//イベントゲームオーバー状態の処理
+void Scene_Game::ProcessForGameOver()
+{
+	nextScene = SceneName::GameOver;
+}
+
+//-------------------------------------------------------------------
+//イベントゲームクリア状態の処理
+void Scene_Game::ProcessForGameClear()
+{
 
 }
