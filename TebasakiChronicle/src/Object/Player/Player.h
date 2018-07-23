@@ -60,6 +60,7 @@ public:
 		GunIdle,		//待機中のカメラガン
 		Damage,			//ダメージ
 		GunRunBack,		//後ろ走りカメラがん
+		Death			//死亡
 	};
 
 public:
