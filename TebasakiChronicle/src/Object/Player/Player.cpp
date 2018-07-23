@@ -143,13 +143,12 @@ void	Player::UpDate()
 		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
 		cameraGun.SetPlayerPos(object.GetPos());
 		cameraGun.SetCameraGun(false);
-		++modeCnt;
 		if (cManager.CheckHitSubCollisionObejct(Foot))
 		{
 			motion = Motion::Idle;
 			ChangeAnimState(AnimState::Idle);
 			motionCnt = 0;
-			modeCnt = 0.0f;
+			++modeCnt;
 		}
 		else
 		{
@@ -166,6 +165,11 @@ void	Player::UpDate()
 			ChangeAnimState(AnimState::Fall);
 		}
 		DecisionAnimation(motion);
+		if (modeCnt >= maxFrame)
+		{
+			modeCnt = 0;
+			ChangeMode(Mode::Event);
+		}
 		break;
 	case Mode::Event:
 		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
