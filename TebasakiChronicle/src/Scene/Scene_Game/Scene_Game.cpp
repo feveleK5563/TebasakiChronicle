@@ -78,13 +78,21 @@ SceneName Scene_Game::Update()
 		//モードを変更する必要がある
 		//EventStartはボスのイベントに入るときに呼ぶ
 		player->ChangeMode(Player::Mode::EventStart);
-		//下の関数はEvent時に移行する際に呼ぶ
-		//frameTimeはそのモードを行うフレーム時間
-		//frameTimeで指定した時間を行ったら、自動で元に戻る
-		//dirは移動方向の向き
-		player->SetDirMoveParam(100.0f, Status::Direction::Right);
 	}
 	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::B)) //Xキー
+	{
+		//プレイヤが着地したか判断
+		if (player->CheckEventLanding())
+		{
+			player->ChangeMode(Player::Mode::Event);
+			//下の関数はEvent時に移行する際に呼ぶ
+			//frameTimeはそのモードを行うフレーム時間
+			//frameTimeで指定した時間を行ったら、自動で元に戻る
+			//dirは移動方向の向き
+			player->SetDirMoveParam(100.0f, Status::Direction::Right);
+		}
+	}
+	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::X)) //Cキー
 	{
 		//通常の状態に入るときに呼ぶ
 		player->ChangeMode(Player::Mode::Normal);

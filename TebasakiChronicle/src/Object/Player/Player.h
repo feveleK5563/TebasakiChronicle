@@ -152,6 +152,9 @@ public:
 	//!@param[in]	frameTime 動作させるフレーム時間
 	//!@param[in]	dir	方向
 	void	SetDirMoveParam(float frameTime = 0.0f, Status::Direction dir = Status::Direction::Right);
+	//!@brief	イベントの着地をしたか判断
+	//!@return	true: 着地した false: 着地していない
+	bool	CheckEventLanding();
 private:
 	//////////////////////////////////////////////////////////////
 	//カメラガン関連

@@ -168,7 +168,6 @@ void	Player::UpDate()
 		if (modeCnt >= maxFrame)
 		{
 			modeCnt = 0;
-			ChangeMode(Mode::Event);
 		}
 		break;
 	case Mode::Event:
@@ -1078,6 +1077,13 @@ void	Player::SetDirMoveParam(float frameTime, Status::Direction dir)
 {
 	eventTime = frameTime;
 	object.SetDirection(dir);
+}
+
+//!@brief	イベントの着地をしたか判断
+//!@return	true: 着地した false: 着地していない
+bool	Player::CheckEventLanding()
+{
+	return cManager.CheckHitSubCollisionObejct(Foot);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
