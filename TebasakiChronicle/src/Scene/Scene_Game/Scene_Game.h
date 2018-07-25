@@ -39,6 +39,7 @@ private:
 	K_Math::Vector3 scale;
 	K_Math::Vector3 rotation;
 	K_Math::Vector3 pos;
+	Object3D*	mapCol;
 	Object3D*	mapObj;
 
 	GUIObject*	back;
@@ -53,8 +54,8 @@ private:
 
 	SceneName nextScene;
 
-	//時間経過
-	TimeCount timeCnt;
+	//イベント用時間経過
+	TimeCount eventTimeCnt;
 	//イベント状態
 	EventState eventState;
 	//壁

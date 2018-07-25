@@ -1,8 +1,5 @@
 #include "EnemyManager.h"
 
-//コンストラクタ
-EnemyManager::EnemyManager() {}
-
 //デストラクタ
 EnemyManager::~EnemyManager()
 {
@@ -20,8 +17,7 @@ void EnemyManager::CreateEnemy(EnemyType* cpyet, const K_Math::Vector3& setPos, 
 //ボス敵を一体作成する
 void EnemyManager::CreateBossEnemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction)
 {
-	int indexNum = (int)bossEnemy.size();
-	bossEnemy.emplace_back(new Enemy(cpyet, setPos, direction, indexNum, true));
+	bossEnemy.CreateBossEnemy(cpyet, setPos, direction);
 }
 
 //-----------------------------------------------------------------------------
@@ -85,13 +81,11 @@ void EnemyManager::UpdateAllEnemy()
 {
 	for (auto& it : enemy)
 	{
+		it->RecieveCollisionOperation();
 		it->Update();
 	}
 
-	for (auto& it : bossEnemy)
-	{
-		it->Update();
-	}
+	bossEnemy.Update();
 }
 
 //-----------------------------------------------------------------------------
@@ -103,10 +97,7 @@ void EnemyManager::RenderAllEnemy()
 		it->Render();
 	}
 
-	for (auto& it : bossEnemy)
-	{
-		it->Render();
-	}
+	bossEnemy.Render();
 }
 
 //-----------------------------------------------------------------------------
@@ -116,25 +107,14 @@ void EnemyManager::AllActiveBoss(bool activeBoss)
 	if (!activeBoss)
 		return;
 
-	for (auto& it : bossEnemy)
-	{
-		it->ResetAndActiveEnemy();
-	}
+	bossEnemy.AllActiveBoss();
 }
 //-----------------------------------------------------------------------------
 //ボスが存在しているかつ全てのボスが死亡状態か否かを返す
 //ボスが存在していない場合はfalseを返す
 bool EnemyManager::GetIsDeadBoss()
 {
-	if (bossEnemy.size() <= 0)
-		return false;
-
-	for (auto& it : bossEnemy)
-	{
-		if (!it->IsDead())
-			return false;
-	}
-	return true;
+	return bossEnemy.GetIsDeadBoss();
 }
 
 //-----------------------------------------------------------------------------
@@ -146,8 +126,12 @@ void EnemyManager::DeleteAllEnemy()
 	enemy.clear();
 	enemy.shrink_to_fit();
 
-	for (auto& it : bossEnemy)
-		delete it;
-	bossEnemy.clear();
-	bossEnemy.shrink_to_fit();
+	bossEnemy.DeleteBoss();
+}
+
+//-----------------------------------------------------------------------------
+//ボスの座標を取得する
+const K_Math::Vector3& EnemyManager::GetBossPos()
+{
+	return bossEnemy.GetBossPos();
 }

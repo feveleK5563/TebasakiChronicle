@@ -40,6 +40,7 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	}
 
 	initialPos = setPos;
+	standerdPos = setPos;
 	gameObject.GetStatus().GetMaxLife() = cpyet->GetMaxLife();
 	isUseGravity = cpyet->GetIsUseGravity();
 
@@ -131,7 +132,8 @@ void Enemy::Update()
 		if (DecisionInScreen())
 			return;
 	}
-	else if (gameObject.GetState() != Status::State::Active)
+	else if (	gameObject.GetState() == Status::State::Death ||
+				gameObject.GetState() == Status::State::Non)
 	{
 		return;
 	}
@@ -141,9 +143,6 @@ void Enemy::Update()
 
 	//重力を加算する
 	gameObject.GetMove().GravityOperation(collisionManager.GetConflictionObjectsTag(3).size() > 0);
-
-	//接触しているコリジョンを調べてダメージを受ける
-	bool isTakeDamage = RecieveCollisionOperation();
 
 	//設定されている動作を行う
 	*skillAndChip->behaviorId = ems->EMove(nowMoveOrder, nowPatternOrder, timeCnt, collisionManager, tempCollisionManager, gameObject.GetStatus(), gameObject.GetMove(), isTakeDamage);
@@ -157,6 +156,8 @@ void Enemy::Update()
 	tempCollisionManager.Update();
 	//タグ情報を更新
 	SetTugData();
+
+	standerdPos = gameObject.GetPos();
 
 	return;
 }
@@ -203,7 +204,10 @@ bool Enemy::DecisionInScreen()
 bool Enemy::RecieveCollisionOperation()
 {
 	if (gameObject.GetState() == Status::State::Invalid)
+	{
+		isTakeDamage = false;
 		return false;
+	}
 
 	std::vector<K_Physics::CollisionTag*> tag;
 
@@ -245,7 +249,8 @@ bool Enemy::RecieveCollisionOperation()
 		Effect::CreateEffect(EffectName::Effect1, gameObject.GetPos());
 	}
 
-	return damage > 0;
+	isTakeDamage = damage > 0;
+	return isTakeDamage;
 }
 
 //-----------------------------------------------------------------------------
@@ -292,4 +297,47 @@ void Enemy::Render()
 			gameObject.GetStatus().GetDirection());
 		tempCollisionManager.Render();
 	}
+}
+
+
+//--------------------------------------------------------
+
+//座標をオフセットする
+void Enemy::OffSetPos(const K_Math::Vector3& pos)
+{
+	gameObject.GetPos() = pos + standerdPos;
+}
+//座標を取得する
+const K_Math::Vector3& Enemy::GetPos()
+{
+	return gameObject.GetPos();
+}
+
+//時間を設定する
+void Enemy::SetTime(int time)
+{
+	timeCnt.SetTime(time);
+	timeCnt.Count(false);
+}
+//時間を取得する
+int Enemy::GetTime()
+{
+	return timeCnt.GetNowCntTime();
+}
+
+//体力を設定する
+void Enemy::SetLife(int life, bool isTakeDamage)
+{
+	gameObject.GetLife() = life;
+	this->isTakeDamage = isTakeDamage;
+}
+//体力を取得する
+const int& Enemy::GetLife()
+{
+	return gameObject.GetLife();
+}
+//ダメージを受けたか否かを取得する
+const bool& Enemy::GetIsTakeDamage()
+{
+	return isTakeDamage;
 }

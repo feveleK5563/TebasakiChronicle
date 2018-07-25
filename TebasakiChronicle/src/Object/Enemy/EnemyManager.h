@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+#include "BossEnemy.h"
 #include "../../Loader/EnemyLoader.h"
 #include "EnemyType/EnemyTypeManager.h"
 
@@ -7,12 +8,11 @@ class EnemyManager
 {
 private:
 	std::vector<Enemy*> enemy;
-	std::vector<Enemy*> bossEnemy;
+	BossEnemy			bossEnemy;
 	EnemyLoader			enemyLoader;
 	EnemyTypeManager	enemyTypeManager;
 
 public:
-	EnemyManager();
 	~EnemyManager();
 
 	//敵を一体作成する
@@ -36,4 +36,7 @@ public:
 
 	//全ての敵を削除(解放)する
 	void DeleteAllEnemy();
+
+	//ボスの座標を取得する
+	const K_Math::Vector3& GetBossPos();
 };

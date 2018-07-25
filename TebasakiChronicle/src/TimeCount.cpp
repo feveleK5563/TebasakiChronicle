@@ -3,7 +3,8 @@
 TimeCount::TimeCount():
 	cntTime(0),
 	endTime(0),
-	isTimeEnd(false) {}
+	isTimeEnd(false),
+	isCount(true){}
 
 void TimeCount::ResetCntTime()
 {
@@ -26,6 +27,16 @@ void TimeCount::Run()
 	}
 
 	++cntTime;
+}
+
+void TimeCount::SetTime(int time)
+{
+	cntTime = time;
+}
+
+void TimeCount::Count(bool isCount)
+{
+	this->isCount = isCount;
 }
 
 int TimeCount::GetNowCntTime() const

@@ -19,6 +19,11 @@ Scene_Game::Scene_Game():
 	scale =		{ 30,30,30 };
 	rotation =	{ K_Math::DegToRad(0),K_Math::DegToRad(0),K_Math::DegToRad(0) };
 	pos =		{ -120.0f,-50.0f,0.f };
+	mapCol = new Object3D("data/model/map/mapCollision.fbx", pos, rotation, scale);
+	//地形判定付きオブジェクト
+	scale = { 30,30,30 };
+	rotation = { K_Math::DegToRad(0),K_Math::DegToRad(0),K_Math::DegToRad(0) };
+	pos = { -120.0f,-50.0f,0.f };
 	mapObj = new Object3D("data/model/map/map.fbx", pos, rotation, scale);
 
 	//背景画像
@@ -58,6 +63,7 @@ Scene_Game::~Scene_Game()
 	Memory::SafeDelete(emanager);
 	Memory::SafeDelete(player);
 	Memory::SafeDelete(mapObj);
+	Memory::SafeDelete(mapCol);
 	Memory::SafeDelete(back);
 	Memory::SafeDelete(playerLifeGui);
 	Memory::SafeDelete(screenGui);
@@ -133,9 +139,6 @@ void Scene_Game::Draw()
 	//画面UIの描画(後ろの描画するもの)
 	screenGui->EarlyRender();
 
-	//敵のlife
-	enemyGageGui->Render();
-
 	//画面UIの描画(前に描画するもの)
 	screenGui->LateRender();
 
@@ -145,12 +148,26 @@ void Scene_Game::Draw()
 	//プレイヤー
 	player->Render();
 
+	//敵のlife
+	enemyGageGui->Render();
 }
 
 //-------------------------------------------------------------------
 //イベントの変更
 void Scene_Game::EventChage()
 {
+
+	
+}
+
+
+//-------------------------------------------------------------------
+//イベント通常状態の処理
+void Scene_Game::ProcessForNomal()
+{
+	//カメラがプレイヤーを追尾
+	cameraMan->Run(player->GetGameObject().GetPos());
+
 	//ゲームオーバー
 	if ((player->GetGameObject().IsDead()) ||	//プレイヤーのHPが0
 		(player->GetGameObject().GetPos().y < -(float)Define::ScreenHeight))	//画面下に落ちる
@@ -161,9 +178,10 @@ void Scene_Game::EventChage()
 
 	//ボス戦移行
 	if ((eventState == EventState::Nomal) &&			//イベント状態がNomal
-		(player->GetGameObject().GetPos().x > 14000))	//一定のX座標を超える
+		(player->GetGameObject().GetPos().x > 500/*14000/**/))	//一定のX座標を超える
 	{
 		eventState = EventState::BossReady;
+		processForEvent = &Scene_Game::ProcessForBossReady;
 		isCreateWall = true;
 
 		//壁を作成
@@ -176,36 +194,59 @@ void Scene_Game::EventChage()
 			CollisionMask::Ground,
 			K_Math::Vector3(player->GetGameObject().GetPos().x - 50, 0, 0),
 			K_Math::Vector3(0, 0, 0));
+
+		//ボスを有効
+		emanager->AllActiveBoss(true);
+
+		//プレイヤーの動作を無効
 	}
-}
-
-
-//-------------------------------------------------------------------
-//イベント通常状態の処理
-void Scene_Game::ProcessForNomal()
-{
-	//カメラがプレイヤーを追尾
-	cameraMan->Run(player->GetGameObject().GetPos());
 }
 
 //-------------------------------------------------------------------
 //イベントボス準備状態の処理
 void Scene_Game::ProcessForBossReady()
 {
+	eventTimeCnt.Run();
 
+	//カメラがプレイヤーを追尾
+	cameraMan->Run(emanager->GetBossPos());
+
+	if (eventTimeCnt.GetNowCntTime() > 180)
+	{
+		eventTimeCnt.ResetCntTime();
+
+		eventState = EventState::BossBattle;
+		processForEvent = &Scene_Game::ProcessForBoss;
+		enemyGageGui->EventStart();
+
+		//プレイヤーの動作を有効
+	}
 }
 
 //-------------------------------------------------------------------
 //イベントボス戦状態の処理
 void Scene_Game::ProcessForBoss()
 {
+	ProcessForNomal();
+
+	if (emanager->GetIsDeadBoss())
+	{
+		eventState = EventState::BossEnd;
+		processForEvent = &Scene_Game::ProcessForBossEnd;
+	}
 }
 
 //-------------------------------------------------------------------
 //イベントボス終了状態の処理
 void Scene_Game::ProcessForBossEnd()
 {
+	eventTimeCnt.Run();
 
+	if (eventTimeCnt.GetNowCntTime() > 120)
+	{
+		eventState = EventState::GameClear;
+		processForEvent = &Scene_Game::ProcessForGameClear;
+	}
 }
 
 //-------------------------------------------------------------------
@@ -219,5 +260,5 @@ void Scene_Game::ProcessForGameOver()
 //イベントゲームクリア状態の処理
 void Scene_Game::ProcessForGameClear()
 {
-
+	nextScene = SceneName::GameClear;
 }

@@ -13,6 +13,8 @@ private:
 	K_Math::Vector3	initialPos;		//初期位置
 	bool	isUseGravity;			//重力を使用するか否か
 
+	bool	isTakeDamage;			//ダメージを受けたか否か
+
 	static const int subCollisionNum = 6;			//サブコリジョンの数
 	int		collisionGiveMask[subCollisionNum];		//サブコリジョンの与マスク
 	int		collisionMyselfMask[subCollisionNum];	//サブコリジョンの受マスク
@@ -25,6 +27,7 @@ private:
 	CollisionManager			collisionManager;		//コリジョンの管理
 	TemporaryCollisionManager	tempCollisionManager;	//一時的に生成するコリジョンクラス
 	GameObject					gameObject;				//ゲームオブジェクト
+	K_Math::Vector3				standerdPos;			//基準となる座標		
 
 	//敵に割り当てられているサブコリジョンの名前一覧
 	enum EnemyCollisionName
@@ -85,4 +88,24 @@ public:
 	
 	//描画
 	void Render();
+
+
+	//--------------------------------------------------------
+
+	//座標をオフセットする
+	void OffSetPos(const K_Math::Vector3& pos);
+	//座標を取得する
+	const K_Math::Vector3& GetPos();
+
+	//時間を設定する
+	void SetTime(int time);
+	//時間を取得する
+	int GetTime();
+
+	//体力を設定する
+	void SetLife(int life, bool isTakeDamage);
+	//体力を取得する
+	const int& GetLife();
+	//ダメージを受けたか否かを取得する
+	const bool& GetIsTakeDamage();
 };

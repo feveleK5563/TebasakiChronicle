@@ -247,6 +247,9 @@
     <ClCompile Include="src\CSTList.cpp">
       <Filter>ソース ファイル\src\Object</Filter>
     </ClCompile>
+    <ClCompile Include="src\Object\Enemy\BossEnemy.cpp">
+      <Filter>ソース ファイル\src\Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BaseClass\Move.h">
@@ -389,6 +392,9 @@
     </ClInclude>
     <ClInclude Include="src\BaseClass\Asset\Asset.h">
       <Filter>ソース ファイル\src\BaseClass\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Enemy\BossEnemy.h">
+      <Filter>ソース ファイル\src\Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
