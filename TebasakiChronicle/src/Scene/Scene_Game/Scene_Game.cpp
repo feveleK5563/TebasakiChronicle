@@ -111,9 +111,6 @@ SceneName Scene_Game::Update()
 	//イベントに応じた処理
 	(this->*processForEvent)();
 
-	//イベント状態の変更
-	EventChage();
-
 	return nextScene;
 }
 
@@ -136,6 +133,9 @@ void Scene_Game::Draw()
 	//背景の描画
 	back->Render3D();
 
+	//敵のlife
+	enemyGageGui->Render();
+
 	//画面UIの描画(後ろの描画するもの)
 	screenGui->EarlyRender();
 
@@ -147,17 +147,6 @@ void Scene_Game::Draw()
 
 	//プレイヤー
 	player->Render();
-
-	//敵のlife
-	enemyGageGui->Render();
-}
-
-//-------------------------------------------------------------------
-//イベントの変更
-void Scene_Game::EventChage()
-{
-
-	
 }
 
 
@@ -177,28 +166,18 @@ void Scene_Game::ProcessForNomal()
 	}
 
 	//ボス戦移行
-	if ((eventState == EventState::Nomal) &&			//イベント状態がNomal
-		(player->GetGameObject().GetPos().x > 500/*14000/**/))	//一定のX座標を超える
+	if ((eventState == EventState::Nomal) &&
+		(player->GetGameObject().GetPos().x > 200/*14000/**/) &&	//一定のX座標を超える
+		player->CheckEventLanding())		//プレイヤーが地面に付いているとき
 	{
+		//プレイヤーの動作を無効
+		player->ChangeMode(Player::Mode::Event);
+		player->SetDirMoveParam(40.f, Status::Direction::Right);
+
+		//イベント状態を変更
 		eventState = EventState::BossReady;
 		processForEvent = &Scene_Game::ProcessForBossReady;
 		isCreateWall = true;
-
-		//壁を作成
-		notReturnWallShape = CC::CreateBoxShape(50.f, 1000.f, 30.f);
-
-		notReturnWall = CC::CreateCollisionObject(
-			notReturnWallShape,
-			false,
-			CollisionMask::Non,
-			CollisionMask::Ground,
-			K_Math::Vector3(player->GetGameObject().GetPos().x - 50, 0, 0),
-			K_Math::Vector3(0, 0, 0));
-
-		//ボスを有効
-		emanager->AllActiveBoss(true);
-
-		//プレイヤーの動作を無効
 	}
 }
 
@@ -208,18 +187,43 @@ void Scene_Game::ProcessForBossReady()
 {
 	eventTimeCnt.Run();
 
-	//カメラがプレイヤーを追尾
-	cameraMan->Run(emanager->GetBossPos());
-
-	if (eventTimeCnt.GetNowCntTime() > 180)
+	if (eventTimeCnt.GetNowCntTime() == 90)
 	{
-		eventTimeCnt.ResetCntTime();
+		//ボスを有効
+		emanager->AllActiveBoss(true);
 
-		eventState = EventState::BossBattle;
-		processForEvent = &Scene_Game::ProcessForBoss;
-		enemyGageGui->EventStart();
+		//壁を作成
+		notReturnWallShape = CC::CreateBoxShape(50.f, 1000.f, 30.f);
 
-		//プレイヤーの動作を有効
+		notReturnWall = CC::CreateCollisionObject(
+			notReturnWallShape,
+			false,
+			CollisionMask::Non,
+			CollisionMask::Ground,
+			K_Math::Vector3(player->GetGameObject().GetPos().x - 100, 0, 0),
+			K_Math::Vector3(0, 0, 0));
+	}
+
+	if (eventTimeCnt.GetNowCntTime() > 90)
+	{
+		//カメラがボスを追尾
+		cameraMan->Run(emanager->GetBossPos());
+
+		if (eventTimeCnt.GetNowCntTime() > 180)
+		{
+			eventTimeCnt.ResetCntTime();
+
+			eventState = EventState::BossBattle;
+			processForEvent = &Scene_Game::ProcessForBoss;
+			enemyGageGui->EventStart();
+
+			//プレイヤーの動作を有効
+			player->ChangeMode(Player::Mode::Normal);
+		}
+	}
+	else
+	{
+		cameraMan->Run(player->GetGameObject().GetPos());
 	}
 }
 
@@ -233,6 +237,7 @@ void Scene_Game::ProcessForBoss()
 	{
 		eventState = EventState::BossEnd;
 		processForEvent = &Scene_Game::ProcessForBossEnd;
+		//player->ChangeMode(Player::Mode::Event);
 	}
 }
 

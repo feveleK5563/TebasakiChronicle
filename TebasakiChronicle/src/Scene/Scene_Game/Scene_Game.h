@@ -72,8 +72,6 @@ public:
 	void Draw();		//描画
 
 private:
-	void EventChage();		//イベントの変更
-
 	void ProcessForNomal();			//イベント通常状態の処理
 	void ProcessForBossReady();		//イベントボス準備状態の処理
 	void ProcessForBoss();			//イベントボス戦状態の処理
