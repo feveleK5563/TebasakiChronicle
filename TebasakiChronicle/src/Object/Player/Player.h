@@ -62,7 +62,14 @@ public:
 		GunRunBack,		//後ろ走りカメラがん
 		Death			//死亡
 	};
-
+	//!@brief	モード
+	enum class Mode
+	{
+		Normal,		//なにもない
+		EventStart,	//イベント開始
+		Event,		//イベント時
+		EventEnd,	//イベント終了
+	};
 public:
 	Player();
 	~Player();
@@ -126,6 +133,28 @@ private:
 	//!@param[in]	frameCnt	切り替えるフレーム数
 	void	SwitchAnimState(const AnimState& animState1,const AnimState& animState2,const float frameCnt);
 
+	//!@brief	アニメーション状態の判断
+	//!@param[in]	motion	モーション
+	void	DecisionAnimation(const Motion& motion);
+private:
+	////////////////////////////////////////////////////////////////
+	//イベント用の関数
+	////////////////////////////////////////////////////////////////
+	//!@brief	イベント時の移動
+	//!@param[in]	dir	方向
+	//!@param[in]	frameTime 動作させるフレーム時間
+	void	EventMove();
+public:
+	//!@brief	モードを変更する
+	//!@param[in]	mode	モードの変更
+	void	ChangeMode(const Mode& mode);
+	//!@brief	イベント時の移動パラメータの設定
+	//!@param[in]	frameTime 動作させるフレーム時間
+	//!@param[in]	dir	方向
+	void	SetDirMoveParam(float frameTime = 0.0f, Status::Direction dir = Status::Direction::Right);
+	//!@brief	イベントの着地をしたか判断
+	//!@return	true: 着地した false: 着地していない
+	bool	CheckEventLanding();
 private:
 	//////////////////////////////////////////////////////////////
 	//カメラガン関連
@@ -178,48 +207,8 @@ private:
 	Sound						cameraGunShotSource;//カメラガンを撃つ
 	
 	Asset*						asset;
-
+	//イベントパラメータ
+	Mode						mode;
+	float						eventTime;		//イベント時間
+	float						modeCnt;		//モード用のカウンタ
 };
-//
-/////////////////////////////////
-////プレイヤーやエネミー
-//
-//class Asset
-//{
-//public:
-//	virtual void PlaySE(const char* name) = 0;
-//};
-//class Asset1 : public Asset
-//{
-//private:
-//	SoundEngine en;
-//	Sound a[10];
-//public:
-//	Asset1()
-//	{
-//		a[0].LoadSound(name[],path[]);
-//
-//
-//
-//
-//		for (auto i(0); i < 10; ++i)
-//		{
-//			
-//			en.AddSource(a[i]);
-//		}
-//		
-//	}//ぜんぶ確保
-//	void PlaySE(const char* name);
-//	
-//
-//};
-//
-//Asset* playerAssets = new Asset1;
-//
-//class Asset
-//{
-//public:
-//	//名前のテキストパスと
-//	Asset(const std::string& filePath);
-//	
-//};

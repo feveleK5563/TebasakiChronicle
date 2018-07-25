@@ -77,7 +77,8 @@ void	Player::Initliaze()
 	object.GetStatus().SetMaxLife(10);
 	preTargetDir = object.GetDirection();
 	targetDir = object.GetDirection();
-
+	mode = Mode::Normal;
+	modeCnt = 0.0f;
 
 	texture = new K_Graphics::Texture();
 	texture->Initialize();
@@ -126,16 +127,83 @@ void	Player::Initliaze()
 //更新
 void	Player::UpDate()
 {
-	motionCnt++;
-
 	//--------------------------------------------------------
-	//思考&モーションの移動
-	Think();
-	Move();
-	//--------------------------------------------------------
+	//モードに応じた処理
+	Mode	nowMode = mode;
+	switch (nowMode)
+	{
+	case Mode::Normal:
+		//思考&モーションの移動
+		Think();
+		Move();
+		++motionCnt;
+		break;
+	case Mode::EventStart:
+		//足元判定
+		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
+		cameraGun.SetPlayerPos(object.GetPos());
+		cameraGun.SetCameraGun(false);
+		if (cManager.CheckHitSubCollisionObejct(Foot))
+		{
+			motion = Motion::Idle;
+			ChangeAnimState(AnimState::Idle);
+			motionCnt = 0;
+			++modeCnt;
+		}
+		else
+		{
+			//上昇中もしくは足元に地面がない
+			if (object.GetMoveVec().y > 0.0f || !cManager.CheckHitSubCollisionObejct(Foot))
+			{
+				object.GetMove().GravityOperation(cManager.CheckHitSubCollisionObejct(Foot));
+			}
+			if (object.GetMoveVec().y <= -15.0f)
+			{
+				object.GetMoveVec().y = -15.0f;
+			}
+			motion = Motion::Fall;
+			ChangeAnimState(AnimState::Fall);
+		}
+		DecisionAnimation(motion);
+		if (modeCnt >= maxFrame)
+		{
+			modeCnt = 0;
+		}
+		break;
+	case Mode::Event:
+		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
+		//コリジョンなくす
+		//cManager.SetSubCollisionMyselfMask(Base, CollisionMask::Non);
+		//cManager.SetSubCollisionGiveMask(Base, CollisionMask::Non);
+		++modeCnt;
+		EventMove();
+		motion = Motion::Run;
+		ChangeAnimState(AnimState::Run);
+		DecisionAnimation(motion);
+		if (modeCnt >= this->eventTime)
+		{
+			motionCnt = 0;		//モーションカウントを初期化
+			modeCnt = 0.0f;
+			ChangeMode(Mode::EventEnd);
+		}
+		break;
+	case Mode::EventEnd:
+		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
+		motion = Motion::Idle;
+		ChangeAnimState(AnimState::Idle);
+		DecisionAnimation(motion);
+		if (modeCnt >= this->eventTime)
+		{
+			motionCnt = 0;
+			modeCnt = 0.0f;
+		}
+		break;
+	}
+	
+	//カメラガン更新-------------------
 	cameraGun.UpDate(object.GetPos());
+	//スキル更新-----------------------
 	skillManager.UpDate(object);
-
 	//当たり判定動作-------------------
 	cManager.MoveBaseCollision(object.GetMoveVec(), object.GetDirection(), false);
 
@@ -152,11 +220,11 @@ void	Player::UpDate()
 	}
 
 	//ここはお試しで行っています
-	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
+	/*if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
 	{
-		//asset->GetSound("GOGOGO2").PlaySE();
-		//asset->GetEffect(static_cast<int>(EffectName::Effect2)).CreateEffect(EffectName::Effect2, object.GetPos());
-	}
+		asset->GetSound("GOGOGO2").PlaySE();
+		asset->GetEffect(static_cast<int>(EffectName::Effect2)).CreateEffect(EffectName::Effect2, object.GetPos());
+	}*/
 }
 
 //-----------------------------------------------------------------
@@ -543,6 +611,7 @@ void	Player::Move()
 			ShotCameraGun();				//かめらがんを撃つ
 			ReverseCameraGun();				//カメラがんを戻す
 		}
+
 		//スキルの使用---------------------
 		if (skillManager.CheckRegistFlag())
 		{
@@ -667,107 +736,19 @@ void	Player::Move()
 			invicibleCnt = 0;
 		}
 		cameraGun.SetCameraGun(false);
+		cManager.SetSubCollisionGiveMask(Base,CollisionMask::Non);
+		cManager.SetSubCollisionMyselfMask(Base,CollisionMask::Non);
+		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
+
 		if (motionCnt >= maxFrame * 3)
 		{
 			object.SetState(Status::State::Death);
 		}
-		//当たり判定をなくす
-		cManager.SetSubCollisionMyselfMask(Base, CollisionMask::Non);
-		cManager.SetSubCollisionGiveMask(Base, CollisionMask::Non);
-		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
 		break;
 	}
 
-	AnimState	nowAnimState = animState;
-	//------------------------------------------------
-	//モーション固有のアニメーション
-	switch (motion) {
-	case Idle:
-		ChangeAnimState(AnimState::Idle);
-		break;
-	case Walk:
-		ChangeAnimState(AnimState::Walk);
-		break;
-	case Run:
-		if (motionCnt == 0)
-		{
-			motionCnt = preMotionCnt;
-		}
-		ChangeAnimState(AnimState::Run);
-		break;
-	case Jump:
-		ChangeAnimState(AnimState::Jump);
-		break;
-	case Fall:
-		ChangeAnimState(AnimState::Fall);
-		break;
-	case Landing:
-		ChangeAnimState(AnimState::Landing);
-		break;
-	case CameraGunUse:
-		ChangeAnimState(AnimState::GunIdle);
-		break;
-	case CameraGunMoveUse:
-		if (motionCnt == 0)
-		{
-			motionCnt = preMotionCnt;
-		}
-		CameraGunMoveAnimation();
-		break;
-	case CameraGunAirUse:
-		if (object.GetMove().GetFallSpeed() > 0)
-		{
-			ChangeAnimState(AnimState::GunJump);
-		}
-		else
-		{
-			ChangeAnimState(AnimState::GunFall);
-		}
-		//カメラガンが左右どちらにあるか判断
-		preTargetDir = targetDir;
-		targetDir = this->IsTargetDir(cameraGun.object.GetPos());
-		if (preTargetDir != targetDir)
-		{
-			if (motionCnt >= maxFrame / 10)
-			{
-				object.SetDirection(targetDir);
-				motionCnt = 0;
-			}
-		}
-		if (targetDir != object.GetDirection())
-		{
-			object.SetDirection(targetDir);
-		}
-		break;
-	case SkillUse:		
-		ChangeAnimState(AnimState::Idle);
-		break;
-	case SkillMoveUse:	
-		if (motionCnt == 0)
-		{
-			motionCnt = preMotionCnt;
-		}
-		ChangeAnimState(AnimState::GunRun);
-		break;
-	case SkillAirUse:
-		if (object.GetMove().GetFallSpeed() > 0)
-		{
-			ChangeAnimState(AnimState::Jump);
-		}
-		else
-		{
-			ChangeAnimState(AnimState::Fall);
-		}
-		break;
-	case DamageRecive:
-		ChangeAnimState(AnimState::Damage);
-		break;
-	case Death:
-		ChangeAnimState(AnimState::Death);
-		break;
-	}
-	UpDateAnimState(nowAnimState);
-
+	//アニメーションをモーションに合わせる
+	DecisionAnimation(motion);
 }
 
 
@@ -961,6 +942,149 @@ void	Player::SwitchAnimState(const AnimState& animState1, const AnimState& animS
 	}
 }
 
+//!@brief	アニメーション状態の判断
+void	Player::DecisionAnimation(const Motion& motion)
+{
+	AnimState	nowAnimState = animState;
+	//------------------------------------------------
+	//モーション固有のアニメーション
+	switch (motion) {
+	case Idle:
+		ChangeAnimState(AnimState::Idle);
+		break;
+	case Walk:
+		ChangeAnimState(AnimState::Walk);
+		break;
+	case Run:
+		if (motionCnt == 0)
+		{
+			motionCnt = preMotionCnt;
+		}
+		ChangeAnimState(AnimState::Run);
+		break;
+	case Jump:
+		ChangeAnimState(AnimState::Jump);
+		break;
+	case Fall:
+		ChangeAnimState(AnimState::Fall);
+		break;
+	case Landing:
+		ChangeAnimState(AnimState::Landing);
+		break;
+	case CameraGunUse:
+		ChangeAnimState(AnimState::GunIdle);
+		break;
+	case CameraGunMoveUse:
+		if (motionCnt == 0)
+		{
+			motionCnt = preMotionCnt;
+		}
+		CameraGunMoveAnimation();
+		break;
+	case CameraGunAirUse:
+		if (object.GetMove().GetFallSpeed() > 0)
+		{
+			ChangeAnimState(AnimState::GunJump);
+		}
+		else
+		{
+			ChangeAnimState(AnimState::GunFall);
+		}
+		//カメラガンが左右どちらにあるか判断
+		preTargetDir = targetDir;
+		targetDir = this->IsTargetDir(cameraGun.object.GetPos());
+		if (preTargetDir != targetDir)
+		{
+			if (motionCnt >= maxFrame / 10)
+			{
+				object.SetDirection(targetDir);
+				motionCnt = 0;
+			}
+		}
+		if (targetDir != object.GetDirection())
+		{
+			object.SetDirection(targetDir);
+		}
+		break;
+	case SkillUse:
+		ChangeAnimState(AnimState::Idle);
+		break;
+	case SkillMoveUse:
+		if (motionCnt == 0)
+		{
+			motionCnt = preMotionCnt;
+		}
+		ChangeAnimState(AnimState::GunRun);
+		break;
+	case SkillAirUse:
+		if (object.GetMove().GetFallSpeed() > 0)
+		{
+			ChangeAnimState(AnimState::Jump);
+		}
+		else
+		{
+			ChangeAnimState(AnimState::Fall);
+		}
+		break;
+	case DamageRecive:
+		ChangeAnimState(AnimState::Damage);
+		break;
+	case Death:
+		ChangeAnimState(AnimState::Death);
+		break;
+	}
+	UpDateAnimState(nowAnimState);
+}
+
+
+//!@brief	キー入力以外の移動
+//!@param[in]	dir	方向
+//!@param[in]	frameTime 動作させるフレーム時間
+void	Player::EventMove()
+{
+	float direction = 0.0f;
+	if (object.GetDirection() == Status::Direction::Left)
+	{
+		direction = -1.0f;
+	}
+	else
+	{
+		direction = 1.0f;
+	}
+	if (modeCnt <= eventTime)
+	{
+		object.GetMove().GetMoveVec().x += object.GetMove().GetAddVec() * direction;
+	}
+}
+
+//!@brief	モードを変更する
+//!@brief	時間がくると自動で普通の状態に戻ります
+//!@param[in]	mode	モードの変更
+void	Player::ChangeMode(const Mode& mode)
+{
+	//同じモードならはじく
+	if (this->mode == mode)
+	{
+		return;
+	}
+	this->mode = mode;
+}
+
+//!@brief	イベント時の移動パラメータの設定
+//!@param[in]	frameTime 動作させるフレーム時間
+//!@param[in]	dir	方向
+void	Player::SetDirMoveParam(float frameTime, Status::Direction dir)
+{
+	eventTime = frameTime;
+	object.SetDirection(dir);
+}
+
+//!@brief	イベントの着地をしたか判断
+//!@return	true: 着地した false: 着地していない
+bool	Player::CheckEventLanding()
+{
+	return cManager.CheckHitSubCollisionObejct(Foot);
+}
 
 ////////////////////////////////////////////////////////////////////////////////////
 //カメラガン関連
