@@ -32,5 +32,8 @@ public:
 	void DeleteBoss();
 
 	//0番目のボスのデータを取得する
-	const K_Math::Vector3& GetBossPos();
+	const K_Math::Vector3& GetBossPos() const;
+
+	//0番目のボスの体力を取得する
+	const int& GetBossLife() const;
 };

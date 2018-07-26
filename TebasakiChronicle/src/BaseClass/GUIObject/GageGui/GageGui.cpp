@@ -5,7 +5,8 @@
 #include "../../../Helper.h"
 
 //!@brief	コンストラクタ
-GageGui::GageGui(GameObject& object)
+GageGui::GageGui(const int& life):
+	life(life)
 {
 	CST::LoadAndGetTexture("LifeBar", "data/image/ScreenUI/LifeBar.png");
 	CST::LoadAndGetTexture("enemyGageBar", "data/image/ScreenUI/enemyGageBar.png");
@@ -29,9 +30,7 @@ GageGui::GageGui(GameObject& object)
 	changeAmount = 50.0f;
 
 	//仮
-	minLife = object.GetStatus().GetMinLife();
-	maxLife = object.GetStatus().GetMaxLife();
-	life = object.GetStatus().GetLife();
+	maxLife = life;
 
 	eventStartFlag = false;
 }
@@ -48,7 +47,7 @@ GageGui::~GageGui()
 
 
 //!@brief	更新
-void		GageGui::UpDate(GameObject& object)
+void		GageGui::UpDate()
 {
 	frame->UpDate();
 	fillAreaBox->UpDate();
@@ -59,11 +58,6 @@ void		GageGui::UpDate(GameObject& object)
 
 	//ゲージ処理
 	if (eventMotion != Ev_End) { return; }
-
-	//体力情報を取得
-	minLife = object.GetStatus().GetMinLife();
-	maxLife = object.GetStatus().GetMaxLife();
-	life = object.GetStatus().GetLife();
 
 	//描画位置がわかる
 	float nowLife = (float)((float)life / (float)maxLife) * abs(maxShowLife.x - 0) + minShowLife.x;
@@ -81,7 +75,7 @@ void		GageGui::UpDate(GameObject& object)
 	}
 
 	//仮ライフ変動
-	if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
+	/*if (INPUT::IsPressButton(VpadIndex::Pad0, VpadButton::A))
 	{
 		if (life > 0)
 		{
@@ -94,7 +88,7 @@ void		GageGui::UpDate(GameObject& object)
 		{
 			life++;
 		}
-	}
+	}*/
 }
 
 //!@brief	描画
@@ -202,7 +196,7 @@ void	GageGui::Fluctuation(const K_Math::Vector3& targetPos)
 }
 
 //!@brief	リセット
-void	GageGui::Reset(GameObject& object)
+void	GageGui::Reset(const int& life)
 {
 	frame->GetGameObject().SetPos(K_Math::Vector3(0, 670, 0));
 	fillAreaBox->GetGameObject().SetPos(K_Math::Vector3(-10, 710, 0));
@@ -220,11 +214,6 @@ void	GageGui::Reset(GameObject& object)
 	maxRotateCnt = 180;
 	eventMotion = Ev_Non;
 	changeAmount = 50.0f;
-
-	//仮
-	minLife = object.GetStatus().GetMinLife();
-	maxLife = object.GetStatus().GetMaxLife();
-	life = object.GetStatus().GetLife();
 
 	eventStartFlag = false;
 }

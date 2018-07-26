@@ -40,8 +40,8 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	}
 
 	initialPos = setPos;
-	standerdPos = setPos;
 	gameObject.GetStatus().GetMaxLife() = cpyet->GetMaxLife();
+	gameObject.GetStatus().GetMinLife() = 0;
 	isUseGravity = cpyet->GetIsUseGravity();
 
 	gameObject.GetMove().SetAddVec(cpyet->GetMoveSpeed());
@@ -80,7 +80,7 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	}
 	collisionManager.SetSubCollisionTagIndex(i, indexNum);
 	collisionManager.SetSubCollisionUserData(i, skillAndChip);
-	SetTugData();
+	SetTagData();
 
 	SetNonEnemy();
 	gameObject.SetState(Status::State::Non);
@@ -138,7 +138,7 @@ void Enemy::Update()
 		return;
 	}
 
-	//移動量をゼロクリア
+	//移動量を初期化
 	gameObject.GetMove().GetMoveVec() = K_Math::Vector3(0, 0, 0);
 
 	//重力を加算する
@@ -155,9 +155,7 @@ void Enemy::Update()
 	gameObject.GetPos() = collisionManager.GetBaseCollisionObjectPosition();
 	tempCollisionManager.Update();
 	//タグ情報を更新
-	SetTugData();
-
-	standerdPos = gameObject.GetPos();
+	SetTagData();
 
 	return;
 }
@@ -203,7 +201,7 @@ bool Enemy::DecisionInScreen()
 //ダメージを受けたらtrueを返す
 bool Enemy::RecieveCollisionOperation()
 {
-	if (gameObject.GetState() == Status::State::Invalid)
+	if (gameObject.GetState() != Status::State::Active)
 	{
 		isTakeDamage = false;
 		return false;
@@ -255,7 +253,7 @@ bool Enemy::RecieveCollisionOperation()
 
 //-----------------------------------------------------------------------------
 //タグに情報を格納
-void Enemy::SetTugData()
+void Enemy::SetTagData()
 {
 	skillAndChip->nowCharaChip = gameObject.GetImage().GetNowAnimationCharaChip();
 }
@@ -302,11 +300,6 @@ void Enemy::Render()
 
 //--------------------------------------------------------
 
-//座標をオフセットする
-void Enemy::OffSetPos(const K_Math::Vector3& pos)
-{
-	gameObject.GetPos() = pos + standerdPos;
-}
 //座標を取得する
 const K_Math::Vector3& Enemy::GetPos()
 {

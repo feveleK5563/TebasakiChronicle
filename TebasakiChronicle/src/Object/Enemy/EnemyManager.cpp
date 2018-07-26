@@ -131,7 +131,14 @@ void EnemyManager::DeleteAllEnemy()
 
 //-----------------------------------------------------------------------------
 //ボスの座標を取得する
-const K_Math::Vector3& EnemyManager::GetBossPos()
+const K_Math::Vector3& EnemyManager::GetBossPos() const
 {
 	return bossEnemy.GetBossPos();
+}
+
+//-----------------------------------------------------------------------------
+//ボスの最大体力を取得する
+const int& EnemyManager::GetBossLife() const
+{
+	return bossEnemy.GetBossLife();
 }

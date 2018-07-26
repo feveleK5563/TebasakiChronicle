@@ -38,5 +38,8 @@ public:
 	void DeleteAllEnemy();
 
 	//ボスの座標を取得する
-	const K_Math::Vector3& GetBossPos();
+	const K_Math::Vector3& GetBossPos() const;
+
+	//ボスの最大体力を取得する
+	const int& GetBossLife() const;
 };

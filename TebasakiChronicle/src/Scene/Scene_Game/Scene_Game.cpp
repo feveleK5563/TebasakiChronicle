@@ -34,8 +34,8 @@ Scene_Game::Scene_Game():
 	//画面のUI
 	screenGui = new ScreenGui();
 	
-	//敵のライフゲージ(今はプレイヤーのLifeと連動)
-	enemyGageGui = new GageGui(player->GetGameObject());
+	//敵のライフゲージ
+	enemyGageGui = new GageGui(emanager->GetBossLife());
 
 	//カメラマン
 	cameraMan = new CameraMan(Define::ScreenWidth, Define::ScreenHeight, 330, player->GetGameObject().GetPos());
@@ -100,7 +100,7 @@ SceneName Scene_Game::Update()
 	//画面UIの更新
 	screenGui->UpDate();
 	//敵のLife
-	enemyGageGui->UpDate(player->GetGameObject());
+	enemyGageGui->UpDate();
 	//プレイヤーのLife
 	playerLifeGui->Raito(player->GetGameObject());
 	playerLifeGui->UpDate();

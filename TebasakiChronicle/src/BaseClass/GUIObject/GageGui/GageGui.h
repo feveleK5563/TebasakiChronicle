@@ -20,11 +20,11 @@ private:
 	};
 public:
 	//!@brief	コンストラクタ
-	explicit GageGui(GameObject& object);
+	explicit GageGui(const int& life);
 	//!@brief	デストラクタ
 	~GageGui();
 	//!@brief	更新
-	void		UpDate(GameObject& object);
+	void		UpDate();
 	//!@brief	描画
 	void		Render();
 	//!@brief	イベントを開始する
@@ -42,7 +42,7 @@ private:
 	//!@brief	ゲージを変動させます
 	void	Fluctuation(const K_Math::Vector3& targetPos);
 	//!@brief	リセット
-	void	Reset(GameObject& object);
+	void	Reset(const int& life);
 private:
 	//コピーを禁止します
 	//explicit GageGui(const GageGui& gageGui);
@@ -53,9 +53,8 @@ private:
 	GUIObject*		fillAreaBox;	//上に配置するゲージ
 
 private:	//仮
-	int		minLife;
 	int		maxLife;
-	int		life;
+	const int&	life;
 private:
 	int				moveCnt;		//移動する時間
 	int				rotateCnt;		//回転する時間

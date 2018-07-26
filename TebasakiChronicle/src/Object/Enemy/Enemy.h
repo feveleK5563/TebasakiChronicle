@@ -27,7 +27,6 @@ private:
 	CollisionManager			collisionManager;		//コリジョンの管理
 	TemporaryCollisionManager	tempCollisionManager;	//一時的に生成するコリジョンクラス
 	GameObject					gameObject;				//ゲームオブジェクト
-	K_Math::Vector3				standerdPos;			//基準となる座標		
 
 	//敵に割り当てられているサブコリジョンの名前一覧
 	enum EnemyCollisionName
@@ -81,7 +80,7 @@ public:
 
 	//タグに情報を格納
 	//体力が0になったらtrueを返す
-	void SetTugData();
+	void SetTagData();
 
 	//アニメーションの更新
 	void AnimationUpdate();
@@ -92,8 +91,6 @@ public:
 
 	//--------------------------------------------------------
 
-	//座標をオフセットする
-	void OffSetPos(const K_Math::Vector3& pos);
 	//座標を取得する
 	const K_Math::Vector3& GetPos();
 

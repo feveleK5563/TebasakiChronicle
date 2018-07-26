@@ -40,11 +40,9 @@ void BossEnemy::Update()
 	{
 		if (i > 0)
 		{
-			bossEnemy[i]->OffSetPos(bossEnemy[0]->GetPos());
 			bossEnemy[i]->SetTime(bossEnemy[0]->GetTime());
-			bossEnemy[i]->SetLife(shareLife, isTakeDamage);
 		}
-
+		bossEnemy[i]->SetLife(shareLife, isTakeDamage);
 		bossEnemy[i]->Update();
 	}
 }
@@ -93,7 +91,13 @@ void BossEnemy::DeleteBoss()
 }
 
 //0番目のボスの座標を取得する
-const K_Math::Vector3& BossEnemy::GetBossPos()
+const K_Math::Vector3& BossEnemy::GetBossPos() const
 {
 	return bossEnemy[0]->GetPos();
+}
+
+//0番目のボスの体力を取得する
+const int& BossEnemy::GetBossLife() const
+{
+	return bossEnemy[0]->GetLife();
 }
