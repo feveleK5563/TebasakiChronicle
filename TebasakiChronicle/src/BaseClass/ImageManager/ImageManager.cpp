@@ -82,7 +82,8 @@ void ImageManager::Animation()
 void ImageManager::ImageDraw3D(	const K_Math::Vector3&	pos,
 								const K_Math::Vector3&	angle,
 								const K_Math::Vector3&	scale,
-								int						direction)
+								int						direction,
+								const K_Math::Vector4&	color)
 {
 	//テクスチャの読み込み位置の調整
 	K_Math::Box2D src = charaChip[nowAnimNum]->chip;
@@ -102,6 +103,7 @@ void ImageManager::ImageDraw3D(	const K_Math::Vector3&	pos,
 	anglec.y += K_Math::DegToRad((float)direction);
 
 	CST::GetShaderClass(0)->UseShader();
+	CST::GetShaderClass(0)->SetValue("color", color);
 	spobj->Draw3D(
 		CST::GetPerspectiveCamera(),
 		CST::GetShaderClass(0),
@@ -116,7 +118,8 @@ void ImageManager::ImageDraw3D(	const K_Math::Vector3&	pos,
 void ImageManager::ImageDraw2D(	const K_Math::Vector3&	pos,
 								const K_Math::Vector3&	angle,
 								const K_Math::Vector3&	scale,
-								int						direction)
+								int						direction,
+								const K_Math::Vector4&	color)
 {
 	//テクスチャの読み込み位置の調整
 	K_Math::Box2D src = charaChip[nowAnimNum]->chip;
@@ -136,6 +139,7 @@ void ImageManager::ImageDraw2D(	const K_Math::Vector3&	pos,
 	draw.y = (int)pos.y;
 
 	CST::GetShaderClass(0)->UseShader();
+	CST::GetShaderClass(0)->SetValue("color", color);
 	spobj->Draw2D(
 		CST::GetOrthoCamera(),
 		CST::GetShaderClass(0),

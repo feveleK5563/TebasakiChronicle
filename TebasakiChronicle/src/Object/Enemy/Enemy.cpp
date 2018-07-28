@@ -84,6 +84,10 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 
 	SetNonEnemy();
 	gameObject.SetState(Status::State::Non);
+
+	timeCnt.SetEndTime(-1);
+	invalidTime.SetEndTime(20);
+	invalidTime.Count(false);
 }
 
 //-----------------------------------------------------------------------------
@@ -145,7 +149,7 @@ void Enemy::Update()
 	gameObject.GetMove().GravityOperation(collisionManager.GetConflictionObjectsTag(3).size() > 0);
 
 	//設定されている動作を行う
-	*skillAndChip->behaviorId = ems->EMove(nowMoveOrder, nowPatternOrder, timeCnt, collisionManager, tempCollisionManager, gameObject.GetStatus(), gameObject.GetMove(), isTakeDamage);
+	*skillAndChip->behaviorId = ems->EMove(nowMoveOrder, nowPatternOrder, timeCnt, collisionManager, tempCollisionManager, gameObject.GetStatus(), gameObject.GetMove());
 
 	//アニメーションの更新
 	AnimationUpdate();
@@ -203,7 +207,14 @@ bool Enemy::RecieveCollisionOperation()
 {
 	if (gameObject.GetState() != Status::State::Active)
 	{
-		isTakeDamage = false;
+		if (gameObject.GetState() == Status::State::Invalid)
+		{
+			invalidTime.Run();
+			if (invalidTime.IsTimeEnd())
+			{
+				gameObject.SetState(Status::State::Active);
+			}
+		}
 		return false;
 	}
 
@@ -247,7 +258,14 @@ bool Enemy::RecieveCollisionOperation()
 		Effect::CreateEffect(EffectName::Effect1, gameObject.GetPos());
 	}
 
-	isTakeDamage = damage > 0;
+	//ダメージを受けたら一定時間無敵状態になる
+	bool isTakeDamage = damage > 0;
+	if (gameObject.GetLife() > 0 && isTakeDamage)
+	{
+		gameObject.GetState() = Status::State::Invalid;
+		invalidTime.ResetCntTime();
+	}
+
 	return isTakeDamage;
 }
 
@@ -283,18 +301,25 @@ void Enemy::AnimationUpdate()
 //描画
 void Enemy::Render()
 {
-	if (gameObject.GetState() != Status::State::Non &&
-		gameObject.GetState() != Status::State::Death)
+	if (gameObject.GetState() == Status::State::Non ||
+		gameObject.GetState() == Status::State::Death)
 	{
-		if (gameObject.GetState() == Status::State::Invalid && (timeCnt.GetNowCntTime() % 10) != 0)
-			return;
-
-		gameObject.GetImage().ImageDraw3D(gameObject.GetStatus().GetPos(),
-			gameObject.GetStatus().GetAngle(),
-			gameObject.GetStatus().GetScale(),
-			gameObject.GetStatus().GetDirection());
-		tempCollisionManager.Render();
+		return;
 	}
+
+	K_Math::Vector4 color(1.f, 1.f, 1.f, 1.f);
+	if (gameObject.GetState() == Status::State::Invalid)
+	{
+		if ((timeCnt.GetNowCntTime() % 10) < 5)	color = { 5.f, 5.f, 2.5f, 1.f };
+		else									return;
+	}
+
+	gameObject.GetImage().ImageDraw3D(gameObject.GetStatus().GetPos(),
+		gameObject.GetStatus().GetAngle(),
+		gameObject.GetStatus().GetScale(),
+		gameObject.GetStatus().GetDirection(),
+		color);
+	tempCollisionManager.Render();
 }
 
 
@@ -306,31 +331,21 @@ const K_Math::Vector3& Enemy::GetPos()
 	return gameObject.GetPos();
 }
 
-//時間を設定する
-void Enemy::SetTime(int time)
-{
-	timeCnt.SetTime(time);
-	timeCnt.Count(false);
-}
-//時間を取得する
-int Enemy::GetTime()
-{
-	return timeCnt.GetNowCntTime();
-}
-
 //体力を設定する
 void Enemy::SetLife(int life, bool isTakeDamage)
 {
 	gameObject.GetLife() = life;
-	this->isTakeDamage = isTakeDamage;
+	if (isTakeDamage)
+	{
+		invalidTime.ResetCntTime();
+		if (gameObject.GetLife() > 0)
+		{
+			gameObject.SetState(Status::State::Invalid);
+		}
+	}
 }
 //体力を取得する
 const int& Enemy::GetLife()
 {
 	return gameObject.GetLife();
-}
-//ダメージを受けたか否かを取得する
-const bool& Enemy::GetIsTakeDamage()
-{
-	return isTakeDamage;
 }

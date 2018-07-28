@@ -10,6 +10,8 @@ Scene_Game::Scene_Game():
 	eventState(EventState::Nomal),
 	processForEvent(&Scene_Game::ProcessForNomal)
 {
+	eventTimeCnt.SetEndTime(-1);
+
 	//敵の配置情報の読み込み
 	emanager->LayoutEnemy("data/EnemyData/EnemyLayout/opStageEnemySettings.txt");
 
@@ -47,12 +49,7 @@ Scene_Game::Scene_Game():
 	//登録すれば正しく使える
 	source.Play();
 
-	//エフェクトを作成
-	Effect::CreateEffectData(EffectName::Effect1,
-		"testEffect", "data/image/testEffect.png",
-		new AnimationCharaChip(K_Math::Box2D(0, 0, 32, 32), 8, 5, false));
-
-	//エフェクト画像の読み込み(仮)
+	//敵用エフェクト画像の読み込み(仮)
 	CST::LoadAndGetTexture("Effect", "data/image/effect.png");
 }
 

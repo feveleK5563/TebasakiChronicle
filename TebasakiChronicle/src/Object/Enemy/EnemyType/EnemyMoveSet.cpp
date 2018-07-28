@@ -26,7 +26,7 @@ const std::vector<AnimationCharaChip*>& EnemyMoveSet::GetNowAnimChip(int nowPatt
 
 //-----------------------------------------------------------------------------
 //現在の動作パターンを実行し、現在プレイヤーが取得可能なスキル番号を返す
-int EnemyMoveSet::EMove(int& nowMoveOrder, int& nowPatternOrder, TimeCount& timeCnt, CollisionManager& colmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move, bool isTakeDamage)
+int EnemyMoveSet::EMove(int& nowMoveOrder, int& nowPatternOrder, TimeCount& timeCnt, CollisionManager& colmanager, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
 {
 	//動作パターンが一巡したか(最後までいったか)どうかを格納
 	bool endMovePattern = empattern[nowPatternOrder]->IsEndMovePattern(nowMoveOrder, timeCnt, tempmanager, status, move);
@@ -35,7 +35,7 @@ int EnemyMoveSet::EMove(int& nowMoveOrder, int& nowPatternOrder, TimeCount& time
 	for (int i = 0; i < (int)empattern.size(); ++i)
 	{
 		if (i != nowPatternOrder &&
-			empattern[nowPatternOrder]->IsTransition(i, colmanager, status, endMovePattern, isTakeDamage))
+			empattern[nowPatternOrder]->IsTransition(i, colmanager, status, endMovePattern))
 		{
 			empattern[nowPatternOrder]->EMoveEnd(nowMoveOrder, timeCnt, tempmanager, status, move);
 			PatternTransition(nowMoveOrder, nowPatternOrder, timeCnt, i);

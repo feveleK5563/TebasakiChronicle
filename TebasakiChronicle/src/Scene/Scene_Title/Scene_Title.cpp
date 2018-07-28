@@ -29,6 +29,7 @@ SceneName Scene_Title::Update()
 void Scene_Title::Draw()
 {
 	CST::GetShaderClass(0)->UseShader();
+	CST::GetShaderClass(0)->SetValue("color", K_Math::Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 	spobj->Draw2D(
 		CST::GetOrthoCamera(),
 		CST::GetShaderClass(0),

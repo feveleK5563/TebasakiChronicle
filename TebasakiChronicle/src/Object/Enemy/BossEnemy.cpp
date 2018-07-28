@@ -38,10 +38,6 @@ void BossEnemy::Update()
 
 	for (size_t i = 0; i < bossEnemy.size(); ++i)
 	{
-		if (i > 0)
-		{
-			bossEnemy[i]->SetTime(bossEnemy[0]->GetTime());
-		}
 		bossEnemy[i]->SetLife(shareLife, isTakeDamage);
 		bossEnemy[i]->Update();
 	}

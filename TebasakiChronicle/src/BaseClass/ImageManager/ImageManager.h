@@ -44,12 +44,14 @@ public:
 	void ImageDraw3D(	const K_Math::Vector3&	posc, 
 						const K_Math::Vector3&	angle,
 						const K_Math::Vector3&	scale,
-						int						direction);
+						int						direction,
+						const K_Math::Vector4&	color = {1.0f, 1.0f, 1.0f, 1.0f});
 
 	//----------------------------------------------
 	//•`‰æ(2D)
 	void ImageDraw2D(	const K_Math::Vector3&	posc,
 						const K_Math::Vector3&	angle,
 						const K_Math::Vector3&	scale,
-						int						direction);
+						int						direction,
+						const K_Math::Vector4&	color = { 1.0f, 1.0f, 1.0f, 1.0f });
 };
