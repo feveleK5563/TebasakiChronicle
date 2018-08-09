@@ -2,8 +2,7 @@
 #include <vector>
 #include "SystemClass.h"
 #include "../../../Effect/Effect.h"
-#include "../../../BaseClass/Status/Status.h"
-#include "../../../BaseClass/Move.h"
+#include "../../GameObject.h"
 #include "../../TemporaryCollision/TemporaryCollisionManager.h"
 #include "../../../TimeCount.h"
 #include "../../../Helper.h"
@@ -14,9 +13,9 @@ class CharacterBehaviorAbstract
 {
 public:
 	virtual ~CharacterBehaviorAbstract();
-	virtual void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move) = 0;
-	virtual void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt) = 0;
-	virtual void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move) = 0;
+	virtual void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) = 0;
+	virtual void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) = 0;
+	virtual void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) = 0;
 };
 
 //-----------------------------------------------------------------------------
@@ -33,9 +32,9 @@ public:
 	//動作を設定する
 	void SetBehavior(int moveNum);
 
-	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move, TimeCount& timeCnt);
-	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, TimeCount& timeCnt);
-	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject, TimeCount& timeCnt);
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, TimeCount& timeCnt);
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject);
 };
 
 
@@ -46,9 +45,9 @@ public:
 class Behavior_ : public CharacterBehaviorAbstract
 {
 public:
-void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
 };
 
 */
@@ -58,9 +57,9 @@ void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move
 class Behavior_NoMotion : public CharacterBehaviorAbstract
 {
 public:
-	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
 };
 
 //-----------------------------------------------
@@ -68,9 +67,9 @@ public:
 class Behavior_ChangeDirection : public CharacterBehaviorAbstract
 {
 public:
-	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
 };
 
 //-----------------------------------------------
@@ -78,9 +77,9 @@ public:
 class Behavior_MovementToDirection : public CharacterBehaviorAbstract
 {
 public:
-	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
 };
 
 //-----------------------------------------------
@@ -88,9 +87,9 @@ public:
 class Behavior_OnceJump : public CharacterBehaviorAbstract
 {
 public:
-	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
 };
 
 //-----------------------------------------------
@@ -101,9 +100,9 @@ private:
 	void CreateAttackCollision();
 
 public:
-	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
 };
 
 //-----------------------------------------------
@@ -111,9 +110,9 @@ public:
 class Behavior_SwitchingGravity : public CharacterBehaviorAbstract
 {
 public:
-	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
 };
 
 //-----------------------------------------------
@@ -121,19 +120,19 @@ public:
 class Behavior_DisableGravityAndFloat : public CharacterBehaviorAbstract
 {
 public:
-	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
 };
 
 //-----------------------------------------------
-//重力を一時的に二倍にする
-class Behavior_ToDoubleGravity : public CharacterBehaviorAbstract
+//一時的に重力を無効にし、一定速度で落下する
+class Behavior_Fall : public CharacterBehaviorAbstract
 {
 public:
-	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
 };
 
 //-----------------------------------------------
@@ -141,9 +140,9 @@ public:
 class Behavior_ToHarfGravity : public CharacterBehaviorAbstract
 {
 public:
-	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
 };
 
 //-----------------------------------------------
@@ -151,9 +150,9 @@ public:
 class Behavior_AirIdle : public CharacterBehaviorAbstract
 {
 public:
-	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
 };
 
 //-----------------------------------------------
@@ -161,9 +160,9 @@ public:
 class Behavior_AirMovementToDirection : public CharacterBehaviorAbstract
 {
 public:
-	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
 };
 
 //-----------------------------------------------
@@ -171,9 +170,9 @@ public:
 class Behavior_ShotBulletFromMiddle : public CharacterBehaviorAbstract
 {
 public:
-	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
 };
 
 //-----------------------------------------------
@@ -181,17 +180,87 @@ public:
 class Behavior_ThrowBomb : public CharacterBehaviorAbstract
 {
 public:
-	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager,  GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
 };
 
 //-----------------------------------------------
-//一定時間無敵状態になる
-class Behavior_Invulnerable : public CharacterBehaviorAbstract
+//視界内のプレイヤーのX軸に合わせる
+class Behavior_MovePlayerPosX : public CharacterBehaviorAbstract
 {
 public:
-	void Initialize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
-	void Action(TemporaryCollisionManager& tempmanager, Status& status, Move& move, const TimeCount& timeCnt);
-	void Finalize(TemporaryCollisionManager& tempmanager, Status& status, Move& move);
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+};
+
+//-----------------------------------------------
+//視界内のプレイヤーのY軸に合わせる
+class Behavior_MovePlayerPosY : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+};
+
+//-----------------------------------------------
+//初期配置時の座標に移動する
+class Behavior_MoveInitPos : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+};
+
+//-----------------------------------------------
+//一時的に重力を無効にし急速落下、動作終了時にエフェクトを発生させる
+class Behavior_HighSpeedFall : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+};
+
+//-----------------------------------------------
+//コリジョンマスクを全て無効にする
+class Behavior_NonActiveCollisionMask : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+};
+
+//-----------------------------------------------
+//コリジョンマスクを全て有効にする
+class Behavior_ActiveCollisionMask : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+};
+
+//-----------------------------------------------
+//ビームを撃つ
+class Behavior_Beam : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+};
+
+//-----------------------------------------------
+//向いている方向に高速で移動する
+class Behavior_HighSpeedMove : public CharacterBehaviorAbstract
+{
+public:
+	void Initialize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
+	void Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt) override;
+	void Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject) override;
 };

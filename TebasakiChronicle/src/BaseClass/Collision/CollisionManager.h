@@ -15,6 +15,17 @@ enum CollisionMask
 	EnemyCamCollision	= 1 << 6,
 };
 
+//敵に割り当てられているサブコリジョンの名前一覧
+enum EnemyCollisionName
+{
+	RecieveDamage,
+	Visibility,
+	AttackArea,
+	CheckFoot,
+	CheckHead,
+	RecieveCameraGun,
+};
+
 //各種キャラクター用コリジョンデータ管理くん
 //コリジョンの形状情報は格納しないので各自で管理したりすること
 class CollisionManager
@@ -89,4 +100,7 @@ public:
 
 	//ベースコリジョンの座標を設定する
 	void SetBaseCollisionObjectPosition(const K_Math::Vector3& setpos);
+
+	//全てのコリジョンマスクの有効無効を切り替える
+	void SetMaskActive(bool active);
 };

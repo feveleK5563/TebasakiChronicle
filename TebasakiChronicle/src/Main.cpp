@@ -50,6 +50,8 @@ int main()
 	//ƒV[ƒ“ŠÇ—
 	SceneManager* sceneManager = new SceneManager(SceneName::Title);
 
+	srand((unsigned int)time(NULL));
+
 	//******************************************************************
 
 	while (sc->IsSystemEnd() == false)

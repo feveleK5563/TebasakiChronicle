@@ -86,3 +86,11 @@ class ETransition_TakeDamage : public EnemyMoveTransitionAbstract
 public:
 	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern);
 };
+
+//-----------------------------------------------
+//7Fƒ‰ƒ“ƒ_ƒ€‚É“ñ‘ğ
+class ETransition_SelectRandom : public EnemyMoveTransitionAbstract
+{
+public:
+	bool IsTransition(CollisionManager& cm, Status& status, bool endMovePattern);
+};

@@ -39,8 +39,6 @@ public:
 	//!@return 生存時間内ならtrue
 	bool	CheckSurvivalTime();
 
-
-
 	//!@brief	1回だけ更新させるフラグのセット
 	//!@param[in] oneFlag_	1回だけ更新するなら true
 	void	SetOneUpdateFlag(bool oneFlag_);
@@ -61,7 +59,6 @@ private:
 	int							continueCnt;	//継続時間計測
 	TemporaryCollisionManager	tempColManager;	//テンポラリオブジェクト
 	TimeCount					timeCnt;
-
 
 	bool	oneFlag;
 	bool	upDateFlag;			//更新するかのフラグ

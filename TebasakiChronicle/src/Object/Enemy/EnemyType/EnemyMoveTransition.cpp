@@ -45,6 +45,10 @@ void EnemyMoveTransition::SetTransition(int transitionNum)
 	case 6:	//ダメージを受けたとき
 		transition = new ETransition_TakeDamage();
 		break;
+
+	case 7:	//ランダムに二択
+		transition = new ETransition_SelectRandom();
+		break;
 	}
 }
 //-----------------------------------------------
@@ -75,7 +79,7 @@ bool ETransition_EndMovePattern::IsTransition(CollisionManager& cm, Status& stat
 //2：視界内にプレイヤーが入っているとき
 bool ETransition_PlayerIntoVisibility::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern)
 {
-	if (cm.CheckHitSubCollisionObejct(1))
+	if (cm.CheckHitSubCollisionObejct(EnemyCollisionName::Visibility))
 		return true;
 
 	return false;
@@ -85,7 +89,7 @@ bool ETransition_PlayerIntoVisibility::IsTransition(CollisionManager& cm, Status
 //3：攻撃遷移用コリジョンにプレイヤーが入っているとき
 bool ETransition_PlayerIntoAttackArea::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern)
 {
-	if (cm.CheckHitSubCollisionObejct(2))
+	if (cm.CheckHitSubCollisionObejct(EnemyCollisionName::AttackArea))
 		return true;
 
 	return false;
@@ -95,7 +99,7 @@ bool ETransition_PlayerIntoAttackArea::IsTransition(CollisionManager& cm, Status
 //4：足元が地形と接触しているとき
 bool ETransition_HitFoot::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern)
 {
-	if (cm.CheckHitSubCollisionObejct(3))
+	if (cm.CheckHitSubCollisionObejct(EnemyCollisionName::CheckFoot))
 		return true;
 
 	return false;
@@ -122,4 +126,12 @@ bool ETransition_IntoVisibilityAndMatchDirection::IsTransition(CollisionManager&
 bool ETransition_TakeDamage::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern)
 {
 	return status.GetState() == Status::State::Invalid;
+}
+
+//-----------------------------------------------
+//7：ランダムに二択
+bool ETransition_SelectRandom::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern)
+{
+	//return rand() % 2;
+	return 0;
 }

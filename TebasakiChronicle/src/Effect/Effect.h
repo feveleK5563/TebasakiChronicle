@@ -9,6 +9,10 @@ enum struct EffectName
 {
 	Effect1,
 	Effect2,
+
+	BossKnockEffect,
+	BossBeamEffect1,
+	BossBeamEffect2,
 };
 
 class EffectManager
@@ -30,6 +34,7 @@ private:
 		ImageManager*		imageManager;	//画像表示とアニメーション制御くん
 		K_Math::Vector3		pos;			//表示座標
 		TimeCount			timeCnt;		//消滅までの時間計測
+		int					direction;		//表示の向き
 	};
 	std::vector<EffectObject*> effectObj;
 
@@ -40,7 +45,7 @@ public:
 	//エフェクトのデータを格納する
 	void CreateEffectData(EffectName effectName, const std::string& texName, const std::string& texPath, AnimationCharaChip* anim, int endTime);
 	//指定座標に指定したエフェクトを生成する
-	void CreateEffect(EffectName effectName, const K_Math::Vector3& setPos);
+	void CreateEffect(EffectName effectName, const K_Math::Vector3& setPos, int direction = 0);
 
 	//エフェクトの更新処理
 	void Run();
@@ -61,7 +66,7 @@ namespace Effect
 	void CreateEffectData(EffectName effectName, const std::string& texName, const std::string& texPath, AnimationCharaChip* anim);
 
 	//指定座標に指定したエフェクトを生成する
-	void CreateEffect(EffectName effectName, const K_Math::Vector3& setPos);
+	void CreateEffect(EffectName effectName, const K_Math::Vector3& setPos, int direction = 0);
 
 	//エフェクトの更新処理
 	void Run();

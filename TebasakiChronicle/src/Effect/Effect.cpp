@@ -19,13 +19,14 @@ void EffectManager::CreateEffectData(EffectName effectName, const std::string& t
 }
 
 //指定座標に指定したエフェクトを生成する
-void EffectManager::CreateEffect(EffectName effectName, const K_Math::Vector3& setPos)
+void EffectManager::CreateEffect(EffectName effectName, const K_Math::Vector3& setPos, int direction)
 {
 	effectObj.emplace_back(new EffectObject());
 	effectObj.back()->imageManager = new ImageManager(effectData[effectName]->texture, true);
 	effectObj.back()->imageManager->CreateCharaChip(effectData[effectName]->animChip->chip, effectData[effectName]->animChip->chipSheetNum, effectData[effectName]->animChip->animSpd, effectData[effectName]->animChip->isAnimRoop);
 	effectObj.back()->pos = setPos;
 	effectObj.back()->timeCnt.SetEndTime(effectData[effectName]->endTime);
+	effectObj.back()->direction = direction;
 }
 
 //エフェクトの更新処理
@@ -54,7 +55,7 @@ void EffectManager::Render()
 {
 	for (auto it : effectObj)
 	{
-		it->imageManager->ImageDraw3D(it->pos, K_Math::Vector3(0, 0, 0), K_Math::Vector3(1, 1, 1), 0);
+		it->imageManager->ImageDraw3D(it->pos, K_Math::Vector3(0, 0, 0), K_Math::Vector3(1, 1, 1), it->direction);
 	}
 }
 
@@ -97,9 +98,9 @@ namespace Effect
 	}
 
 	//指定座標に指定したエフェクトを生成する
-	void CreateEffect(EffectName effectName, const K_Math::Vector3& setPos)
+	void CreateEffect(EffectName effectName, const K_Math::Vector3& setPos, int direction)
 	{
-		effectManager->CreateEffect(effectName, setPos);
+		effectManager->CreateEffect(effectName, setPos, direction);
 	}
 
 	//エフェクトの更新処理

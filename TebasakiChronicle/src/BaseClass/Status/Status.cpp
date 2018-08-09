@@ -80,6 +80,12 @@ K_Math::Vector3&	Status::GetPos()
 	return pos;
 }
 
+//‰ŠúÀ•W‚Ìæ“¾
+K_Math::Vector3&	Status::GetInitialPos()
+{
+	return initialPos;
+}
+
 //ŒX‚«‚Ìæ“¾
 K_Math::Vector3&	Status::GetAngle()
 {

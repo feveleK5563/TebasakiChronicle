@@ -10,12 +10,7 @@ private:
 	int				behaviorId;		//現在の敵から読み取れる動作番号
 	bool			isBoss;			//こいつがボスか否か
 
-	K_Math::Vector3	initialPos;		//初期位置
 	bool	isUseGravity;			//重力を使用するか否か
-
-	static const int subCollisionNum = 6;			//サブコリジョンの数
-	int		collisionGiveMask[subCollisionNum];		//サブコリジョンの与マスク
-	int		collisionMyselfMask[subCollisionNum];	//サブコリジョンの受マスク
 
 	int					nowMoveOrder;		//現在の動作順番
 	int					nowPatternOrder;	//現在の動作パターン番号
@@ -27,17 +22,6 @@ private:
 	GameObject					gameObject;				//ゲームオブジェクト
 
 	TimeCount					invalidTime;			//被ダメージ時の無敵時間計測
-
-	//敵に割り当てられているサブコリジョンの名前一覧
-	enum EnemyCollisionName
-	{
-		RecieveDamage,
-		Visibility,
-		AttackArea,
-		CheckFoot,
-		CheckHead,
-		RecieveCameraGun,
-	};
 
 public:
 	//スキル番号と現在のテクスチャ名、キャラチップ番号を格納

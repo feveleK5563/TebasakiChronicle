@@ -3,6 +3,7 @@
 #include "BossEnemy.h"
 #include "../../Loader/EnemyLoader.h"
 #include "EnemyType/EnemyTypeManager.h"
+#include "../../Effect/Effect.h"
 
 class EnemyManager
 {
@@ -13,6 +14,7 @@ private:
 	EnemyTypeManager	enemyTypeManager;
 
 public:
+	EnemyManager();
 	~EnemyManager();
 
 	//“G‚ğˆê‘Ìì¬‚·‚é

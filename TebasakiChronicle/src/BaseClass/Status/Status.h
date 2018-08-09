@@ -53,6 +53,7 @@ public:
 	//æ“¾ˆ—
 	State&				GetState();
 	K_Math::Vector3&	GetPos();
+	K_Math::Vector3&	GetInitialPos();
 	K_Math::Vector3&	GetAngle();
 	K_Math::Vector3&	GetScale();
 	Direction&			GetDirection();
@@ -65,6 +66,7 @@ public:
 private:
 	State				state;		//ó‘Ô
 	K_Math::Vector3		pos;		//À•W
+	K_Math::Vector3		initialPos;	//‰ŠúÀ•W
 	K_Math::Vector3		angle;		//ŒX‚«
 	K_Math::Vector3		scale;		//Šg‘åk¬
 	Direction			direction;	//Œü‚«

@@ -46,13 +46,13 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 	switch (skillType->GetType())
 	{
 	case SkillType::Type::MoveSkill:
-		skillType->BehaivorInit(tempColManager, obj.GetStatus(), obj.GetMove(), timeCnt);
+		skillType->BehaivorInit(tempColManager, obj, timeCnt);
 		break;
 	case SkillType::Type::AttackSkill:
-		skillType->BehaivorInit(tempColManager, object.GetStatus(), object.GetMove(), timeCnt);
+		skillType->BehaivorInit(tempColManager, object, timeCnt);
 		break;
 	case SkillType::Type::PassiveSkill:
-		skillType->BehaivorInit(tempColManager, obj.GetStatus(), obj.GetMove(), timeCnt);
+		skillType->BehaivorInit(tempColManager, obj, timeCnt);
 		break;
 	}
 }
@@ -63,7 +63,7 @@ SkillObject::SkillObject(std::shared_ptr<SkillType> skillType_,GameObject& obj,c
 SkillObject::~SkillObject()
 {
 	//ƒXƒLƒ‹‚Ì“®ì‚ÌI—¹
-	skillType->BehaivorFinal(tempColManager, object.GetStatus(), object.GetMove());
+	skillType->BehaivorFinal(tempColManager, object);
 }
 
 
@@ -82,13 +82,13 @@ void	SkillObject::UpDate(GameObject& gameObj)
 	switch (skillType->GetType())
 	{
 	case SkillType::Type::MoveSkill:
-		skillType->Behaivor(tempColManager, gameObj.GetStatus(), gameObj.GetMove(), timeCnt);
+		skillType->Behaivor(tempColManager, gameObj, nullptr, timeCnt);
 		break;
 	case SkillType::Type::AttackSkill:
-		skillType->Behaivor(tempColManager, object.GetStatus(), object.GetMove(), timeCnt);
+		skillType->Behaivor(tempColManager, object, nullptr, timeCnt);
 		break;
 	case SkillType::Type::PassiveSkill:
-		skillType->Behaivor(tempColManager, gameObj.GetStatus(), gameObj.GetMove(), timeCnt);
+		skillType->Behaivor(tempColManager, gameObj, nullptr, timeCnt);
 		break;
 	}
 }

@@ -196,3 +196,14 @@ void CollisionManager::SetBaseCollisionObjectPosition(const K_Math::Vector3& set
 {
 	baseCollision->SetCollisionPosition(setpos);
 }
+
+//-----------------------------------------------------------------------------
+//全てのコリジョンマスクの有効無効を切り替える
+void CollisionManager::SetMaskActive(bool active)
+{
+	baseCollision->SetActive(active);
+	for (auto& it : subCollision)
+	{
+		it->collision->SetActive(active);
+	}
+}

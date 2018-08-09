@@ -32,18 +32,18 @@ void	SkillType::UpDate(GameObject& object)
 }
 
 //‰Šú‰»
-void	SkillType::BehaivorInit(TemporaryCollisionManager& tempCol, Status& status, Move& move, TimeCount& timeCnt)
+void	SkillType::BehaivorInit(TemporaryCollisionManager& tempCol, GameObject& gameObject, TimeCount& timeCnt)
 {
-	charaBehaivor->Initialize(tempCol, status, move, timeCnt);
+	charaBehaivor->Initialize(tempCol, gameObject, timeCnt);
 }
 //I—¹
-void	SkillType::BehaivorFinal(TemporaryCollisionManager& tempCol, Status& status, Move& move)
+void	SkillType::BehaivorFinal(TemporaryCollisionManager& tempCol, GameObject& gameObject)
 {
-	charaBehaivor->Finalize(tempCol, status, move);
+	charaBehaivor->Finalize(tempCol, gameObject);
 }
-void	SkillType::Behaivor(TemporaryCollisionManager& tempCol, Status& status, Move& move, TimeCount& timeCnt)
+void	SkillType::Behaivor(TemporaryCollisionManager& tempCol, GameObject& gameObject, CollisionManager* collmanager, TimeCount& timeCnt)
 {
-	charaBehaivor->Action(tempCol, status, move, timeCnt);
+	charaBehaivor->Action(tempCol, gameObject, collmanager, timeCnt);
 }
 
 

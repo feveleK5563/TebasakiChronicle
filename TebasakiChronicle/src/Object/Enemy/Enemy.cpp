@@ -39,7 +39,7 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 		gameObject.GetMove().SetGravity(0.f);
 	}
 
-	initialPos = setPos;
+	gameObject.GetStatus().GetInitialPos() = setPos;
 	gameObject.GetStatus().GetMaxLife() = cpyet->GetMaxLife();
 	gameObject.GetStatus().GetMinLife() = 0;
 	isUseGravity = cpyet->GetIsUseGravity();
@@ -60,12 +60,6 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 	collisionManager.SetSubCollisionData(cpyet->CreateAndGetCheckFootCollisionData());		//3 足元判定用コリジョン
 	collisionManager.SetSubCollisionData(cpyet->CreateAndGetCheckHeadCollisionData());		//4 頭上判定用コリジョン
 	collisionManager.SetSubCollisionData(cpyet->CreateAndGetRecieveCameraCollisionData());	//5 被カメラガン用コリジョン
-
-	for (int i = 0; i < subCollisionNum; ++i)
-	{
-		collisionGiveMask[i] = collisionManager.GetSubCollisionGiveMask(i);
-		collisionMyselfMask[i] = collisionManager.GetSubCollisionMyselfMask(i);
-	}
 
 	//タグの設定
 	skillAndChip = new SkillAndCharaChip();
@@ -95,11 +89,7 @@ void Enemy::SetEnemyType(EnemyType* cpyet, const K_Math::Vector3& setPos, const 
 void Enemy::SetNonEnemy()
 {
 	//カメラマン受け用コリジョンを除いたサブコリジョンのマスクを無効にする
-	for (int i = 0; i < subCollisionNum; ++i)
-	{
-		collisionManager.SetSubCollisionGiveMask(i, CollisionMask::Non);
-		collisionManager.SetSubCollisionMyselfMask(i, CollisionMask::Non);
-	}
+	collisionManager.SetMaskActive(false);
 	tempCollisionManager.DeleteCollision();
 }
 
@@ -107,7 +97,7 @@ void Enemy::SetNonEnemy()
 //状態を全て初期状態に戻す
 void Enemy::ResetAndActiveEnemy()
 {
-	collisionManager.SetBaseCollisionObjectPosition(initialPos);
+	collisionManager.SetBaseCollisionObjectPosition(gameObject.GetStatus().GetInitialPos());
 	gameObject.SetState(Status::State::Active);
 	timeCnt.ResetCntTime();
 	gameObject.GetStatus().GetLife() = gameObject.GetStatus().GetMaxLife();
@@ -117,11 +107,7 @@ void Enemy::ResetAndActiveEnemy()
 	beforeMoveOrder = 0;
 	beforePatternOrder = 0;
 	//カメラマン受け用コリジョンを除いたサブコリジョンのマスクを有効にする
-	for (int i = 0; i < subCollisionNum; ++i)
-	{
-		collisionManager.SetSubCollisionGiveMask(i, collisionGiveMask[i]);
-		collisionManager.SetSubCollisionMyselfMask(i, collisionMyselfMask[i]);
-	}
+	collisionManager.SetMaskActive(true);
 	//アニメーションのリセット
 	gameObject.GetImage().ChangeCharaChip(ems->GetNowAnimChip(nowPatternOrder));
 	gameObject.GetImage().ChangeAnimationPattern(nowMoveOrder);
@@ -149,7 +135,7 @@ void Enemy::Update()
 	gameObject.GetMove().GravityOperation(collisionManager.GetConflictionObjectsTag(3).size() > 0);
 
 	//設定されている動作を行う
-	*skillAndChip->behaviorId = ems->EMove(nowMoveOrder, nowPatternOrder, timeCnt, collisionManager, tempCollisionManager, gameObject.GetStatus(), gameObject.GetMove());
+	*skillAndChip->behaviorId = ems->EMove(nowMoveOrder, nowPatternOrder, timeCnt, &collisionManager, tempCollisionManager, gameObject);
 
 	//アニメーションの更新
 	AnimationUpdate();
@@ -180,7 +166,7 @@ bool Enemy::DecisionInScreen()
 	{
 		if (gameObject.GetState() != Status::State::Non)
 		{
-			gameObject.SetPos(initialPos);
+			gameObject.SetPos(gameObject.GetStatus().GetInitialPos());
 			SetNonEnemy();
 			gameObject.SetState(Status::State::Non);
 		}
@@ -223,7 +209,7 @@ bool Enemy::RecieveCollisionOperation()
 	int damage = 0;	//被ダメージ
 
 	//ダメージを受ける
-	tag = collisionManager.GetConflictionObjectsTag(Enemy::EnemyCollisionName::RecieveDamage);
+	tag = collisionManager.GetConflictionObjectsTag(EnemyCollisionName::RecieveDamage);
 	for (auto it : tag)
 	{
 		Status* hitThing = (Status*)it->userData;
@@ -235,7 +221,7 @@ bool Enemy::RecieveCollisionOperation()
 	}
 
 	//カメラガンを受ける
-	tag = collisionManager.GetConflictionObjectsTag(Enemy::EnemyCollisionName::RecieveCameraGun);
+	tag = collisionManager.GetConflictionObjectsTag(EnemyCollisionName::RecieveCameraGun);
 	for (auto it : tag)
 	{
 		if (((Status*)it->userData)->GetState() == Status::State::Active)

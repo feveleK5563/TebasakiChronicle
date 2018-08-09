@@ -1,5 +1,29 @@
 #include "EnemyManager.h"
 
+//コンストラクタ
+EnemyManager::EnemyManager()
+{
+	//エフェクト作成
+	Effect::CreateEffectData(	//ボス戦1, 振り下ろし用
+		EffectName::BossKnockEffect,
+		"BossButtleEffect1",
+		"data/image/Enemy/BossA.png",
+		new AnimationCharaChip(K_Math::Box2D(0, 544, 128, 128), 3, 5.f, false)
+	);
+	Effect::CreateEffectData(	//ボス戦1, ビーム用1
+		EffectName::BossBeamEffect1,
+		"BossButtleEffect1",
+		"data/image/Enemy/BossA.png",
+		new AnimationCharaChip(K_Math::Box2D(0, 448, 64, 96), 4, 3.f, false)
+	);
+	Effect::CreateEffectData(	//ボス戦1, ビーム用2
+		EffectName::BossBeamEffect2,
+		"BossButtleEffect1",
+		"data/image/Enemy/BossA.png",
+		new AnimationCharaChip(K_Math::Box2D(256, 448, 64, 96), 4, 3.f, false)
+	);
+}
+
 //デストラクタ
 EnemyManager::~EnemyManager()
 {

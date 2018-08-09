@@ -36,13 +36,13 @@ EnemyMovePattern::~EnemyMovePattern()
 
 //-----------------------------------------------------------------------------
 //動作が終了したか否かを返す
-bool EnemyMovePattern::IsEndMovePattern(int& nowMoveOrder, TimeCount& timeCnt, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+bool EnemyMovePattern::IsEndMovePattern(int& nowMoveOrder, TimeCount& timeCnt, TemporaryCollisionManager& tempmanager, GameObject& gameObject)
 {
 	//timeCntがmoveTimeMaxを超えたら、次の動作に移行する
 	if (timeCnt.IsTimeEnd())
 	{
 		//終了時の処理
-		EMoveEnd(nowMoveOrder, timeCnt, tempmanager, status, move);
+		EMoveEnd(nowMoveOrder, timeCnt, tempmanager, gameObject);
 
 		++nowMoveOrder;
 		if (nowMoveOrder >= (int)mp.size())
@@ -57,16 +57,16 @@ bool EnemyMovePattern::IsEndMovePattern(int& nowMoveOrder, TimeCount& timeCnt, T
 
 //-----------------------------------------------------------------------------
 //動作を行い、現在取得可能なスキルの番号を返す
-int EnemyMovePattern::EMove(int& nowMoveOrder, TimeCount& timeCnt, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+int EnemyMovePattern::EMove(int& nowMoveOrder, TimeCount& timeCnt, TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager)
 {
 	if (timeCnt.GetNowCntTime() == 0)	//最初に行う処理
 	{
 		timeCnt.SetEndTime(mp[nowMoveOrder]->moveTimeMax);
-		mp[nowMoveOrder]->em.Initialize(tempmanager, status, move, timeCnt);
+		mp[nowMoveOrder]->em.Initialize(tempmanager, gameObject, timeCnt);
 	}
 
 	// 動作
-	mp[nowMoveOrder]->em.Action(tempmanager, status, move, timeCnt);
+	mp[nowMoveOrder]->em.Action(tempmanager, gameObject, collmanager, timeCnt);
 
 	timeCnt.Run();
 	return mp[nowMoveOrder]->behaviorId;
@@ -74,9 +74,9 @@ int EnemyMovePattern::EMove(int& nowMoveOrder, TimeCount& timeCnt, TemporaryColl
 
 //-----------------------------------------------------------------------------
 //終了時の処理を行う
-void EnemyMovePattern::EMoveEnd(int& nowMoveOrder, TimeCount& timeCnt, TemporaryCollisionManager& tempmanager, Status& status, Move& move)
+void EnemyMovePattern::EMoveEnd(int& nowMoveOrder, TimeCount& timeCnt, TemporaryCollisionManager& tempmanager, GameObject& gameObject)
 {
-	mp[nowMoveOrder]->em.Finalize(tempmanager, status, move);
+	mp[nowMoveOrder]->em.Finalize(tempmanager, gameObject);
 	timeCnt.ResetCntTime();
 }
 

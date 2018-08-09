@@ -151,8 +151,19 @@ void Scene_Game::Draw()
 //イベント通常状態の処理
 void Scene_Game::ProcessForNomal()
 {
-	//カメラがプレイヤーを追尾
-	cameraMan->Run(player->GetGameObject().GetPos());
+	if (eventState == EventState::BossBattle)
+	{
+		//ボス線中だった場合、ボスとプレイヤーの間にカメラを配置する
+		float x = fabsf(emanager->GetBossPos().x - ((emanager->GetBossPos().x - player->GetGameObject().GetPos().x) / 2.f));
+		float y = fabsf(emanager->GetBossPos().y - ((emanager->GetBossPos().y - player->GetGameObject().GetPos().y) / 2.f));
+		float z = -fabsf(emanager->GetBossPos().x - player->GetGameObject().GetPos().x) / 5.f - 10.f;
+		cameraMan->Run(K_Math::Vector3(x, y, z));
+	}
+	else
+	{
+		//カメラがプレイヤーを追尾
+		cameraMan->Run(player->GetGameObject().GetPos());
+	}
 
 	//ゲームオーバー
 	if ((player->GetGameObject().IsDead()) ||	//プレイヤーのHPが0
@@ -190,14 +201,14 @@ void Scene_Game::ProcessForBossReady()
 		emanager->AllActiveBoss(true);
 
 		//壁を作成
-		notReturnWallShape = CC::CreateBoxShape(50.f, 1000.f, 30.f);
+		notReturnWallShape = CC::CreateBoxShape(100.f, 10000.f, 1000.f);
 
 		notReturnWall = CC::CreateCollisionObject(
 			notReturnWallShape,
 			false,
 			CollisionMask::Non,
 			CollisionMask::Ground,
-			K_Math::Vector3(player->GetGameObject().GetPos().x - 100, 0, 0),
+			K_Math::Vector3(player->GetGameObject().GetPos().x - 300, 0, 0),
 			K_Math::Vector3(0, 0, 0));
 	}
 
@@ -206,7 +217,7 @@ void Scene_Game::ProcessForBossReady()
 		//カメラがボスを追尾
 		cameraMan->Run(emanager->GetBossPos());
 
-		if (eventTimeCnt.GetNowCntTime() > 180)
+		if (eventTimeCnt.GetNowCntTime() > 90 + 360)
 		{
 			eventTimeCnt.ResetCntTime();
 
