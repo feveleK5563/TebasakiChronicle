@@ -5,6 +5,8 @@
 #include "Scene_Game/Scene_Game.h"
 #include "Scene_GameOver/Scene_GameOver.h"
 #include "Scene_GameClear/Scene_GameClear.h"
+#include "Scene_StageSelect/Scene_StageSelect.h"
+
 
 class SceneManager
 {

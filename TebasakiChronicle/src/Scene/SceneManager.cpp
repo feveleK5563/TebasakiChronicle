@@ -24,6 +24,10 @@ void SceneManager::ChangeScene(SceneName nextScene)
 	case SceneName::GameClear:
 		scene = new Scene_GameClear();
 		break;
+
+	case SceneName::StageSelect:
+		scene = new Scene_StageSelect();
+		break;
 	}
 }
 

@@ -63,6 +63,7 @@
     <ClCompile Include="src\Scene\Scene_GameClear\Scene_GameClear.cpp" />
     <ClCompile Include="src\Scene\Scene_GameOver\Scene_GameOver.cpp" />
     <ClCompile Include="src\Scene\Scene_Game\Scene_Game.cpp" />
+    <ClCompile Include="src\Scene\Scene_StageSelect\Scene_StageSelect.cpp" />
     <ClCompile Include="src\Scene\Scene_Title\Scene_Title.cpp" />
     <ClCompile Include="src\TimeCount.cpp" />
   </ItemGroup>
@@ -113,6 +114,7 @@
     <ClInclude Include="src\Scene\Scene_GameClear\Scene_GameClear.h" />
     <ClInclude Include="src\Scene\Scene_GameOver\Scene_GameOver.h" />
     <ClInclude Include="src\Scene\Scene_Game\Scene_Game.h" />
+    <ClInclude Include="src\Scene\Scene_StageSelect\Scene_StageSelect.h" />
     <ClInclude Include="src\Scene\Scene_Title\Scene_Title.h" />
     <ClInclude Include="src\TimeCount.h" />
   </ItemGroup>

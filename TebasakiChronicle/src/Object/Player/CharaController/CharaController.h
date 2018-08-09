@@ -23,9 +23,14 @@ public:
 	bool	IsStickLeft();
 	//!@brief	右入力が押されたか判断
 	bool	IsStickRight();
+
+	//!@brief	スティック入力の深さの取得
+	//!@param[in]	スティックの傾き 0～1
+	const float	GetStickDepth() const;
 private:
-	float friction;
-	float inputAngle;
+	float	friction;
+	float	inputAngle;
+	float	inputDepth;
 };
 
 

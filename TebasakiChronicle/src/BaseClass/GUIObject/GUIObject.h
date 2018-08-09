@@ -72,6 +72,17 @@ public:
 	//!@brief	移動量の設定
 	void		SetMoveAmount(const float moveAmount);
 
+	//!@brief	外周の回転をさせる
+	//!@param[in]	rotSpeed	回転速度(ラジアン)
+	void		OutCircleRotation(const float rotSpeed);
+	//!@brief	外周回転でのGUI位置の設定
+	//!@param[in]	baseRotPos	回転の基準位置
+	//!@param[in]	distance	基準位置からの距離
+	void		SetOutCirclePos(const K_Math::Vector3& baseRotPos,const float distance);
+	//!@brief	外周での角度の設定
+	//!@param[in]	angle	外周での角度(ラジアン)
+	void		SetOutCircleAngle(const float angle);
+
 	//!@brief	数字画像描画専用
 	//!@param[in]	numStr	数字文字列
 	void		RenderNumberImage(const char* numStr);
@@ -86,4 +97,5 @@ private:
 	float					moveCnt;		//移動カウント
 	float					moveAmount;		//移動させる量
 	K_Math::Vector2			offsetSrcPos;	//オフセット量
+	float					outCircleAngle;	//外周位置の角度
 };

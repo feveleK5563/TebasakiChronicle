@@ -11,7 +11,7 @@
 //コンストラクタ
 //-------------------------------------------------
 CharaController::CharaController()
-	: friction(0.0f),inputAngle(1.5f)
+	: friction(0.0f),inputAngle(1.5f),inputDepth(0.0f)
 {
 
 }
@@ -34,6 +34,7 @@ void	CharaController::UpDate(Move& move)
 {
 	//左スティックの倒れている深さ
 	float stickDepth = INPUT::GetStickPower(VpadIndex::Pad0,K_Input::VpadStick::L);
+	inputDepth = stickDepth;
 	//右方向を0度とした回転度
 	float stickAngle = INPUT::GetStickRotation(VpadIndex::Pad0,K_Input::VpadStick::L);
 
@@ -104,4 +105,12 @@ bool	CharaController::IsStickRight()
 		}
 	}
 	return false;
+}
+
+
+//!@brief	スティック入力の深さの取得
+//!@param[in]	スティックの傾き 0～1
+const float	CharaController::GetStickDepth() const
+{
+	return inputDepth;
 }

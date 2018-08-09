@@ -17,6 +17,7 @@ GUIObject::GUIObject(const std::string& imageName_,
 	angle = 0.0f;
 	maxAngle = 360.0f;
 	moveAmount = 0.0f;
+	outCircleAngle = 0.0f;
 	offsetSrcPos = K_Math::Vector2(0,0);
 
 	object.SetPos(pos_);
@@ -44,6 +45,7 @@ GUIObject::GUIObject(
 	angle = 0.0f;
 	maxAngle = 360.0f;
 	moveAmount = 0.0f;
+	outCircleAngle = 0.0f;
 	offsetSrcPos = K_Math::Vector2(0, 0);
 	object.SetPos(pos_);
 	object.SetAngle(K_Math::Vector3(0, 0, angle));
@@ -175,6 +177,28 @@ void		GUIObject::AddVec()
 void		GUIObject::SetMoveAmount(const float moveAmount)
 {
 	this->moveAmount = moveAmount;
+}
+
+//!@brief	外周の回転をさせる
+//!@param[in]	rotSpeed	回転速度(ラジアン)
+void		GUIObject::OutCircleRotation(const float rotSpeed)
+{
+	this->outCircleAngle += rotSpeed;
+}
+
+//!@brief	外周回転でのGUI位置の設定
+//!@param[in]	baseRotPos	回転の基準位置
+//!@param[in]	distance	基準位置からの距離
+void		GUIObject::SetOutCirclePos(const K_Math::Vector3& baseRotPos,const float distance)
+{
+	SetPos(K_Math::Vector3(baseRotPos.x + cosf(outCircleAngle) * distance, baseRotPos.y + sinf(outCircleAngle) * distance, 0));
+}
+
+//!@brief	外周での角度の設定
+//!@param[in]	angle	外周での角度(ラジアン)
+void		GUIObject::SetOutCircleAngle(const float angle)
+{
+	outCircleAngle = angle;
 }
 
 //!@brief	数字画像描画専用

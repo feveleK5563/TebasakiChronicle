@@ -7,6 +7,7 @@ enum struct SceneName
 	Game,
 	GameOver,
 	GameClear,
+	StageSelect,
 };
 
 class SceneAbstract

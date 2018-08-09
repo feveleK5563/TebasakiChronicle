@@ -64,7 +64,7 @@ void	Player::Initliaze()
 		K_Math::Vector3(1, 1, 1),
 		Status::Direction::Right,
 		1,
-		2
+		10
 		);
 
 	motion = Idle;
@@ -634,6 +634,8 @@ void	Player::Move()
 		{
 			//RunSource.PlaySE();	//草むらを歩く音の例
 		}
+		//アニメーション速度調整
+		object.GetImage().GetNowAnimationCharaChip()->animSpd = (4.0f - abs(object.GetMoveVec().x)) + 4.0f;
 		break;
 	case Jump:		//上昇中
 		if (motionCnt == 0)
@@ -646,10 +648,13 @@ void	Player::Move()
 			//仮のエフェクト発動
 			//Effect::CreateEffect(EffectName::Effect1, object.GetPos()-K_Math::Vector3(0,24,0));
 		}
-		//ジャンプ力の調節
-		if (INPUT::IsReaveButton(VpadIndex::Pad0, K_Input::VpadButton::R1) && (object.GetMove().GetFallSpeed() > minJumpForce))
+		if (preMotion != Motion::SkillAirUse)
 		{
-			object.GetMove().SetFallSpeed(minJumpForce);
+			//ジャンプ力の調節
+			if (INPUT::IsReaveButton(VpadIndex::Pad0, K_Input::VpadButton::R1) && (object.GetMove().GetFallSpeed() > minJumpForce))
+			{
+				object.GetMove().SetFallSpeed(minJumpForce);
+			}
 		}
 		break;
 	case Fall:		//落下中
@@ -734,10 +739,10 @@ void	Player::Move()
 		if (motionCnt == 0)
 		{
 			invicibleCnt = 0;
+			cManager.SetSubCollisionGiveMask(Base, CollisionMask::Non);
+			cManager.SetSubCollisionMyselfMask(Base, CollisionMask::Non);
 		}
 		cameraGun.SetCameraGun(false);
-		cManager.SetSubCollisionGiveMask(Base,CollisionMask::Non);
-		cManager.SetSubCollisionMyselfMask(Base,CollisionMask::Non);
 		object.SetMoveVec(K_Math::Vector3(0, 0, 0));
 
 		if (motionCnt >= maxFrame * 3)
@@ -891,6 +896,10 @@ bool	Player::Flashing()
 		{
 			return false;
 		}
+	}
+	else
+	{
+		invicibleCnt = 0;
 	}
 	return true;
 }
