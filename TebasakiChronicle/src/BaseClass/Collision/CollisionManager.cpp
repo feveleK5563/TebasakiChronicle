@@ -146,13 +146,13 @@ void CollisionManager::MoveBaseCollision(K_Math::Vector3& moveVec, int direction
 
 //-----------------------------------------------------------------------------
 //ベースコリジョンの座標を基にサブコリジョンの位置を設定する
-void CollisionManager::SetSubCollisionPos(int angle)
+void CollisionManager::SetSubCollisionPos(int direction)
 {
 	for (auto it : subCollision)
 	{
 		K_Math::Vector3 setPos = it->relativePos;
 
-		if (angle == 180)	//向きが左だった場合位置を反転
+		if (direction == 180)	//向きが左だった場合位置を反転
 			setPos.x *= -1.f;
 
 		it->collision->SetCollisionPosition(setPos + baseCollision->GetCollisionPosition());
@@ -206,4 +206,11 @@ void CollisionManager::SetMaskActive(bool active)
 	{
 		it->collision->SetActive(active);
 	}
+}
+
+//-----------------------------------------------------------------------------
+//ベースコリジョンの座標を設定する
+void CollisionManager::SetBaseCollisionPos(const K_Math::Vector3& pos)
+{
+	baseCollision->SetCollisionPosition(pos);
 }

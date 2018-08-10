@@ -484,7 +484,7 @@ void Behavior_MoveInitPos::Initialize(TemporaryCollisionManager& tempmanager, Ga
 }
 void Behavior_MoveInitPos::Action(TemporaryCollisionManager& tempmanager, GameObject& gameObject, CollisionManager* collmanager, const TimeCount& timeCnt)
 {
-	K_Math::Vector3 dist((gameObject.GetStatus().GetInitialPos().x - gameObject.GetPos().x) / 30.f, 1.f, 0.f);
+	K_Math::Vector3 dist((gameObject.GetStatus().GetInitialPos().x - gameObject.GetPos().x) / 30.f, (gameObject.GetStatus().GetInitialPos().y - gameObject.GetPos().y) / 30.f, 0.f);
 	gameObject.GetMove().GetMoveVec() += dist;
 }
 void Behavior_MoveInitPos::Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject)
@@ -504,8 +504,8 @@ void Behavior_HighSpeedFall::Action(TemporaryCollisionManager& tempmanager, Game
 }
 void Behavior_HighSpeedFall::Finalize(TemporaryCollisionManager& tempmanager, GameObject& gameObject)
 {
-	Effect::CreateEffect(EffectName::BossKnockEffect, gameObject.GetPos() + K_Math::Vector3(-80, 0, 0), Status::Direction::Left);
-	Effect::CreateEffect(EffectName::BossKnockEffect, gameObject.GetPos() + K_Math::Vector3(80, 0, 0), Status::Direction::Right);
+	Effect::CreateEffect(EffectName::BossKnockEffect, gameObject.GetPos() + K_Math::Vector3(80, 0, 0), Status::Direction::Left);
+	Effect::CreateEffect(EffectName::BossKnockEffect, gameObject.GetPos() + K_Math::Vector3(-80, 0, 0), Status::Direction::Right);
 }
 
 //-----------------------------------------------

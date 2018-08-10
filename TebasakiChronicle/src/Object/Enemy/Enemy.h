@@ -20,6 +20,7 @@ private:
 	CollisionManager			collisionManager;		//コリジョンの管理
 	TemporaryCollisionManager	tempCollisionManager;	//一時的に生成するコリジョンクラス
 	GameObject					gameObject;				//ゲームオブジェクト
+	K_Math::Vector3				relativePos;			//相対座標
 
 	TimeCount					invalidTime;			//被ダメージ時の無敵時間計測
 
@@ -75,8 +76,15 @@ public:
 
 	//--------------------------------------------------------
 
+	//座標を設定
+	void SetPos(const K_Math::Vector3& setPos);
+	//相対座標を設定
+	void SetRelativePos(const K_Math::Vector3& rePos);
+
 	//座標を取得する
 	const K_Math::Vector3& GetPos();
+	//座標をオフセット
+	void OffsetPos(const K_Math::Vector3& offPos);
 
 	//体力と、ダメージを受けたか否かを設定する
 	void SetLife(int life, bool isTakeDamage);

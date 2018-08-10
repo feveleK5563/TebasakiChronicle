@@ -84,7 +84,7 @@ public:
 	void MoveBaseCollision(K_Math::Vector3& moveVec, int direction, bool isLightness);
 
 	//ベースコリジョンの座標を基にサブコリジョンの位置を設定する
-	void SetSubCollisionPos(int angle);
+	void SetSubCollisionPos(int direction);
 
 	//指定したサブコリジョンの受け取ったタグを返す
 	std::vector<K_Physics::CollisionTag*>& GetConflictionObjectsTag(int subNum);
@@ -103,4 +103,7 @@ public:
 
 	//全てのコリジョンマスクの有効無効を切り替える
 	void SetMaskActive(bool active);
+
+	//ベースコリジョンの座標を設定する
+	void SetBaseCollisionPos(const K_Math::Vector3& pos);
 };

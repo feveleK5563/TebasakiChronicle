@@ -17,7 +17,15 @@ BossEnemy::~BossEnemy()
 void BossEnemy::CreateBossEnemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Direction& direction)
 {
 	int indexNum = (int)bossEnemy.size();
-	bossEnemy.emplace_back(new Enemy(cpyet, setPos, direction, indexNum, true));
+	if (bossEnemy.size() > 0)
+	{
+		bossEnemy.emplace_back(new Enemy(cpyet, K_Math::Vector3(0.f, 0.f, 0.f), direction, indexNum, true));
+		bossEnemy.back()->SetRelativePos(setPos);
+	}
+	else
+	{
+		bossEnemy.emplace_back(new Enemy(cpyet, setPos, direction, indexNum, true));
+	}
 }
 
 //ボスを更新する
@@ -30,16 +38,25 @@ void BossEnemy::Update()
 	int shareLife = bossEnemy[0]->GetLife();
 	bool isTakeDamage = false;
 
+	//ダメージ判定を共有
 	for (size_t i = 0; i < bossEnemy.size(); ++i)
 	{
 		isTakeDamage = isTakeDamage || bossEnemy[i]->RecieveCollisionOperation();
 		shareLife = std::min(shareLife, bossEnemy[i]->GetLife());
 	}
 
+	//体力を共有
 	for (size_t i = 0; i < bossEnemy.size(); ++i)
 	{
 		bossEnemy[i]->SetLife(shareLife, isTakeDamage);
 		bossEnemy[i]->Update();
+	}
+
+	K_Math::Vector3 sharePos = bossEnemy[0]->GetPos();
+	//座標を共有
+	for (size_t i = 1; i < bossEnemy.size(); ++i)
+	{
+		bossEnemy[i]->OffsetPos(sharePos);
 	}
 }
 

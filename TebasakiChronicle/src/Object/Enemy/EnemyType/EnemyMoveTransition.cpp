@@ -132,6 +132,5 @@ bool ETransition_TakeDamage::IsTransition(CollisionManager& cm, Status& status, 
 //7Fƒ‰ƒ“ƒ_ƒ€‚É“ñ‘ğ
 bool ETransition_SelectRandom::IsTransition(CollisionManager& cm, Status& status, bool endMovePattern)
 {
-	//return rand() % 2;
-	return 0;
+	return rand() % 2;
 }

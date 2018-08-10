@@ -9,7 +9,8 @@ Enemy::Enemy(EnemyType* cpyet, const K_Math::Vector3& setPos, const Status::Dire
 	nowPatternOrder(0),
 	beforeMoveOrder(0),
 	beforePatternOrder(0),
-	isBoss(isBoss)
+	isBoss(isBoss),
+	relativePos(0.f, 0.f, 0.f)
 {
 	SetEnemyType(cpyet, setPos, direction, indexNum);
 }
@@ -144,6 +145,7 @@ void Enemy::Update()
 	collisionManager.MoveBaseCollision(gameObject.GetMove().GetMoveVec(), gameObject.GetStatus().GetDirection(), true);
 	gameObject.GetPos() = collisionManager.GetBaseCollisionObjectPosition();
 	tempCollisionManager.Update();
+	relativePos += gameObject.GetMove().GetMoveVec();
 	//タグ情報を更新
 	SetTagData();
 
@@ -311,11 +313,34 @@ void Enemy::Render()
 
 //--------------------------------------------------------
 
+
+//座標を設定
+void Enemy::SetPos(const K_Math::Vector3& setPos)
+{
+	gameObject.SetPos(setPos);
+	collisionManager.SetBaseCollisionPos(setPos);
+	collisionManager.SetSubCollisionPos(gameObject.GetDirection());
+}
+
+//相対座標を設定
+void Enemy::SetRelativePos(const K_Math::Vector3& rePos)
+{
+	relativePos = rePos;
+}
+
 //座標を取得する
 const K_Math::Vector3& Enemy::GetPos()
 {
 	return gameObject.GetPos();
 }
+
+//座標をオフセット
+void Enemy::OffsetPos(const K_Math::Vector3& offPos)
+{
+	K_Math::Vector3 setPos = offPos + relativePos;
+	SetPos(setPos);
+}
+
 
 //体力を設定する
 void Enemy::SetLife(int life, bool isTakeDamage)
